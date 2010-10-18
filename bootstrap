@@ -1,0 +1,137 @@
+#!/bin/sh
+# PSP Software Development Kit - http://www.pspdev.org
+# -----------------------------------------------------------------------
+# Licensed under the BSD license, see LICENSE in PSPSDK root for details.
+#
+# bootstrap - Script to bootstrap GNU autoconf and GNU automake.
+#             Inspired by libtool's autogen script.
+#
+# Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
+# Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
+# Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
+#$Id: bootstrap 444 2005-07-03 20:34:12Z mrbrown $
+
+progname=`basename $0`
+top_srcdir=`dirname $0`
+
+verbose="";
+quiet="false"
+mode="generate"
+
+usage()
+{
+  echo
+  echo "usage: ${progname} [-h|-q|-v|-c]"
+  echo
+  echo "options:"
+  echo "	-h .. display this message and exit";
+  echo "	-q .. quiet, don't display directories";
+  echo "	-v .. verbose, pass -v to automake when invoking automake"
+  echo "	-c .. clean, remove all aclocal/autoconf/automake generated files"
+  echo
+  exit 1;
+}
+
+if test ! -f $top_srcdir/VERSION; then
+  echo "${progname}:"
+  echo "	Installation problem: Can't find file VERSION"
+  exit 1;
+fi
+
+while test $# -gt 0; do
+case $1 in
+-h|--he|--hel|--help)
+  usage ;;
+-q|--qu|--qui|--quie|--quiet)
+  quiet="true";
+  shift;;
+-v|--ve|--ver|--verb|--verbo|--verbos|--verbose)
+  verbose="-v";
+  shift;;
+-c|--cl|--cle|--clea|--clean)
+  mode="clean";
+  shift;;
+-*) echo "unknown option $1" ;
+  usage ;;
+*) echo "invalid parameter $1" ;
+  usage ;;
+esac
+done
+
+case $mode in
+generate)
+
+  case $top_srcdir in
+  /* ) aclocal_dir=$top_srcdir
+    ;;
+  *) aclocal_dir=`pwd`/$top_srcdir
+    ;;
+  esac
+
+  confs=`find . \( -name 'configure.in' -o -name 'configure.ac' \) -print`
+  for i in $confs; do
+  dir=`dirname $i`;
+  configure=`basename $i`;
+  ( test "$quiet" = "true" || echo "$dir";
+    cd $dir;
+    pat="s,\$(TOPdir),${aclocal_dir},g"
+    aclocal_args=`grep '^[ ]*ACLOCAL_AMFLAGS' Makefile.am | \
+      sed -e 's%.*ACLOCAL_AMFLAGS.*\=[ ]*%%g' -e $pat ` ;
+    test "$verbose" = "-v" && echo "aclocal $aclocal_args"
+    aclocal $aclocal_args;
+    test -n "`grep CONFIG_HEADER ${configure}`" && autoheader \
+      && test "$verbose" = "-v" && echo "autoheader";
+    test -f Makefile.am && automake -a -c --foreign $verbose ;
+    test "$verbose" = "-v" && echo "autoconf";
+    autoconf;
+    test -f Makefile.am && test -n "`grep 'stamp-h\.in' Makefile.in`" \
+      && echo timestamp > stamp-h.in
+  )
+  done
+
+  # HACK: Fixup the version in the generated configure script.  This would be less of
+  # hack if it wasn't pspsdk-specific.  I'm doing this because I don't want to look
+  # into how to do it the autoconf way.
+  version=`cat "$top_srcdir/VERSION"`
+  cat configure | sed "s/PSPSDK_VERSION/$version/g" > configure.out
+  cp configure.out configure
+  rm -f configure.out
+  ;;
+
+clean)
+  test "$quiet" = "true" || echo "removing automake generated Makefile.in files"
+  files=`find . -name 'Makefile.am' -print | sed -e 's%\.am%\.in%g'` ;
+  for i in $files; do if test -f $i; then
+    rm -f $i
+    test "$verbose" = "-v" && echo "$i"    
+  fi; done
+
+  test "$quiet" = "true" || echo "removing configure files"
+  files=`find . -name 'configure' -print` ;
+  test "$verbose" = "-v" && test -n "$files" && echo "$files" ;
+  for i in $files; do if test -f $i; then
+    rm -f $i config.guess config.sub depcomp install-sh mdate-sh missing \
+	mkinstalldirs texinfo.tex
+    test "$verbose" = "-v" && echo "$i"    
+  fi; done
+  
+  test "$quiet" = "true" || echo "removing aclocal.m4 files"
+  files=`find . -name 'aclocal.m4' -print` ;
+  test "$verbose" = "-v" && test -n "$files" && echo "$files" ;
+  for i in $files; do if test -f $i; then
+    rm -f $i
+    test "$verbose" = "-v" && echo "$i"    
+  fi; done
+
+  find . -name '*~' -print | xargs rm -f
+  find . -name '*.orig' -print | xargs rm -f
+  find . -name '*.rej' -print | xargs rm -f
+  find . -name 'config.status' -print | xargs rm -f
+  find . -name 'config.log' -print | xargs rm -f
+  find . -name 'config.cache' -print | xargs rm -f
+  find . -name 'Makefile' -print | xargs rm -f
+  find . -name '.deps' -print | xargs rm -rf
+  find . -name '.libs' -print | xargs rm -rf
+  find . -name 'stamp-h.in' | xargs rm -rf
+  ;;
+esac

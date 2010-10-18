@@ -1,0 +1,17 @@
+TARGET = polyphonic
+OBJS = main.o
+
+INCDIR = 
+CFLAGS = -O2 -G0 -Wall
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
+ASFLAGS = $(CFLAGS)
+
+LIBDIR =
+LDFLAGS =
+LIBS = -lpspaudiolib -lpspaudio
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = Polyphonic sample by Shine
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak

@@ -1,0 +1,999 @@
+GE Command Format:
+
+Each command word is divided into two parts, a 8-bit command and a 24-bit
+argument. The command is in the upper part of the word, and the argument
+in the lower. The argument can be either integer of a special kind of float
+that the GE supports (described below).
+
+GE Floats:
+
+Floats processed in the command-stream are 24 bits instead of 32 that are
+used by the CPU. Conversion from 32 to 24 bits is done by shifting the
+value down 8 bits, losing the least significant bits of the mantissa.
+
+Pointers:
+
+Some pointers use a shared register when loading addresses called BASE. This
+register must be written BEFORE you write to the designated register.  All
+these registers are marked with (BASE) after the summary.
+
+Other pointers only use 28 bits of information, and their top bits are
+referred to as the '4 most significant bits' in pointer, which reflects
+bits 24-27, not 28-31 which could perhaps be believed from common
+terminology.
+
+Enabling Registers:
+
+Any command or bit that has 'Enable' in the name implies that setting the
+first bit (or the bit itself) enables the feature, and no ON/OFF-states
+are documented.
+
+DISCLAIMER: Names and bitsets are all derived from reverse engineering,
+available PS2 documentation and educated guesses. Nothing has been derived
+using illegal methods.
+
+Dec Hex Name        Description
+--- --- ----        -----------
+        
+0   00  NOP         No Operation
+
+1   01  VADDR       Vertex Address (BASE)
+                        0-23: 24 least significant bits of pointer
+
+2   02  IADDR       Index Address (BASE)
+                        0-23: 24 least significant bits of pointer
+
+4   04  PRIM        Primitive Kick
+                        0-15: Number of vertices to kick (0-65535)
+                        16-18: Primitive Type
+                            000: Points
+                            001: Lines
+                            010: Line Strips
+                            011: Triangles
+                            100: Triangle Strips
+                            101: Triangle Fans
+                            110: Sprites (2D Rectangles)
+
+5   05  BEZIER      Bezier Patch Kick
+                        0-7: U Count
+                        8-15: V Count
+
+6   06  SPLINE      Spline Surface Kick
+                        0-7: U Count
+                        8-15: V Count
+                        16-17: U Edges
+                            00: Close/Close
+                            01: Open/Close
+                            10: Close/Open
+                            11: Open/Open
+                        18-19: V Edges
+                            00: Close/Close
+                            01: Open/Close
+                            10: Close/Open
+                            11: Open/Open
+
+7   07  BBOX        Bounding Box
+                        0-15: Number of vertices to test for conditional rendering (0-65535)
+
+8   08  JUMP        Jump To New Address (BASE)
+                        0-23: 24 least significant bits of pointer
+
+9   09  BJUMP       Conditional Jump (BASE)
+                        0-23: 24 least significant bits of pointer
+
+10  0A  CALL        Call Address (BASE)
+                        0-23: 24 least significant bits of pointer
+
+11  0B  RET         Return From Call
+
+12  0C  END         Stop execution
+
+14  0E  SIGNAL      Raise Signal Interrupt
+                        0-15: Argument to pass to signal handler
+                        16-23: Signal index to trigger
+
+15  0F  FINISH      Complete rendering
+			0-15: Finish signal argument
+
+16  10  BASE        Base Address Register
+                        16-20: 4 most significant bits for address (28 bits total)
+
+18  12  VTYPE       Vertex Type
+                        0-1: Texture Format (2 values ST/UV)
+                            00: Not present in vertex
+                            01: 8-bit fixed
+                            10: 16-bit fixed
+                            11: 32-bit floats
+                        2-4: Color Format (1 value)
+                            000: Not present in vertex
+                            100: 16-bit BGR-5650
+                            101: 16-bit ABGR-5551
+                            110: 16-bit ABGR-4444
+                            111: 32-bit ABGR-8888
+                        5-6: Normal Format (3 values XYZ)
+                            00: Not present in vertex
+                            01: 8-bit fixed
+                            10: 16-bit fixed
+                            11: 32-bit floats
+                        7-8: Position Format (3 values XYZ)
+                            00: Not present in vertex
+                            01: 8-bit fixed
+                            10: 16-bit fixed
+                            11: 32-bit floats
+                        9-10: Weight Format
+                            00: Not present in vertex
+                            01: 8-bit fixed
+                            10: 16-bit fixed
+                            11: 32-bit floats
+                        11-12: Index Format
+                            00: Not using indices
+                            01: 8-bit
+                            10: 16-bit
+                        14-16: Number of weights (Skinning)
+                            000-111: 1-8 weights
+                        18-20: Number of vertices (Morphing)
+                            000-111: 1-8 vertices
+                        23: Bypass Transform Pipeline
+                            0: Transformed Coordinates
+                            1: Raw Coordinates
+
+19  13  ???         Offset Address (BASE)
+
+20  14  ???         Origin Address (BASE)
+
+21  15  REGION1     Draw Region Start
+                        0-9: X Start
+                        10-19: Y Start
+
+22  16  REGION2     Draw Region End
+                        0-9: X End ((X + Width)-1)
+                        10-19: Y End ((Y+Height)-1)
+
+23  17  LTE         Lighting Enable
+
+24  18  LTE0        Light Enable 0
+
+25  19  LTE1        Light Enable 1
+
+26  1A  LTE2        Light Enable 2
+
+27  1B  LTE3        Light Enable 3
+
+28  1C  CPE         Clip Plane Enable
+
+29  1D  BCE         Backface Culling Enable
+
+30  1E  TME         Texture Mapping Enable
+
+31  1F  FGE         Fog Enable
+
+32  20  DTE         Dither Enable
+
+33  21  ABE         Alpha Blend Enable
+
+34  22  ATE         Alpha Test Enable
+
+35  23  ZTE         Depth Test Enable
+
+36  24  STE         Stencil Test Enable
+
+37  25  AAE         Anti Aliasing Enable
+
+38  26  PCE         Patch Cull Enable
+
+39  27  CTE         Color Test Enable
+
+40  28  LOE         Logical Operation Enable
+
+42  2A  BOFS        Bone Matrix Offset
+                        0-23: Bone Matrix Offset
+                            Offset is in values, so each matrix is offset by 3*4 values
+
+43  2B  BONE        Bone Matrix Upload
+                        0-23: Matrix Value (GE Float)
+                            Write 3x4 times to upload full bone matrix
+
+44  2C  MW0         Morph Weight 0
+                        0-23: Morph Value (GE Float)
+
+45  2D  MW1         Morph Weight 1
+                        0-23: Morph Value (GE Float)
+
+46  2E  MW2         Morph Weight 2
+                        0-23: Morph Value (GE Float)
+
+47  2F  MW3         Morph Weight 3
+                        0-23: Morph Value (GE Float)
+
+48  30  MW4         Morph Weight 4
+                        0-23: Morph Value (GE Float)
+
+49  31  MW5         Morph Weight 5
+                        0-23: Morph Value (GE Float)
+
+50  32  MW6         Morph Weight 6
+                        0-23: Morph Value (GE Float)
+
+51  33  MW7         Morph Weight 7
+                        0-23: Morph Value (GE Float)
+
+54  36  PSUB        Patch Subdivision
+                        0-7: S Subdivision
+                        8-15: T Subdivision
+
+55  37  PPRIM       Patch Primitive
+                        0-1:
+                            00: Triangles
+                            01: Lines
+                            10: Points
+
+56  38  PFACE       Patch Front Face
+                        0:
+                            0: Clockwise
+                            1: Counter-Clockwise
+
+58  3A  WMS         World Matrix Select
+
+59  3B  WORLD       World Matrix Upload
+                        0-23: Matrix Value (GE Float)
+                           Write 3*4 values for complete matrix
+
+60  3C  VMS         View Matrix Select
+
+61  3D  VIEW        View Matrix Upload
+                        0-23: Matrix Value (GE Float)
+                            Write 3*4 values for complete matrix
+
+62  3E  PMS         Projection Matrix Select
+
+63  3F  PROJ        Projection Matrix Upload
+                        0-23: Matrix Value (GE Float)
+                            Write 4*4 values for complete matrix
+
+64  40  TMS         Texture Matrix Select
+
+65  41  TMATRIX     Texture Matrix Upload
+                        0-23: Matrix Value
+                            Write 3*4 values for complete matrix
+
+66  42  XSCALE      Viewport Width Scale
+                        0-23: Scale Value (GE Float)
+
+67  43  YSCALE      Viewport Height Scale
+                        0-23: Scale Value (GE Float)
+
+68  44  ZSCALE      Depth Scale
+                        0-23: Scale Value (GE Float)
+
+69  45  XPOS        Viewport X Position
+                        0-23: Offset Value (GE Float)
+
+70  46  YPOS        Viewport Y Position
+                        0-23: Offset Value (GE Float)
+
+71  47  ZPOS        Depth Position
+                        0-23: Offset Value (GE Float)
+
+72  48  USCALE      Texture U Scale
+                        0-23: Scale Value (GE Float)
+
+73  49  USCALE      Texture V Scale
+                        0-23: Scale Value (GE Float)
+
+74  4A  OFFSET     Texture U Offset
+                        0-23: Offset Value (GE Float)
+
+75  4B  OFFSET     Texture V Offset
+                        0-23: Offset Value (GE Float)
+
+76  4C  OFFSETX     Viewport X Offset
+                        0-23: X Offset (12.4 fixed)
+
+77  4D  OFFSETY     Viewport Y Offset
+                        0-23: Y Offset (12.4 fixed)
+
+80  50  SHADE       Shade Model
+                        0: Shading type
+                            0: Flat
+                            1: Smooth
+
+81  51  RNORM       Reverse Face Normals Enable
+
+83  53  CMAT        Color Material
+                        0-2: Material flags (OR together)
+                            001: Ambient
+                            010: Diffuse
+                            100: Specular
+
+84  54  EMC         Emissive Model Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+85  55  AMC         Ambient Model Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+86  56  DMC         Diffuse Model Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+87  57  SMC         Specular Model Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+88  58  AMA         Ambient Model Alpha
+                        0-7: Alpha Component
+
+91  5B  SPOW        Specular Power
+                        0-23: Power (GE Float)
+
+92  5C  ALC         Ambient Light Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+93  5D  ALA         Amibient Light Alpha
+                        0-7: Alpha Component
+
+94  5E  LMODE       Light Model
+                        0: Lighting model
+                             0: Single color
+                             1: Separate specular color   
+
+95  5F  LT0         Light Type 0
+                        0-1: Light Components
+                            00: Ambient & Diffuse
+                            01: Diffuse & Specular
+                            10: Unknown (diffuse color, affected by specular power)
+                        8-9: Light Type
+                            00: Directional Light
+                            01: Point Light
+                            10: Spot Light
+
+96  60  LT1         Light Type 1
+                        0-1: Light Components
+                            00: Ambient & Diffuse
+                            01: Diffuse & Specular
+                            10: Unknown (diffuse color, affected by specular power)
+                        8-9: Light Type
+                            00: Directional Light
+                            01: Point Light
+                            10: Spot Light
+
+97  61  LT2         Light Type 2
+                        0-1: Light Components
+                            00: Ambient & Diffuse
+                            01: Diffuse & Specular
+                            10: Unknown (diffuse color, affected by specular power)
+                        8-9: Light Type
+                            00: Directional Light
+                            01: Point Light
+                            10: Spot Light
+
+98  62  LT3         Light Type 3
+                        0-1: Light Components
+                            00: Ambient & Diffuse
+                            01: Diffuse & Specular
+                            10: Unknown (diffuse color, affected by specular power)
+                        8-9: Light Type
+                            00: Directional Light
+                            01: Point Light
+                            10: Spot Light
+
+99  63  LXP0        Light X Position 0
+                        0-23: Vector Component (GE Float)
+
+100 64  LYP0        Light Y Position 0
+                        0-23: Vector Component (GE Float)
+
+101 65  LZP0        Light Z Position 0
+                        0-23: Vector Component (GE Float)
+
+102 66  LXP1        Light X Position 1
+                        0-23: Vector Component (GE Float)
+
+103 67  LYP1        Light Y Position 1
+                        0-23: Vector Component (GE Float)
+
+104 68  LZP1        Light Z Position 1
+                        0-23: Vector Component (GE Float)
+
+105 69  LXP2        Light X Position 2
+                        0-23: Vector Component (GE Float)
+
+106 6A  LYP2        Light Y Position 2
+                        0-23: Vector Component (GE Float)
+
+107 6B  LZP2        Light Z Position 2
+                        0-23: Vector Component (GE Float)
+
+108 6C  LXP3        Light X Position 3
+                        0-23: Vector Component (GE Float)
+
+109 6D  LYP3        Light Y Position 3
+                        0-23: Vector Component (GE Float)
+
+110 6E  LZP3        Light Z Position 3
+                        0-23: Vector Component (GE Float)
+
+111 6F  LXD0        Light X Direction 0
+                        0-23: Vector Component (GE Float)
+
+112 70  LYD0        Light Y Direction 0
+                        0-23: Vector Component (GE Float)
+
+113 71  LZD0        Light Z Direction 0
+                        0-23: Vector Component (GE Float)
+
+114 72  LXD0        Light X Direction 1
+                        0-23: Vector Component (GE Float)
+
+115 73  LYD0        Light Y Direction 1
+                        0-23: Vector Component (GE Float)
+
+116 74  LZD0        Light Z Direction 1
+                        0-23: Vector Component (GE Float)
+
+117 75  LXD0        Light X Direction 2
+                        0-23: Vector Component (GE Float)
+
+118 76  LYD0        Light Y Direction 2
+                        0-23: Vector Component (GE Float)
+
+119 77  LZD0        Light Z Direction 2
+                        0-23: Vector Component (GE Float)
+
+120 78  LXD0        Light X Direction 3
+                        0-23: Vector Component (GE Float)
+
+121 79  LYD0        Light Y Direction 3
+                        0-23: Vector Component (GE Float)
+
+122 7A  LZD0        Light Z Direction 3
+                        0-23: Vector Component (GE Float)
+
+123 7B  LCA0        Light Constant Attenuation 0
+                        0-23: Attenuation Factor (GE Float)
+
+124 7C  LLA0        Light Linear Attenuation 0
+                        0-23: Attenuation Factor (GE Float)
+
+125 7D  LQA0        Light Quadratic Attenuation 0
+                        0-23: Attenuation Factor (GE Float)
+
+126 7E  LCA1        Light Constant Attenuation 1
+                        0-23: Attenuation Factor (GE Float)
+
+127 7F  LLA1        Light Linear Attenuation 1
+                        0-23: Attenuation Factor (GE Float)
+
+128 80  LQA1        Light Quadratic Attenuation 1
+                        0-23: Attenuation Factor (GE Float)
+
+129 81  LCA2        Light Constant Attenuation 2
+                        0-23: Attenuation Factor (GE Float)
+
+130 82  LLA2        Light Linear Attenuation 2
+                        0-23: Attenuation Factor (GE Float)
+
+131 83  LQA2        Light Quadratic Attenuation 2
+                        0-23: Attenuation Factor (GE Float)
+
+132 84  LCA3        Light Constant Attenuation 3
+                        0-23: Attenuation Factor (GE Float)
+
+133 85  LLA3        Light Linear Attenuation 3
+                        0-23: Attenuation Factor (GE Float)
+
+134 86  LQA3        Light Quadratic Attenuation 3
+                        0-23: Attenuation Factor (GE Float)
+
+135 87  ???         Spot light 0 exponent
+                        0-23: Spotlight exponent
+
+136 88  ???         Spot light 1 exponent
+                        0-23: Spotlight exponent
+
+137 89  ???         Spot light 2 exponent
+                        0-23: Spotlight exponent
+
+139 8A  ???         Spot light 3 exponent
+                        0-23: Spotlight exponent
+
+139 8B  ???         Spot light 0 cutoff
+                        0-23: Spotlight cutoff angle (cosine of angle)
+
+140 8C  ???         Spot light 1 cutoff
+                        0-23: Spotlight cutoff angle (cosine of angle)
+
+141 8D  ???         Spot light 2 cutoff
+                        0-23: Spotlight cutoff angle (cosine of angle)
+
+142 8E  ???         Spot light 3 cutoff
+                        0-23: Spotlight cutoff angle (cosine of angle)
+
+143 8F  ALC0        Ambient Light Color 0
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+144 90  DLC0        Diffuse Light Color 0
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+145 91  SLC0        Specular Light Color 0
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+146 92  ALC1        Ambient Light Color 1
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+147 93  DLC1        Diffuse Light Color 1
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+148 94  SLC1        Specular Light Color 1
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+149 95  ALC2        Ambient Light Color 2
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+150 96  DLC2        Diffuse Light Color 2
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+151 97  SLC2        Specular Light Color 2
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+152 98  ALC3        Ambient Light Color 3
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+153 99  DLC3        Diffuse Light Color 3
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+154 9A  SLC3        Specular Light Color 3
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+155 9B  FFACE       Front Face Culling Order
+                        0: Culling Order
+                            0: Clockwise primitives are visible
+                            1: Counter-clockwise primitives are visible
+
+156 9C  FBP         Frame Buffer Pointer
+                        0-23: 24 least significant bits of pointer (see FBW)
+
+157 9D  FBW         Frame Buffer Width
+                        0-15: Buffer width in pixels
+                        16-23: 8 most significant bits of pointer (see FBP)
+
+158 9E  ZBP         Depth Buffer Pointer
+                        0-23: 24 least significant bits of pointer (see ZBW)
+
+159 9F  ZBW         Depth Buffer Width
+                        0-15: Buffer width in pixels
+                        16-23: 8 most significant bits of pointer (see ZBP)
+
+160 A0  TBP0        Texture Buffer Pointer 0
+                        0-23: 24 least significant bits of pointer (see TBW0)
+
+161 A1  TBP1        Texture Buffer Pointer 1
+                        0-23: 24 least significant bits of pointer (see TBW1)
+
+162 A2  TBP2        Texture Buffer Pointer 2
+                        0-23: 24 least significant bits of pointer (see TBW2)
+
+163 A3  TBP3        Texture Buffer Pointer 3
+                        0-23: 24 least significant bits of pointer (see TBW3)
+
+164 A4  TBP4        Texture Buffer Pointer 4
+                        0-23: 24 least significant bits of pointer (see TBW4)
+
+165 A5  TBP5        Texture Buffer Pointer 5
+                        0-23: 24 least significant bits of pointer (see TBW5)
+
+166 A6  TBP6        Texture Buffer Pointer 6
+                        0-23: 24 least significant bits of pointer (see TBW6)
+
+167 A7  TBP7        Texture Buffer Pointer 7
+                        0-23: 24 least significant bits of pointer (see TBW7)
+
+168 A8  TBW0        Texture Buffer Width 0
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP0)
+
+169 A9  TBW1        Texture Buffer Width 1
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP1)
+
+170 AA  TBW2        Texture Buffer Width 2
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP2)
+
+171 AB  TBW3        Texture Buffer Width 3
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP3)
+
+172 AC  TBW4        Texture Buffer Width 4
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP4)
+
+173 AD  TBW5        Texture Buffer Width 5
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP5)
+
+174 AE  TBW6        Texture Buffer Width 6
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP6)
+
+175 AF  TBW7        Texture Buffer Width 7
+                        0-15: Buffer width in pixels
+                        16-20: 4 most significant bits of pointer (see TBP7)
+
+176 B0  CBP         CLUT Buffer Pointer
+                        0-23: 24 least significant bits of pointer (see CBPH)
+
+177 B1  CBPH        CLUT Buffer Pointer H
+                        16-20: 4 most significant bits of pointer (see CBP)
+
+178 B2  TRXSBP      Transmission Source Buffer Pointer
+                        0-23: 24 least significant bits of pointer (see TRXSBW)
+
+179 B3  TRXSBW      Transmission Source Buffer Width
+                        0-15: Source Buffer Width
+                        16-23: 8 most significant bits of pointer (see TRXSBP)
+
+180 B4  TRXDBP      Transmission Destination Buffer Pointer
+                        0-23: 24 least significant bits of pointer (see TRXDBW)
+
+181 B5  TRXDBW      Transmission Destination Buffer Width
+                        0-15: Destination Buffer Width
+                        16-23: 8 most significant bits of pointer (see TRXDBP)
+
+184 B8  TSIZE0      Texture Size Level 0
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+185 B9  TSIZE1      Texture Size Level 1
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+186 BA  TSIZE2      Texture Size Level 2
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+187 BB  TSIZE3      Texture Size Level 3
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+188 BC  TSIZE4      Texture Size Level 4
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+189 BD  TSIZE5      Texture Size Level 5
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+190 BE  TSIZE6      Texture Size Level 6
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+191 BF  TSIZE7      Texture Size Level 7
+                        0-7: Width = 2^TW
+                        8-15: Height = 2^TH
+
+192 C0  TMAP        Texture Projection Map Mode + Texture Map Mode
+                        0-1: Texture Map Mode
+                            00: Texture Coordinates (UV)
+                            01: Texture Matrix
+                            10: Environment Map
+                        8-9: Texture Projection Map Mode
+                            00: Position
+                            01: Texture Coordinates
+                            10: Normalized Normal
+                            11: Normal
+
+193 C1              Texture Environment Map Matrix
+                        0-1: 1st Column for matrix
+                        8-9: 2nd column for matrix
+
+194 C2  TMODE       Texture Mode
+                        0: Swizzle Enable
+                        8-15: ???
+                        16-20: Maximum mipmap level
+
+195 C3  TPSM        Texture Pixel Storage Mode
+                        0-23: Pixel Storage Mode
+                            0: 16-bit BGR 5650
+                            1: 16-bit ABGR 5551
+                            2: 16-bit ABGR 4444
+                            3: 32-bit ABGR 8888
+                            4: 4-bit indexed
+                            5: 8-bit indexed
+                            6: 16-bit indexed
+                            7: 32-bit indexed
+                            8: DXT1
+                            9: DXT3
+                            10: DXT5
+
+196 C4  CLOAD       CLUT Load
+                        0-23: Number of colors divided by 8
+
+197 C5  CMODE       CLUT Mode
+                        0-1: CLUT Pixel Format
+                            00: 16-bit BGR 5650
+                            01: 16-bit ABGR 5551
+                            10: 16-bit ABGR 4444
+                            11: 32-bit ABGR 8888
+                        2-7: ???
+                        8-15: mask
+                        16-23: ???
+
+198 C6  TFLT        Texture Filter
+                        0-2: Minifying filter
+                        8-10: Magnifying filter
+                            000: Nearest
+                            001: Linear
+                            100: Nearest; Mipmap Nearest
+                            101: Linear; Mipmap Nearest
+                            110: Nearest; Mipmap Linear
+                            111: Linear; Mipmap Linear
+
+199 C7  TWRAP       Texture Wrapping
+                        0: U Wrap Mode
+                        8: V Wrap Mode
+                            0: Repeat
+                            1: Clamp
+
+200 C8  TBIAS       Texture Level Bias (???)
+                        0-15: ???
+                        16-23: Mipmap bias (signed)
+
+201 C9  TFUNC       Texture Function
+                        0-2: Texture Effect
+                            000: Modulate
+                            001: Decal
+                            010: Blend
+                            011: Replace
+                            100: Add
+                        8: Texture Color Component
+                            0: Texture alpha is ignored
+                            1: Texture alpha is read
+                        16: Fragment Double Enable
+                            0: Fragment color is untouched
+                            1: Fragment color is doubled
+
+202 CA  TEC         Texture Environment Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+203 CB  TFLUSH      Texture Flush
+                        Invalidate texture cache on texture change
+
+204 CC  TSYNC       Texture Sync
+                        Sync with texture transfer (see TRXKICK)
+
+205 CD  FFAR        Fog Far (???)
+
+206 CE  FDIST       Fog Range
+                        0-23: Range (GE Float)
+
+207 CF  FCOL        Fog Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+208 D0  TSLOPE      Texture Slope
+                        0-23: Slope (GE Float)
+
+210 D2  PSM         Frame Buffer Pixel Storage Mode
+                        0-1: Pixel Storage Mode
+                            00: 16-bit BGR 5650
+                            01: 16-bit ABGR 5551
+                            10: 16-bit ABGR 4444
+                            11: 32-bit ABGR 8888
+
+211 D3  CLEAR       Clear Flags
+                        0: Clear enable
+                        8-11: Clear flags (OR together)
+                            001: Clear Color Buffer
+                            010: Clear Stencil/Alpha Buffer
+                            100: Clear Depth Buffer
+
+212 D4  SCISSOR1    Scissor Region Start
+                        0-9: X Start
+                        10-19: Y Start
+
+213 D5  SCISSOR2    Scissor Region End
+                        0-9: X End
+                        10-19: Y End
+
+214 D6  NEARZ       Near Depth Range
+                        0-15: Depth Value
+
+215 D7  FARZ        Far Depth Range
+                        0-15: Depth Value
+
+216 D8  CTST        Color Test Function
+                        0-1: Color Function
+                            00: Never pass pixel
+                            01: Always pass pixel
+                            10: Pass pixel if color matches
+                            11: Pass pixel if color differs 
+
+217 D9  CREF        Color Reference
+                        0-23: Color Reference Value
+
+218 DA  CMSK        Color Mask
+                        0-23: Color Mask
+
+219 DB  ATST        Alpha Test
+                        0-2: Alpha Test Function
+                            000: Never pass pixel
+                            001: Always pass pixel
+                            010: Pass pixel if match
+                            011: Pass pixel if difference
+                            100: Pass pixel if less
+                            101: Pass pixel if less or equal
+                            110: Pass pixel if greater
+                            111: Pass pixel if greater or equal
+                        8-15: Alpha Reference Value
+                        16-23: Alpha Mask
+
+220 DC  STST        Stencil Test
+                        0-2: Stencil Function
+                            000: Never pass stencil test
+                            001: Always pass stencil test
+                            010: Pass test if match
+                            011: Pass test if difference
+                            100: Pass test if less
+                            101: Pass test if less or equal
+                            110: Pass test if greater
+                            111: Pass test if greater or equal                       
+                        8-15: Stencil Reference Value
+                        16-23: Stencil Mask
+
+221 DD  SOP         Stencil Operations
+                        0-3: Pass Op
+                        8-11: Fail Op
+                        16-18: Zfail Op
+                            000: Keep stencil value
+                            001: Zero stencil value
+                            010: Replace stencil value
+                            011: Invert stencil value
+                            100: Increment stencil value
+                            101: Decrement stencil value
+
+222 DE  ZTST        Depth Test Function
+                        0-2: Function
+                            000: Never pass pixel
+                            001: Always pass pixel
+                            010: Pass pixel when depth is equal
+                            011: Pass pixel when depth is not equal
+                            100: Pass pixel when depth is less
+                            101: Pass pixel when depth is less or equal
+                            110: Pass pixel when depth is greater
+                            111: Pass pixel when depth is greater or equal
+
+223 DF  ALPHA       Alpha Blend
+                        0-3: Blend Operation
+                            000: Add
+                            001: Subtract
+                            010: Reverse Subtract
+                            011: Minimum Value
+                            100: Maximum Value
+                            101: Absolute Value
+                        4-7: Source Function
+                        8-11: Destination Function
+                            0000: Source Color
+                            0001: One Minus Source Color
+                            0010: Source Alpha
+                            0011: One Minus Source Alpha
+                            0100: Destination Color
+                            0101: One Minus Destination Color
+                            0110: Destination Alpha
+                            0111: One Minus Destination Alpha
+                            1010: Fix
+
+224 E0  SFIX        Source Fix Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+225 E1  DFIX        Destination Fix Color
+                        0-7: Red Component
+                        8-15: Green Component
+                        16-23: Blue Component
+
+226 E2  DTH0        Dither Matrix Row 0
+                        0-3: Column 0
+                        4-7: Column 1
+                        8-11: Column 2
+                        12-15: Column 3
+
+227 E3  DTH1        Dither Matrix Row 1
+                        0-3: Column 0
+                        4-7: Column 1
+                        8-11: Column 2
+                        12-15: Column 3
+
+228 E4  DTH2        Dither Matrix Row 2
+                        0-3: Column 0
+                        4-7: Column 1
+                        8-11: Column 2
+                        12-15: Column 3
+
+229 E5  DTH3        Dither Matrix Row 3
+                        0-3: Column 0
+                        4-7: Column 1
+                        8-11: Column 2
+                        12-15: Column 3
+
+230 E6  LOP         Logical Operation
+                        0-3: Logic Op
+                            0000: Clear
+                            0001: And
+                            0010: Reverse And
+                            0011: Copy
+                            0100: Inverted And
+                            0101: No Operation
+                            0110: Exclusive Or
+                            0111: Or
+                            1000: Negated Or
+                            1001: Equivalence
+                            1010: Inverted
+                            1011: Reverse Or
+                            1100: Inverted Copy
+                            1101: Inverted Or
+                            1110: Negated And
+                            1111: Set
+
+231 E7  ZMSK        Depth Mask
+                        0-15: Depth Write Mask
+
+232 E8  PMSKC       Pixel Mask Color
+                        0-7: Red Write Mask
+                        8-15: Green Write Mask
+                        16-23: Blue Write Mask
+
+233 E9  PMSKA       Pixel Mask Alpha
+                        0-7: Alpha Write Mask
+
+234 EA  TRXKICK     Transmission Kick
+                        0:
+                            0: 16-bit texel size
+                            1: 32-bit texel size
+
+235 EB  TRXSPOS     Transfer Source Position
+                        0-9: X Position
+                        10-19: Y Position
+
+236 EC  TRXDPOS     Transfer Destination Position
+                        0-9: X Position
+                        10-19: Y Position
+
+237 EE  TRXSIZE     Transfer Size
+                        0-9: Width = Transfer Width-1
+                        10-19: Height = Transfer Height-1

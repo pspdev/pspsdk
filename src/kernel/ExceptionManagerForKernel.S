@@ -1,0 +1,31 @@
+	.set noreorder
+
+#include "pspimport.s"
+
+#ifdef F_ExceptionManagerForKernel_0000
+	IMPORT_START	"ExceptionManagerForKernel",0x00010000
+#endif
+#ifdef F_ExceptionManagerForKernel_0001
+	IMPORT_FUNC	"ExceptionManagerForKernel",0x3FB264FC,sceKernelRegisterExceptionHandler
+#endif
+#ifdef F_ExceptionManagerForKernel_0002
+	IMPORT_FUNC	"ExceptionManagerForKernel",0x5A837AD4,sceKernelRegisterPriorityExceptionHandler
+#endif
+#ifdef F_ExceptionManagerForKernel_0003
+	IMPORT_FUNC	"ExceptionManagerForKernel",0x565C0B0E,sceKernelRegisterDefaultExceptionHandler
+#endif
+#ifdef F_ExceptionManagerForKernel_0004
+	IMPORT_FUNC	"ExceptionManagerForKernel",0x1AA6CFFA,sceKernelReleaseExceptionHandler
+#endif
+#ifdef F_ExceptionManagerForKernel_0005
+	IMPORT_FUNC	"ExceptionManagerForKernel",0xDF83875E,sceKernelGetActiveDefaultExceptionHandler
+#endif
+#ifdef F_ExceptionManagerForKernel_0006
+	IMPORT_FUNC	"ExceptionManagerForKernel",0x291FF031,sceKernelReleaseDefaultExceptionHandler
+#endif
+#ifdef F_ExceptionManagerForKernel_0007
+	IMPORT_FUNC	"ExceptionManagerForKernel",0x15ADC862,sceKernelRegisterNmiHandler
+#endif
+#ifdef F_ExceptionManagerForKernel_0008
+	IMPORT_FUNC	"ExceptionManagerForKernel",0xB15357C9,sceKernelReleaseNmiHandler
+#endif

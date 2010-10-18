@@ -1,0 +1,19 @@
+Info file for : Spherical Harmonics
+-----------------------------------
+
+coding & gfx: adresd
+
+Just a little demo to wet your appetites!
+
+LEFT/RIGHT change rendermode
+Up = first mode
+down = last mode
+
+Goes through a few pre-defined shapes, then onto random ones.. just interpolating
+so it might get messy at times.
+
+Greets and thank you's go to:
+-----------------------------
+Everyone involved with pspsdk and the forums/sites under ps2dev.org
+
+Chip for his excellent work reversing sceGu :)
