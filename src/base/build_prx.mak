@@ -69,10 +69,14 @@ endif
 FINAL_TARGET = $(TARGET).prx
 
 all: $(FINAL_TARGET)
-
+ifeq ($(NO_FIXUP_IMPORTS), 1)
+$(TARGET).elf: $(OBJS)
+	$(LINK.c) $^ $(LIBS) -o $@
+else
 $(TARGET).elf: $(OBJS)
 	$(LINK.c) $^ $(LIBS) -o $@
 	$(FIXUP) $@
+endif
 
 %.prx: %.elf
 	psp-prxgen $< $@
