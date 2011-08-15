@@ -167,9 +167,14 @@ SCEkxploit: $(TARGET).elf $(PSP_EBOOT_SFO)
 		$(PSP_EBOOT_ICON1) $(PSP_EBOOT_UNKPNG) $(PSP_EBOOT_PIC1)  \
 		$(PSP_EBOOT_SND0) NULL $(PSP_EBOOT_PSAR)
 
+ifeq ($(NO_FIXUP_IMPORTS), 1)
+$(TARGET).elf: $(OBJS) $(EXPORT_OBJ)
+	$(LINK.c) $^ $(LIBS) -o $@
+else
 $(TARGET).elf: $(OBJS) $(EXPORT_OBJ)
 	$(LINK.c) $^ $(LIBS) -o $@
 	$(FIXUP) $@
+endif
 
 $(TARGET_LIB): $(OBJS)
 	$(AR) cru $@ $(OBJS)
