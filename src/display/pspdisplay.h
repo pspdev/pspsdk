@@ -33,7 +33,7 @@ enum PspDisplayPixelFormats {
 
 enum PspDisplaySetBufSync {
 	/** Buffer change effective immediately */
-	PSP_DISPLAY_SETBUF_IMMEDIATE = 0, 
+	PSP_DISPLAY_SETBUF_IMMEDIATE = 0,
 	/** Buffer change effective next frame */
 	PSP_DISPLAY_SETBUF_NEXTFRAME = 1
 };
@@ -41,9 +41,9 @@ enum PspDisplaySetBufSync {
 
 enum PspDisplayErrorCodes
 {
-   SCE_DISPLAY_ERROR_OK    = 0,   
-   SCE_DISPLAY_ERROR_POINTER    = 0x80000103,   
-   SCE_DISPLAY_ERROR_ARGUMENT   = 0x80000107   
+   SCE_DISPLAY_ERROR_OK    = 0,
+   SCE_DISPLAY_ERROR_POINTER    = 0x80000103,
+   SCE_DISPLAY_ERROR_ARGUMENT   = 0x80000107
 };
 
 
@@ -68,7 +68,7 @@ int sceDisplaySetMode(int mode, int width, int height);
  * @param pmode - Pointer to an integer to receive the current mode.
  * @param pwidth - Pointer to an integer to receive the current width.
  * @param pheight - Pointer to an integer to receive the current height,
- * 
+ *
  * @return 0 on success
  */
 int sceDisplayGetMode(int *pmode, int *pwidth, int *pheight);
@@ -121,6 +121,31 @@ int sceDisplayWaitVblank(void);
  * Wait for vertical blank with callback
  */
 int sceDisplayWaitVblankCB(void);
+
+/**
+ * Get accumlated HSYNC count
+ */
+int sceDisplayGetAccumulatedHcount(void);
+
+/**
+ * Get current HSYNC count
+ */
+int sceDisplayGetCurrentHcount(void);
+
+/**
+ * Get number of frames per second
+ */
+float sceDisplayGetFramePerSec(void);
+
+/**
+ * Get whether or not frame buffer is being displayed
+ */
+int sceDisplayIsForeground(void);
+
+/**
+ * Test whether VBLANK is active
+ */
+int sceDisplayIsVblank(void);
 
 #ifdef __cplusplus
 }

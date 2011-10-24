@@ -20,8 +20,6 @@ extern void _exit(int code);
 __attribute__((weak))
 void abort()
 {
-	printf("Program aborted.\n");
-
 	while (1)
 		_exit(1);
 }

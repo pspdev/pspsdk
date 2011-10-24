@@ -20,7 +20,7 @@
 extern "C" {
 #endif
 
-/* Some of the structures and definitions in this file were extracted from the japanese 
+/* Some of the structures and definitions in this file were extracted from the japanese
    puzzle bobble main executable */
 
 /** @defgroup Utils Utils Library */
@@ -37,17 +37,17 @@ extern "C" {
   */
 time_t sceKernelLibcTime(time_t *t);
 
-/** 
+/**
   * Get the processor clock used since the start of the process
   */
 clock_t sceKernelLibcClock(void);
 
-/** 
+/**
   * Get the current time of time and time zone information
   */
 int sceKernelLibcGettimeofday(struct timeval *tp, struct timezone *tzp);
 
-/** 
+/**
   * Write back the data cache to memory
   */
 void sceKernelDcacheWritebackAll(void);
@@ -58,12 +58,12 @@ void sceKernelDcacheWritebackAll(void);
 void sceKernelDcacheWritebackInvalidateAll(void);
 
 /**
-  * Write back a range of addresses from data cache to memory
+  * Write back a range of addresses from the data cache to memory
   */
 void sceKernelDcacheWritebackRange(const void *p, unsigned int size);
 
 /**
-  * Write back and invalidate a range of addresses in data cache
+  * Write back and invalidate a range of addresses in the data cache
   */
 void sceKernelDcacheWritebackInvalidateRange(const void *p, unsigned int size);
 
@@ -72,13 +72,23 @@ void sceKernelDcacheWritebackInvalidateRange(const void *p, unsigned int size);
   */
 void sceKernelDcacheInvalidateRange(const void *p, unsigned int size);
 
+/**
+  * Invalidate the instruction cache
+  */
+void sceKernelIcacheInvalidateAll(void);
+
+/**
+  * Invalidate a range of addresses in the instruction cache
+  */
+void sceKernelIcacheInvalidateRange(const void *p, unsigned int size);
+
 /** Structure for holding a mersenne twister context */
 typedef struct _SceKernelUtilsMt19937Context {
 	unsigned int 	count;
 	unsigned int 	state[624];
 } SceKernelUtilsMt19937Context;
 
-/** 
+/**
   * Function to initialise a mersenne twister context.
   *
   * @param ctx - Pointer to a context
@@ -173,7 +183,7 @@ typedef struct _SceKernelUtilsSha1Context {
 
 /**
   * Function to SHA1 hash a data block.
-  * 
+  *
   * @param data - The data to hash.
   * @param size - The size of the data.
   * @param digest - Pointer to a 20 byte array for storing the digest
@@ -213,7 +223,7 @@ int sceKernelUtilsSha1BlockUpdate(SceKernelUtilsSha1Context *ctx, u8 *data, u32 
 
 /**
   * Function to get the result of the SHA1 hash.
-  * 
+  *
   * @param ctx - Pointer to a prefilled context.
   * @param digest - A pointer to a 20 byte array to contain the digest.
   *

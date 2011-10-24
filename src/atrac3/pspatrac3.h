@@ -18,6 +18,57 @@
 extern "C" {
 #endif
 
+/* Error code definition */
+#define PSP_ATRAC_SUCCESS                       SCE_OK
+
+#define PSP_ATRAC_ERROR_PARAM_FAIL              (0x80630001)
+#define PSP_ATRAC_ERROR_API_FAIL                (0x80630002)
+#define PSP_ATRAC_ERROR_NO_ATRACID              (0x80630003)
+#define PSP_ATRAC_ERROR_BAD_CODECTYPE           (0x80630004)
+#define PSP_ATRAC_ERROR_BAD_ATRACID             (0x80630005)
+#define PSP_ATRAC_ERROR_UNKNOWN_FORMAT          (0x80630006)
+#define PSP_ATRAC_ERROR_UNMATCH_FORMAT          (0x80630007)
+#define PSP_ATRAC_ERROR_BAD_DATA                (0x80630008)
+#define PSP_ATRAC_ERROR_ALLDATA_IS_ONMEMORY     (0x80630009)
+#define PSP_ATRAC_ERROR_UNSET_DATA              (0x80630010)
+
+#define PSP_ATRAC_ERROR_READSIZE_IS_TOO_SMALL   (0x80630011)
+#define PSP_ATRAC_ERROR_NEED_SECOND_BUFFER      (0x80630012)
+#define PSP_ATRAC_ERROR_READSIZE_OVER_BUFFER    (0x80630013)
+#define PSP_ATRAC_ERROR_NOT_4BYTE_ALIGNMENT     (0x80630014)
+#define PSP_ATRAC_ERROR_BAD_SAMPLE              (0x80630015)
+#define PSP_ATRAC_ERROR_WRITEBYTE_FIRST_BUFFER  (0x80630016)
+#define PSP_ATRAC_ERROR_WRITEBYTE_SECOND_BUFFER (0x80630017)
+#define PSP_ATRAC_ERROR_ADD_DATA_IS_TOO_BIG     (0x80630018)
+
+#define PSP_ATRAC_ERROR_UNSET_PARAM             (0x80630021)
+#define PSP_ATRAC_ERROR_NONEED_SECOND_BUFFER    (0x80630022)
+#define PSP_ATRAC_ERROR_NODATA_IN_BUFFER        (0x80630023)
+#define PSP_ATRAC_ERROR_ALLDATA_WAS_DECODED     (0x80630024)
+
+/* Audio Codec ID */
+#define PSP_ATRAC_AT3PLUS        (0x00001000)
+#define PSP_ATRAC_AT3            (0x00001001)
+
+/* Remain Frame typical Status */
+#define PSP_ATRAC_ALLDATA_IS_ON_MEMORY             (-1)
+#define PSP_ATRAC_NONLOOP_STREAM_DATA_IS_ON_MEMORY (-2)
+#define PSP_ATRAC_LOOP_STREAM_DATA_IS_ON_MEMORY    (-3)
+
+typedef struct {
+	u8 *pucWritePositionFirstBuf;
+	u32 uiWritableByteFirstBuf;
+	u32 uiMinWriteByteFirstBuf;
+	u32 uiReadPositionFirstBuf;
+
+	u8 *pucWritePositionSecondBuf;
+	u32 uiWritableByteSecondBuf;
+	u32 uiMinWriteByteSecondBuf;
+	u32 uiReadPositionSecondBuf;
+} PspBufferInfo;
+
+int sceAtracGetAtracID(uint  uiCodecType);
+
 /**
  * Creates a new Atrac ID from the specified data
  *
@@ -131,6 +182,30 @@ int sceAtracGetNextSample(int atracID, int *outN);
  *
  */
 int sceAtracGetMaxSample(int atracID, int *outMax); 
+
+int sceAtracGetBufferInfoForReseting(int atracID, u32 uiSample, PspBufferInfo *pBufferInfo);
+
+int sceAtracGetChannel(int atracID, u32 *puiChannel);
+
+int sceAtracGetInternalErrorInfo(int atracID, int *piResult);
+
+int sceAtracGetLoopStatus(int atracID, int *piLoopNum, u32 *puiLoopStatus);
+
+int sceAtracGetNextDecodePosition(int atracID, u32 *puiSamplePosition);
+
+int sceAtracGetSecondBufferInfo(int atracID, u32 *puiPosition, u32 *puiDataByte);
+
+int sceAtracGetSoundSample(int atracID, int *piEndSample, int *piLoopStartSample, int *piLoopEndSample);
+
+int sceAtracResetPlayPosition(int atracID, u32 uiSample, u32 uiWriteByteFirstBuf, u32 uiWriteByteSecondBuf);
+
+int sceAtracSetData(int atracID, u8 *pucBufferAddr, u32 uiBufferByte);
+
+int sceAtracSetHalfwayBuffer(int atracID, u8 *pucBufferAddr, u32 uiReadByte, u32 uiBufferByte);
+
+int sceAtracSetHalfwayBufferAndGetID(u8 *pucBufferAddr, u32 uiReadByte, u32 uiBufferByte);
+
+int sceAtracSetSecondBuffer(int atracID, u8 *pucSecondBufferAddr, u32 uiSecondBufferByte);
 
 #ifdef __cplusplus
 }

@@ -19,11 +19,52 @@ extern "C" {
 
 typedef enum
 {
+	PSP_HTTP_VERSION_1_0,
+	PSP_HTTP_VERSION_1_1
+} PspHttpHttpVersion;
+
+typedef enum
+{
 	PSP_HTTP_METHOD_GET,
 	PSP_HTTP_METHOD_POST,
 	PSP_HTTP_METHOD_HEAD
 	
 } PspHttpMethod;
+
+typedef enum
+{
+	PSP_HTTP_AUTH_BASIC,
+	PSP_HTTP_AUTH_DIGEST
+} PspHttpAuthType;
+
+
+typedef enum
+{
+	PSP_HTTP_PROXY_AUTO,
+	PSP_HTTP_PROXY_MANUAL
+} PspHttpProxyMode;
+
+typedef enum
+{
+	PSP_HTTP_HEADER_OVERWRITE,
+	PSP_HTTP_HEADER_ADD
+} PspHttpAddHeaderMode;
+
+/* Memory function types */
+typedef void *(*PspHttpMallocFunction)(SceSize size);
+typedef void *(*PspHttpReallocFunction)(void *p, SceSize size);
+typedef void (*PspHttpFreeFunction)(void *p);
+
+typedef int (*PspHttpPasswordCB)(
+	int request,
+	PspHttpAuthType auth_type,
+	const unsigned char *realm,
+	unsigned char *username,
+	unsigned char *password,
+	SceBool need_entity,
+	unsigned char **entity_body,
+	SceSize *entity_size,
+	SceBool *save);
 
 /**
  * Init the http library.
@@ -318,6 +359,32 @@ int sceHttpsEnd(void);
  * @return 0 on success, < 0 on error.
 */
 int sceHttpsLoadDefaultCert(int unknown1, int unknown2);
+
+int sceHttpDisableAuth(int id);
+
+int sceHttpDisableCache(int id);
+
+int sceHttpEnableAuth(int id);
+
+int sceHttpEnableCache(int id);
+
+int sceHttpEndCache(void);
+
+int sceHttpGetAllHeader(int request, unsigned char **header, unsigned int *header_size);
+
+int sceHttpGetNetworkErrno(int request, int *err_num);
+
+int sceHttpGetProxy(int id, int *activate_flag, int *mode, unsigned char *proxy_host, SceSize len, unsigned short *proxy_port);
+
+int sceHttpInitCache(SceSize max_size);
+
+int sceHttpSetAuthInfoCB(int id, PspHttpPasswordCB cbfunc);
+
+int sceHttpSetProxy(int id, int activate_flag, int mode, const unsigned char *new_proxy_host, unsigned short new_proxy_port);
+
+int sceHttpSetResHeaderMaxSize(int id, unsigned int header_size);
+
+int sceHttpSetMallocFunction(PspHttpMallocFunction malloc_func, PspHttpFreeFunction free_func, PspHttpReallocFunction realloc_func);
 
 #if defined(__cplusplus)
 };
