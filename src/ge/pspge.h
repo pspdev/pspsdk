@@ -46,6 +46,13 @@ typedef struct PspGeListArgs
 } PspGeListArgs;
 
 /**
+ * Drawing queue interruption parameter
+ */
+typedef struct PspGeBreakParam {
+	unsigned int	buf[4];
+} PspGeBreakParam;
+
+/**
  * Get the size of VRAM.
  *
  * @return The size of VRAM (in bytes).
@@ -116,7 +123,7 @@ int sceGeSaveContext(PspGeContext *context);
  */
 int sceGeRestoreContext(const PspGeContext *context);
 
-/** 
+/**
   * Enqueue a display list at the tail of the GE display list queue.
   *
   * @param list - The head of the list to queue.
@@ -131,7 +138,7 @@ int sceGeListEnQueue(const void *list, void *stall, int cbid, PspGeListArgs *arg
 
 /**
   * Enqueue a display list at the head of the GE display list queue.
-  * 
+  *
   * @param list - The head of the list to queue.
   * @param stall - The stall address.
   * If NULL then no stall address set and the list is transferred immediately.
@@ -153,7 +160,7 @@ int sceGeListDeQueue(int qid);
 
 /**
   * Update the stall address for the specified queue.
-  * 
+  *
   * @param qid - The ID of the queue.
   * @param stall - The stall address to update
   *
@@ -176,22 +183,22 @@ typedef enum PspGeSyncType {
   *
   * @param qid - The queue ID of the list to sync.
   * @param syncType - Specifies the condition to wait on.  One of ::PspGeSyncType.
-  * 
+  *
   * @return ???
   */
 int sceGeListSync(int qid, int syncType);
 
 /**
   * Wait for drawing to complete.
-  * 
+  *
   * @param syncType - Specifies the condition to wait on.  One of ::PspGeSyncType.
-  * 
+  *
   * @return ???
   */
 int sceGeDrawSync(int syncType);
 
 /**
-  * Register callback handlers for the the Ge 
+  * Register callback handlers for the the Ge
   *
   * @param cb - Configured callback data structure
   * @return The callback ID, < 0 on error
@@ -205,6 +212,22 @@ int sceGeSetCallback(PspGeCallbackData *cb);
   * @return < 0 on error
   */
 int sceGeUnsetCallback(int cbid);
+
+/**
+ * Interrupt drawing queue
+ */
+int sceGeBreak(int mode, PspGeBreakParam *pParam);
+
+/**
+ * Restart drawing queue
+ */
+int sceGeContinue(void);
+
+/**
+ * Set Graphics Engine eDRAM address translation mode
+ */
+int sceGeEdramSetAddrTranslation(int width);
+
 
 #ifdef __cplusplus
 }

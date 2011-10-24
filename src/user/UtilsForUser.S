@@ -77,3 +77,9 @@
 #ifdef F_UtilsForUser_0024
 	IMPORT_FUNC	"UtilsForUser",0xFB05FAD0,sceKernelIcacheReadTag
 #endif
+#ifdef F_UtilsForUser_0025
+	IMPORT_FUNC	"UtilsForUser",0x920F104A,sceKernelIcacheInvalidateAll
+#endif
+#ifdef F_UtilsForUser_0026
+	IMPORT_FUNC	"UtilsForUser",0xC2DF770E,sceKernelIcacheInvalidateRange
+#endif

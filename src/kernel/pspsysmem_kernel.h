@@ -201,6 +201,21 @@ int sceKernelDeleteUID(SceUID uid);
  */
 int sceKernelGetModel(void);
 
+/**
+ * Set the version of the SDK with which the caller was compiled.
+ * Version numbers are as for sceKernelDevkitVersion().
+ *
+ * @return 0 on success, < 0 on error.
+ */
+int sceKernelSetCompiledSdkVersion(int version);
+
+/**
+ * Get the SDK version set with sceKernelSetCompiledSdkVersion().
+ *
+ * @return Version number, or 0 if unset.
+ */
+int sceKernelGetCompiledSdkVersion(void);
+
 #ifdef __cplusplus
 }
 #endif

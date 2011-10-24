@@ -249,14 +249,31 @@ int sceRtcSetWin32FileTime(pspTime* date, u64* win32Time);
 int sceRtcGetWin32FileTime(pspTime* date, u64* win32Time);
 
 int sceRtcParseDateTime(u64 *destTick, const char *dateString);
-/*
-sceRtcFormatRFC2822
-sceRtcFormatRFC2822LocalTime
-sceRtcFormatRFC3339
-sceRtcFormatRFC3339LocalTime
 
-sceRtcParseRFC3339
-*/
+/**
+ * Format Tick-representation UTC time in RFC2822 format
+ */
+int sceRtcFormatRFC2822(char *pszDateTime, const u64 *pUtc, int iTimeZoneMinutes);
+
+/**
+ * Format Tick-representation UTC time in RFC2822 format
+ */
+int sceRtcFormatRFC2822LocalTime(char *pszDateTime, const u64 *pUtc);
+
+/**
+ * Format Tick-representation UTC time in RFC3339(ISO8601) format
+ */
+int sceRtcFormatRFC3339(char *pszDateTime, const u64 *pUtc, int iTimeZoneMinutes);
+
+/**
+ * Format Tick-representation UTC time in RFC3339(ISO8601) format
+ */
+int sceRtcFormatRFC3339LocalTime(char *pszDateTime, const u64 *pUtc);
+
+/**
+ * Parse time information represented in RFC3339 format
+ */
+int sceRtcParseRFC3339(u64 *pUtc, const char *pszDateTime);
 
 #ifdef __cplusplus
 }

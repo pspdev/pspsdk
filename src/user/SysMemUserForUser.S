@@ -26,3 +26,9 @@
 #ifdef F_SysMemUserForUser_0007
 	IMPORT_FUNC	"SysMemUserForUser",0x13A5ABEF,sceKernelPrintf
 #endif
+#ifdef F_SysMemUserForUser_0008
+	IMPORT_FUNC	"SysMemUserForUser",0x7591C7DB,sceKernelSetCompiledSdkVersion
+#endif
+#ifdef F_SysMemUserForUser_0009
+	IMPORT_FUNC	"SysMemUserForUser",0xFC114573,sceKernelGetCompiledSdkVersion
+#endif

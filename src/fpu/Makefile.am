@@ -14,5 +14,5 @@ libpspfpuincludedir = @PSPSDK_INCLUDEDIR@
 libpspfpuinclude_HEADERS = pspfpu.h
 
 lib_LIBRARIES = libpspfpu.a
-libpspfpu_a_SOURCES = pspfpu.c
+libpspfpu_a_SOURCES = pspfpu.c double.S
 libpspfpu_a_LIBADD  = 

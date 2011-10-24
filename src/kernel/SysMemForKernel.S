@@ -211,3 +211,9 @@
 #ifdef F_SysMemForKernel_0068
 	IMPORT_FUNC "SysMemForKernel",0x6373995D,sceKernelGetModel
 #endif
+#ifdef F_SysMemForKernel_0069
+	IMPORT_FUNC	"SysMemForKernel",0x7591C7DB,sceKernelSetCompiledSdkVersion
+#endif
+#ifdef F_SysMemForKernel_0070
+	IMPORT_FUNC	"SysMemForKernel",0xFC114573,sceKernelGetCompiledSdkVersion
+#endif
