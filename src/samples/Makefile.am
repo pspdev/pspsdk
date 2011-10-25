@@ -81,7 +81,8 @@ SAMPLES = \
 	utility/systemparam \
 	utility/osk \
 	me/basic \
-	wlan
+	wlan \
+	exceptions
 
 all:
 

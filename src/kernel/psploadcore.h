@@ -52,7 +52,7 @@ typedef struct SceModule {
 	unsigned int		nsegment;
 	unsigned int		segmentaddr[4];
 	unsigned int		segmentsize[4];
-} SceModule;
+} __attribute__((packed)) SceModule;
 
 /** Defines a library and its exported functions and variables.  Use the len
     member to determine the real size of the table (size = len * 4). */
