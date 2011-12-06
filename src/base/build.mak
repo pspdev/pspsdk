@@ -25,6 +25,7 @@ STRIP    = psp-strip
 MKSFO    = mksfo
 PACK_PBP = pack-pbp
 FIXUP    = psp-fixup-imports
+ENC		 = PrxEncrypter
 
 # Add in PSPSDK includes and libraries.
 INCDIR   := $(INCDIR) . $(PSPSDK)/include
@@ -185,11 +186,17 @@ $(PSP_EBOOT_SFO):
 
 ifeq ($(BUILD_PRX),1)
 $(PSP_EBOOT): $(TARGET).prx $(PSP_EBOOT_SFO)
+ifeq ($(ENCRYPT), 1)
+	- $(ENC) $(TARGET).prx $(TARGET).prx
+endif
 	$(PACK_PBP) $(PSP_EBOOT) $(PSP_EBOOT_SFO) $(PSP_EBOOT_ICON)  \
 		$(PSP_EBOOT_ICON1) $(PSP_EBOOT_UNKPNG) $(PSP_EBOOT_PIC1)  \
 		$(PSP_EBOOT_SND0)  $(TARGET).prx $(PSP_EBOOT_PSAR)
 else
 $(PSP_EBOOT): $(TARGET).elf $(PSP_EBOOT_SFO)
+ifeq ($(ENCRYPT), 1)
+	- $(ENC) $(TARGET).prx $(TARGET).prx
+endif
 	$(STRIP) $(TARGET).elf -o $(TARGET)_strip.elf
 	$(PACK_PBP) $(PSP_EBOOT) $(PSP_EBOOT_SFO) $(PSP_EBOOT_ICON)  \
 		$(PSP_EBOOT_ICON1) $(PSP_EBOOT_UNKPNG) $(PSP_EBOOT_PIC1)  \
