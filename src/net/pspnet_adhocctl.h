@@ -22,11 +22,13 @@ extern "C" {
 /** Product structure */
 struct productStruct
 {
-	/** Unknown, set to 0 */
+	/** Unknown, set to 0, other values used are 1 and 2. Not sure on what they represent */
 	int unknown;
 	/** The product ID string */
 	char product[9];
-} productStruct;
+	/* possibly padding */
+	char unk[3];
+};
 
 /** Peer info structure */
 struct SceNetAdhocctlPeerInfo

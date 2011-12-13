@@ -1,4 +1,4 @@
-
+SUBDIRS = PrxEncrypter
 bin_PROGRAMS = bin2s bin2c bin2o pack-pbp unpack-pbp mksfo mksfoex psp-config psp-build-exports psp-prxgen psp-fixup-imports
 
 bin2s_SOURCES = bin2s.c
