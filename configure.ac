@@ -23,7 +23,8 @@ AC_PROG_RANLIB
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([fcntl.h malloc.h stdlib.h string.h unistd.h])
+AC_CHECK_HEADERS([fcntl.h malloc.h stdlib.h string.h unistd.h zlib.h])
+AC_CHECK_LIB([z], [compress])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
@@ -114,5 +115,6 @@ AC_CONFIG_FILES([Makefile
                  src/vsh/Makefile
                  src/wlan/Makefile
                  src/samples/Makefile
-                 tools/Makefile])
+                 tools/Makefile
+                 tools/PrxEncrypter/Makefile])
 AC_OUTPUT
