@@ -41,8 +41,14 @@ typedef struct PspGeCallbackData
 
 typedef struct PspGeListArgs
 {
+	/** Size of the structure (16) */
 	unsigned int	size;
+	/** Pointer to a context */
 	PspGeContext*	context;
+	/** Number of stacks to use */
+	u32 numStacks;
+	/** Pointer to the stacks (unused) */
+	SceGeStack *stacks;
 } PspGeListArgs;
 
 /**
