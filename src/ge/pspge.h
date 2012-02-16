@@ -23,6 +23,13 @@ typedef struct PspGeContext {
 	unsigned int context[512];
 } PspGeContext;
 
+/** Structure storing a stack (for CALL/RET) */
+typedef struct
+{
+	/** The stack buffer */
+	unsigned int stack[8];
+} SceGeStack;
+
 /** Typedef for a GE callback */
 typedef void (*PspGeCallback)(int id, void *arg);
 
