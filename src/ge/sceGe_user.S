@@ -21,38 +21,41 @@
 	IMPORT_FUNC	"sceGe_user",0x57C8945B,sceGeGetMtx
 #endif
 #ifdef F_sceGe_user_0006
-	IMPORT_FUNC	"sceGe_user",0x438A385A,sceGeSaveContext
+	IMPORT_FUNC "sceGe_user",0xE66CB92E,sceGeGetStack
 #endif
 #ifdef F_sceGe_user_0007
-	IMPORT_FUNC	"sceGe_user",0x0BF608FB,sceGeRestoreContext
+	IMPORT_FUNC	"sceGe_user",0x438A385A,sceGeSaveContext
 #endif
 #ifdef F_sceGe_user_0008
-	IMPORT_FUNC	"sceGe_user",0xAB49E76A,sceGeListEnQueue
+	IMPORT_FUNC	"sceGe_user",0x0BF608FB,sceGeRestoreContext
 #endif
 #ifdef F_sceGe_user_0009
-	IMPORT_FUNC	"sceGe_user",0x1C0D95A6,sceGeListEnQueueHead
+	IMPORT_FUNC	"sceGe_user",0xAB49E76A,sceGeListEnQueue
 #endif
 #ifdef F_sceGe_user_0010
-	IMPORT_FUNC	"sceGe_user",0x5FB86AB0,sceGeListDeQueue
+	IMPORT_FUNC	"sceGe_user",0x1C0D95A6,sceGeListEnQueueHead
 #endif
 #ifdef F_sceGe_user_0011
-	IMPORT_FUNC	"sceGe_user",0xE0D68148,sceGeListUpdateStallAddr
+	IMPORT_FUNC	"sceGe_user",0x5FB86AB0,sceGeListDeQueue
 #endif
 #ifdef F_sceGe_user_0012
-	IMPORT_FUNC	"sceGe_user",0x03444EB4,sceGeListSync
+	IMPORT_FUNC	"sceGe_user",0xE0D68148,sceGeListUpdateStallAddr
 #endif
 #ifdef F_sceGe_user_0013
-	IMPORT_FUNC	"sceGe_user",0xB287BD61,sceGeDrawSync
+	IMPORT_FUNC	"sceGe_user",0x03444EB4,sceGeListSync
 #endif
 #ifdef F_sceGe_user_0014
-	IMPORT_FUNC	"sceGe_user",0xB448EC0D,sceGeBreak
+	IMPORT_FUNC	"sceGe_user",0xB287BD61,sceGeDrawSync
 #endif
 #ifdef F_sceGe_user_0015
-	IMPORT_FUNC	"sceGe_user",0x4C06E472,sceGeContinue
+	IMPORT_FUNC	"sceGe_user",0xB448EC0D,sceGeBreak
 #endif
 #ifdef F_sceGe_user_0016
-	IMPORT_FUNC	"sceGe_user",0xA4FC06A4,sceGeSetCallback
+	IMPORT_FUNC	"sceGe_user",0x4C06E472,sceGeContinue
 #endif
 #ifdef F_sceGe_user_0017
+	IMPORT_FUNC	"sceGe_user",0xA4FC06A4,sceGeSetCallback
+#endif
+#ifdef F_sceGe_user_0018
 	IMPORT_FUNC	"sceGe_user",0x05DB22CE,sceGeUnsetCallback
 #endif

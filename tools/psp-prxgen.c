@@ -606,8 +606,8 @@ int calculate_outsize(void)
 				{
 					reloc_size += g_elfsections[i].iSize;
 					out_sects++;
-					str_size += strlen(g_elfsections[i].szName) + 1;
 				}
+				str_size += strlen(g_elfsections[i].szName) + 1;
 			}
 			else
 			{
@@ -762,7 +762,8 @@ void output_sh(unsigned char *data)
 			SW(&shdr->sh_addralign, g_elfsections[i].iAddralign);
 			SW(&shdr->sh_entsize, g_elfsections[i].iEntsize);
 
-			if((g_elfsections[i].iType == SHT_REL) || (g_elfsections[i].iType == SHT_PRXRELOC))
+			if(((g_elfsections[i].iType == SHT_REL) || (g_elfsections[i].iType == SHT_PRXRELOC)) 
+					&& (g_elfsections[g_elfsections[i].iInfo].iFlags & SHF_ALLOC))
 			{
 				SW(&shdr->sh_type, SHT_PRXRELOC);
 				SW(&shdr->sh_info, g_elfsections[i].pRef->iIndex);
