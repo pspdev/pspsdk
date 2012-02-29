@@ -596,17 +596,11 @@ int calculate_outsize(void)
 					mem_size = top_addr;
 				}
 				
-				out_sects++;
 				str_size += strlen(g_elfsections[i].szName) + 1;
 			}
 			else if((g_elfsections[i].iType == SHT_REL) || (g_elfsections[i].iType == SHT_PRXRELOC))
 			{
-				/* Check this is a reloc for an allocated section */
-				if(g_elfsections[g_elfsections[i].iInfo].iFlags & SHF_ALLOC)
-				{
-					reloc_size += g_elfsections[i].iSize;
-					out_sects++;
-				}
+				reloc_size += g_elfsections[i].iSize;
 				str_size += strlen(g_elfsections[i].szName) + 1;
 			}
 			else
@@ -620,9 +614,9 @@ int calculate_outsize(void)
 					mem_size = top_addr;
 				}
 				
-				out_sects++;
 				str_size += strlen(g_elfsections[i].szName) + 1;
 			}
+			out_sects++;
 		}
 	}
 
@@ -762,11 +756,13 @@ void output_sh(unsigned char *data)
 			SW(&shdr->sh_addralign, g_elfsections[i].iAddralign);
 			SW(&shdr->sh_entsize, g_elfsections[i].iEntsize);
 
-			if(((g_elfsections[i].iType == SHT_REL) || (g_elfsections[i].iType == SHT_PRXRELOC)) 
-					&& (g_elfsections[g_elfsections[i].iInfo].iFlags & SHF_ALLOC))
+			if((g_elfsections[i].iType == SHT_REL) || (g_elfsections[i].iType == SHT_PRXRELOC)) 
 			{
 				SW(&shdr->sh_type, SHT_PRXRELOC);
-				SW(&shdr->sh_info, g_elfsections[i].pRef->iIndex);
+				if (g_elfsections[i].pRef)
+					SW(&shdr->sh_info, g_elfsections[i].pRef->iIndex);
+				else
+					SW(&shdr->sh_info, 0);
 				SW(&shdr->sh_offset, reloc_ofs);
 				reloc_ofs += g_elfsections[i].iSize;
 			}
