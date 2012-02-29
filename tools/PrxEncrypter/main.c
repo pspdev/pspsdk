@@ -298,12 +298,12 @@ int main(int argc, char **argv)
 	header_keys keys;
 	u8 rawkheaderBk[0x90];
 	char *out_fname = NULL;
-	if(argc != 3)
+	if(argc < 2)
 	{
 		printf("USAGE: %s [input_prx] [output_prx]\n", argv[0]);
 		return 0;
 	}
-	out_fname = argv[2];
+	out_fname = argc > 2 ? argv[2] : "./data.psp";
 
 	memset(in_buffer, 0, sizeof(in_buffer));
 	memset(out_buffer, 0, sizeof(out_buffer));
