@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <malloc.h>
 #include "types.h"
 #include "kirk_engine.h"
 #include "crypto.h"
