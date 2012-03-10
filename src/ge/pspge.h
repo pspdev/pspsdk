@@ -14,6 +14,8 @@
 #ifndef __GE_H__
 #define __GE_H__
 
+#include <psptypes.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
