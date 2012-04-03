@@ -123,12 +123,16 @@ clean)
     test "$verbose" = "-v" && echo "$i"    
   fi; done
 
+  test "$quiet" = "true" || echo "removing autom4te.cache"
+  rm -fr autom4te.cache
+
   find . -name '*~' -print | xargs rm -f
   find . -name '*.orig' -print | xargs rm -f
   find . -name '*.rej' -print | xargs rm -f
   find . -name 'config.status' -print | xargs rm -f
   find . -name 'config.log' -print | xargs rm -f
   find . -name 'config.cache' -print | xargs rm -f
+  find . -name 'config.h.in' -print | xargs rm -f
   find . -name 'Makefile' -print | xargs rm -f
   find . -name '.deps' -print | xargs rm -rf
   find . -name '.libs' -print | xargs rm -rf
