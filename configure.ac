@@ -31,7 +31,6 @@ AC_C_CONST
 AC_C_BIGENDIAN
 
 # Checks for library functions.
-AC_FUNC_MALLOC
 AC_FUNC_MEMCMP
 AC_CHECK_FUNCS([getcwd strchr])
 
@@ -74,8 +73,10 @@ AC_SUBST(PSPSDK_CXXFLAGS)
 
 # Turn on all warnings (for host programs).
 if test x$ac_compiler_gnu = xyes; then
-   CFLAGS="$CFLAGS -Wall"
+   CFLAGS="$CFLAGS $CFLAGS_FOR_HOST -Wall"
 fi
+AC_SUBST(CFLAGS)
+AC_SUBST(LDFLAGS)
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile
