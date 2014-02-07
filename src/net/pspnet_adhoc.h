@@ -106,7 +106,7 @@ typedef struct pdpStatStruct
  * Get the status of all PDP objects
  *
  * @param size - Pointer to the size of the stat array (e.g 20 for one structure)
- * @param stat - Pointer to a list of ::pspStatStruct structures.
+ * @param stat - Pointer to a list of ::pdpStatStruct structures.
  *
  * @return 0 on success, < 0 on error
  */

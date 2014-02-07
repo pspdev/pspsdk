@@ -258,7 +258,7 @@ int sceUsbCamSetupStill(PspUsbCamSetupStillParam *param);
 /**
  * Setups the parameters to take a still image (with more options)
  *
- * @param param - pointer to a ::PspUsbCamSetupStillParamEx 
+ * @param param - pointer to a ::PspUsbCamSetupStillExParam 
  *
  * @return 0 on success, < 0 on error
 */
@@ -499,7 +499,7 @@ int sceUsbCamGetContrast(int *contrast);
 /**
  * Gets the current sharpness
  *
- * @param brightness - pointer to a variable that receives the current sharpness
+ * @param sharpness - pointer to a variable that receives the current sharpness
  *
  * @return 0 on success, < 0 on error
 */

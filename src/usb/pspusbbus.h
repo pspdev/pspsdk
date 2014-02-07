@@ -174,7 +174,7 @@ struct DeviceRequest
 	unsigned short wLength;
 } __attribute__((packed));
 
-/** USB driver structure used by ::sceUsbbdRegisterDriver and ::sceUsbbdUnregisterDriver */
+/** USB driver structure used by ::sceUsbbdRegister and ::sceUsbbdUnregister */
 struct UsbDriver
 {
 	/** Name of the USB driver */
