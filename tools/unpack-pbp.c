@@ -149,7 +149,14 @@ int main(int argc, char *argv[]) {
          printf("ERROR: Could not open the output file. (%s)\n", filename[loop0]);
          return -1;
       }
-      
+
+      // Create the read buffer
+      buffer = malloc(maxbuffer);
+      if (buffer == NULL) {
+         printf("ERROR: Could not allocate the section data buffer. (%d)\n", readsize);
+         return -1;
+      }
+
       do {
          int readsize;
          
@@ -161,31 +168,27 @@ int main(int argc, char *argv[]) {
          }
          size -= readsize;
          
-         // Create the read buffer
-         buffer = malloc(readsize);
-         if (buffer == NULL) {
-            printf("ERROR: Could not allocate the section data buffer. (%d)\n", readsize);
-            return -1;
-         }
-         
          // Read in the data from the PBP
          if (fread(buffer, readsize, 1, infile) < 0) {
             printf("ERROR: Could not read in the section data.\n");
+            free(buffer);
             return -1;
          }
          
          // Write the contents of the buffer to the output file
          if (fwrite(buffer, readsize, 1, outfile) < 0) {
             printf("ERROR: Could not write out the section data.\n");
+            free(buffer);
             return -1;
          }
-         
-         // Clean up the buffer
-         free(buffer);
          
          // Repeat if we haven't finished writing the file
       } while (size);
       
+
+      // Clean up the buffer
+      free(buffer);
+
       // Close the output file
       if (fclose(outfile) < 0) {
          printf("ERROR: Could not close the output file.\n");
