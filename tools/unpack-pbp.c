@@ -153,7 +153,7 @@ int main(int argc, char *argv[]) {
       // Create the read buffer
       buffer = malloc(maxbuffer);
       if (buffer == NULL) {
-         printf("ERROR: Could not allocate the section data buffer. (%d)\n", readsize);
+         printf("ERROR: Could not allocate the section data buffer. (%d)\n", maxbuffer);
          return -1;
       }
 
