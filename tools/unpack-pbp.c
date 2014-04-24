@@ -150,6 +150,17 @@ int main(int argc, char *argv[]) {
          return -1;
       }
 
+
+      int readsize;
+         
+      // Make sure we don't exceed the maximum buffer size
+      if (size > maxbuffer) {
+         readsize = maxbuffer;
+      } else {
+         readsize = size;
+      }
+      size -= readsize;
+
       // Create the read buffer
       buffer = malloc(maxbuffer);
       if (buffer == NULL) {
@@ -158,16 +169,6 @@ int main(int argc, char *argv[]) {
       }
 
       do {
-         int readsize;
-         
-         // Make sure we don't exceed the maximum buffer size
-         if (size > maxbuffer) {
-            readsize = maxbuffer;
-         } else {
-            readsize = size;
-         }
-         size -= readsize;
-         
          // Read in the data from the PBP
          if (fread(buffer, readsize, 1, infile) < 0) {
             printf("ERROR: Could not read in the section data.\n");
