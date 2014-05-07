@@ -133,7 +133,7 @@ int sceNetApctlAddHandler(sceNetApctlHandler handler, void *pArg);
 /**
  * Delete an apctl event handler.
  *
- * @param handlerid - A handler as created returned from sceNetApctlAddHandler.
+ * @param handlerId - A handler as created returned from sceNetApctlAddHandler.
  *
  * @return < 0 on error.
  */

@@ -119,7 +119,7 @@ int sceRtcGetDayOfWeek(int year, int month, int day);
  * Validate pspDate component ranges
  *
  * @param date - pointer to pspDate struct to be checked
- * @return 0 on success, one of ::CheckValidErrors on error
+ * @return 0 on success, one of ::pspRtcCheckValidErrors on error
  */
 int sceRtcCheckValid(const pspTime* date);
 
