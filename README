@@ -76,7 +76,7 @@ from Subversion" below for details.
     * The PSPDEV Toolchain.  PSPSDK requires the GNU toolchain (GCC and
       binutils) targetted to the PSP.  You can find binary packages of these
       tools at http://www.pspdev.org/.  You can find a script to build and
-      install the toolchain at http://www.oopo.net/consoledev/.
+      install the toolchain at https://github.com/pspdev/psptoolchain.
 
     In addition to the above requirements, if you plan on building PSPSDK from
 source, you will need:
