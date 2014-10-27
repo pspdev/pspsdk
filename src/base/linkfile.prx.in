@@ -88,12 +88,12 @@ SECTIONS
   PROVIDE (_etext = .);
   PROVIDE (etext = .);
   /* PSP library entry table and library stub table. */
-  .lib.ent.top    : { *(.lib.ent.top) }
+  PROVIDE (__lib_ent_top = .);
   .lib.ent        : { *(.lib.ent) }
-  .lib.ent.btm    : { *(.lib.ent.btm) }
-  .lib.stub.top   : { *(.lib.stub.top) }
+  PROVIDE (__lib_ent_bottom = .);
+  PROVIDE (__lib_stub_top = .);
   .lib.stub       : { *(.lib.stub) }
-  .lib.stub.btm   : { *(.lib.stub.btm) }
+  PROVIDE (__lib_stub_bottom = .);
   /* PSP read-only data for module info, NIDs, and Vstubs.  The
      .rodata.sceModuleInfo section must appear before the .rodata section
      otherwise it would get absorbed into .rodata and the PSP bootloader
