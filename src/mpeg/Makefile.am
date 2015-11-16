@@ -25,9 +25,6 @@ libpspmpeginclude_HEADERS = pspmpeg.h
 libpspmpegbaseincludedir = @PSPSDK_INCLUDEDIR@
 libpspmpegbaseinclude_HEADERS = pspmpegbase.h
 
-libpspmpegbase_driverincludedir = @PSPSDK_INCLUDEDIR@
-libpspmpegbase_driverinclude_HEADERS = pspmpegbase.h
-
 libpspjpegincludedir = @PSPSDK_INCLUDEDIR@
 libpspjpeginclude_HEADERS = pspjpeg.h
 
