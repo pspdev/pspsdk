@@ -10,8 +10,7 @@
  * Copyright (c) 2007 cooleyes
  * Copyright (c) 2007 Alexander Berl <raphael@fx-world.org>
  * Copyright (c) 2008 David Perry <tias_dp@hotmail.com>
- *
- * $Id: pspaudio.h 2433 2008-10-15 10:00:27Z iwn $
+ * Copyright (c) 2016 173210 <root.3.173210@live.com>
  */
 #ifndef PSPAUDIO_H
 #define PSPAUDIO_H
@@ -344,6 +343,10 @@ int sceAudioWaitInputEnd(void);
   * @return 0 if input has completed, 1 if not completed or an error if less than 0.
   */
 int sceAudioPollInputEnd(void);
+
+/** Error codes used as return values */
+#define SCE_AUDIO_ERROR_OUTPUT_BUSY (0x80260002)
+#define SCE_AUDIO_ERROR_NOT_RESERVED (0x80260008)
 
 /*@}*/
 
