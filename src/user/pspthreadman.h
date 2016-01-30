@@ -605,6 +605,15 @@ typedef struct {
 	int pad[3];
 } SceLwMutexWorkarea;
 
+/**
+ * Delete a lightweight mutex
+ *
+ * @param workarea - The pointer to the workarea
+ *
+ * @return 0 on success, otherwise one of ::PspKernelErrorCodes
+ */
+int sceKernelDeleteLwMutex(SceLwMutexWorkarea *workarea);
+
 /* Event flags. */
 
 /** Structure to hold the event flag information */
