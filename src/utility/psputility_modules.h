@@ -6,7 +6,7 @@
  * psputility_modules.h - Load modules from user mode
  *
  * Copyright (c) 2008 David Perry <tias_dp@hotmail.com>
- *
+ * Copyright (c) 2016 173210 <root.3.173210@live.com>
  */
 #ifndef __PSPUTILITY_MODULES_H__
 #define __PSPUTILITY_MODULES_H__
@@ -70,6 +70,9 @@ int sceUtilityLoadModule(int module);
  * @return 0 on success, < 0 on error
  */
 int sceUtilityUnloadModule(int module);
+
+/** An error code used as a return value */
+#define SCE_ERROR_MODULE_ALREADY_LOADED (0x80111102)
 
 #ifdef __cplusplus
 }
