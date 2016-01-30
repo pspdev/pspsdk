@@ -8,8 +8,7 @@
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
- *
- * $Id: pspmodulemgr.h 2433 2008-10-15 10:00:27Z iwn $
+ * Copyright (c) 2016 173210 <root.3.173210@live.com>
  */
 
 /* Note: Some of the structures, types, and definitions in this file were
@@ -208,6 +207,15 @@ int sceKernelQueryModuleInfo(SceUID modid, SceKernelModuleInfo *info);
   * @return >= 0 on success
   */
 int sceKernelGetModuleIdList(SceUID *readbuf, int readbufsize, int *idcount);
+
+/**
+ * Get the ID of the module occupying the address
+ *
+ * @param p - A pointer to the module
+ *
+ * @return >= 0 on success, otherwise one of ::PspKernelErrorCodes
+ */
+int sceKernelGetModuleIdByAddress(const void *p);
 
 /*@}*/
 

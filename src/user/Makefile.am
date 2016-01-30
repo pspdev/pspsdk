@@ -14,7 +14,7 @@ IO_OBJS = IoFileMgrForUser_0000.o IoFileMgrForUser_0001.o IoFileMgrForUser_0002.
 
 KERNEL_OBJS = Kernel_Library_0000.o Kernel_Library_0001.o Kernel_Library_0002.o Kernel_Library_0003.o Kernel_Library_0004.o Kernel_Library_0005.o
 
-MODMGR_OBJS = ModuleMgrForUser_0000.o ModuleMgrForUser_0001.o ModuleMgrForUser_0002.o ModuleMgrForUser_0003.o ModuleMgrForUser_0004.o ModuleMgrForUser_0005.o ModuleMgrForUser_0006.o ModuleMgrForUser_0007.o ModuleMgrForUser_0008.o ModuleMgrForUser_0009.o ModuleMgrForUser_0010.o ModuleMgrForUser_0011.o
+MODMGR_OBJS = ModuleMgrForUser_0000.o ModuleMgrForUser_0001.o ModuleMgrForUser_0002.o ModuleMgrForUser_0003.o ModuleMgrForUser_0004.o ModuleMgrForUser_0005.o ModuleMgrForUser_0006.o ModuleMgrForUser_0007.o ModuleMgrForUser_0008.o ModuleMgrForUser_0009.o ModuleMgrForUser_0010.o ModuleMgrForUser_0011.o ModuleMgrForUser_0012.o
 
 STDIO_OBJS = StdioForUser_0000.o StdioForUser_0001.o StdioForUser_0002.o StdioForUser_0003.o StdioForUser_0004.o StdioForUser_0005.o StdioForUser_0006.o StdioForUser_0007.o StdioForUser_0008.o StdioForUser_0009.o
 
