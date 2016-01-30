@@ -6,8 +6,7 @@
  *  psputility_netmodules.h - Load network modules from user mode on 2.xx+
  *
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
- *
- * $Id: psputility_netmodules.h 2002 2006-09-16 16:49:57Z jim $
+ * Copyright (c) 2016 173210 <root.3.173210@live.com>
  */
 #ifndef __PSPUTILITY_NETMODULES_H__
 #define __PSPUTILITY_NETMODULES_H__
@@ -45,6 +44,9 @@ int sceUtilityLoadNetModule(int module);
  * @return 0 on success, < 0 on error
  */
 int sceUtilityUnloadNetModule(int module);
+
+/** An error code used as a return value */
+#define SCE_ERROR_NET_MODULE_NOT_LOADED (0x80110803)
 
 #ifdef __cplusplus
 }
