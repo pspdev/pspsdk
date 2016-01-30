@@ -9,8 +9,7 @@
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  * Copyright (c) 2005 Florin Sasu
- *
- * $Id: pspthreadman.h 2433 2008-10-15 10:00:27Z iwn $
+ * Copyright (c) 2016 173210 <root.3.173210@live.com>
  */
 #ifndef __THREADMAN_H__
 #define __THREADMAN_H__
@@ -590,6 +589,21 @@ int sceKernelPollSema(SceUID semaid, int signal);
  */
 int sceKernelReferSemaStatus(SceUID semaid, SceKernelSemaInfo *info);
 
+/** Struct as workarea for lightweight mutex */
+typedef struct {
+	/** Count */
+	int count;
+	/** Locking thread */
+	SceUID lockThread;
+	/** Attribute */
+	int attr;
+	/** Number of waiting threads */
+	int numWaitThreads;
+	/** UID */
+	SceUID uid;
+	/** Padding */
+	int pad[3];
+} SceLwMutexWorkarea;
 
 /* Event flags. */
 
