@@ -21,7 +21,7 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x844AF6BD,sceSysreg_driver_844AF6BD
 #endif
 #ifdef F_sceSysreg_driver_0006
-	IMPORT_FUNC	"sceSysreg_driver",0xE2A5D1EE,sceSysreg_driver_E2A5D1EE
+	IMPORT_FUNC	"sceSysreg_driver",0xE2A5D1EE,sceSysregGetTachyonVersion
 #endif
 #ifdef F_sceSysreg_driver_0007
 	IMPORT_FUNC	"sceSysreg_driver",0x4F46EEDE,sceSysreg_driver_4F46EEDE
