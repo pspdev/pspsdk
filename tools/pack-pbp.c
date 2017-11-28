@@ -3,7 +3,7 @@
 #  ____|   |    ____|   |        | |____|
 # |     ___|   |     ___|    ____| |    \    PSPDEV Open Source Project.
 #-----------------------------------------------------------------------
-# (c) 2005 Dan Peori <peori@oopo.net>
+# (c) 2005 Naomi Peori <naomi@peori.ca>
 # Licenced under Academic Free License version 2.0
 # Review pspsdk README & LICENSE files for further details.
 #
