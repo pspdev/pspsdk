@@ -65,6 +65,18 @@ int sceSysconSetHPConnectCallback( void (*)(int), int unk0 );
 
 int sceSysconSetHRPowerCallback( void (*)(int), int unk0 );
 
+/**
+ * Get the PSP's Pommel version
+ * @param version - A pointer to an int to receive the Pommel version into
+ */
+int sceSysconGetPommelVersion( int* version );
+
+/**
+ * Get the PSP's Baryon version
+ * @param version - A pointer to an int to receive the Baryon version into
+ */
+int sceSysconGetBaryonVersion( int* version );
+
 /*@}*/
 
 #ifdef __cplusplus

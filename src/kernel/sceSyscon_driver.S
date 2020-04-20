@@ -129,7 +129,7 @@
 	IMPORT_FUNC	"sceSyscon_driver",0xE6B74CB9,sceSysconNop
 #endif
 #ifdef F_sceSyscon_driver_0042
-	IMPORT_FUNC	"sceSyscon_driver",0x7EC5A957,sceSyscon_driver_7EC5A957
+	IMPORT_FUNC	"sceSyscon_driver",0x7EC5A957,sceSysconGetBaryonVersion
 #endif
 #ifdef F_sceSyscon_driver_0043
 	IMPORT_FUNC	"sceSyscon_driver",0x7BCC5EAE,sceSyscon_driver_7BCC5EAE
@@ -192,7 +192,7 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x91E183CB,sceSysconPowerSuspend
 #endif
 #ifdef F_sceSyscon_driver_0063
-	IMPORT_FUNC	"sceSyscon_driver",0xE7E87741,sceSyscon_driver_E7E87741
+	IMPORT_FUNC	"sceSyscon_driver",0xE7E87741,sceSysconGetPommelVersion
 #endif
 #ifdef F_sceSyscon_driver_0064
 	IMPORT_FUNC	"sceSyscon_driver",0xFB148FB6,sceSyscon_driver_FB148FB6
