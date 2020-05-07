@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -9,7 +9,6 @@
  * Copyright (c) 2005 Adresd
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
  *
- * $Id: pspaudiolib.c 1145 2005-10-12 15:32:44Z mrbrown $
  */
 #include <stdlib.h>
 #include <string.h>

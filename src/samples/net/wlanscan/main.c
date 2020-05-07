@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -10,8 +10,6 @@
  *
  * Copyright (c) 2006 James F
  *
- * $Id: main.c 1699 2006-01-15 23:46:00Z tyranid $
- * $HeadURL: svn://svn.ps2dev.org/psp/trunk/pspsdk/src/samples/net/wlanscan/main.c $
  */
 #include <pspkernel.h>
 #include <stdio.h>

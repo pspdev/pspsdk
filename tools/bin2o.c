@@ -1,12 +1,12 @@
 /*
 # _____     ___ ____     ___ ____
-#  ____|   |    ____|   |        | |____|
+#  ____|   |    ____|   |        | |____|    https://github.com/pspdev
 # |     ___|   |     ___|    ____| |    \    PSPDEV Open Source Project.
 #-----------------------------------------------------------------------
 # Review pspsdk README & LICENSE files for further details.
 #
-# $Id: bin2o.c 1988 2006-08-06 12:06:54Z chip $
-# Convets any file into a PSP's .o file.
+# Converts any file into a PSP's .o file.
+#
 */
 
 #include <sys/types.h>

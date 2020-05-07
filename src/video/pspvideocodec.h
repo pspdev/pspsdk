@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2007 cooleyes
  *
- * $Id: pspvideocodec.h 2418 2008-08-13 23:29:18Z Raphael $
  */
  
 #ifndef __SCELIBVIDEOCODEC_H__

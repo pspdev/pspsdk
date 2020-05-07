@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -8,7 +8,6 @@
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  * Copyright (c) 2005 adresd
  *
- * $Id: psputilsforkernel.h 2339 2007-12-06 19:41:18Z raphael $
  */
 
 #ifndef __PSPUTILSFORKERNEL_H__

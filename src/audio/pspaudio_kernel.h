@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -10,7 +10,6 @@
  * Copyright (c) 2007 cooleyes
  * Copyright (c) 2007 Alexander Berl <raphael@fx-world.org>
  *
- * $Id: pspaudio_kernel.h 2433 2008-10-15 10:00:27Z iwn $
  */
 #ifndef PSPAUDIO_KERNEL_H
 #define PSPAUDIO_KERNEL_H

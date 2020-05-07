@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 Adresd
  *
- * $Id: psphprm.h 1480 2005-11-25 16:10:18Z mrbrown $
  */
 #ifndef __HPRM_H__
 #define __HPRM_H__

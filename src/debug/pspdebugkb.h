@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2006 Mike Mallett <mike@nerdcore.net>
  *
- * $Id: pspdebugkb.h 2110 2006-12-19 14:50:27Z tyranid $
  */
 
 #ifndef __PSPDEBUGKB_H

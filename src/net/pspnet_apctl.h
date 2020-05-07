@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -10,7 +10,6 @@
  *
  * Portions based on PspPet's wifi_03 sample code.
  * 
- * $Id: pspnet_apctl.h 2434 2008-10-15 17:37:25Z iwn $
  */
 
 #ifndef PSPNET_APCTL_H

@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  *
- * $Id: gdb-stub.c 1152 2005-10-16 20:37:00Z tyranid $
  */
 
 /* Note: there is the odd small bit which comes from the gdb stubs/linux mips stub */

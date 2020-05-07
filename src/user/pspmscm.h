@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2006 Adrahil
  *
- * $Id: pspmscm.h 2005 2006-09-17 21:36:52Z tyranid $
  */
 #ifndef PSPMSCM_H
 #define PSPMSCM_H

@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -9,7 +9,6 @@
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
- * $Id: xprintf.c 540 2005-07-08 19:35:10Z warren $
  */
 /* Code borrowed from mysql's xprintf.c, by Richard Hipp */
 /* This xprintf.c file on which this one is based is in public domain. */

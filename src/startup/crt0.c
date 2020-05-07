@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
  *
- * $Id: crt0.c 1531 2005-12-07 18:27:12Z tyranid $
  */
 
 #include <pspkerneltypes.h>

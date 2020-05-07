@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -9,7 +9,6 @@
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
- * $Id: pspiofilemgr_fcntl.h 559 2005-07-09 08:47:52Z mrbrown $
  */
 #ifndef PSPIOFILEMGR_FCNTL_H
 #define PSPIOFILEMGR_FCNTL_H

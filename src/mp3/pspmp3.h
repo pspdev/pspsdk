@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -8,7 +8,6 @@
  * Copyright (c) 2008 David Perry <tias_dp@hotmail.com>
  * Copyright (c) 2008 Alexander Berl <raphael@fx-world.org>
  *
- * $Id: $
  */
 
 #ifndef __SCELIBMP3_H__

@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 James F.
  *
- * $Id: pspthreadman_kernel.h 2131 2007-01-15 21:42:22Z tyranid $
  */
 
 #ifndef PSPTHREADMANKERNEL_H

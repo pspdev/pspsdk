@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@0xd6.org>
  *
- * $Id: pspnand_driver.h 1211 2005-10-24 06:36:00Z mrbrown $
  */
 
 #ifndef PSPNAND_DRIVER_H

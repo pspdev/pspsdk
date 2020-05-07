@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -9,7 +9,6 @@
  *			 (c) 2007 InsertWittyName (tias_dp@hotmail.com)
  * Based on work by Shine
  *
- * $Id: main.c 2364 2008-02-16 22:07:09Z iwn $
  */
 #include <pspkernel.h>
 #include <pspdisplay.h>

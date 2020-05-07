@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,8 +7,6 @@
  *
  * Copyright (c) 2006 Iaroslav Gaponenko <adrahil@gmail.com>
  *
- * $Id: main.c 2006 2006-09-17 21:48:56Z tyranid $
- * $HeadURL: svn://svn.ps2dev.org/psp/trunk/pspsdk/src/samples/ms/callback/main.c $
  */
 #include <pspkernel.h>
 #include <stdio.h>

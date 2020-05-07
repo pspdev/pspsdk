@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -17,7 +17,6 @@
  * that point to the block offsets of the IPL itself.  The table is terminated
  * with an entry of zero.
  * 
- * $Id: main.c 1212 2005-10-24 06:36:57Z mrbrown $
  */
 
 #include <assert.h>

@@ -1,12 +1,12 @@
 /*
 # _____     ___ ____     ___ ____
-#  ____|   |    ____|   |        | |____|
+#  ____|   |    ____|   |        | |____|    https://github.com/pspdev
 # |     ___|   |     ___|    ____| |    \    PSPDEV Open Source Project.
 #-----------------------------------------------------------------------
 # Review pspsdk README & LICENSE files for further details.
 #
 # New and improved mksfo
-# $Id$
+#
 */
 #include <stdio.h>
 #include <stdint.h>
