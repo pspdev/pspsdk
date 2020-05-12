@@ -281,7 +281,11 @@ int load_sections(unsigned char *data)
 						load_addr = g_elfsections[i].iAddr;
 					}
 				}
+			}
 
+			/* Okay so we have loaded all the sections, lets find relocations and fix up the names */
+			for(i = 0; i < g_elfhead.iShnum; i++)
+			{
 				if(((g_elfsections[i].iType == SHT_REL) || (g_elfsections[i].iType == SHT_PRXRELOC)) 
 						&& (g_elfsections[g_elfsections[i].iInfo].iFlags & SHF_ALLOC))
 				{
@@ -289,11 +293,7 @@ int load_sections(unsigned char *data)
 					found_rel = 1;
 					g_elfsections[i].blOutput = 1;
 				}
-			}
 
-			/* Okay so we have loaded all the sections, lets fix up the names */
-			for(i = 0; i < g_elfhead.iShnum; i++)
-			{
 				strcpy(g_elfsections[i].szName, (char *) (g_elfsections[g_elfhead.iShstrndx].pData + g_elfsections[i].iName));
 				if(strcmp(g_elfsections[i].szName, PSP_MODULE_INFO_NAME) == 0)
 				{
