@@ -6,10 +6,10 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/display \
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/display \
 	-I$(top_srcdir)/src/ge -I$(top_srcdir)/src/user -I$(top_srcdir)/src/vfpu
 CFLAGS =  @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
 
 libpspgumincludedir = @PSPSDK_INCLUDEDIR@
 libpspguminclude_HEADERS = pspgum.h

@@ -6,7 +6,7 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
 CCASFLAGS = $(CFLAGS) -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 

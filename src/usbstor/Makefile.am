@@ -6,9 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES) 
+CCASFLAGS = $(CFLAGS) $(CPPFLAGS) 
 
 USBSTOR_OBJS = sceUsbstor_0000.o sceUsbstor_0001.o 
 USBSTORBOOT_OBJS = sceUsbstorBoot_0000.o sceUsbstorBoot_0001.o sceUsbstorBoot_0002.o sceUsbstorBoot_0003.o sceUsbstorBoot_0004.o sceUsbstorBoot_0005.o sceUsbstorBoot_0006.o 

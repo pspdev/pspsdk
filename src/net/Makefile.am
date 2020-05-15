@@ -6,9 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
 
 NET_OBJS = sceNet_0000.o sceNet_0001.o sceNet_0002.o sceNet_0003.o sceNet_0004.o sceNet_0005.o sceNet_0006.o sceNet_0007.o sceNet_0008.o 
 

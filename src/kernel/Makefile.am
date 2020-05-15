@@ -6,9 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/user
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/user
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
 
 EXCEPTION_OBJS = ExceptionManagerForKernel_0000.o ExceptionManagerForKernel_0001.o ExceptionManagerForKernel_0002.o ExceptionManagerForKernel_0003.o ExceptionManagerForKernel_0004.o ExceptionManagerForKernel_0005.o ExceptionManagerForKernel_0006.o ExceptionManagerForKernel_0007.o ExceptionManagerForKernel_0008.o 
 

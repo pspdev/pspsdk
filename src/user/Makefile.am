@@ -6,9 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base
+CPPFLAGS = -I$(top_srcdir)/src/base
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
 
 IO_OBJS = IoFileMgrForUser_0000.o IoFileMgrForUser_0001.o IoFileMgrForUser_0002.o IoFileMgrForUser_0003.o IoFileMgrForUser_0004.o IoFileMgrForUser_0005.o IoFileMgrForUser_0006.o IoFileMgrForUser_0007.o IoFileMgrForUser_0008.o IoFileMgrForUser_0009.o IoFileMgrForUser_0010.o IoFileMgrForUser_0011.o IoFileMgrForUser_0012.o IoFileMgrForUser_0013.o IoFileMgrForUser_0014.o IoFileMgrForUser_0015.o IoFileMgrForUser_0016.o IoFileMgrForUser_0017.o IoFileMgrForUser_0018.o IoFileMgrForUser_0019.o IoFileMgrForUser_0020.o IoFileMgrForUser_0021.o IoFileMgrForUser_0022.o IoFileMgrForUser_0023.o IoFileMgrForUser_0024.o IoFileMgrForUser_0025.o IoFileMgrForUser_0026.o IoFileMgrForUser_0027.o IoFileMgrForUser_0028.o IoFileMgrForUser_0029.o IoFileMgrForUser_0030.o IoFileMgrForUser_0031.o IoFileMgrForUser_0032.o IoFileMgrForUser_0033.o IoFileMgrForUser_0034.o IoFileMgrForUser_0035.o IoFileMgrForUser_0036.o
 
