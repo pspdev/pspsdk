@@ -11,6 +11,7 @@ EXTRA_DIST =			\
 	$(ACLOCAL_FILES)	\
 	LICENSE			\
 	VERSION			\
+	README.md		\
 	$(DX_CONFIG)		\
 	doc/html
 
