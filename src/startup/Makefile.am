@@ -6,7 +6,7 @@ RANLIB = @PSP_RANLIB@
 
 CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/user -I$(top_srcdir)/src/debug
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
+CCASFLAGS = $(CFLAGS)
 
 ## Borrow this trick from newlib - create a dummy library to generate build rules.
 noinst_LIBRARIES = lib.a

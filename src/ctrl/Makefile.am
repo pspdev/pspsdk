@@ -8,7 +8,7 @@ RANLIB = @PSP_RANLIB@
 
 CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CCASFLAGS = $(CFLAGS)
 
 CTRL_OBJS = sceCtrl_0000.o sceCtrl_0001.o sceCtrl_0002.o sceCtrl_0003.o sceCtrl_0004.o sceCtrl_0005.o sceCtrl_0006.o sceCtrl_0007.o sceCtrl_0008.o sceCtrl_0009.o sceCtrl_0010.o sceCtrl_0011.o sceCtrl_0012.o sceCtrl_0013.o sceCtrl_0014.o sceCtrl_0015.o sceCtrl_0016.o
 
@@ -25,8 +25,8 @@ libpspctrl_driver_a_SOURCES = sceCtrl_driver.S
 libpspctrl_driver_a_LIBADD = $(CTRLDRIVER_OBJS)
 
 $(CTRL_OBJS): sceCtrl.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(CTRLDRIVER_OBJS): sceCtrl_driver.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 

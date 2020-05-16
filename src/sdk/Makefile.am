@@ -13,7 +13,7 @@ CPPFLAGS = -I$(top_srcdir)/src/base \
 	   -I$(top_srcdir)/src/utility \
 	   -I$(top_srcdir)/src/debug
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
+CCASFLAGS = $(CFLAGS)
 
 libpspsdkincludedir = @PSPSDK_INCLUDEDIR@
 libpspsdkinclude_HEADERS = pspsdk.h
@@ -34,7 +34,7 @@ libpspsdk_a_SOURCES = query_mod.c loadmodule.c fixup.c threadutils.c interrupt.S
 libpspsdk_a_LIBADD  = $(MULT_OBJS)
 
 $(MODULEMGR_PATCHES_OBJS): modulemgr_patches.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(INETHELPER_OBJS): inethelper.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

@@ -8,7 +8,7 @@ RANLIB = @PSP_RANLIB@
 
 CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CCASFLAGS = $(CFLAGS)
 
 OPENPSID_OBJS = sceOpenPSID_0000.o sceOpenPSID_0001.o
 
@@ -20,4 +20,4 @@ libpspopenpsid_a_SOURCES = sceOpenPSID.S
 libpspopenpsid_a_LIBADD  = $(OPENPSID_OBJS)
 
 $(OPENPSID_OBJS): sceOpenPSID.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

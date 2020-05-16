@@ -8,7 +8,7 @@ RANLIB = @PSP_RANLIB@
 
 CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CCASFLAGS = $(CFLAGS)
 
 HPRM_OBJS = sceHprm_0000.o sceHprm_0001.o sceHprm_0002.o sceHprm_0003.o sceHprm_0004.o sceHprm_0005.o sceHprm_0006.o sceHprm_0007.o sceHprm_0008.o 
 
@@ -24,7 +24,7 @@ libpsphprm_driver_a_SOURCES = sceHprm_driver.S
 libpsphprm_driver_a_LIBADD  = $(HPRM_DRIVER_OBJS)
 
 $(HPRM_OBJS): sceHprm.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(HPRM_DRIVER_OBJS): sceHprm_driver.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

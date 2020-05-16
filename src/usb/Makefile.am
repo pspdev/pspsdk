@@ -8,7 +8,7 @@ RANLIB = @PSP_RANLIB@
 
 CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(CPPFLAGS) 
+CCASFLAGS = $(CFLAGS) 
 
 USB_OBJS = sceUsb_0000.o sceUsb_0001.o sceUsb_0002.o sceUsb_0003.o sceUsb_0004.o sceUsb_0005.o sceUsb_0006.o sceUsb_0007.o sceUsb_0008.o sceUsb_0009.o 
 
@@ -39,13 +39,13 @@ libpspusbcam_a_SOURCES = sceUsbCam.S
 libpspusbcam_a_LIBADD  = $(USBCAM_OBJS)
 
 $(USB_OBJS): sceUsb.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(USBDRIVER_OBJS): sceUsb_driver.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(USBBUSDRIVER_OBJS): sceUsbBus_driver.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(USBCAM_OBJS): sceUsbCam.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

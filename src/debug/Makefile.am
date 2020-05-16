@@ -13,7 +13,7 @@ CPPFLAGS = -I$(top_srcdir)/src/base \
 	   -I$(top_srcdir)/src/user \
 	   -I$(top_srcdir)/src/ctrl 
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
+CCASFLAGS = $(CFLAGS)
 
 SCRPRINT_OBJS = pspDebugScreenInit.o pspDebugScreenPrintf.o pspDebugScreenKprintf.o
 
@@ -47,4 +47,4 @@ libpspgdb_kernel_a_SOURCES = gdb-kernellib.c
 libpspdebugkb_a_SOURCES = pspdebugkb.c
 
 $(SCRPRINT_OBJS): scr_printf.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

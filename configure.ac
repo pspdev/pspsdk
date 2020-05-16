@@ -11,6 +11,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_PSPDEV_PATH
 
 AM_INIT_AUTOMAKE([1.14 foreign])
+AM_SILENT_RULES([yes])
 
 # Checks for programs.
 AC_PSPDEV_TOOLCHAIN

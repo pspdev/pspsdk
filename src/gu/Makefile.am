@@ -8,7 +8,6 @@ RANLIB = @PSP_RANLIB@
 
 CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/display -I$(top_srcdir)/src/ge -I$(top_srcdir)/src/user -I$(top_srcdir)/src/debug
 CFLAGS =  @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(CPPFLAGS)
 
 libpspguincludedir = @PSPSDK_INCLUDEDIR@
 libpspguinclude_HEADERS = pspgu.h

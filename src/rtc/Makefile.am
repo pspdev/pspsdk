@@ -8,7 +8,7 @@ RANLIB = @PSP_RANLIB@
 
 CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CCASFLAGS = $(CFLAGS)
 
 RTC_OBJS = sceRtc_0000.o sceRtc_0001.o sceRtc_0002.o sceRtc_0003.o sceRtc_0004.o sceRtc_0005.o sceRtc_0006.o sceRtc_0007.o sceRtc_0008.o sceRtc_0009.o sceRtc_0010.o sceRtc_0011.o sceRtc_0012.o sceRtc_0013.o sceRtc_0014.o sceRtc_0015.o sceRtc_0016.o sceRtc_0017.o sceRtc_0018.o sceRtc_0019.o sceRtc_0020.o sceRtc_0021.o sceRtc_0022.o sceRtc_0023.o sceRtc_0024.o sceRtc_0025.o sceRtc_0026.o sceRtc_0027.o sceRtc_0028.o sceRtc_0029.o sceRtc_0030.o sceRtc_0031.o sceRtc_0032.o sceRtc_0033.o sceRtc_0034.o sceRtc_0035.o sceRtc_0036.o sceRtc_0037.o sceRtc_0038.o sceRtc_0039.o sceRtc_0040.o sceRtc_0041.o 
 
@@ -25,7 +25,7 @@ libpsprtc_driver_a_SOURCES = sceRtc_driver.S
 libpsprtc_driver_a_LIBADD = $(RTCDRIVER_OBJS)
 
 $(RTC_OBJS): sceRtc.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(RTCDRIVER_OBJS): sceRtc_driver.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
