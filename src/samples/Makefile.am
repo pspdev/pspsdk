@@ -84,10 +84,11 @@ SAMPLES = \
 	wlan \
 	exceptions
 
-all:
+# FIXME: This workaround is actually needed to get the stage1 installation
+# without samples working. Once a better way to do header installation for
+# newlib is figured out, this can be rewritten.
 
-dist-hook:
-	rm -rf `find $(distdir) -name .svn -o -name CVS`
+all:
 
 # Install all of the samples.  Rename any files that end in a .sample extension.
 SAMPLES_INSTALL = $(INSTALL_DATA)
