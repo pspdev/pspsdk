@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2006 Harley G. <harleyg@0x89.org>
  *
- * $Id: pspidstorage.h 2120 2006-12-30 23:19:33Z tyranid $
  */
 
 #ifndef PSPIDSTORAGE_H

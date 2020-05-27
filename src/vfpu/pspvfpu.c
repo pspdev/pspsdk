@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 Jeremy Fitzhardinge <jeremy@goop.org>
  *
- * $Id: pspvfpu.c 1796 2006-02-08 19:59:58Z jsgf $
  */
 #include <malloc.h>
 #include <string.h>

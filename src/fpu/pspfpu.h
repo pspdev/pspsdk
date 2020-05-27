@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -8,7 +8,6 @@
  * Copyright (c) 2009 JetCube
  * Copyright (c) 2006 TyRaNiD (James F.)
  *
- * $Id: pspfpu.h 1782 2006-02-04 12:57:05Z tyranid $
  */
 #ifndef __PSPFPU_H__
 #define __PSPFPU_H__

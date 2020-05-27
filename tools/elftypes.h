@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  *
- * $Id: elftypes.h 1520 2005-12-04 20:09:36Z tyranid $
  */
 
 #ifndef __ELF_TYPES_H__

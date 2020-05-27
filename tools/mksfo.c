@@ -1,12 +1,12 @@
 /*
 # _____     ___ ____     ___ ____ 
-#  ____|   |    ____|   |        | |____|    
+#  ____|   |    ____|   |        | |____|    https://github.com/pspdev
 # |     ___|   |     ___|    ____| |    \    PSPDEV Open Source Project. 
 #-----------------------------------------------------------------------
 # Review ps2sdk README & LICENSE files for further details. 
 # 
 # A simple tool to build an SFO file for use in the EBOOT.PBP
-# $Id: mksfo.c 1993 2006-08-23 21:40:16Z jim $
+#
 */
 
 #include <stdio.h>

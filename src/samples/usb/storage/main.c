@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -10,7 +10,6 @@
  * Derived from code written by PspPet
  * Code flow and API usage from VSH module "sysconf_plugin.prx"
  *
- * $Id: main.c 1882 2006-04-24 00:25:11Z jim $
  */
 #include <pspkernel.h>
 #include <pspiofilemgr.h>

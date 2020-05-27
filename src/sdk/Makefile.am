@@ -6,14 +6,14 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base \
+CPPFLAGS = -I$(top_srcdir)/src/base \
 	   -I$(top_srcdir)/src/kernel \
 	   -I$(top_srcdir)/src/user \
 	   -I$(top_srcdir)/src/net \
 	   -I$(top_srcdir)/src/utility \
 	   -I$(top_srcdir)/src/debug
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS)
 
 libpspsdkincludedir = @PSPSDK_INCLUDEDIR@
 libpspsdkinclude_HEADERS = pspsdk.h
@@ -34,7 +34,7 @@ libpspsdk_a_SOURCES = query_mod.c loadmodule.c fixup.c threadutils.c interrupt.S
 libpspsdk_a_LIBADD  = $(MULT_OBJS)
 
 $(MODULEMGR_PATCHES_OBJS): modulemgr_patches.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(INETHELPER_OBJS): inethelper.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

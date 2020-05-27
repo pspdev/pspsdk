@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -10,7 +10,6 @@
  *
  * Based on the adhoc code in SMS Plus
  * 
- * $Id: pspnet_adhoc.h 2400 2008-07-06 22:46:56Z iwn $
  */
 #ifndef __PSPNET_ADHOC_H__
 #define __PSPNET_ADHOC_H__

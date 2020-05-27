@@ -1,6 +1,6 @@
 /*
 # _____     ___ ____     ___ ____
-#  ____|   |    ____|   |        | |____|
+#  ____|   |    ____|   |        | |____|    https://github.com/pspdev
 # |     ___|   |     ___|    ____| |    \    PSPDEV Open Source Project.
 #-----------------------------------------------------------------------
 # (c) 2005 Naomi Peori <naomi@peori.ca>
@@ -13,7 +13,6 @@
 #   - improved memory efficiency with large PBPs
 #   - output name of each file as it's added
 #
-# $Id: pack-pbp.c 2228 2007-05-01 05:22:03Z oopo $
 */
 
 #ifdef HAVE_CONFIG_H

@@ -6,9 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CCASFLAGS = $(CFLAGS)
 
 UMDUSER_OBJS = sceUmdUser_0000.o sceUmdUser_0001.o sceUmdUser_0002.o sceUmdUser_0003.o sceUmdUser_0004.o sceUmdUser_0005.o sceUmdUser_0006.o sceUmdUser_0007.o sceUmdUser_0008.o sceUmdUser_0009.o sceUmdUser_0010.o sceUmdUser_0011.o sceUmdUser_0012.o sceUmdUser_0013.o sceUmdUser_0014.o
 
@@ -26,7 +26,7 @@ libpspumd_driver_a_SOURCES = sceUmd.S
 libpspumd_driver_a_LIBADD = $(UMD_OBJS)
 
 $(UMDUSER_OBJS): sceUmdUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(UMD_OBJS): sceUmd.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

@@ -6,7 +6,7 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/debug -I$(top_srcdir)/src/user
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/debug -I$(top_srcdir)/src/user
 CFLAGS = @PSPSDK_CFLAGS@ -std=gnu99 -Wall -Wmissing-prototypes
 CCASFLAGS = $(CFLAGS) -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 

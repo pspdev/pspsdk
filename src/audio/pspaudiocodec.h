@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2006 hitchhikr
  *
- * $Id: pspaudiocodec.h 2430 2008-08-28 12:04:04Z Raphael $
  */
 
 #ifdef __cplusplus

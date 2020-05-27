@@ -6,9 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS)
 
 NET_OBJS = sceNet_0000.o sceNet_0001.o sceNet_0002.o sceNet_0003.o sceNet_0004.o sceNet_0005.o sceNet_0006.o sceNet_0007.o sceNet_0008.o 
 
@@ -71,31 +71,31 @@ libpspssl_a_SOURCES = sceSsl.S
 libpspssl_a_LIBADD = $(SSL_OBJS)
 
 $(NET_OBJS): sceNet.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(NETLIB_OBJS): sceNet_lib.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(NET_APCTL_OBJS): sceNetApctl.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(NET_INET_OBJS): sceNetInet.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(NET_RESOLVER_OBJS): sceNetResolver.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(NET_ADHOC_OBJS): sceNetAdhoc.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(NET_ADHOCCTL_OBJS): sceNetAdhocctl.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(NET_ADHOCMATCHING_OBJS): sceNetAdhocMatching.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 	
 $(HTTP_OBJS): sceHttp.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 	
 $(SSL_OBJS): sceSsl.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

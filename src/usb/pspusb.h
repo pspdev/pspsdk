@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
- * $Id: pspusb.h 2087 2006-12-04 07:08:01Z loser $
  */
 #ifndef __PSPUSB_H__
 #define __PSPUSB_H__

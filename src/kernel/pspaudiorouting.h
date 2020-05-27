@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2007 Alexander Berl <raphael@fx-world.org>
  *
- * $Id: pspinit.h 2345 2007-12-08 02:34:59Z raphael $
  */
 #ifndef __PSPAUDIOROUTING_H__
 #define __PSPAUDIOROUTING_H__

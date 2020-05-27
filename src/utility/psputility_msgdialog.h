@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -9,7 +9,6 @@
  * Copyright (c) 2005 Marcus Comstedt <marcus@mc.pp.se>
  *			 (c) 2008 InsertWittyName <tias_dp@hotmail.com>
  *
- * $Id: psputility_msgdialog.h 2433 2008-10-15 10:00:27Z iwn $
  */
 #ifndef __PSPUTILITY_DIALOGS_H__
 #define __PSPUTILITY_DIALOGS_H__

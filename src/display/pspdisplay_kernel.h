@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -10,7 +10,6 @@
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  * Copyright (c) 2007 Alexander Berl <raphael@fx-world.org>
  *
- * $Id: pspdisplay_kernel.h 2271 2007-07-20 13:08:41Z oopo $
  */
 #ifndef __DISPLAYKERNEL_H__
 #define __DISPLAYKERNEL_H__

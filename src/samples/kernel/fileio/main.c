@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -9,7 +9,6 @@
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
- * $Id: main.c 2389 2008-05-24 17:42:11Z iwn $
  */
 #include <pspkernel.h>
 #include <pspctrl.h>
@@ -268,7 +267,7 @@ void dump_flashrom(int lower)
 
 void show_menu(void)
 {
-	printf("PSP Dumping Tool - TyRaNiD 2k5. (www.pspdev.org)\n");
+	printf("PSP Dumping Tool - TyRaNiD 2k5. (github.com/pspdev)\n");
 	printf("Press triangle to dump umd boot.bin\n");
 	printf("Press circle to dump flash0\n");
 	printf("Press square to dump flash1\n");

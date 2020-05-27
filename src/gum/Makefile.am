@@ -6,10 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/display \
+CPPFLAGS = -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/display \
 	-I$(top_srcdir)/src/ge -I$(top_srcdir)/src/user -I$(top_srcdir)/src/vfpu
 CFLAGS =  @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
 
 libpspgumincludedir = @PSPSDK_INCLUDEDIR@
 libpspguminclude_HEADERS = pspgum.h
@@ -41,7 +40,7 @@ PSPGUM_VFPU_OBJS =    sceGumLoadIdentity_vfpu.o sceGumLoadMatrix_vfpu.o sceGumMa
                       sceGumBeginObject_vfpu.o sceGumEndObject_vfpu.o gumScale_vfpu.o \
                       gumTranslate_vfpu.o gumLoadIdentity_vfpu.o gumFastInverse_vfpu.o \
                       gumMultMatrix_vfpu.o gumRotateX_vfpu.o gumRotateY_vfpu.o gumRotateZ_vfpu.o \
-		      gumInit_vfpu.o
+                      gumInit_vfpu.o
 
 libpspgum_a_SOURCES = gumInternal.c pspgum.c
 libpspgum_a_LIBADD = $(PSPGUM_FPU_OBJS) $(PSPGUM_SHARED_OBJS)
@@ -50,10 +49,10 @@ libpspgum_vfpu_a_SOURCES = gumInternal.c pspgum.c pspgum_vfpu.c
 libpspgum_vfpu_a_LIBADD = $(PSPGUM_VFPU_OBJS) $(PSPGUM_SHARED_OBJS)
 
 $(PSPGUM_SHARED_OBJS): pspgum.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
 $(PSPGUM_FPU_OBJS): pspgum.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
 $(PSPGUM_VFPU_OBJS): pspgum_vfpu.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@

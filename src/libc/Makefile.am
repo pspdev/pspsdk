@@ -7,10 +7,10 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/libc/include -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/user -I$(top_srcdir)/src/debug
+CPPFLAGS = -I$(top_srcdir)/src/libc/include -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/user -I$(top_srcdir)/src/debug
 CFLAGS = @PSPSDK_CFLAGS@
 CXXFLAGS = @PSPSDK_CXXFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS)
 
 EXTRA_DIST = LIB.status
 
@@ -55,19 +55,19 @@ libpsplibc_a_SOURCES = $(CORE_SOURCES) $(MULT_SOURCES)
 libpsplibc_a_LIBADD  = $(MULT_OBJS)
 
 $(XPRINTF_OBJS): xprintf.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(ALLOC_OBJS): alloc.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(STRING_C_OBJS): string.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(STDIO_OBJS): stdio.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(STDLIB_OBJS): stdlib.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(GLUE_OBJS): libcglue.c
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

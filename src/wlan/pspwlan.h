@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
- * $Id: pspwlan.h 2207 2007-03-16 16:42:08Z tyranid $
  */
 #ifndef __PSPWLAN_H__
 #define __PSPWLAN_H__

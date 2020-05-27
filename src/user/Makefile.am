@@ -6,9 +6,9 @@ CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-INCLUDES = -I$(top_srcdir)/src/base
+CPPFLAGS = -I$(top_srcdir)/src/base
 CFLAGS = @PSPSDK_CFLAGS@
-CCASFLAGS = $(CFLAGS) $(INCLUDES)
+CCASFLAGS = $(CFLAGS)
 
 IO_OBJS = IoFileMgrForUser_0000.o IoFileMgrForUser_0001.o IoFileMgrForUser_0002.o IoFileMgrForUser_0003.o IoFileMgrForUser_0004.o IoFileMgrForUser_0005.o IoFileMgrForUser_0006.o IoFileMgrForUser_0007.o IoFileMgrForUser_0008.o IoFileMgrForUser_0009.o IoFileMgrForUser_0010.o IoFileMgrForUser_0011.o IoFileMgrForUser_0012.o IoFileMgrForUser_0013.o IoFileMgrForUser_0014.o IoFileMgrForUser_0015.o IoFileMgrForUser_0016.o IoFileMgrForUser_0017.o IoFileMgrForUser_0018.o IoFileMgrForUser_0019.o IoFileMgrForUser_0020.o IoFileMgrForUser_0021.o IoFileMgrForUser_0022.o IoFileMgrForUser_0023.o IoFileMgrForUser_0024.o IoFileMgrForUser_0025.o IoFileMgrForUser_0026.o IoFileMgrForUser_0027.o IoFileMgrForUser_0028.o IoFileMgrForUser_0029.o IoFileMgrForUser_0030.o IoFileMgrForUser_0031.o IoFileMgrForUser_0032.o IoFileMgrForUser_0033.o IoFileMgrForUser_0034.o IoFileMgrForUser_0035.o IoFileMgrForUser_0036.o
 
@@ -83,34 +83,34 @@ $(LOADEXEC_OBJS) \
 $(IMPOSE_OBJS)
 
 $(IO_OBJS): IoFileMgrForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(KERNEL_OBJS): Kernel_Library.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(MODMGR_OBJS): ModuleMgrForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(STDIO_OBJS): StdioForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(SUSPEND_OBJS): sceSuspendForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(SYSMEM_OBJS): SysMemUserForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(THREADMAN_OBJS): ThreadManForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(UTILS_OBJS): UtilsForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(INTERRUPT_OBJS): InterruptManager.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(LOADEXEC_OBJS): LoadExecForUser.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(IMPOSE_OBJS): sceImpose.S
-	$(COMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@

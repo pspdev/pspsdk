@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2007 Iaroslav Gaponenko <adrahil@gmail.com>
  *
- * $Id: pspimpose_driver.h$
  */
 
 #ifndef __IMPOSE_DRIVER_H__

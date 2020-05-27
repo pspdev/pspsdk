@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -7,7 +7,6 @@
  *
  * Copyright (c) 2007 moonlight
  *
- * $Id: pspinit.h 2433 2008-10-15 10:00:27Z iwn $
  */
 #ifndef __PSPINIT_H__
 #define __PSPINIT_H__

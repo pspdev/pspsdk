@@ -1,11 +1,10 @@
 /*
 # _____     ___ ____     ___ ____
-#  ____|   |    ____|   |        | |____|
+#  ____|   |    ____|   |        | |____|    https://github.com/pspdev
 # |     ___|   |     ___|    ____| |    \    PSPDEV Open Source Project.
 #-----------------------------------------------------------------------
 # Review pspsdk README & LICENSE files for further details.
 #
-# $Id: bin2s.c 210 2005-06-18 17:52:59Z mrbrown $
 */
 
 #include <sys/types.h>

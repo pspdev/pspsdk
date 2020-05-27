@@ -1,14 +1,17 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.59)
-AC_INIT([pspsdk], [PSPSDK_VERSION], [])
+AC_PREREQ(2.69)
+AC_INIT([PSP Software Development Kit], m4_esyscmd_s([cat VERSION]),
+    [https://github.com/pspdev/pspsdk/issues], [pspsdk],
+    [https://pspdev.github.io/pspsdk])
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([tools/bin2c.c])
-AC_CONFIG_HEADER([config.h])
-AC_PSPSDK_VERSION
+AC_CONFIG_HEADERS([config.h])
 AC_PSPDEV_PATH
 
-AM_INIT_AUTOMAKE([pspsdk], [PSPSDK_VERSION])
+AM_INIT_AUTOMAKE([1.14 foreign])
+AM_SILENT_RULES([yes])
 
 # Checks for programs.
 AC_PSPDEV_TOOLCHAIN
@@ -36,6 +39,7 @@ AC_CHECK_FUNCS([getcwd strchr])
 
 # Doxygen.
 DX_HTML_FEATURE(ON)
+DX_DOT_FEATURE(ON)
 DX_CHM_FEATURE(OFF)
 DX_CHI_FEATURE(OFF)
 DX_MAN_FEATURE(OFF)
@@ -43,7 +47,7 @@ DX_RTF_FEATURE(OFF)
 DX_XML_FEATURE(OFF)
 DX_PDF_FEATURE(OFF)
 DX_PS_FEATURE(OFF)
-DX_INIT_DOXYGEN(pspsdk, doxygen.cfg, doc)
+DX_INIT_DOXYGEN(PSPSDK, Doxyfile, doc)
 
 # Override the default prefix to point to where the pspdev tools should be installed.
 # The binaries will end up in $prefix/bin, but pspsdk itself will end up in $prefix/$target/sdk.

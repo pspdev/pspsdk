@@ -1,5 +1,5 @@
 /*
- * PSP Software Development Kit - http://www.pspdev.org
+ * PSP Software Development Kit - https://github.com/pspdev
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
@@ -8,7 +8,6 @@
  *
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
- * $Id: psputility_netconf.h 2363 2008-02-16 19:40:17Z iwn $
  */
 #ifndef __PSPUTILITY_NETCONF_H__
 #define __PSPUTILITY_NETCONF_H__
