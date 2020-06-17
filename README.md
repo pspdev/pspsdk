@@ -168,6 +168,12 @@ bug.
 
 ## Resources
 
+### Official Source Documentation
+
+This is generated automatically from the repository `master` branch:
+https://pspdev.github.io/pspsdk/
+
+
 ### Internet Relay Chat (IRC)
 
 The PSPSDK developers can sometimes be found hanging out in the #pspdev channel

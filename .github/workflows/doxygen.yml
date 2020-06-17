@@ -1,0 +1,33 @@
+name: doxygen on github pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Prepare Doxyfile
+      run: |
+        sed -e 's/\$(PROJECT)/PSPSDK/' \
+            -e 's/\$(VERSION)/'`cat VERSION | xargs echo -n`'/' \
+            -e 's/\$(SRCDIR)/src/g' \
+            -e 's/\$(GENERATE_LATEX)/NO/' \
+            -e 's/\$(HAVE_DOT)/YES/' \
+            -e 's/Helvetica/FreeSans/' \
+            -i Doxyfile
+
+    - name: Doxygen documentation generation
+      uses: mattnotmitt/doxygen-action@v1
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./doc/html
+        force_orphan: true
