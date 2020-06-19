@@ -11,6 +11,9 @@
 
 #include "as_reg_compat.h"
 
+// Enable eret on LLVM
+#define eret .word 0x42000018
+
 	.set noreorder
 	.set noat
 
@@ -125,9 +128,9 @@ _pspDebugExceptionHandler:
 	sw		$0, REG_GPR_0($v0)
 	sw		$1, REG_GPR_1($v0)
 
-	cfc0	$1, $4					# Get original v0
+	.word 0x40412000 // cfc0	$1, $4					# Get original v0
 	sw		$1, REG_GPR_2($v0)
-	cfc0 	$1, $5					# Get original v1
+	.word 0x40412800 // cfc0 	$1, $5					# Get original v1
 	sw		$1, REG_GPR_3($v0)
 	sw		$4, REG_GPR_4($v0)
 	sw		$5, REG_GPR_5($v0)
