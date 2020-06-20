@@ -84,34 +84,34 @@
 .ent	pspFpuFloatToDouble
 pspFpuFloatToDouble:
 	mfc1	t0, fa0				/* t0 = fa0 */
-	ext	t1, t0, 23, 8			/* t1 = (t0 >> 23) & 0xFF */
+    .word 0x7d093dc0 // 	ext	t1, t0, 23, 8			/* t1 = (t0 >> 23) & 0xFF */
 	beq	t1, zero, ftod_denormal		/* if (t1==0) goto ftod_denormal */
 	addiu	v0, t1, (-0x7F+0x3FF)		/* v0 = t1 - 0x7F + 0x3FF */
 	xori	t1, t1, 0xFF			/* t1 = t1 ^ 0xFF */
 	li	v1, 0x7FF			/* v1 = 0x7FF */
-	movz	v0, v1, t1			/* v0 = (t1==0) ? v1 : v0 */
-	ext	v1, t0,  3, 20			/* v1 = (t0 >> 3 ) & 0x00FFFFF */
-	ins	v1, v0, 20, 11			/* v1 = (v1 & 0x800FFFFF) | ((v0<<20) & 0x7FF00000) */
+    .word 0x0069100a // 	movz	v0, v1, t1			/* v0 = (t1==0) ? v1 : v0 */
+    .word 0x7d0398c0 // 	ext	v1, t0,  3, 20			/* v1 = (t0 >> 3 ) & 0x00FFFFF */
+    .word 0x7c43f504 // 	ins	v1, v0, 20, 11			/* v1 = (v1 & 0x800FFFFF) | ((v0<<20) & 0x7FF00000) */
 	sll	v0, t0, 29			/* v0 = (t0 << 29) */
 	srl	t0, t0, 31			/* t0 = (t0 >> 31) & 1 */
 	jr	ra				/* return */
-	ins	v1, t0, 31, 1			/* v1 = (v1 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
+    .word 0x7d03ffc4 // 	ins	v1, t0, 31, 1			/* v1 = (v1 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
 
 ftod_denormal:
 	sll	v0, t0, 9			/* v0 = t0 << 9 */
 	beql	v0, zero, ftod_zero		/* if (v0==0) goto ftod_zero */
 	move	v1, zero			/* v1 = 0 */
 	li	v1, 0x380			/* v1 = 0x380 */
-	clz	t1, v0				/* t1 = clz(v0) */
+    .word 0x00404816 // 	clz	t1, v0				/* t1 = clz(v0) */
 	subu	v0, v1, t1			/* v0 = v1 - v0 = 0x380 - clz(t1) */
 	sllv	t1, t0, t1			/* t1 = t0 << t1 */
-	ext	v1, t1,  2, 20			/* v1 = (t1 >> 2 ) & 0x00FFFFF */
-	ins	v1, v0, 20, 11			/* v1 = (v1 & 0x800FFFFF) | ((v0<<20) & 0x7FF00000) */
+    .word 0x7d239880 // 	ext	v1, t1,  2, 20			/* v1 = (t1 >> 2 ) & 0x00FFFFF */
+    .word 0x7c43f504 // 	ins	v1, v0, 20, 11			/* v1 = (v1 & 0x800FFFFF) | ((v0<<20) & 0x7FF00000) */
 	sll	v0, t1, 30			/* v0 = (t1 << 30) */
 ftod_zero:
 	srl	t0, t0, 31			/* t0 = (t0 >> 31) & 1 */
 	jr	ra				/* return */
-	ins	v1, t0, 31, 1			/* v1 = (v1 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
+    .word 0x7d03ffc4 // 	ins	v1, t0, 31, 1			/* v1 = (v1 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
 .end	pspFpuFloatToDouble
 
 /**
@@ -123,7 +123,7 @@ ftod_zero:
  */
 .ent	pspFpuDoubleToFloat
 pspFpuDoubleToFloat:
-	ext	t0, a1, 20, 11		/* t0 = (a1>>20) & 0x000007FF */
+    .word 0x7ca85500 // 	ext	t0, a1, 20, 11		/* t0 = (a1>>20) & 0x000007FF */
 	beq	t0, zero, dtof_zero	/* if (t0==0) goto dtof_zero */
 	xori	t1, t0, 0x7FF		/* t1 = t0 ^ 0x7FF */
 	beq	t1, zero, dtof_naninf	/* if (t1==0) goto dtof_naninf */
@@ -134,12 +134,12 @@ pspFpuDoubleToFloat:
 	move	v0, zero		/* v0 = 0 */
 
 	srl	v0, a0, 29			/* v0 = (a0>>29) & 0x00000007 */
-	ins	v0, a1, 3, 20			/* v0 = (v0 & 0xFF800007) | ((a1 & 0FFFFF)<<3) */
+    .word 0x7ca2b0c4 // 	ins	v0, a1, 3, 20			/* v0 = (v0 & 0xFF800007) | ((a1 & 0FFFFF)<<3) */
 	beq	t2, zero, dtof_inf_normal	/* if (t2==0) goto dtof_inf_normal */
 dtof_normal:
 	srl	t2, a1, 31		/* t2 = (a1>>31) & 1 */
-	ins	v0, t2, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | (t2 << 31) */
-	ins	v0, t1, 23, 8		/* v0 = (v0 & 0x8007FFFF) | (t1 << 23) */
+    .word 0x7d42ffc4 // 	ins	v0, t2, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | (t2 << 31) */
+    .word 0x7d22f5c4 // 	ins	v0, t1, 23, 8		/* v0 = (v0 & 0x8007FFFF) | (t1 << 23) */
 	jr	ra			/* return */
 	mtc1	v0, fv0			/* fv0 = v0 */
 dtof_denormal:
@@ -154,7 +154,7 @@ dtof_denormal:
 	beq	t1, zero, dtof_min	/* if (t1==0) goto dtof_min */
 	srlv	v0, v0, t0		/* v0 = v0 >> t0 */
 	srl	t2, a1, 31		/* t2 = (a1>>31) & 1 */
-	ins	v0, t2, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | (t2 << 31) */
+    .word 0x7d42ffc4 // 	ins	v0, t2, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | (t2 << 31) */
 	jr	ra			/* return */
 	mtc1	v0, fv0			/* fv0 = v0 */
 dtof_zero:
@@ -162,9 +162,9 @@ dtof_zero:
 	or	t0, t0, a0		/* t0 = t0 | a0 */
 dtof_min:
 	li	v0, 0x00000001		/* v0 = 0x00000001 */
-	movz	v0, zero, t0		/* v0 = (t0==0) ? zero : v0 */
+    .word 0x0008100a // 	movz	v0, zero, t0		/* v0 = (t0==0) ? zero : v0 */
 	srl	t0, a1, 31		/* t0 = (a1 >> 31) & 1 */
-	ins	v0, t0, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
+    .word 0x7d02ffc4 // 	ins	v0, t0, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
 	jr	ra			/* return */
 	mtc1	v0, fv0			/* fv0 = v0 */
 dtof_inf_normal:
@@ -185,12 +185,12 @@ dtof_naninf:
 	or	v0, v0, t0		/* v0 = v0 | t0 */
 	sltiu	t0, v0, 1		/* t0 = (v0 < 1) */
 	or	v0, v0, t0		/* v0 = v0 | t0 */
-	movz	v0, zero, t1		/* v0 = (t1==0) ? zero : v0 */
+    .word 0x0009100a // 	movz	v0, zero, t1		/* v0 = (t1==0) ? zero : v0 */
 dtof_inf:
 	li	t0, 0x7F800000		/* t0 = 0x7F800000 */
 	or	v0, v0, t0		/* v0 = v0 | t0 */
 	srl	t0, a1, 31		/* t0 = (a1 >> 31) & 1 */
-	ins	v0, t0, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
+    .word 0x7d02ffc4 // 	ins	v0, t0, 31, 1		/* v0 = (v0 & 0x7FFFFFFF) | ((t0<<31) & 0x80000000) */
 	jr	ra			/* return */
 	mtc1	v0, fv0			/* fv0 = v0 */
 .end	pspFpuDoubleToFloat
