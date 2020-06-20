@@ -7,11 +7,8 @@ SUBDIRS = \
 	display \
 	fpu \
 	ge \
-	gu \
-	gum \
 	hprm \
 	kernel \
-	libc \
 	mp3 \
 	mpeg \
 	nand \
@@ -29,7 +26,6 @@ SUBDIRS = \
 	usbstor \
 	user \
 	utility \
-	vfpu \
 	video \
 	vsh \
 	wlan \
