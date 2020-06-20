@@ -11,6 +11,10 @@
  */
 #include "pspfpu.h"
 
+#ifdef __clang__
+#include <math.h>
+#endif
+
 #define PSP_MATH_PI             3.14159265358979323846
 #define PSP_MATH_TWOPI          (PSP_MATH_PI * 2.0)
 #define PSP_MATH_SQRT2          1.41421356237309504880
@@ -321,6 +325,9 @@ int   pspFpuIsEqual(float fs1, float fs2)
 
 float pspFpuSignFloat(float fs)
 {
+#ifdef __clang__
+	return 0;
+#else
 	float fv;
 	asm (
 		".set push\n"
@@ -340,10 +347,15 @@ float pspFpuSignFloat(float fs)
 		: "$8", "$9", "$10"
 	);
 	return (fv);
+#endif // __clang__
 }
 
 int pspFpuSignInt(float fs)
 {
+#ifdef __clang__
+	union { float f; int i; } bits = {.f = fs};
+	return (0x7F800000 & bits.i) == 0 ? 0 : bits.i >> 30 | 1;
+#else
 	int v;
 	asm (
 		".set push\n"
@@ -360,6 +372,7 @@ int pspFpuSignInt(float fs)
 		: "$8"
 	);
 	return (v);
+#endif // __clang__
 }
 
 float pspFpuPositiveZero(void)
@@ -390,6 +403,16 @@ float pspFpuNegativeZero(void)
 
 int pspFpuIsZero(float f)
 {
+#ifdef __clang__
+	union {
+		float f;
+		int i;
+	} bits = {.f = f};
+
+	return (bits.i << 1 != 0)
+		? 0
+		: (bits.i >> 30 | 1);
+#else
 	int v;
 	asm (
 		".set push\n"
@@ -405,6 +428,7 @@ int pspFpuIsZero(float f)
 		: "$8"
 	);
 	return (v);
+#endif // __clang__
 }
 
 int pspFpuIsPositiveZero(float f)
@@ -442,6 +466,9 @@ int pspFpuIsNegativeZero(float f)
 
 int pspFpuIsDenormal(float f)
 {
+#ifdef __clang__
+	return fpclassify(f) == FP_SUBNORMAL;
+#else
 	int v;
 	asm (
 		".set push\n"
@@ -460,10 +487,18 @@ int pspFpuIsDenormal(float f)
 		: "$8", "$9"
 	);
 	return (v);
+#endif // __clang__
 }
 
 int   pspFpuIsZeroOrDenormal(float f)
 {
+#ifdef __clang__
+	union {
+		float f;
+		unsigned int i;
+	} bits = {.f = f};
+	return (bits.i & 0x7F800000) ? 0 : (bits.i | 0x7F800000) >> 30;
+#else
 	int v;
 	asm (
 		".set push\n"
@@ -480,6 +515,7 @@ int   pspFpuIsZeroOrDenormal(float f)
 		: "$8", "$9"
 	);
 	return (v);
+#endif // __clang__
 }
 
 float pspFpuPositiveInf(void)
@@ -510,10 +546,14 @@ float pspFpuNegativeInf(void)
 		: "=f"(v)
 	);
 	return (v);
+
 }
 
 int pspFpuIsInf(float f)
 {
+#ifdef __clang__
+	return isinf(f);
+#else
 	int v;
 	asm (
 		".set push\n"
@@ -533,6 +573,7 @@ int pspFpuIsInf(float f)
 		: "$8", "$9"
 	);
 	return (v);
+#endif // __clang__
 }
 
 float pspFpuPositiveNaN(void)
@@ -603,6 +644,10 @@ float pspFpuNegativeQNaN(void)
 
 float pspFpuPositiveSNaN(unsigned int uiSignal)
 {
+#ifdef __clang__
+	unsigned int signalBits = uiSignal & 0x003FFFFF;
+	return (signalBits != 0 ? signalBits : 1) | 0x7F800000;
+#else
 	float v;
 	asm (
 		".set push\n"
@@ -619,10 +664,15 @@ float pspFpuPositiveSNaN(unsigned int uiSignal)
 		: "$8", "$9"
 	);
 	return (v);
+#endif // __clang__
 }
 
 float pspFpuNegativeSNaN(unsigned int uiSignal)
 {
+#ifdef __clang__
+	unsigned int signalBits = uiSignal & 0x003FFFFF;
+	return (signalBits != 0 ? signalBits : 1) | 0xFF800000;
+#else
 	float v;
 	asm (
 		".set push\n"
@@ -639,10 +689,14 @@ float pspFpuNegativeSNaN(unsigned int uiSignal)
 		: "$8", "$9"
 	);
 	return (v);
+#endif // __clang__
 }
 
 int pspFpuIsNaN(float f)
 {
+#ifdef __clang__
+	return isnan(f);
+#else
 	int v;
 	asm (
 		".set push\n"
@@ -663,10 +717,14 @@ int pspFpuIsNaN(float f)
 		: "$8", "$9"
 	);
 	return (v);
+#endif // __clang__
 }
 
 int pspFpuIsInfOrNaN(float f)
 {
+#ifdef __clang__
+	return isnan(f) || isinf(f);
+#else
 	int v;
 	asm (
 		".set push\n"
@@ -684,6 +742,7 @@ int pspFpuIsInfOrNaN(float f)
 		: "$8"
 	);
 	return (v);
+#endif // __clang__
 }
 
 float pspFpuNormalizePhase(float fs)
@@ -691,19 +750,22 @@ float pspFpuNormalizePhase(float fs)
 	const float f2pi = PSP_MATH_TWOPI;
 	float fd;
 
+	// Clang dies if we try to clobber this instead.
+	float tmp = 0;
+
 	asm (
 		".set push\n"
 		".set noreorder\n"
 		"mfc1 $9,  %1\n"		// t1 = f0
-		"div.s $f0, $f0, %2\n"		// f0 = f0 / f2pi = fs / 2PI
-		"round.w.s $f0, $f0\n"		// f0 = (int)(f0+0.5)
-		"cvt.s.w $f0, $f0\n"		// f0 = float(f0)
-		"mul.s $f0, $f0, %2\n"		// f0 = f0 * f2pi = fd * 2PI
-		"sub.s %0,  %1,  $f0\n"		// fd = fs - f0   = fs - (fd * 2PI)
+		"div.s %3, %3, %2\n"		// f0 = f0 / f2pi = fs / 2PI
+		"round.w.s %3, %3\n"		// f0 = (int)(f0+0.5)
+		"cvt.s.w %3, %3\n"		// f0 = float(f0)
+		"mul.s %3, %3, %2\n"		// f0 = f0 * f2pi = fd * 2PI
+		"sub.s %0,  %1,  %3\n"		// fd = fs - f0   = fs - (fd * 2PI)
 		".set pop\n"
 		: "=f"(fd)
-		: "f"(fs), "f"(f2pi)
-		: "$f0", "$8", "$9"
+		: "f"(fs), "f"(f2pi), "f"(tmp)
+		: "$8", "$9"
 	);
 	return (fd);
 }
