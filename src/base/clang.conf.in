@@ -1,0 +1,9 @@
+-target mips
+-mcpu=mips2
+-msingle-float
+-mlittle-endian
+-mno-check-zero-division
+-D__psp__
+-isystem @PSPSDK@/../include
+-isystem @PSPSDK_INCLUDEDIR@
+-include clang_psp.h

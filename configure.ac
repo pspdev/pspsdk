@@ -70,7 +70,7 @@ AC_SUBST(PSPSDK_INCLUDEDIR)
 AC_SUBST(PSPSDK_LIBDIR)
 
 # CFLAGS and CXXFLAGS used to build pspsdk libraries.
-PSPSDK_CFLAGS="$CFLAGS -G0 -Wall"
+PSPSDK_CFLAGS="$CFLAGS $PSP_CFLAGS -G0 -Wall"
 PSPSDK_CXXFLAGS="$PSPSDK_CFLAGS -fno-exceptions -fno-rtti"
 AC_SUBST(PSPSDK_CFLAGS)
 AC_SUBST(PSPSDK_CXXFLAGS)
@@ -87,6 +87,7 @@ AC_CONFIG_FILES([Makefile
                  src/atrac3/Makefile
                  src/audio/Makefile
                  src/base/Makefile
+                 src/base/clang.conf
                  src/base/linkfile.prx
                  src/ctrl/Makefile
                  src/debug/Makefile
