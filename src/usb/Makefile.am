@@ -24,6 +24,7 @@ libpspusbincludedir = @PSPSDK_INCLUDEDIR@
 libpspusbinclude_HEADERS =	\
 	pspusb.h pspusbbus.h pspusbcam.h pspusbacc.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspusb.a libpspusb_driver.a libpspusbbus_driver.a libpspusbcam.a
 
 libpspusb_a_SOURCES = sceUsb.S
@@ -49,3 +50,4 @@ $(USBBUSDRIVER_OBJS): sceUsbBus_driver.S
 
 $(USBCAM_OBJS): sceUsbCam.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

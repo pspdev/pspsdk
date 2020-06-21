@@ -17,6 +17,7 @@ CTRLDRIVER_OBJS = sceCtrl_driver_0000.o sceCtrl_driver_0001.o sceCtrl_driver_000
 libpspctrlincludedir = @PSPSDK_INCLUDEDIR@
 libpspctrlinclude_HEADERS = pspctrl.h pspctrl_kernel.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspctrl.a libpspctrl_driver.a
 libpspctrl_a_SOURCES = sceCtrl.S
 libpspctrl_a_LIBADD = $(CTRL_OBJS)
@@ -29,4 +30,4 @@ $(CTRL_OBJS): sceCtrl.S
 
 $(CTRLDRIVER_OBJS): sceCtrl_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
-
+endif

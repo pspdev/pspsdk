@@ -29,6 +29,7 @@ libpsputilityinclude_HEADERS = psputility.h \
                                psputility_htmlviewer.h \
                                psputility_modules.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpsputility.a
 libpsputility_a_SOURCES = sceUtility.S sceUtility_netparam_internal.S
 libpsputility_a_LIBADD = $(UTILITY_OBJS) $(NETPARAM_OBJS)
@@ -38,3 +39,4 @@ $(UTILITY_OBJS): sceUtility.S
 
 $(NETPARAM_OBJS): sceUtility_netparam_internal.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

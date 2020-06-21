@@ -15,9 +15,11 @@ ATRAC3_OBJS = sceAtrac3plus_0000.o sceAtrac3plus_0001.o sceAtrac3plus_0002.o sce
 libpspatrac3includedir = @PSPSDK_INCLUDEDIR@
 libpspatrac3include_HEADERS = pspatrac3.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspatrac3.a 
 libpspatrac3_a_SOURCES = sceAtrac3plus.S
 libpspatrac3_a_LIBADD  = $(ATRAC3_OBJS)
 
 $(ATRAC3_OBJS): sceAtrac3plus.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

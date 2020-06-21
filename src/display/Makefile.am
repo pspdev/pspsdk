@@ -17,6 +17,7 @@ DISPLAYDRIVER_OBJS = sceDisplay_driver_0000.o sceDisplay_driver_0001.o sceDispla
 libpspdisplayincludedir = @PSPSDK_INCLUDEDIR@
 libpspdisplayinclude_HEADERS = pspdisplay.h pspdisplay_kernel.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspdisplay.a libpspdisplay_driver.a
 libpspdisplay_a_SOURCES = sceDisplay.S 
 libpspdisplay_a_LIBADD = $(DISPLAY_OBJS)
@@ -28,3 +29,4 @@ $(DISPLAY_OBJS): sceDisplay.S
 
 $(DISPLAYDRIVER_OBJS): sceDisplay_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

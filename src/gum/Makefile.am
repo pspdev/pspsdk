@@ -13,6 +13,7 @@ CFLAGS =  @PSPSDK_CFLAGS@
 libpspgumincludedir = @PSPSDK_INCLUDEDIR@
 libpspguminclude_HEADERS = pspgum.h
 
+if PSP_GRAPHICS
 lib_LIBRARIES = libpspgum.a libpspgum_vfpu.a
 
 noinst_HEADERS = gumInternal.h
@@ -56,3 +57,4 @@ $(PSPGUM_FPU_OBJS): pspgum.c
 
 $(PSPGUM_VFPU_OBJS): pspgum_vfpu.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
+endif

@@ -17,6 +17,7 @@ GEDRIVER_OBJS = sceGe_driver_0000.o sceGe_driver_0001.o sceGe_driver_0002.o sceG
 libpspgeincludedir = @PSPSDK_INCLUDEDIR@
 libpspgeinclude_HEADERS = pspge.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspge.a libpspge_driver.a
 libpspge_a_SOURCES = sceGe_user.S
 libpspge_a_LIBADD = $(GE_OBJS)
@@ -28,3 +29,4 @@ $(GE_OBJS): sceGe_user.S
 
 $(GEDRIVER_OBJS): sceGe_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

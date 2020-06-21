@@ -41,6 +41,7 @@ libpspnetinclude_HEADERS = pspnet.h			\
 			   psphttp.h			\
 			   pspssl.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspnet.a			\
 		libpspnet_apctl.a		\
 		libpspnet_inet.a		\
@@ -99,3 +100,4 @@ $(HTTP_OBJS): sceHttp.S
 	
 $(SSL_OBJS): sceSsl.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

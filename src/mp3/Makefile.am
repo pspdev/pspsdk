@@ -15,6 +15,7 @@ MP3_OBJS = sceMp3_0000.o sceMp3_0001.o sceMp3_0002.o sceMp3_0003.o sceMp3_0004.o
 libpspmp3includedir = @PSPSDK_INCLUDEDIR@
 libpspmp3include_HEADERS = pspmp3.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspmp3.a
 
 
@@ -23,3 +24,4 @@ libpspmp3_a_LIBADD = $(MP3_OBJS)
 
 $(MP3_OBJS): sceMp3.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

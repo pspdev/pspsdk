@@ -17,6 +17,7 @@ HPRM_DRIVER_OBJS = sceHprm_driver_0000.o sceHprm_driver_0001.o sceHprm_driver_00
 libpsphprmincludedir = @PSPSDK_INCLUDEDIR@
 libpsphprminclude_HEADERS = psphprm.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpsphprm.a libpsphprm_driver.a
 libpsphprm_a_SOURCES = sceHprm.S
 libpsphprm_a_LIBADD  = $(HPRM_OBJS)
@@ -28,3 +29,4 @@ $(HPRM_OBJS): sceHprm.S
 
 $(HPRM_DRIVER_OBJS): sceHprm_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

@@ -15,9 +15,11 @@ NAND_DRIVER_OBJS = sceNand_driver_0000.o sceNand_driver_0001.o sceNand_driver_00
 libpspnandincludedir = @PSPSDK_INCLUDEDIR@
 libpspnandinclude_HEADERS = pspnand_driver.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspnand_driver.a
 libpspnand_driver_a_SOURCES = sceNand_driver.S
 libpspnand_driver_a_LIBADD = $(NAND_DRIVER_OBJS)
 
 $(NAND_DRIVER_OBJS): sceNand_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

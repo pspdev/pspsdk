@@ -17,6 +17,7 @@ REGDRIVER_OBJS = sceReg_driver_0000.o sceReg_driver_0001.o sceReg_driver_0002.o 
 libpspregincludedir = @PSPSDK_INCLUDEDIR@
 libpspreginclude_HEADERS = pspreg.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspreg.a libpspreg_driver.a
 libpspreg_a_SOURCES = sceReg.S
 libpspreg_a_LIBADD = $(REG_OBJS)
@@ -29,4 +30,4 @@ $(REG_OBJS): sceReg.S
 
 $(REGDRIVER_OBJS): sceReg_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
-
+endif

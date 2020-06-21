@@ -75,6 +75,7 @@ libpspkernelinclude_HEADERS =	\
 	pspinit.h			\
 	pspaudiorouting.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspkernel.a
 
 libpspkernel_a_SOURCES =	\
@@ -164,3 +165,4 @@ $(INIT_OBJS): InitForKernel.S
 
 $(AUDIOROUTING_OBJS): sceAudioRouting_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

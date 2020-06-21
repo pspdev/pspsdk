@@ -9,6 +9,15 @@ AC_DEFUN([AC_PSPDEV_PATH],
               [  --with-pspdev=DIR       Path where the pspdev toolchain is installed (default is $PSPDEV)],
               pspdev="$withval", pspdev="$PSPDEV")
 
+  AC_ARG_ENABLE([sonystubs],
+    [AS_HELP_STRING([--disable-sonystubs], [Don't build Sony stub libraries])])
+
+  AC_ARG_ENABLE([psp-graphics],
+    [AS_HELP_STRING([--disable-psp-graphics], [Don't build graphics libraries])])
+
+  AC_ARG_ENABLE([psp-libc],
+    [AS_HELP_STRING([--disable-psp-libc], [Don't build PSP libc])])
+
   AC_MSG_CHECKING(for pspdev)
   if test x$pspdev = x ; then
      # If there's no $PSPDEV environment variable, find out where psp-gcc lives (it should be on the $PATH).
@@ -32,6 +41,10 @@ AC_DEFUN([AC_PSPDEV_PATH],
   PSPDEV_LIBDIR="$pspdev_libdir"
   AC_SUBST(PSPDEV_INCLUDEDIR)
   AC_SUBST(PSPDEV_LIBDIR)
+
+  AM_CONDITIONAL([SONYSTUBS], [test x$enable_sonystubs != xno])
+  AM_CONDITIONAL([PSP_GRAPHICS], [test x$enable_psp_graphics != xno])
+  AM_CONDITIONAL([PSP_LIBC], [test x$enable_psp_libc != xno])
 ])
 
 dnl Check for a tool prefixed with "psp-".

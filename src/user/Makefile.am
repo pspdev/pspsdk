@@ -53,6 +53,7 @@ libpspuserinclude_HEADERS =	\
 	pspintrman.h		\
 	pspmoduleexport.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspuser.a
 
 libpspuser_a_SOURCES =	\
@@ -114,3 +115,4 @@ $(LOADEXEC_OBJS): LoadExecForUser.S
 
 $(IMPOSE_OBJS): sceImpose.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

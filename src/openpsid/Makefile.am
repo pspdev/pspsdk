@@ -15,9 +15,11 @@ OPENPSID_OBJS = sceOpenPSID_0000.o sceOpenPSID_0001.o
 libpspopenspidincludedir = @PSPSDK_INCLUDEDIR@
 libpspopenspidinclude_HEADERS = pspopenpsid.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspopenpsid.a 
 libpspopenpsid_a_SOURCES = sceOpenPSID.S
 libpspopenpsid_a_LIBADD  = $(OPENPSID_OBJS)
 
 $(OPENPSID_OBJS): sceOpenPSID.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

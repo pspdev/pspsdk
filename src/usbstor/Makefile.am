@@ -18,6 +18,7 @@ libpspusbstorincludedir = @PSPSDK_INCLUDEDIR@
 libpspusbstorinclude_HEADERS =	\
 	pspusbstor.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspusbstor.a
 
 libpspusbstor_a_SOURCES = sceUsbstor.S	sceUsbstorBoot.S
@@ -28,3 +29,4 @@ $(USBSTOR_OBJS): sceUsbstor.S
 
 $(USBSTORBOOT_OBJS): sceUsbstorBoot.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

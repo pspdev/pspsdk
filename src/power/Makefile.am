@@ -17,6 +17,7 @@ POWERDRIVER_OBJS= scePower_driver_0000.o scePower_driver_0001.o scePower_driver_
 libpsppowerincludedir = @PSPSDK_INCLUDEDIR@
 libpsppowerinclude_HEADERS = psppower.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpsppower.a libpsppower_driver.a
 libpsppower_a_SOURCES = scePower.S 
 libpsppower_a_LIBADD = $(POWER_OBJS)
@@ -29,3 +30,4 @@ $(POWER_OBJS): scePower.S
 
 $(POWERDRIVER_OBJS): scePower_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

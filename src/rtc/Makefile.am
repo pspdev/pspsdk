@@ -17,6 +17,7 @@ RTCDRIVER_OBJS = sceRtc_driver_0000.o sceRtc_driver_0001.o sceRtc_driver_0002.o 
 libpsprtcincludedir = @PSPSDK_INCLUDEDIR@
 libpsprtcinclude_HEADERS = psprtc.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpsprtc.a libpsprtc_driver.a
 libpsprtc_a_SOURCES = sceRtc.S
 libpsprtc_a_LIBADD = $(RTC_OBJS)
@@ -29,3 +30,4 @@ $(RTC_OBJS): sceRtc.S
 
 $(RTCDRIVER_OBJS): sceRtc_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

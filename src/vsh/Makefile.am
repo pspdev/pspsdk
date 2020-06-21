@@ -17,6 +17,7 @@ PAF_OBJS = scePaf_0000.o scePaf_0001.o scePaf_0002.o scePaf_0003.o scePaf_0004.o
 libpspchnnlsvincludedir = @PSPSDK_INCLUDEDIR@
 libpspchnnlsvinclude_HEADERS = pspchnnlsv.h 
 
+if SONYSTUBS
 lib_LIBRARIES = libpspchnnlsv.a libpspvshbridge.a libpsppaf.a
 libpspchnnlsv_a_SOURCES = sceChnnlsv.S
 libpspchnnlsv_a_LIBADD = $(CHNNLSV_OBJS)
@@ -33,3 +34,4 @@ $(VSHBRIDGE_OBJS): sceVshBridge.S
 
 $(PAF_OBJS): scePaf.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

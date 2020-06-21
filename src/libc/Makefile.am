@@ -14,7 +14,9 @@ CCASFLAGS = $(CFLAGS)
 
 EXTRA_DIST = LIB.status
 
+if PSP_LIBC
 lib_LIBRARIES = libpsplibc.a
+endif
 
 ## libpsplibc.a sources.
 CORE_SOURCES = terminate.c setjmp.S qsort.c init.c cxx.cpp

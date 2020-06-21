@@ -15,6 +15,8 @@ VFPU_OBJS =
 libpspvfpuincludedir = @PSPSDK_INCLUDEDIR@
 libpspvfpuinclude_HEADERS = pspvfpu.h
 
+if PSP_GRAPHICS
 lib_LIBRARIES = libpspvfpu.a
 libpspvfpu_a_SOURCES = pspvfpu.c
 libpspvfpu_a_LIBADD  = $(VFPU_OBJS)
+endif

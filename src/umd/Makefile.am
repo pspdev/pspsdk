@@ -17,6 +17,7 @@ UMD_OBJS = sceUmd_0000.o sceUmd_0001.o sceUmd_0002.o sceUmd_0003.o sceUmd_0004.o
 libpspumdlincludedir = @PSPSDK_INCLUDEDIR@
 libpspumdlinclude_HEADERS = pspumd.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspumd.a libpspumd_driver.a
 
 libpspumd_a_SOURCES = sceUmdUser.S
@@ -30,3 +31,4 @@ $(UMDUSER_OBJS): sceUmdUser.S
 
 $(UMD_OBJS): sceUmd.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

@@ -12,6 +12,7 @@ CFLAGS =  @PSPSDK_CFLAGS@
 libpspguincludedir = @PSPSDK_INCLUDEDIR@
 libpspguinclude_HEADERS = pspgu.h
 
+if PSP_GRAPHICS
 lib_LIBRARIES = libpspgu.a
 
 noinst_HEADERS = guInternal.h
@@ -32,4 +33,4 @@ libpspgu_a_SOURCES = callbackFin.c callbackSig.c guInternal.c resetValues.c sceG
 	sceGuSwapBuffers.c sceGuSync.c sceGuTerm.c sceGuTexEnvColor.c sceGuTexFilter.c sceGuTexFlush.c sceGuTexFunc.c \
 	sceGuTexImage.c sceGuTexLevelMode.c sceGuTexMapMode.c sceGuTexMode.c sceGuTexOffset.c sceGuTexProjMapMode.c \
 	sceGuTexScale.c sceGuTexSlope.c sceGuTexSync.c sceGuTexWrap.c sceGuViewport.c sendCommand.c
-
+endif

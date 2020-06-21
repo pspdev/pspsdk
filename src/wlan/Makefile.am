@@ -16,6 +16,7 @@ WLANLIB_OBJS = sceWlanDrv_lib_0000.o sceWlanDrv_lib_0001.o sceWlanDrv_lib_0002.o
 libpspwlanincludedir = @PSPSDK_INCLUDEDIR@
 libpspwlaninclude_HEADERS = pspwlan.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspwlan.a
 libpspwlan_a_SOURCES = sceWlanDrv.S sceWlanDrv_lib.S
 libpspwlan_a_LIBADD  = $(WLAN_OBJS) $(WLANLIB_OBJS)
@@ -25,3 +26,4 @@ $(WLAN_OBJS): sceWlanDrv.S
 
 $(WLANLIB_OBJS): sceWlanDrv_lib.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

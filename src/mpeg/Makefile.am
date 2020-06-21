@@ -29,6 +29,7 @@ libpspjpegincludedir = @PSPSDK_INCLUDEDIR@
 libpspjpeginclude_HEADERS = pspjpeg.h
 
 
+if SONYSTUBS
 lib_LIBRARIES = libpspmpeg.a libpspmpegbase.a libpspmpegbase_driver.a libpspjpeg.a
 
 
@@ -56,4 +57,4 @@ $(MPEGBASE_DRIVER_OBJS): sceMpegbase_driver.S
 
 $(JPEG_OBJS): sceJpeg.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
-
+endif

@@ -28,6 +28,7 @@ libpspaudiolibinclude_HEADERS = pspaudiolib.h
 libpspaudiocodecincludedir = @PSPSDK_INCLUDEDIR@
 libpspaudiocodecinclude_HEADERS = pspaudiocodec.h
 
+if SONYSTUBS
 lib_LIBRARIES = libpspaudio.a libpspaudio_driver.a libpspaudiolib.a libpspaudiocodec.a
 
 libpspaudio_a_SOURCES = sceAudio.S
@@ -49,3 +50,4 @@ $(AUDIO_DRIVER_OBJS): sceAudio_driver.S
 
 $(CODEC_OBJS): sceAudiocodec.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif

@@ -17,6 +17,7 @@ libpspvideocodecincludedir = @PSPSDK_INCLUDEDIR@
 libpspvideocodecinclude_HEADERS = pspvideocodec.h
 
 
+if SONYSTUBS
 lib_LIBRARIES = libpspvideocodec.a
 
 
@@ -25,3 +26,4 @@ libpspvideocodec_a_LIBADD = $(VIDEOCODEC_OBJS)
 
 $(VIDEOCODEC_OBJS): sceVideocodec.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+endif
