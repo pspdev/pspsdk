@@ -1,6 +1,4 @@
 /* Default linker script, for normal executables */
-OUTPUT_FORMAT("elf32-littlemips", "elf32-bigmips",
-	      "elf32-littlemips")
 OUTPUT_ARCH(mips:allegrex)
 ENTRY(module_start)
 SEARCH_DIR("@PSPDEV_LIBDIR@");
@@ -9,7 +7,6 @@ SEARCH_DIR("@PSPDEV_LIBDIR@");
 SECTIONS
 {
   /* Read-only sections, merged into text segment: */
-  PROVIDE (__executable_start = 0x0); . = 0x0;
   .interp         : { *(.interp) }
   .dynamic        : { *(.dynamic) }
   .hash           : { *(.hash) }
@@ -34,7 +31,7 @@ SECTIONS
   .rel.lib.stub.btm   : { *(.rel.lib.stub.btm) }
   .rel.rodata.sceModuleInfo   : { *(.rel.rodata.sceModuleInfo) }
   .rel.rodata.sceResident     : { *(.rel.rodata.sceResident) }
-  .rel.rodata.sceNid          : { *(.rel.rodata.sceNid) }
+  .rel.rodata.sceNid          : { *(.rel.rodata.sceNid) *(SORT(.rel.rodata.sceNid.*)) }
   .rel.rodata.sceVstub        : { *(.rel.rodata.sceVstub) *(SORT(.rel.rodata.sceVstub.*)) }
   .rel.rodata     : { *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*) }
   .rela.rodata    : { *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*) }
@@ -64,6 +61,7 @@ SECTIONS
   .rela.bss       : { *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*) }
   .rel.plt        : { *(.rel.plt) }
   .rela.plt       : { *(.rela.plt) }
+  PROVIDE (__executable_start = 0x0); . = 0x0;
   .text           :
   {
     _ftext = . ;
@@ -94,13 +92,24 @@ SECTIONS
   .lib.stub.top   : { *(.lib.stub.top) }
   .lib.stub       : { *(.lib.stub) }
   .lib.stub.btm   : { *(.lib.stub.btm) }
+
+  /* Add symbols for LLVM's libunwind */
+  __eh_frame_hdr_start = SIZEOF(.eh_frame_hdr) > 0 ? ADDR(.eh_frame_hdr) : 0;
+  __eh_frame_hdr_end = SIZEOF(.eh_frame_hdr) > 0 ? . : 0;
+  .eh_frame :
+  {
+    __eh_frame_start = .;
+    KEEP(*(.eh_frame))
+    __eh_frame_end = .;
+  }
+
   /* PSP read-only data for module info, NIDs, and Vstubs.  The
      .rodata.sceModuleInfo section must appear before the .rodata section
      otherwise it would get absorbed into .rodata and the PSP bootloader
      would be unable to locate the module info structure. */
   .rodata.sceModuleInfo    : { *(.rodata.sceModuleInfo) }
   .rodata.sceResident      : { *(.rodata.sceResident) }
-  .rodata.sceNid           : { KEEP (*(.rodata.sceNid)) }
+  .rodata.sceNid           : { KEEP (*(.rodata.sceNid)) *(SORT(.rodata.sceNid.*)) }
   .rodata.sceVstub         : { *(.rodata.sceVstub) *(SORT(.rodata.sceVstub.*)) }
   .rodata         : { *(.rodata .rodata.* .gnu.linkonce.r.*) }
   .rodata1        : { *(.rodata1) }
