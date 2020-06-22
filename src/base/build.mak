@@ -14,13 +14,13 @@ ifeq ($(PSPSDK),)
 $(error $$(PSPSDK) is undefined.  Use "PSPSDK := $$(shell psp-config --pspsdk-path)" in your Makefile)
 endif
 
-CC       = psp-gcc
-CXX      = psp-g++
-AS       = psp-gcc
-LD       = psp-gcc
-AR       = psp-ar
-RANLIB   = psp-ranlib
-STRIP    = psp-strip
+CC       = clang
+CXX      = clang++
+AS       = llvm-as
+LD       = ld.lld
+AR       = llvm-ar
+RANLIB   = llvm-ranlib
+STRIP    = llvm-strip
 MKSFO    = mksfo
 PACK_PBP = pack-pbp
 FIXUP    = psp-fixup-imports
@@ -30,7 +30,7 @@ ENC		 = PrxEncrypter
 INCDIR   := $(INCDIR) . $(PSPSDK)/include
 LIBDIR   := $(LIBDIR) . $(PSPSDK)/lib
 
-CFLAGS   := $(addprefix -I,$(INCDIR)) $(CFLAGS)
+CFLAGS   := --config $(PSPSDK)/lib/clang.conf $(addprefix -I,$(INCDIR)) $(CFLAGS)
 CXXFLAGS := $(CFLAGS) $(CXXFLAGS)
 ASFLAGS  := $(CFLAGS) $(ASFLAGS)
 
@@ -44,9 +44,10 @@ endif
 
 CFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
 CXXFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
+LDFLAGS += --no-gc-sections --emit-relocs -L$(PSPSDK)/../lib
 
 ifeq ($(BUILD_PRX),1)
-LDFLAGS  := $(addprefix -L,$(LIBDIR)) -specs=$(PSPSDK)/lib/prxspecs -Wl,-q,-T$(PSPSDK)/lib/linkfile.prx $(LDFLAGS)
+LDFLAGS  := $(addprefix -L,$(LIBDIR)) --script=$(PSPSDK)/lib/linkfile.prx $(PSPSDK)/../lib/crt0_prx.o $(LDFLAGS)
 EXTRA_CLEAN += $(TARGET).elf
 # Setup default exports if needed
 ifdef PRX_EXPORTS
@@ -91,8 +92,8 @@ LIBS     := $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) -lpspnet \
 			-lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility \
 			-lpspuser
 else
-PSPSDK_LIBS = -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk
-LIBS     := $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) -lpspnet \
+PSPSDK_LIBS = # -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk
+LIBS     := --whole-archive -lpsp --no-whole-archive $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) # -lpspnet \
 			-lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility \
 			-lpspuser -lpspkernel
 endif
@@ -169,10 +170,10 @@ SCEkxploit: $(TARGET).elf $(PSP_EBOOT_SFO)
 
 ifeq ($(NO_FIXUP_IMPORTS), 1)
 $(TARGET).elf: $(OBJS) $(EXPORT_OBJ)
-	$(LINK.c) $^ $(LIBS) -o $@
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 else
 $(TARGET).elf: $(OBJS) $(EXPORT_OBJ)
-	$(LINK.c) $^ $(LIBS) -o $@
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 	$(FIXUP) $@
 endif
 
