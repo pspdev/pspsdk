@@ -123,9 +123,6 @@
 	IMPORT_FUNC	"sceRtc",0x62685E98,sceRtcGetLastAdjustedTime
 #endif
 #ifdef F_sceRtc_0040
-	IMPORT_FUNC	"sceRtc",0xDFBC5F16,sceRtcParseDateTime
-#endif
-#ifdef F_sceRtc_0041
 	IMPORT_FUNC	"sceRtc",0xE1C93E47,sceRtcGetTime64_t
 #endif
 
