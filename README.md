@@ -1,4 +1,4 @@
-# PSP Software Development Kit
+# PSP Software Development Kit ![CI][ci-badge]
 Version 1.0+beta2 - https://github.com/pspdev/pspsdk
 
 
@@ -187,3 +187,6 @@ The pspsdk developers wish to thank all the people who have contributed bug
 fixes, ideas and support for the project. Also big thanks to nem for kicking off
 PSP development with all his work, the original imports system is based on his
 work in the hello world demo.
+
+
+[ci-badge]: https://github.com/pspdev/pspsdk/workflows/CI/badge.svg
