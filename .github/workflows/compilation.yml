@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  repository_dispatch:
+    types: [run_build]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pspdev/psptoolchain:latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        apk add build-base autoconf automake zlib-dev
+
+    - name: Compile PSPSDK
+      run: |
+        ./bootstrap
+        ./configure
+        make clean
+        make -j2
+        make install
