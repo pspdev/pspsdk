@@ -93,7 +93,7 @@ LIBS     := $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) -lpspnet \
 			-lpspuser
 else
 PSPSDK_LIBS = # -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk
-LIBS     := --whole-archive -lpsp --no-whole-archive $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) # -lpspnet \
+LIBS     := --whole-archive -lpsp --no-whole-archive -lpspbuiltin $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) # -lpspnet \
 			-lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility \
 			-lpspuser -lpspkernel
 endif

@@ -89,6 +89,7 @@ AC_CONFIG_FILES([Makefile
                  src/base/Makefile
                  src/base/clang.conf
                  src/base/linkfile.prx
+                 src/builtin/Makefile
                  src/ctrl/Makefile
                  src/debug/Makefile
                  src/display/Makefile

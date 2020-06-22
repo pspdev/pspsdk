@@ -2,6 +2,7 @@ SUBDIRS = \
 	atrac3 \
 	audio \
 	base \
+	builtin \
 	ctrl \
 	debug \
 	display \
