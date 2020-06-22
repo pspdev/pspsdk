@@ -283,7 +283,6 @@ int validate_header(unsigned char *data)
 int load_sections(unsigned char *data)
 {
 	int ret = 0;
-	int found_rel = 0;
 	unsigned int load_addr = 0xFFFFFFFF;
 
 	if(g_elfhead.iShnum > 0)
@@ -336,7 +335,6 @@ int load_sections(unsigned char *data)
 						&& (g_elfsections[g_elfsections[i].iInfo].iFlags & SHF_ALLOC))
 				{
 					g_elfsections[i].pRef = &g_elfsections[g_elfsections[i].iInfo];
-					found_rel = 1;
 				}
 			}
 
