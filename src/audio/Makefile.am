@@ -28,16 +28,18 @@ libpspaudiolibinclude_HEADERS = pspaudiolib.h
 libpspaudiocodecincludedir = @PSPSDK_INCLUDEDIR@
 libpspaudiocodecinclude_HEADERS = pspaudiocodec.h
 
+lib_LIBRARIES = libpspaudiolib.a
+
+libpspaudiolib_a_SOURCES = pspaudiolib.c
+
 if SONYSTUBS
-lib_LIBRARIES = libpspaudio.a libpspaudio_driver.a libpspaudiolib.a libpspaudiocodec.a
+lib_LIBRARIES += libpspaudio.a libpspaudio_driver.a libpspaudiocodec.a
 
 libpspaudio_a_SOURCES = sceAudio.S
 libpspaudio_a_LIBADD = $(AUDIO_OBJS)
 
 libpspaudio_driver_a_SOURCES = sceAudio_driver.S
 libpspaudio_driver_a_LIBADD = $(AUDIO_DRIVER_OBJS)
-
-libpspaudiolib_a_SOURCES = pspaudiolib.c
 
 libpspaudiocodec_a_SOURCES = sceAudiocodec.S
 libpspaudiocodec_a_LIBADD = $(CODEC_OBJS)
