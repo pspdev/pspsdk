@@ -405,7 +405,7 @@ void build_exports(void)
 			fprintf(stdout, "\t{ \"%s\", ", pLib->name);
 		}
 
-		fprintf(stdout, "0x%04X, 0x%04X, 4, %d, %d, &__%s_exports },\n", pLib->ver, pLib->attr, 
+		fprintf(stdout, "0x%04X, 0x%04X, 4, %d, %d, (unsigned int *) &__%s_exports },\n", pLib->ver, pLib->attr, 
 				pLib->varCount, pLib->funcCount, pLib->name);
 
 		pLib = pLib->pNext;

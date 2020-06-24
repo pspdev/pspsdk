@@ -162,15 +162,12 @@
 	IMPORT_FUNC	"sceRtc_driver",0xCE27DE2F,sceRtcEnd
 #endif
 #ifdef F_sceRtc_driver_0053
-	IMPORT_FUNC	"sceRtc_driver",0xDFBC5F16,sceRtcParseDateTime
-#endif
-#ifdef F_sceRtc_driver_0054
 	IMPORT_FUNC	"sceRtc_driver",0xE1C93E47,sceRtcGetTime64_t
 #endif
-#ifdef F_sceRtc_driver_0055
+#ifdef F_sceRtc_driver_0054
 	IMPORT_FUNC	"sceRtc_driver",0xF0B5571C,sceRtcSynchronize
 #endif
-#ifdef F_sceRtc_driver_0056
+#ifdef F_sceRtc_driver_0055
 	IMPORT_FUNC	"sceRtc_driver",0xFB3B18CD,sceRtc_driver_FB3B18CD
 #endif
 

@@ -11,8 +11,8 @@
 #include <pspmoduleexport.h>
 #define NULL ((void *) 0)
 
-void extern module_start;
-void extern module_info;
+extern int module_start;
+extern struct SceModuleInfo module_info;
 static const unsigned int __syslib_exports[4] __attribute__((section(".rodata.sceResident"))) = {
 	0xD632ACDB,
 	0xF01D73A7,
@@ -21,5 +21,5 @@ static const unsigned int __syslib_exports[4] __attribute__((section(".rodata.sc
 };
 
 const struct _PspLibraryEntry __library_exports[1] __attribute__((section(".lib.ent"), used)) = {
-	{ NULL, 0x0000, 0x8000, 4, 1, 1, &__syslib_exports },
+	{ NULL, 0x0000, 0x8000, 4, 1, 1, (unsigned int *) &__syslib_exports },
 };

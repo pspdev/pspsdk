@@ -168,5 +168,5 @@ static const struct _library_entry {
 	unsigned short	funcCount;
 	void *			entrytable;
 } _library_entry __attribute__((section(".lib.ent"), used)) = {
-	NULL, 0, 0x8000, 4, 1, 1, &__entrytable
+	NULL, 0, 0x8000, 4, 1, 1, (unsigned int *) &__entrytable
 };

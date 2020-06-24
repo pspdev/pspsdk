@@ -454,7 +454,7 @@ char *	strstr(const char * string, const char * substring)
 {
 	char* strpos;
 
-	if (string == 0)
+	if (*string == 0)
 		return 0;
 	
 	if (strlen(substring)==0)

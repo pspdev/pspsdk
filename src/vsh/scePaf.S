@@ -2025,7 +2025,7 @@
 	IMPORT_FUNC	"scePaf",0x10F3BB61,memset
 #endif
 #ifdef F_scePaf_0674
-	IMPORT_FUNC	"scePaf",0x81D0D1F7,memcpy
+	IMPORT_FUNC	"scePaf",0x81D0D1F7,memcmp
 #endif
 #ifdef F_scePaf_0675
 	IMPORT_FUNC	"scePaf",0x7EDCC45E,floorf
