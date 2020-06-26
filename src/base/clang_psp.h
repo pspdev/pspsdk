@@ -6,4 +6,5 @@ extern float __builtin_allegrex_floor_w_s(float);
 extern float __builtin_allegrex_trunc_w_s(float);
 extern float __builtin_allegrex_round_w_s(float);
 extern float __builtin_allegrex_sqrt_s(float);
+extern int __builtin_allegrex_clz(int);
 #endif

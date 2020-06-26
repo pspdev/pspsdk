@@ -26,4 +26,9 @@ float __builtin_allegrex_sqrt_s(float f) {
     asm ("sqrt.s %0, %0" : "+f"(f));
     return f;
 }
+
+int __builtin_allegrex_clz(int i) {
+    asm ("clz %0, %0" : "+r"(i));
+    return i;
+}
 #endif
