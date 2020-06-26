@@ -1,9 +1,12 @@
--target mips
+-target mipsel-unknown-linux
 -mcpu=mips2
 -msingle-float
--mlittle-endian
 -mno-check-zero-division
 -D__psp__
 -isystem @PSPSDK@/../include
 -isystem @PSPSDK_INCLUDEDIR@
 -include clang_psp.h
+-fuse-ld=lld
+-nostdlib
+-L@PSPSDK@/../lib
+-Wl,--no-dynamic-linker

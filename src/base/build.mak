@@ -170,10 +170,10 @@ SCEkxploit: $(TARGET).elf $(PSP_EBOOT_SFO)
 
 ifeq ($(NO_FIXUP_IMPORTS), 1)
 $(TARGET).elf: $(OBJS) $(EXPORT_OBJ)
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+	$(LINK.c) $^ $(LIBS) -o $@
 else
 $(TARGET).elf: $(OBJS) $(EXPORT_OBJ)
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+	$(LINK.c) $^ $(LIBS) -o $@
 	$(FIXUP) $@
 endif
 
