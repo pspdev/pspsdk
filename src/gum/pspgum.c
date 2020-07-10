@@ -439,7 +439,7 @@ void sceGumMultMatrix(const ScePspFMatrix4* m)
 #ifdef F_sceGumOrtho
 void sceGumOrtho(float left, float right, float bottom, float top, float near, float far)
 {
-	register ScePspFMatrix4* t __asm("a0") = GUM_ALIGNED_MATRIX();
+	register ScePspFMatrix4* t = GUM_ALIGNED_MATRIX();
 	float dx = right-left, dy = top-bottom, dz = far-near;
 
 	memset(t,0,sizeof(ScePspFMatrix4));
@@ -462,7 +462,7 @@ void sceGumPerspective(float fovy, float aspect, float near, float far)
 	float angle = (fovy / 2) * (GU_PI/180.0f);
 	float cotangent = cosf(angle) / sinf(angle);
 	float delta_z = near-far;
-	register ScePspFMatrix4* t __asm("a0") = GUM_ALIGNED_MATRIX();
+	register ScePspFMatrix4* t = GUM_ALIGNED_MATRIX();
 
 	memset(t,0,sizeof(ScePspFMatrix4));
 	t->x.x = cotangent / aspect;
