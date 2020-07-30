@@ -7,6 +7,7 @@
 -isystem @PSPSDK_INCLUDEDIR@
 -include clang_psp.h
 -fuse-ld=lld
+-ffreestanding
 -nostdlib
 -L@PSPSDK@/../lib
 -Wl,--no-dynamic-linker
