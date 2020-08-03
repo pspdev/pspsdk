@@ -1,5 +1,7 @@
 #pragma once
 
+#undef __linux__
+
 #undef __UINTPTR_TYPE__
 #define __UINTPTR_TYPE__ unsigned int
 
