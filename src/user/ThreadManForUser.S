@@ -383,3 +383,6 @@
 #ifdef F_ThreadManForUser_0126
 	IMPORT_FUNC	"ThreadManForUser",0x8218B4DD,sceKernelReferGlobalProfiler
 #endif
+#ifdef F_ThreadManForUser_0127
+	IMPORT_FUNC	"ThreadManForUser",0x60107536,sceKernelDeleteLwMutex
+#endif

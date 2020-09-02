@@ -589,6 +589,30 @@ int sceKernelPollSema(SceUID semaid, int signal);
  */
 int sceKernelReferSemaStatus(SceUID semaid, SceKernelSemaInfo *info);
 
+/** Struct as workarea for lightweight mutex */
+typedef struct {
+    /** Count */
+    int lockLevel;
+    /** Locking thread */
+    SceUID lockThread;
+    /** Attribute */
+    int attr;
+    /** Number of waiting threads */
+    int numWaitThreads;
+    /** UID */
+    SceUID uid;
+    /** Padding */
+    int pad[3];
+} SceLwMutexWorkarea;
+
+/**
+ * Delete a lightweight mutex
+ *
+ * @param workarea - The pointer to the workarea
+ *
+ * @return 0 on success, otherwise one of ::PspKernelErrorCodes
+ */
+int sceKernelDeleteLwMutex(SceLwMutexWorkarea *workarea);
 
 /* Event flags. */
 

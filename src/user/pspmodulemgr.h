@@ -208,6 +208,15 @@ int sceKernelQueryModuleInfo(SceUID modid, SceKernelModuleInfo *info);
   */
 int sceKernelGetModuleIdList(SceUID *readbuf, int readbufsize, int *idcount);
 
+/**
+ * Get the ID of the module occupying the address
+ *
+ * @param moduleAddr - A pointer to the module
+ *
+ * @return >= 0 on success, otherwise one of ::PspKernelErrorCodes
+ */
+int sceKernelGetModuleIdByAddress(const void *moduleAddr);
+
 /*@}*/
 
 #ifdef __cplusplus
