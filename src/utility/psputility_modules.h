@@ -52,6 +52,8 @@ extern "C" {
 /* IrDA */
 #define PSP_MODULE_IRDA				0x0600
 
+/** An error code used as a return value */
+#define SCE_ERROR_MODULE_ALREADY_LOADED (0x80111102)
 
 /**
  * Load a module (PRX) from user mode.

@@ -24,6 +24,9 @@ extern "C" {
 #define PSP_NET_MODULE_PARSEHTTP 5
 #define PSP_NET_MODULE_HTTP 6
 #define PSP_NET_MODULE_SSL 7
+    
+/** An error code used as a return value */
+#define SCE_ERROR_NET_MODULE_NOT_LOADED (0x80110803)
 
 /**
  * Load a network module (PRX) from user mode.
