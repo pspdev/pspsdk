@@ -91,6 +91,7 @@ AC_CONFIG_FILES([Makefile
                  src/ctrl/Makefile
                  src/debug/Makefile
                  src/display/Makefile
+                 src/dmac/Makefile
                  src/fpu/Makefile
                  src/ge/Makefile
                  src/gu/Makefile
