@@ -17,7 +17,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Reg Registry Kernel Library */
-/*@{*/
+/**@{*/
 
 /** System registry path */
 #define SYSTEM_REGISTRY "/system"
@@ -227,7 +227,7 @@ int sceRegCreateKey(REGHANDLE hd, const char *name, int type, SceSize size);
  */
 int sceRegRemoveRegistry(struct RegParam *reg);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

@@ -23,7 +23,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Ctrl Controller Kernel Library */
-/*@{*/
+/**@{*/
 
 /**
  * Enumeration for the digital controller buttons.
@@ -196,7 +196,7 @@ int sceCtrlSetIdleCancelThreshold(int idlereset, int idleback);
  */
 int sceCtrlGetIdleCancelThreshold(int *idlerest, int *idleback);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

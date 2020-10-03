@@ -25,7 +25,7 @@ extern "C" {
 #include <psptypes.h>
 
 /** @addtogroup Chnnlsv Chnnlsv Library */
-/*@{*/
+/**@{*/
 
 typedef struct _pspChnnlsvContext1 {
 	/** Cipher mode */
@@ -103,7 +103,7 @@ int sceChnnlsv_850A7FA1(pspChnnlsvContext2 *ctx, unsigned char *data, int len);
  */
 int sceChnnlsv_21BE78B4(pspChnnlsvContext2 *ctx);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

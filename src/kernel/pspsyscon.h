@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Syscon Interface to the sceSyscon_driver library. */
-/*@{*/
+/**@{*/
 
 /**
   * Force the PSP to go into standby
@@ -76,7 +76,7 @@ int sceSysconGetPommelVersion( int* version );
  */
 int sceSysconGetBaryonVersion( int* version );
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

@@ -20,7 +20,7 @@
   */
 
 /** @addtogroup IntrMan Interrupt Manager */
-/*@{*/
+/**@{*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -172,6 +172,6 @@ int QueryIntrHandlerInfo(SceUID intr_code, SceUID sub_intr_code, PspIntrHandlerO
 }
 #endif
 
-/*@}*/
+/**@}*/
 
 #endif /* PSPINTRMAN_H */

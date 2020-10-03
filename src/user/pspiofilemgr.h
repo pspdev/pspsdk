@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 /** @addtogroup FileIO File IO Library */
-/*@{*/
+/**@{*/
 
 /** Permission value for the sceIoAssign function */
 enum IoAssignPerms
@@ -467,7 +467,7 @@ int sceIoChangeAsyncPriority(SceUID fd, int pri);
   */
 int sceIoSetAsyncCallback(SceUID fd, SceUID cb, void *argp);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

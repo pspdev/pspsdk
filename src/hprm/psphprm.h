@@ -21,7 +21,7 @@ extern "C" {
 
 /** @addtogroup Hprm */
 
-/*@{*/
+/**@{*/
 
 /** Enumeration of the remote keys */
 enum PspHprmKeys
@@ -85,7 +85,7 @@ int sceHprmIsMicrophoneExist(void);
 
 
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

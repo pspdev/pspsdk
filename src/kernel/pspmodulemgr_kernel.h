@@ -26,7 +26,7 @@ extern "C" {
 #endif
 
 /** @addtogroup ModuleMgrKern Kernel Module Manager Library */
-/*@{*/
+/**@{*/
 
 /**
   * Gets the current module list.
@@ -58,7 +58,7 @@ int sceKernelModuleCount(void);
  */
 SceUID sceKernelLoadModuleBuffer(void *buf, SceSize bufsize, int flags, SceKernelLMOption *option);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

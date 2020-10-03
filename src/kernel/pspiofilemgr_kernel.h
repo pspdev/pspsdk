@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 /** @addtogroup IoFileMgr_Kernel Driver interface to IoFileMgr */
-/*@{*/
+/**@{*/
 
 struct PspIoDrv;
 
@@ -156,7 +156,7 @@ int sceIoGetThreadCwd(SceUID uid, char *dir, int len);
  */
 int sceIoChangeThreadCwd(SceUID uid, char *dir);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

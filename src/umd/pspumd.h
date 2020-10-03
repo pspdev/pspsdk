@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /** @addtogroup UMD UMD Kernel Library */
-/*@{*/
+/**@{*/
 
 /** UMD Info struct */
 typedef struct pspUmdInfo
@@ -206,7 +206,7 @@ int sceUmdReplacePermit(void);
   */
 int sceUmdReplaceProhibit(void);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

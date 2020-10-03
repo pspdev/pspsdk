@@ -304,7 +304,7 @@ extern "C" {
 typedef void (*GuSwapBuffersCallback)(void** display,void** render);
 
 /** @addtogroup GU */
-/*@{*/
+/**@{*/
 
 /**
   * Set depth buffer parameters
@@ -1478,7 +1478,7 @@ void guSwapBuffersBehaviour(int behaviour);
 **/
 void guSwapBuffersCallback(GuSwapBuffersCallback callback);
 
-/*@}*/
+/**@}*/
 
 #if defined(__cplusplus)
 };

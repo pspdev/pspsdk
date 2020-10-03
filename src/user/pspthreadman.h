@@ -33,7 +33,7 @@ extern "C" {
 
 /** @addtogroup ThreadMan */
 
-/*@{*/
+/**@{*/
 
 /** 64-bit system clock type. */
 typedef struct SceKernelSysClock {
@@ -1782,7 +1782,7 @@ PspDebugProfilerRegs *sceKernelReferThreadProfiler(void);
  */
 PspDebugProfilerRegs *sceKernelReferGlobalProfiler(void);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

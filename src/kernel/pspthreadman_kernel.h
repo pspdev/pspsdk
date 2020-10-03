@@ -20,7 +20,7 @@
   */
 
 /** @addtogroup ThreadmanKern Thread Manager kernel functions */
-/*@{*/
+/**@{*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -228,6 +228,6 @@ int ThreadManForKernel_2D69D086(SceUID uid, SceKernelThreadKInfo *info);
 }
 #endif
 
-/*@}*/
+/**@}*/
 
 #endif /* PSPTHREADMANKERNEL_H */

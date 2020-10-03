@@ -26,7 +26,7 @@ extern "C" {
 
 /** @addtogroup LoadExec */
 
-/*@{*/
+/**@{*/
 
 /**
  * Register callback
@@ -82,6 +82,6 @@ int sceKernelLoadExec(const char *file, struct SceKernelLoadExecParam *param);
 }
 #endif
 
-/*@}*/
+/**@}*/
 
 #endif

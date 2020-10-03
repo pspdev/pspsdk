@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Kdebug Interface to the KDebugForKernel library. */
-/*@{*/
+/**@{*/
 
 /** Typedef for the debug putcharacter handler */
 typedef void (*PspDebugPutChar)(unsigned short* args, unsigned int ch);
@@ -49,7 +49,7 @@ PspDebugPutChar sceKernelGetDebugPutchar(void);
  */
 void Kprintf(const char *format, ...) __attribute__((format(printf, 1, 2)));
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

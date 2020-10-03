@@ -26,7 +26,7 @@ extern "C" {
 
 /** @addtogroup Utils */
 
-/*@{*/
+/**@{*/
 
 #include <sys/time.h>
 
@@ -230,7 +230,7 @@ int sceKernelUtilsSha1BlockUpdate(SceKernelUtilsSha1Context *ctx, u8 *data, u32 
   */
 int sceKernelUtilsSha1BlockResult(SceKernelUtilsSha1Context *ctx, u8 *digest);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }
