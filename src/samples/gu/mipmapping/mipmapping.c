@@ -19,7 +19,7 @@
 #include <pspgum.h>
 
 
-PSP_MODULE_INFO("Cube Sample", 0, 1, 1);
+PSP_MODULE_INFO("MIP Mapping Sample", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);
 
 static unsigned int __attribute__((aligned(16))) list[262144];
