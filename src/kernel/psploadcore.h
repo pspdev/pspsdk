@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 /** @addtogroup LoadCore Interface to the LoadCoreForKernel library. */
-/*@{*/
+/**@{*/
 
 /** Describes a module.  This structure could change in future firmware revisions. */
 typedef struct SceModule {
@@ -136,7 +136,7 @@ int sceKernelModuleCount(void);
  */
 void sceKernelIcacheClearAll(void);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

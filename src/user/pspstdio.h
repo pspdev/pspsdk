@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Stdio Stdio Library */
-/*@{*/
+/**@{*/
 
 /**
   * Function to get the current standard in file no
@@ -47,7 +47,7 @@ SceUID sceKernelStdout(void);
   */
 SceUID sceKernelStderr(void);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

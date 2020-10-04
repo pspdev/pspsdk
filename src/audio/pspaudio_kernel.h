@@ -22,7 +22,7 @@ extern "C" {
 
 /** @addtogroup Audio */
 
-/*@{*/
+/**@{*/
 
 enum PspAudioFrequencies {
     /** Sampling frequency set to 44100Hz. */
@@ -39,7 +39,7 @@ enum PspAudioFrequencies {
   * @return 0 on success, an error if less than 0.
   */
 int sceAudioSetFrequency(int frequency);
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

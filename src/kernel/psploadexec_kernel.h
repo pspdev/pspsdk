@@ -23,7 +23,7 @@ extern "C" {
 #endif
 
 /** @addtogroup LoadExecKernel Interface to the LoadExecForKernel library. */
-/*@{*/
+/**@{*/
 
 /** Structure for LoadExecVSH* functions */
 struct SceKernelLoadExecVSHParam {
@@ -155,7 +155,7 @@ int sceKernelLoadExecVSHMs3(const char *file, struct SceKernelLoadExecVSHParam *
 int sceKernelLoadExecVSHMs4(const char *file, struct SceKernelLoadExecVSHParam *param);
 #endif
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

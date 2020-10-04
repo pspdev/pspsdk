@@ -26,7 +26,7 @@ extern "C" {
 /** @defgroup PSPSDK PSPSDK Utility Library */
 
 /** @addtogroup PSPSDK */
-/*@{*/
+/**@{*/
 
 /**
   * Query a modules information from its uid.
@@ -286,7 +286,7 @@ unsigned int pspSdkGetK1(void);
  */
 void pspSdkDisableFPUExceptions(void);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

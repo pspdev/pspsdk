@@ -23,7 +23,7 @@
   */
 
 /** @addtogroup SysMem System Memory Manager */
-/*@{*/
+/**@{*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -133,6 +133,6 @@ int sceKernelGetCompiledSdkVersion(void);
 }
 #endif
 
-/*@}*/
+/**@}*/
 
 #endif /* PSPSYSMEM_H */

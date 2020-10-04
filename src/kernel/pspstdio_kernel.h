@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Stdio_Kernel Driver interface to Stdio */
-/*@{*/
+/**@{*/
 
 /** 
   * Function reopen the stdout file handle to a new file
@@ -62,7 +62,7 @@ int sceKernelStderrReopen(const char *file, int flags, SceMode mode);
   * @return number of characters printed, <0 on error
   */
 int fdprintf(int fd, const char *format, ...);
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

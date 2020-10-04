@@ -29,7 +29,7 @@ extern "C" {
 #endif
 
 /** @addtogroup ModuleMgr Module Manager Library */
-/*@{*/
+/**@{*/
 
 #define PSP_MEMORY_PARTITION_KERNEL 1
 #define PSP_MEMORY_PARTITION_USER 2
@@ -217,7 +217,7 @@ int sceKernelGetModuleIdList(SceUID *readbuf, int readbufsize, int *idcount);
  */
 int sceKernelGetModuleIdByAddress(const void *moduleAddr);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

@@ -19,7 +19,7 @@
   */
 
 /** @addtogroup IntrManKern Interrupt Manager Kernel */
-/*@{*/
+/**@{*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -76,6 +76,6 @@ int sceKernelIsIntrContext(void);
 }
 #endif
 
-/*@}*/
+/**@}*/
 
 #endif /* PSPINTRMAN_KERNEL_H */

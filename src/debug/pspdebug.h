@@ -23,7 +23,7 @@ extern "C" {
 /** @defgroup Debug Debug Utility Library */
 
 /** @addtogroup Debug */
-/*@{*/
+/**@{*/
 
 /** 
   * Initialise the debug screen
@@ -433,7 +433,7 @@ void pspDebugSioEnableKprintf(void);
  */
 void pspDebugSioDisableKprintf(void);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

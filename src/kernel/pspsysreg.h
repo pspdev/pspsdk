@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Sysreg Interface to the sceSysreg_driver library. */
-/*@{*/
+/**@{*/
 
 /**
   * Enable the ME reset.
@@ -74,7 +74,7 @@ int sceSysregMeBusClockDisable(void);
  */
 int sceSysconGetTachyonVersion( int* version );
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

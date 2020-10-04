@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 /** @addtogroup IdStorage Interface to the sceIdStorage_driver library.*/
-/*@{*/
+/**@{*/
 
 /**Retrieves the value associated with a key
  * @param key    - idstorage key
@@ -50,7 +50,7 @@ int sceIdStorageIsReadOnly(void);
 /** sceIdStorageFlush() - Finalizes a write */
 int sceIdStorageFlush(void);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

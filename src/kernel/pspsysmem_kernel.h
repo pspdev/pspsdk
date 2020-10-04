@@ -24,7 +24,7 @@
   */
 
 /** @addtogroup SysMemKern System Memory Manager Kernel */
-/*@{*/
+/**@{*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -219,6 +219,6 @@ int sceKernelGetCompiledSdkVersion(void);
 }
 #endif
 
-/*@}*/
+/**@}*/
 
 #endif /* PSPSYSMEMKERNEL_H */

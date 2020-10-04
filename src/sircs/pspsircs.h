@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 /** @addtogroup Sony Integrated Remote Control System Library */
-/*@{*/
+/**@{*/
 
 struct sircs_data {
 	u8 type; // 12, 15 or 20 bits
@@ -36,7 +36,7 @@ struct sircs_data {
   */
 int sceSircsSend(struct sircs_data* sd, int count); 
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }
