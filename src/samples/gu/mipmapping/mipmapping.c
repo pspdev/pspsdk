@@ -122,9 +122,11 @@ int main(int argc, char* argv[])
 		// setup texture
 		sceGuTexMode(GU_PSM_8888,2, 0, 0);
 		sceGuTexFunc(GU_TFX_MODULATE, GU_TCC_RGBA); 
-		sceGuTexLevelMode(GU_TEXTURE_AUTO, 0); 
-		sceGuTexFilter(GU_LINEAR_MIPMAP_LINEAR, GU_LINEAR); //Set your filters according to what you want
+		sceGuTexLevelMode(GU_TEXTURE_AUTO, 0);
+		//Set your filters according to what you want
+		sceGuTexFilter(GU_LINEAR_MIPMAP_LINEAR, GU_LINEAR);
 
+		//Set three textures for MIP Mapping
 		sceGuTexImage(0,128,128,128,mip0_start);
 		sceGuTexImage(1,64,64,64,mip1_start);
 		sceGuTexImage(2,32,32,32,mip2_start);
