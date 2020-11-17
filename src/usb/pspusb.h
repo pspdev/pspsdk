@@ -37,8 +37,8 @@ int sceUsbStart(const char* driverName, int size, void *args);
   * Stop a USB driver.
   * 
   * @param driverName - name of the USB driver to stop
-  * @param size - Size of arguments to pass to USB driver start
-  * @param args - Arguments to pass to USB driver start
+  * @param size - Size of arguments to pass to USB driver stop
+  * @param args - Arguments to pass to USB driver stop
   *
   * @return 0 on success
   */
