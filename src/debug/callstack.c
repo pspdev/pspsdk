@@ -128,6 +128,10 @@ typedef int Bool;
 #define FALSE 0
 #endif
 
+// Defined by the linker, denotes the start and end of the .text section
+extern unsigned int _ftext;
+extern unsigned int _etext;
+
 extern unsigned int *pspGetReturnAddress();
 extern unsigned int *pspGetStackPointer();
 extern int main();
@@ -135,7 +139,7 @@ extern int main();
 int pspDebugGetStackTrace(unsigned int *results, int max)
 {
 	unsigned int *ra;
-	unsigned int *ra_limit;
+	unsigned int *ra_limit = &_etext;
 	unsigned int *sp;
 	unsigned int inst;
 	unsigned int mainCall;
@@ -164,7 +168,7 @@ int pspDebugGetStackTrace(unsigned int *results, int max)
 			const_upper = 0;
 			const_lower = 0;
 			rc->returnAddress = ra;
-			ra_limit = (unsigned int *) 0x200000;
+			ra_limit = &_etext;
 			ra_offset = 0;
 			sp_adjust = -1;
 
@@ -225,6 +229,7 @@ int pspDebugGetStackTrace(unsigned int *results, int max)
 			rc->raOffset = ra_offset;
 			rc->spAdjust = sp_adjust;
 		}
+
 		/* if something went wrong, punt */
 		if (rc->spAdjust <= 0)
 		{
@@ -235,7 +240,8 @@ int pspDebugGetStackTrace(unsigned int *results, int max)
 		ra = (unsigned int *) sp[rc->raOffset >> 2];
 		sp += rc->spAdjust >> 2;
 
-		if (ra == 0)
+		// Previously, this test was "if (ra == 0)", but in practice `ra` may be an unsafe value at this point, for whatever reason... In which case it doesn't make sense to go any further.
+		if (((unsigned int) ra) < 8 || &ra[-2] < &_ftext || ra >= ra_limit)
 		{
 			*results++ = 0;
 			break;
