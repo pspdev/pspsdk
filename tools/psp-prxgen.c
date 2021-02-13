@@ -419,7 +419,7 @@ int remove_weak_relocs(struct ElfSection *pReloc, struct ElfSection *pSymbol, st
 			}
 
 			/* Remove PC16 relocations (unsupported by PSP, and useless) */
-			if(LH(pSymData[iSymbol].st_shndx) == 0 || ELF32_R_TYPE(LW(pInRel->r_info)) == R_MIPS_PC16)
+			if(LH(pSymData[iSymbol].st_shndx) == 0 || ELF32_R_TYPE(LW(pInRel->r_info)) == R_MIPS_PC16 || ELF32_R_TYPE(LW(pInRel->r_info)) == R_MIPS_GPREL16)
 			{
 				if(g_verbose)
 				{
