@@ -72,7 +72,7 @@ int sceSysregMeBusClockDisable(void);
  * Get the PSP's Tachyon version.
  * @param version - A pointer to an int to receive the Tachyon version into
  */
-int sceSysconGetTachyonVersion( int* version );
+int sceSysregGetTachyonVersion( int* version );
 
 /**@}*/
 
