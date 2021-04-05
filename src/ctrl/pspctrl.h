@@ -113,12 +113,12 @@ typedef struct SceCtrlData {
  *    • [press]: The button is currently in the 'pressed' state.\n 
  *    • [break]: The button has just been released with its prior state being the 'pressed' state. Transition from
  *      'pressed' state to 'release' state.\n 
- *    • [release]: The button is currently in the 'released' state.\n 
+ *    • [release]: The button is currently in the 'released' state.
  * 
  * It is possible for a button to (briefly) be in two states at the same time. Valid combinations are as follows:
  * 
  *    • [make] & [press]\n 
- *    • [break] & [release]\n    
+ *    • [break] & [release]    
  * 
  * In other words, if a button is in the [make] state, then it is also in the [press] state. However, this is not the case
  * for the inverse. A button in the [press] state does not need to be in the [make] state.
