@@ -249,22 +249,22 @@ int sceCtrlPeekLatch(SceCtrlLatch *latch_data);
  *     // Obtain latch data
  *     sceCtrlReadLatch(&latchData);
  * 
- *     if (latchData.buttonMake & SCE_CTRL_CROSS)
+ *     if (latchData.buttonMake & PSP_CTRL_CROSS)
  *     {
  *         // The Cross button has just been pressed (transition from 'released' state to 'pressed' state)
  *     }
  * 
- *     if (latchData.buttonPress & SCE_CTRL_SQUARE)
+ *     if (latchData.buttonPress & PSP_CTRL_SQUARE)
  *     {
  *         // The Square button is currently in the 'pressed' state
  *     }
  * 
- *    if (latchData.buttonBreak & SCE_CTRL_TRIANGLE)
+ *    if (latchData.buttonBreak & PSP_CTRL_TRIANGLE)
  *    {
- *        // The Trangle button has just been released (transition from 'pressed' state to 'released' state)
+ *        // The Triangle button has just been released (transition from 'pressed' state to 'released' state)
  *    }
  * 
- *    if (latchData.buttonRelease & SCE_CTRL_CIRCLE)
+ *    if (latchData.buttonRelease & PSP_CTRL_CIRCLE)
  *    {
  *        // The Circle button is currently in the 'released' state
  *    }
