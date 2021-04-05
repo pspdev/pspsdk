@@ -109,22 +109,22 @@ typedef struct SceCtrlData {
  * states for each button:
  *
  *    • [make]: The button has just been pressed with its prior state being the released state. Transition from
- *      'released' state to 'pressed' state.
- *    • [press]: The button is currently in the 'pressed' state.
+ *      'released' state to 'pressed' state.\n 
+ *    • [press]: The button is currently in the 'pressed' state.\n 
  *    • [break]: The button has just been released with its prior state being the 'pressed' state. Transition from
- *      'pressed' state to 'release' state.
+ *      'pressed' state to 'release' state.\n 
  *    • [release]: The button is currently in the 'released' state.
  * 
  * It is possible for a button to (briefly) be in two states at the same time. Valid combinations are as follows:
  * 
- *    • [make] & [press] 
- *    • [break] & [release]   
+ *    • [make] & [press]\n 
+ *    • [break] & [release]
  * 
  * In other words, if a button is in the [make] state, then it is also in the [press] state. However, this is not the case
  * for the inverse. A button in the [press] state does not need to be in the [make] state.
  * 
  * These comparison results are stored internally as latch data and can be retrieved using the APIs ::sceCtrlPeekLatch() and 
- * ::sceCtrlReadLatch(). ::SceCtrlPadButtons can be used to find out the state of each button.
+ * ::sceCtrlReadLatch(). ::PspCtrlButtons can be used to find out the state of each button.
  * 
  * @remark The same can be accomplished by using the different sceCtrl[Read/Peek]Buffer[Positive/Negative]() APIs
  * and comparing the currently collected button sampling data with the previously collected one.
