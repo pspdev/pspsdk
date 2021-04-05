@@ -124,7 +124,7 @@ typedef struct SceCtrlData {
  * for the inverse. A button in the [press] state does not need to be in the [make] state.
  * 
  * These comparison results are stored internally as latch data and can be retrieved using the APIs ::sceCtrlPeekLatch() and 
- * ::sceCtrlReadLatch(). ::SceCtrlPadButtons can be used to find out the state of each button.
+ * ::sceCtrlReadLatch(). ::PspCtrlButtons can be used to find out the state of each button.
  * 
  * @remark The same can be accomplished by using the different sceCtrl[Read/Peek]Buffer[Positive/Negative]() APIs
  * and comparing the currently collected button sampling data with the previously collected one.
