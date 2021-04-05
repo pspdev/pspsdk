@@ -118,7 +118,7 @@ typedef struct SceCtrlData {
  * It is possible for a button to (briefly) be in two states at the same time. Valid combinations are as follows:
  * 
  *    • [make] & [press]\n 
- *    • [break] & [release]    
+ *    • [break] & [release]
  * 
  * In other words, if a button is in the [make] state, then it is also in the [press] state. However, this is not the case
  * for the inverse. A button in the [press] state does not need to be in the [make] state.
