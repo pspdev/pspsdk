@@ -81,7 +81,7 @@ enum PspCtrlButtons
 /** Controller mode. */
 enum PspCtrlMode
 {
-	/* Digitial. */
+	/* Digital. */
 	PSP_CTRL_MODE_DIGITAL = 0,
 	/* Analog. */
 	PSP_CTRL_MODE_ANALOG
@@ -164,7 +164,8 @@ int sceCtrlGetSamplingCycle(int *pcycle);
 /**
  * Set the controller mode.
  *
- * @param mode - One of ::PspCtrlMode.
+ * @param mode - One of ::PspCtrlMode. If this is PSP_CTRL_MODE_DIGITAL, no data about the analog stick 
+ * will be present in the SceCtrlData struct read by SceCtrlReadBuffer.
  *
  * @return The previous mode.
  */
