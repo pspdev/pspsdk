@@ -14,4 +14,8 @@ buildmak_DATA = build.mak prxspecs
 buildmakprxdir = @PSPSDK_LIBDIR@
 buildmakprx_DATA = build_prx.mak linkfile.prx
 
-EXTRA_DIST = build.mak prxspecs build_prx.mak linkfile.prx
+## Install the cmake toolchain config to $PSPDEV/share
+buildmakcmakedir = @PSPDEV_SHAREDIR@
+buildmakcmake_DATA = pspdev.cmake
+
+EXTRA_DIST = build.mak prxspecs build_prx.mak linkfile.prx pspdev.cmake
