@@ -19,7 +19,7 @@
 #define PSP_O_WRONLY	0x0002
 #define PSP_O_RDWR	(PSP_O_RDONLY | PSP_O_WRONLY)
 #define PSP_O_NBLOCK	0x0004
-#define PSP_O_DIROPEN	0x0008	// Internal use for dopen
+#define PSP_O_DIR 	0x0008
 #define PSP_O_APPEND	0x0100
 #define PSP_O_CREAT	0x0200
 #define PSP_O_TRUNC	0x0400
