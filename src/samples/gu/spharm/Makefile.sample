@@ -2,7 +2,7 @@ TARGET = spharm
 OBJS = cube.o spharm.o disablefpu.o mt19937.o logo.o logo2.o logo3.o
 
 INCDIR =
-CFLAGS = -G0 -Wall -fno-exceptions
+CFLAGS = -Wall -fno-exceptions
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 

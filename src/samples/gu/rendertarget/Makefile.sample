@@ -2,7 +2,7 @@ TARGET = rendertarget
 OBJS = rendertarget.o
 
 INCDIR =
-CFLAGS = -G0 -Wall
+CFLAGS = -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 

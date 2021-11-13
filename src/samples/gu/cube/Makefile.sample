@@ -2,7 +2,7 @@ TARGET = cube
 OBJS = cube.o logo.o ../common/callbacks.o ../common/vram.o
 
 INCDIR =
-CFLAGS = -G0 -Wall
+CFLAGS = -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 

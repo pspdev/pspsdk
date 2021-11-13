@@ -22,6 +22,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/unistd.h>
+#include <sys/param.h>
 
 PSP_MODULE_INFO("CwdTest", 0, 1, 1);
 

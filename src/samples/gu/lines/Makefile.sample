@@ -2,7 +2,7 @@ TARGET = lines
 OBJS = lines.o ../common/callbacks.o ../common/vram.o
 
 INCDIR =
-CFLAGS = -G0 -Wall -O2
+CFLAGS = -Wall -O2
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 

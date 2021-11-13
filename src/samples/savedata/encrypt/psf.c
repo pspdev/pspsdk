@@ -75,7 +75,7 @@ int find_psf_section(const char *name,
 		    && (sectBufLen < dataLen) && (sectBufLoc < dataLen))
                 {
                         /* Check if this is the section we want */
-                        if (!stricmp((char *)&data[strLoc + nameLoc], name))
+                        if (!strcasecmp((char *)&data[strLoc + nameLoc], name))
                         {
                                 /* Update the location and size */
                                 *location = &data[headLen + sectBufLoc];
