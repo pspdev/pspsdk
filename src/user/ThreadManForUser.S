@@ -386,3 +386,6 @@
 #ifdef F_ThreadManForUser_0127
 	IMPORT_FUNC "ThreadManForUser",0x60107536,sceKernelDeleteLwMutex
 #endif
+#ifdef F_ThreadManForUser_0128
+	IMPORT_FUNC "ThreadManForUser",0x19CFF145,sceKernelCreateLwMutex
+#endif
