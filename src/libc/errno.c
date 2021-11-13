@@ -3,18 +3,24 @@
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
- * unistd.h
+ * init.c - The global init/deinit code for our crt0.
  *
- * Copyright (c) 2002-2004 PS2DEV
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
  */
 
-#ifndef __UNISTD_H__
-#define __UNISTD_H__
-
 #include <stdio.h>
+#include <errno.h>
 
+#ifdef F___set_errno
+int __set_errno(int code)
+{
+	if ((code & 0x80010000) == 0x80010000) {
+		errno = code & 0xFFFF;
+		return -1;
+	}
+	return code;
+}
 #endif

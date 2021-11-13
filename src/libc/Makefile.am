@@ -2,72 +2,119 @@
 libdir = @PSPSDK_LIBDIR@
 
 CC = @PSP_CC@
-CXX = @PSP_CXX@
 CCAS = $(CC)
 AR = @PSP_AR@
 RANLIB = @PSP_RANLIB@
 
-CPPFLAGS = -I$(top_srcdir)/src/libc/include -I$(top_srcdir)/src/base -I$(top_srcdir)/src/kernel -I$(top_srcdir)/src/user -I$(top_srcdir)/src/debug
+CPPFLAGS = -I$(top_srcdir)/src/base \
+	-I$(top_srcdir)/src/debug \
+	-I$(top_srcdir)/src/kernel \
+	-I$(top_srcdir)/src/net \
+	-I$(top_srcdir)/src/sdk \
+	-I$(top_srcdir)/src/user \
+	-I$(top_srcdir)/src/utility
 CFLAGS = @PSPSDK_CFLAGS@
-CXXFLAGS = @PSPSDK_CXXFLAGS@
 CCASFLAGS = $(CFLAGS)
 
-EXTRA_DIST = LIB.status
+CWD_OBJS = __cwd.o getcwd.o __path_absolute.o __init_cwd.o
+
+ERRNO_OBJS = __set_errno.o
+
+FDMAN_OBJS = __descriptor_data_pool.o __descriptormap.o __fdman_init.o __fdman_get_new_descriptor.o __fdman_get_dup_descriptor.o \
+	__fdman_release_descriptor.o
+
+GLUE_OBJS = __fill_stat.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o _open.o _close.o _read.o _write.o _fstat.o \
+	_stat.o lstat.o access.o _fcntl.o  _lseek.o chdir.o mkdir.o rmdir.o getdents.o _seekdir.o _link.o _unlink.o \
+	_rename.o getcwd.o _getpid.o _kill.o _sbrk.o _gettimeofday.o _times.o _internal_malloc_lock.o _internal_malloc_unlock.o \
+	_isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o readlink.o utime.o fchown.o getentropy.o
+
+
+INIT_OBJS = __psp_libc_init.o
+
+MUTEXMAN_OBJS = __malloc_mutex.o __sbrk_mutex.o __fdman_mutex.o __init_mutex.o
+
+NETDB_OBJS = h_errno.o gethostbyaddr.o gethostbyname.o
+
+PIPE_OBJS = __pipe_peekmsgsize.o pipe.o __pipe_close.o __pipe_nonblocking_read.o __pipe_read.o __pipe_write.o \
+	__pipe_nonblocking_write.o
+
+SELECT_OBJS = select.o
+
+SLEEP_OBJS = nanosleep.o
+
+SOCKET_OBJS = socket.o __socket_close.o accept.o bind.o connect.o getsockopt.o listen.o recv.o recvfrom.o send.o sendto.o \
+	setsockopt.o shutdown.o getpeername.o getsockname.o inet_ntoa.o sendmsg.o recvmsg.o
+
+TERMINATE_OBJS = _exit.o abort.o exit.o
+
+TIMEZONE_OBJS = __timezone_update.o
 
 lib_LIBRARIES = libpsplibc.a
 
-## libpsplibc.a sources.
-CORE_SOURCES = terminate.c setjmp.S qsort.c init.c cxx.cpp
-MULT_SOURCES = xprintf.c alloc.c string.c stdio.c stdlib.c libcglue.c
+netdb_nobase_includedir = @PSPSDK_INCLUDEDIR@
+netdb_nobase_include_HEADERS = netdb.h
 
-ALLOC_OBJS = malloc.o realloc.o calloc.o memalign.o free.o __builtin_alloc.o __alloc_internals.o __mem_walk.o
+netinet_nobase_includedir = @PSPSDK_INCLUDEDIR@/netinet
+netinet_nobase_include_HEADERS = netinet/in.h netinet/tcp.h
 
-STRING_C_OBJS = strdup.o strcasecmp.o strncasecmp.o strtok.o strrchr.o strstr.o \
-	strupr.o strlwr.o _sjis_internals.o strcpy_ascii.o strcpy_sjis.o \
-	strpbrk.o strspn.o strcspn.o memchr.o memcmp.o memcpy.o memmove.o \
-	memset.o strcat.o strchr.o strcmp.o strcpy.o strlen.o strncat.o strncmp.o strncpy.o \
-	tolower.o toupper.o isupper.o islower.o isalpha.o isdigit.o isalnum.o iscntrl.o \
-	isgraph.o isprint.o ispunct.o isspace.o isxdigit.o
+arpa_nobase_includedir = @PSPSDK_INCLUDEDIR@/arpa
+arpa_nobase_include_HEADERS = arpa/inet.h
 
-XPRINTF_OBJS = vxprintf.o _xprintf.o __sout.o vsnprintf.o snprintf.o vsprintf.o sprintf.o \
-	__mout.o mprintf.o vmprintf.o __fout.o fprintf.o vfprintf.o printf.o vprintf.o putchar.o \
-	asprintf.o vasprintf.o 
+sys_nobase_includedir = @PSPSDK_INCLUDEDIR@/sys
+sys_nobase_include_HEADERS = sys/socket.h sys/ioctl.h
 
-STDIO_OBJS = clearerr.o fclose.o fcloseall.o feof.o ferror.o fflush.o fflushall.o fgetc.o \
-	fgetpos.o fgets.o fopen.o fputc.o fputs.o fread.o fseek.o fsetpos.o ftell.o fwrite.o fileno.o \
-	getc.o getchar.o getfdtype.o gets.o perror.o putc.o puts.o remove.o rename.o fdopen.o \
-	rewind.o skipatoi.o sscanf.o _stdio.o tmpfile.o tmpnam.o ungetc.o updatestdoutxy.o strerror.o \
-	__stdio_internals.o 
+libpsplibc_a_SOURCES = \
+	cwd.o \
+	errno.o \
+	fdman.c \
+	glue.c \
+	init.c \
+	netdb.c \
+	pipe.c \
+	select.c \
+	sleep.c \
+	socket.c \
+	terminate.c \
+	timezone.c
 
-STDLIB_OBJS = abs.o atexit.o atof.o bsearch.o div.o exit.o getenv.o _itoa.o labs.o \
-	ldiv.o llabs.o lldiv.o _lltoa.o _ltoa.o rand.o setenv.o srand.o \
-	strtod.o strtol.o strtoul.o __assert_fail.o \
-	__stdlib_internals.o 
+libpsplibc_a_LIBADD  = $(CWD_OBJS) $(ERRNO_OBJS) $(FDMAN_OBJS) $(INIT_OBJS) $(GLUE_OBJS) $(MUTEXMAN_OBJS) $(NETDB_OBJS) $(PIPE_OBJS) \
+	$(SELECT_OBJS) $(SOCKET_OBJS) $(SLEEP_OBJS) $(TERMINATE_OBJS) $(TIMEZONE_OBJS)
 
-## Use a few functions from libpspglue.a.
-GLUE_OBJS = glue__exit.o glue__sbrk.o glue_clock.o glue_gettimeofday.o glue_time.o glue___errno.o
+$(CWD_OBJS): cwd.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-MULT_OBJS = $(XPRINTF_OBJS) $(ALLOC_OBJS) $(STRING_C_OBJS) $(STDIO_OBJS) $(STDLIB_OBJS) $(GLUE_OBJS)
+$(ERRNO_OBJS): errno.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-libpsplibcincludedir = @PSPSDK_INCLUDEDIR@/libc
-libpsplibcinclude_HEADERS = assert.h ctype.h malloc.h stdio.h stdlib.h string.h time.h unistd.h 
-libpsplibc_a_SOURCES = $(CORE_SOURCES) $(MULT_SOURCES)
-libpsplibc_a_LIBADD  = $(MULT_OBJS)
+$(FDMAN_OBJS): fdman.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-$(XPRINTF_OBJS): xprintf.c
-	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+$(INIT_OBJS): init.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-$(ALLOC_OBJS): alloc.c
-	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+$(GLUE_OBJS): glue.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-$(STRING_C_OBJS): string.c
-	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+$(MUTEXMAN_OBJS): mutexman.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-$(STDIO_OBJS): stdio.c
-	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+$(NETDB_OBJS): netdb.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-$(STDLIB_OBJS): stdlib.c
-	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+$(PIPE_OBJS): pipe.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-$(GLUE_OBJS): libcglue.c
-	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+$(SELECT_OBJS): select.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
+
+$(SLEEP_OBJS): sleep.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
+
+$(SOCKET_OBJS): socket.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
+
+$(TERMINATE_OBJS): terminate.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
+
+$(TIMEZONE_OBJS): timezone.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@

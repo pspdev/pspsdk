@@ -14,18 +14,47 @@
 #include <psptypes.h>
 #include <pspkernel.h>
 
-extern void _exit(int code);
+#ifdef F__exit
+extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
 
+int __psp_free_heap(void);
+
+void _exit(int status)
+{
+	if (&sce_newlib_nocreate_thread_in_start != NULL) {
+		/* Free the heap created by _sbrk(). */
+		__psp_free_heap();
+
+		sceKernelSelfStopUnloadModule(1, 0, NULL);
+	} else {
+		if (status == 0) {
+			/* Free the heap created by _sbrk(). */
+			__psp_free_heap();
+		}
+
+		sceKernelExitThread(status);
+	}
+
+	while (1) ;
+}
+#else
+void _exit(int status);
+#endif
+
+#ifdef F_abort
 __attribute__((weak))
 void abort()
 {
 	while (1)
 		_exit(1);
 }
+#endif
 
+#ifdef F_exit
 __attribute__((weak))
-void _Exit(int retval)
+void exit(int retval)
 {
 	while (1)
 		_exit(retval);
 }
+#endif

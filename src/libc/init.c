@@ -10,25 +10,38 @@
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
  */
-void _pspsdk_alloc_init();
-void _pspsdk_alloc_deinit();
-void _pspsdk_stdio_init();
-void _pspsdk_stdio_deinit();
-void _pspsdk_stdlib_init();
-void _pspsdk_stdlib_deinit();
 
-__attribute__((weak, constructor))
-void _pspsdk_libc_init()
-{
-    _pspsdk_alloc_init();
-    _pspsdk_stdio_init();
-    _pspsdk_stdlib_init();
-}
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/param.h>
 
-__attribute__((weak, destructor))
-void _pspsdk_libc_deinit()
+void __init_cwd(char *argv_0);
+void __timezone_update();
+void __fdman_init();
+void __init_mutex();
+
+#ifdef F___psp_libc_init
+/* Note: This function is being called from crt0.c/crt0_prx.c.
+* It is a weak function because can be override by user program, 
+* saving a lot of space in your binary, however you will loose
+  all the basic libc operation
+*/
+__attribute__((weak))
+void __psp_libc_init(int argc, char *argv[])
 {
-    _pspsdk_stdlib_deinit();
-    _pspsdk_stdio_deinit();
-    _pspsdk_alloc_deinit();
+    (void) argc;
+
+    /* Initialize mutex used in malloc and fdman */
+    __init_mutex();
+
+	/* Initialize filedescriptor management */
+	__fdman_init();
+
+	/* Initialize cwd from this program's path */
+	__init_cwd(argv[0]);
+
+	/* Initialize timezone */
+	__timezone_update();
 }
+#endif
