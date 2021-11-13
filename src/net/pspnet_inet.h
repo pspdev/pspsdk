@@ -19,7 +19,9 @@ extern "C" {
 #endif
 
 int sceNetInetInit(void);
+int sceNetInetSelect(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 int sceNetInetTerm(void);
+int sceNetInetGetErrno(void);
 
 /* The real sceNetInet socket prototypes are in <sys/socket.h>. */
 #ifdef DOXYGEN
