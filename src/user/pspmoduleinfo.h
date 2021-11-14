@@ -146,6 +146,6 @@ enum PspModuleInfoAttr
 
 /* Disable the use of newlib, getting a minimal binary. */
 #define PSP_DISABLE_NEWLIB() \
-	void __psp_libc_init(int argc, char *argv[]) {}
+	void __libcglue_init(int argc, char *argv[]) {}
 
 #endif /* PSPMODULEINFO_H */

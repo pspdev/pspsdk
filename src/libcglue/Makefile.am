@@ -29,7 +29,7 @@ GLUE_OBJS = __fill_stat.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o
 	_isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o readlink.o utime.o fchown.o getentropy.o
 
 
-INIT_OBJS = __psp_libc_init.o
+INIT_OBJS = __libcglue_init.o
 
 MUTEXMAN_OBJS = __malloc_mutex.o __sbrk_mutex.o __fdman_mutex.o __init_mutex.o
 
@@ -49,7 +49,7 @@ TERMINATE_OBJS = _exit.o abort.o exit.o
 
 TIMEZONE_OBJS = __timezone_update.o
 
-lib_LIBRARIES = libpsplibc.a
+lib_LIBRARIES = libcglue.a
 
 netdb_nobase_includedir = @PSPSDK_INCLUDEDIR@
 netdb_nobase_include_HEADERS = netdb.h
@@ -63,7 +63,7 @@ arpa_nobase_include_HEADERS = arpa/inet.h
 sys_nobase_includedir = @PSPSDK_INCLUDEDIR@/sys
 sys_nobase_include_HEADERS = sys/socket.h sys/ioctl.h
 
-libpsplibc_a_SOURCES = \
+libcglue_a_SOURCES = \
 	cwd.o \
 	errno.o \
 	fdman.c \
@@ -77,7 +77,7 @@ libpsplibc_a_SOURCES = \
 	terminate.c \
 	timezone.c
 
-libpsplibc_a_LIBADD  = $(CWD_OBJS) $(ERRNO_OBJS) $(FDMAN_OBJS) $(INIT_OBJS) $(GLUE_OBJS) $(MUTEXMAN_OBJS) $(NETDB_OBJS) $(PIPE_OBJS) \
+libcglue_a_LIBADD  = $(CWD_OBJS) $(ERRNO_OBJS) $(FDMAN_OBJS) $(INIT_OBJS) $(GLUE_OBJS) $(MUTEXMAN_OBJS) $(NETDB_OBJS) $(PIPE_OBJS) \
 	$(SELECT_OBJS) $(SOCKET_OBJS) $(SLEEP_OBJS) $(TERMINATE_OBJS) $(TIMEZONE_OBJS)
 
 $(CWD_OBJS): cwd.c

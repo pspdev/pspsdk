@@ -22,9 +22,7 @@ See the LICENSE files for more information.
 * Stub libraries and headers for interfacing with the PSP operating system,
   ranging from threading libraries, file io, display driver and wifi networking.
 * Basic runtime support (crt0) for executables and libraries.
-* A minimal port of the Standard C Library (libc) is included. PSPSDK's
-  mini-libc provides portable memory allocation, string formatting, and several
-  other Standard C Library functions.
+* A libcglue library for fulfill newlib system call requirements.
 * Support code for linking with the full Standard C Library provided with the
   PSPDEV toolchain.
 * An implementation of the libGU graphics library. libGU provides an interface

@@ -21,14 +21,14 @@ void __timezone_update();
 void __fdman_init();
 void __init_mutex();
 
-#ifdef F___psp_libc_init
+#ifdef F___libcglue_init
 /* Note: This function is being called from crt0.c/crt0_prx.c.
 * It is a weak function because can be override by user program, 
 * saving a lot of space in your binary, however you will loose
   all the basic libc operation
 */
 __attribute__((weak))
-void __psp_libc_init(int argc, char *argv[])
+void __libcglue_init(int argc, char *argv[])
 {
     (void) argc;
 

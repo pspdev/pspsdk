@@ -3,7 +3,7 @@
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
- * timezon.c - Set proper timezone needed by newlib.
+ * timezone.c - Set proper timezone needed by newlib.
  *
  * Copyright (c) 2021 Francisco Javier Trujillo Mata <fjtrujy@gmail.com>
  *

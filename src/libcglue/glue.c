@@ -3,7 +3,7 @@
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
- * libcglue.c - Newlib-compatible system calls.
+ * glue.c - Newlib-compatible system calls.
  *
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
