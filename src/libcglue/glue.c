@@ -36,6 +36,7 @@
 #include <pspthreadman.h>
 #include <psputils.h>
 #include <pspsdk.h>
+#include <psprtc.h>
 
 #include "fdman.h"
 
@@ -617,13 +618,6 @@ int _rename(const char *old, const char *new)
 }
 #endif
 
-#ifdef F_getcwd
-char *getcwd(char *buf, size_t len) {
-	strncpy(buf, __cwd, len);
-	return buf;
-}
-#endif
-
 #ifdef F__getpid
 pid_t _getpid(void)
 {
@@ -642,7 +636,7 @@ int _kill(pid_t pid, int sig)
 pid_t _fork(void)
 {
 	errno = ENOSYS;
-	return (pid_t) -1;
+	return (pid_t) -1; /* not supported */
 }
 #endif
 
@@ -650,7 +644,7 @@ pid_t _fork(void)
 pid_t _wait(int *unused)
 {
 	errno = ENOSYS;
-	return (pid_t) -1;
+	return (pid_t) -1; /* not supported */
 }
 #endif
 
@@ -786,45 +780,62 @@ int truncate(const char *path, off_t length)
 int _isatty(int fd)
 {
 	errno = ENOTTY;
-	return 0;
+	return -1; /* not supported */
 }
 #endif
 
 #ifdef F_chmod
 int chmod(const char *pathname, mode_t mode)
 {
-	// TODO: Implement proper functionality
-    return 0;
+	SceIoStat psp_stat;
+	char dest[MAXNAMLEN + 1];
+	int ret;
+
+	if(__path_absolute(pathname, dest, MAXNAMLEN) < 0) {
+		errno = ENAMETOOLONG;
+		return -1;
+	}
+
+	ret = sceIoGetstat(dest, &psp_stat);
+	if (ret < 0) {
+		return __set_errno(ret);
+	}
+
+	psp_stat.st_mode = (SceMode)mode;
+	ret = sceIoChstat(dest, &psp_stat, 0x0001);
+	if (ret < 0) {
+		return __set_errno(ret);
+	}
+    
+	return 0;
 }
 #endif
 
 #ifdef F_fchmod
-int fchmod(int filedes, mode_t mode)
+int fchmod(int fd, mode_t mode)
 {
-	// TODO: Implement proper functionality
-    return 0;
+	return chmod(__descriptormap[fd]->filename, mode);
 }
 #endif
 
 #ifdef F_fchmodat
 int fchmodat(int fd, const char *path, mode_t mode, int flag)
 {
-	// TODO: Implement proper functionality
-    return 0;
+	return chmod(path, mode);
 }
 #endif
 
 #ifdef F_pathconf
 long int pathconf(const char *path, int name) {
-	// TODO: Implement proper functionality
-    return 0;
+	errno = ENOSYS;
+	return -1; /* not supported */
 }
 #endif
 
 #ifdef F_readlink
 ssize_t readlink(const char *path, char *buf, size_t bufsiz) {
-	// TODO: Implement proper functionality
-    return 0;
+	errno = ENOSYS;
+	return -1; /* not supported */
 }
 #endif
 
@@ -834,18 +845,46 @@ struct utimbuf {
   time_t  modtime;  /* Modification time */
 };
 
-int utime(const char *path, const struct utimbuf *times)
+int utime(const char *pathname, const struct utimbuf *times)
 {
-	// TODO: Implement proper functionality
-    return 0;
+	SceIoStat psp_stat;
+	char dest[MAXNAMLEN + 1];
+	int ret;
+
+	if(__path_absolute(pathname, dest, MAXNAMLEN) < 0) {
+		errno = ENAMETOOLONG;
+		return -1;
+	}
+
+	ret = sceIoGetstat(dest, &psp_stat);
+	if (ret < 0) {
+		return __set_errno(ret);
+	}
+
+	ret = sceRtcSetTime_t((pspTime *)&psp_stat.sce_st_atime, times->actime);
+	if (ret < 0) {
+		return __set_errno(ret);
+	}
+
+	ret = sceRtcSetTime_t((pspTime *)&psp_stat.sce_st_mtime, times->modtime);
+	if (ret < 0) {
+		return __set_errno(ret);
+	}
+
+	ret = sceIoChstat(dest, &psp_stat, 0x0030);
+	if (ret < 0) {
+		return __set_errno(ret);
+	}
+    
+	return 0;
 }
 #endif
 
 #ifdef F_fchown
 int fchown(int fd, uid_t owner, gid_t group)
 {
-	// TODO: Implement proper functionality
-    return 0;
+	errno = ENOSYS;
+	return -1; /* not supported */
 }
 #endif
 

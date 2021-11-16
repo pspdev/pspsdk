@@ -8,7 +8,7 @@ ASFLAGS = $(CFLAGS)
 
 LIBDIR = 
 LDFLAGS = 
-LIBS = -lpspaudiolib -lpspaudio -lm
+LIBS = -lpspaudiolib -lpspaudio
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Audiolib Wave Generator
