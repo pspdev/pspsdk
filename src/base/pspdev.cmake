@@ -27,6 +27,8 @@ include_directories(${PSPDEV}/psp/include ${PSPDEV}/psp/sdk/include)
 link_directories( ${PSPDEV}/lib ${PSPDEV}/psp/lib ${PSPDEV}/psp/sdk/lib)
 
 add_definitions("-D__PSP__")
+add_definitions("-DPSP")
 SET(PLATFORM_PSP TRUE)
+SET(PSP TRUE)
 
 include("${PSPDEV}/psp/share/CreatePBP.cmake")
