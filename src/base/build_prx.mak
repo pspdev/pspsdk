@@ -20,50 +20,27 @@ AS       = psp-gcc
 LD       = psp-gcc
 FIXUP    = psp-fixup-imports
 
-# Add in PSPSDK includes and libraries.
-INCDIR   := $(INCDIR) . $(PSPSDK)/include
-LIBDIR   := $(LIBDIR) . $(PSPSDK)/lib
+# Add PSPSDK includes and libraries.
+INCDIR   := $(INCDIR) . $(PSPDEV)/psp/include $(PSPSDK)/include
+LIBDIR   := $(LIBDIR) . $(PSPDEV)/psp/lib $(PSPSDK)/lib
 
-CFLAGS   := $(addprefix -I,$(INCDIR)) $(CFLAGS)
+CFLAGS   := $(addprefix -I,$(INCDIR)) -G0 $(CFLAGS)
 CXXFLAGS := $(CFLAGS) $(CXXFLAGS)
 ASFLAGS  := $(CFLAGS) $(ASFLAGS)
 
-LDFLAGS  := $(addprefix -L,$(LIBDIR)) -Wl,-q,-T$(PSPSDK)/lib/linkfile.prx -nostartfiles $(LDFLAGS)
+LDFLAGS  := $(addprefix -L,$(LIBDIR)) -Wl,-q,-T$(PSPSDK)/lib/linkfile.prx -nostartfiles -Wl,-zmax-page-size=128 $(LDFLAGS)
+
+ifeq ($(USE_KERNEL_LIBS),1)
+LIBS := -nostdlib $(LIBS) -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspsdk -lpspkernel
+else 
+LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk
+endif
 
 ifeq ($(PSP_FW_VERSION),)
 PSP_FW_VERSION=150
 endif
 
 CFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
-
-# Library selection.  By default we link with Newlib's libc.  Allow the
-# user to link with PSPSDK's libc if USE_PSPSDK_LIBC is set to 1.
-
-ifeq ($(USE_KERNEL_LIBC),1)
-# Use the PSP's kernel libc
-PSPSDK_LIBC_LIB = 
-CFLAGS := -I$(PSPSDK)/include/libc $(CFLAGS)
-else
-ifeq ($(USE_PSPSDK_LIBC),1)
-# Use the pspsdk libc
-PSPSDK_LIBC_LIB = -lpsplibc
-CFLAGS := -I$(PSPSDK)/include/libc $(CFLAGS)
-else
-# Use newlib (urgh)
-PSPSDK_LIBC_LIB = -lc
-endif
-endif
-
-# Link with following default libraries.  Other libraries should be specified in the $(LIBS) variable.
-# TODO: This library list needs to be generated at configure time.
-
-ifeq ($(USE_KERNEL_LIBS),1)
-PSPSDK_LIBS = -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspsdk
-LIBS     := $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) -lpspkernel
-else
-PSPSDK_LIBS = -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk
-LIBS     := $(LIBS) $(PSPSDK_LIBS) $(PSPSDK_LIBC_LIB) -lpsputility -lpspuser -lpspkernel
-endif
 
 FINAL_TARGET = $(TARGET).prx
 

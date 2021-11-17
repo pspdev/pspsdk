@@ -64,7 +64,7 @@ int setupCallbacks(void) {
 const float PI = 3.1415926535897932f;
 const int sampleRate = 44100;
 float frequency = 440.0f;
-float time = 0;
+float currentTime = 0;
 int function = 0;
 
 typedef struct {
@@ -107,17 +107,17 @@ void audioCallback(void* buf, unsigned int length, void *userdata) {
 	int i;
 	
 	if (frequency != freq0) {
-	        time *= (freq0 / frequency);
+	        currentTime *= (freq0 / frequency);
 	}
 	for (i = 0; i < length; i++) {
-	        short s = (short) (scaleFactor * currentFunction(2.0f * PI * frequency * time));
+	        short s = (short) (scaleFactor * currentFunction(2.0f * PI * frequency * currentTime));
 		ubuf[i].l = s;
 		ubuf[i].r = s;
-		time += sampleLength;
+		currentTime += sampleLength;
 	}
-	if (time * frequency > 1.0f) {
+	if (currentTime * frequency > 1.0f) {
 	        double d;
-		time = modf(time * frequency, &d) / frequency;
+		currentTime = modf(currentTime * frequency, &d) / frequency;
 	}
 	freq0 = frequency;
 }

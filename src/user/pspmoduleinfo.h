@@ -137,11 +137,15 @@ enum PspModuleInfoAttr
 #define PSP_HEAP_SIZE_KB(size_kb) \
 	int sce_newlib_heap_kb_size = (size_kb)
 
-/* Declare to allocate maximum heap area */
-#define PSP_HEAP_SIZE_MAX() \
-	PSP_HEAP_SIZE_KB(-1)
+/* Declare the threshold of the heap (in KB) that the program wants to keep for external allocation. */
+#define PSP_HEAP_THRESHOLD_SIZE_KB(size_kb) \
+	int sce_newlib_heap_threshold_kb_size = (size_kb)
 
 /* Declare the name of the main thread */
 #define PSP_MAIN_THREAD_NAME(s) const char* sce_newlib_main_thread_name = (s)
+
+/* Disable the use of newlib, getting a minimal binary. */
+#define PSP_DISABLE_NEWLIB() \
+	void __libcglue_init(int argc, char *argv[]) {}
 
 #endif /* PSPMODULEINFO_H */

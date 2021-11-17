@@ -4,21 +4,66 @@ on:
   push:
     branches:
       - master
+    tags:
+      - v*
   repository_dispatch:
     types: [run_build]
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+  
     steps:
     - uses: actions/checkout@v2
 
-    - uses: docker/build-push-action@v1
+    - name: Extract DOCKER_TAG using tag name
+      if: startsWith(github.ref, 'refs/tags/')
+      run: |
+        echo "DOCKER_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+    
+    - name: Use default DOCKER_TAG
+      if: startsWith(github.ref, 'refs/tags/') != true
+      run: |
+        echo "DOCKER_TAG=latest" >> $GITHUB_ENV
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+      
+    - name: Login to Github registry
+      uses: docker/login-action@v1 
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ env.GITHUB_REPOSITORY }}
-        tags: latest
-        tag_with_ref: true
-        add_git_labels: true
+        username: ${{ github.actor }}
+        password:  ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io
+    
+    - uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: ghcr.io/${{ github.repository }}:${{ env.DOCKER_TAG }}
+        build-args: |
+          BASE_DOCKER_IMAGE=ghcr.io/${{ github.repository_owner }}/psptoolchain:${{ env.DOCKER_TAG }}
+    
+    - name: Send Compile action
+      run: |
+        export DISPATCH_ACTION="$(echo run_build)"
+        echo "NEW_DISPATCH_ACTION=$DISPATCH_ACTION" >> $GITHUB_ENV
+
+    - name: Repository Dispatch to psp-packages
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        repository: ${{ github.repository_owner }}/psp-packages
+        token: ${{ secrets.DISPATCH_TOKEN }}
+        event-type: ${{ env.NEW_DISPATCH_ACTION }}
+        client-payload: '{"ref": "${{ github.ref }}"}'
+    
+    - name: Repository Dispatch to psplinkusb
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        repository: ${{ github.repository_owner }}/psplinkusb
+        token: ${{ secrets.DISPATCH_TOKEN }}
+        event-type: ${{ env.NEW_DISPATCH_ACTION }}
+        client-payload: '{"ref": "${{ github.ref }}"}'

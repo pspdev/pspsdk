@@ -1,0 +1,88 @@
+SAMPLES = \
+	audio/polyphonic \
+	audio/wavegen \
+	controller/basic \
+	debug/exception \
+	debug/kprintf \
+	debug/prxdecrypt \
+	debug/profiler \
+	debug/debugkb \
+	debug/sio \
+	debug/gdb \
+	gu/beginobject \
+	gu/blend \
+	gu/blit \
+	gu/celshading \
+	gu/clut \
+	gu/copy \
+	gu/cube \
+	gu/envmap \
+	gu/integerdrawing \
+	gu/lights \
+	gu/lines \
+	gu/logic \
+	gu/morph \
+	gu/morphskin \
+	gu/ortho \
+	gu/reflection \
+	gu/rendertarget \
+	gu/shadowprojection \
+	gu/signals \
+	gu/skinning \
+	gu/speed \
+	gu/spharm \
+	gu/splinesurface \
+	gu/sprite \
+	gu/text \
+	gu/timing \
+	gu/vertex \
+	gu/zbufferfog \
+	ir/sircs \
+	ir/irda \
+	kernel/kdumper \
+	kernel/loadmodule \
+	kernel/threadstatus \
+	kernel/cwd \
+	kernel/fileio \
+	kernel/idstorage \
+	kernel/messagebox \
+	kernel/registry \
+	kernel/regenum \
+	kernel/systimer \
+	kernel/sysevent \
+	mp3 \
+	ms/callback \
+	nand/dumpipl \
+	net/simple \
+	net/simple_prx \
+	net/resolver \
+	net/wlanscan \
+	net/wlanscan_elf \
+	power \
+	prx/prx_loader \
+	prx/testprx \
+	savedata/utility \
+	savedata/decrypt \
+	savedata/encrypt \
+	template/elf_template \
+	template/prx_template \
+	template/lib_template \
+	template/kprx_template \
+	usb/storage \
+	utility/gamesharing \
+	utility/htmlviewer \
+	utility/netconf \
+	utility/netdialog \
+	utility/msgdialog \
+	utility/systemparam \
+	utility/osk \
+	me/basic \
+	wlan \
+	exceptions
+	
+
+all:
+	for sample in $(SAMPLES) ; do \
+		$(MAKE) -f Makefile.sample -C $$sample clean all || break; \
+	done
+

@@ -2,13 +2,13 @@ TARGET = blit
 OBJS = blit.o ../common/callbacks.o ../common/vram.o
 
 INCDIR =
-CFLAGS = -G0 -Wall -O2
+CFLAGS = -Wall -O2
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lpspgum -lpspgu -lpsprtc
+LIBS= -lpspgum -lpspgu
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Blit Sample

@@ -2,7 +2,7 @@ TARGET = resolver
 OBJS = main.o
 
 INCDIR = 
-CFLAGS = -O0 -G0 -Wall -g
+CFLAGS = -O0 -Wall -g
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 

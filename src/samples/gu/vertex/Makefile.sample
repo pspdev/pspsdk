@@ -2,13 +2,13 @@ TARGET = vertex
 OBJS = vertex.o ../common/callbacks.o ../common/vram.o ../common/menu.o
 
 INCDIR =
-CFLAGS = -G0 -Wall
+CFLAGS = -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lpspgum -lpspgu -lm -lpsprtc
+LIBS= -lpspgum -lpspgu
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Vertex Speed Sample

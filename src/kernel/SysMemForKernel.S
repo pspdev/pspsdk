@@ -217,3 +217,6 @@
 #ifdef F_SysMemForKernel_0070
 	IMPORT_FUNC	"SysMemForKernel",0xFC114573,sceKernelGetCompiledSdkVersion
 #endif
+#ifdef F_SysMemForKernel_0071
+	IMPORT_FUNC	"SysMemForKernel",0xA291F107,sceKernelMaxFreeMemSize
+#endif

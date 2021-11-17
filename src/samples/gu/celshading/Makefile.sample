@@ -2,13 +2,13 @@ TARGET = celshading
 OBJS = lightmap.o celshading.o ../common/callbacks.o
 
 INCDIR =
-CFLAGS = -G0 -Wall -O2
+CFLAGS = -Wall -O2
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lpspgum -lpspgu -lm
+LIBS= -lpspgum -lpspgu
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Celshading Sample

@@ -12,7 +12,7 @@ SUBDIRS = \
 	gum \
 	hprm \
 	kernel \
-	libc \
+	libcglue \
 	mp3 \
 	mpeg \
 	nand \

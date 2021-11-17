@@ -10,20 +10,12 @@ CCASFLAGS = $(CFLAGS)
 
 # Borrowed this trick from newlib: create a dummy library to generate build rules.
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = dummy.c
-
-# FIXME: This workaround is actually needed to get the stage1 installation
-# working. Once a better way to do crt0 installation for newlib is figured out,
-# this can be rewritten.
+lib_a_SOURCES = crt0.c crt0_prx.c prxexports.c
 
 all: crt0.o crt0_prx.o prxexports.o
 
 startupdir = @PSPDEV_LIBDIR@
 pspsdkdir = @PSPSDK_LIBDIR@
-
-# Overwrite build rule to disable dependency magic
-.c.o:
-	$(AM_V_CC)$(COMPILE) $< -c -o $@
 
 # Install the prx specific stuff in the pspsdk libdir
 install-exec-hook:

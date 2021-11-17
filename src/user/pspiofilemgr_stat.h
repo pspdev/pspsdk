@@ -105,11 +105,11 @@ typedef struct SceIoStat {
 	/** Size of the file in bytes. */
 	SceOff 			st_size;
 	/** Creation time. */
-	ScePspDateTime 	st_ctime;
+	ScePspDateTime 	sce_st_ctime;
 	/** Access time. */
-	ScePspDateTime 	st_atime;
+	ScePspDateTime 	sce_st_atime;
 	/** Modification time. */
-	ScePspDateTime 	st_mtime;
+	ScePspDateTime 	sce_st_mtime;
 	/** Device-specific data. */
 	unsigned int 	st_private[6];
 } SceIoStat;

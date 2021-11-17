@@ -2,13 +2,13 @@ TARGET = rendertarget
 OBJS = rendertarget.o
 
 INCDIR =
-CFLAGS = -G0 -Wall
+CFLAGS = -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS = -lpspgum -lpspgu -lm
+LIBS = -lpspgum -lpspgu
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Render-To-Texture Sample

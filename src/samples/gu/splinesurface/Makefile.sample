@@ -2,13 +2,13 @@ TARGET = splinesurface
 OBJS = splinesurface.o ../common/callbacks.o ../common/vram.o
 
 INCDIR =
-CFLAGS = -G0 -Wall
+CFLAGS = -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lpspgum -lpspgu -lm
+LIBS= -lpspgum -lpspgu
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Spline Surface Sample

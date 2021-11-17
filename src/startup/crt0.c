@@ -37,12 +37,10 @@ extern const char*  sce_newlib_main_thread_name __attribute__((weak));
    toolchain. */
 extern SceModuleInfo module_info __attribute__((weak));
 
-/* Allow newlib/psplibc to provide an init hook to be called before main */
-extern void __psp_libc_init(int argc, char *argv[]) __attribute__((weak));
-
+/* Allow to provide a libc init hook to be called before main */
+extern void __libcglue_init(int argc, char *argv[]);
 extern void _init(void);
 extern void _fini(void);
-
 extern int main(int argc, char *argv[]);
 
 /**
@@ -75,8 +73,7 @@ void _main(SceSize args, void *argp)
 	argv[argc] = NULL;
 
 	/* Call libc initialization hook */
-	if(__psp_libc_init != NULL)
-		__psp_libc_init(argc, argv);
+	__libcglue_init(argc, argv);
 
 	/* Make sure _fini() is called when the program ends. */
 	atexit((void *) _fini);

@@ -20,3 +20,12 @@
 #ifdef F_Kernel_Library_0005
 	IMPORT_FUNC	"Kernel_Library",0xB55249D2,sceKernelIsCpuIntrEnable
 #endif
+#ifdef F_Kernel_Library_0006
+	IMPORT_FUNC "Kernel_Library",0xBEA46419,sceKernelLockLwMutex
+#endif
+#ifdef F_Kernel_Library_0007
+	IMPORT_FUNC "Kernel_Library",0x15B6446B,sceKernelUnlockLwMutex
+#endif
+#ifdef F_Kernel_Library_0008
+	IMPORT_FUNC "Kernel_Library",0xDC692EE3,sceKernelTryLockLwMutex
+#endif

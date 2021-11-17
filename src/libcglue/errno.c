@@ -3,29 +3,24 @@
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
- * terminate.c - Process exit functions.
+ * errno.c - The global init/deinit code for our crt0.
  *
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
  */
+
 #include <stdio.h>
-#include <psptypes.h>
-#include <pspkernel.h>
+#include <errno.h>
 
-extern void _exit(int code);
-
-__attribute__((weak))
-void abort()
+#ifdef F___set_errno
+int __set_errno(int code)
 {
-	while (1)
-		_exit(1);
+	if ((code & 0x80010000) == 0x80010000) {
+		errno = code & 0xFFFF;
+		return -1;
+	}
+	return code;
 }
-
-__attribute__((weak))
-void _Exit(int retval)
-{
-	while (1)
-		_exit(retval);
-}
+#endif

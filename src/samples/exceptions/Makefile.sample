@@ -3,7 +3,7 @@ OBJS = main.o
 LIBS = -lstdc++
 
 INCDIR =
-CFLAGS = -G0 -Wall -O2
+CFLAGS = -Wall -O2
 CXXFLAGS = $(CFLAGS) -fno-rtti -fexceptions
 ASFLAGS = $(CFLAGS)
 
