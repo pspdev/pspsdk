@@ -23,6 +23,7 @@ void __init_cwd(char *argv_0);
 void __timezone_update();
 void __fdman_init();
 void __init_mutex();
+void pthread_init();
 void __psp_free_heap();
 void __deinit_mutex();
 
@@ -44,6 +45,9 @@ void __libcglue_init(int argc, char *argv[])
 
 	/* Initialize filedescriptor management */
 	__fdman_init();
+
+	/* Initialize pthread library */
+	pthread_init();
 
 	/* Initialize cwd from this program's path */
 	__init_cwd(argv[0]);

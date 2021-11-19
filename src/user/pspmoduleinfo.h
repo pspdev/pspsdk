@@ -107,4 +107,8 @@ enum PspModuleInfoAttr
 	void __libcglue_init(int argc, char *argv[]) {} \
 	void __libcglue_deinit() {}
 
+/* Disable the use of pthread for reducing binary size */
+#define PSP_DISABLE_PTHREAD() \
+	void __libpthreadglue_init() {}
+
 #endif /* PSPMODULEINFO_H */

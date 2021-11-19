@@ -13,6 +13,7 @@ SUBDIRS = \
 	hprm \
 	kernel \
 	libcglue \
+	libpthreadglue \
 	modinfo \
 	mp3 \
 	mpeg \

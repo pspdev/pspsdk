@@ -33,7 +33,7 @@ LDFLAGS  := $(addprefix -L,$(LIBDIR)) -Wl,-q,-T$(PSPSDK)/lib/linkfile.prx -nosta
 ifeq ($(USE_KERNEL_LIBS),1)
 LIBS := -nostdlib $(LIBS) -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspmodinfo -lpspsdk -lpspkernel
 else 
-LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk
+LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl
 endif
 
 ifeq ($(PSP_FW_VERSION),)
