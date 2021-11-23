@@ -9,23 +9,26 @@
  *
  */
 
-#include <pspthreadman.h>
-
-#include <errno.h>
+#include <stdio.h>
 #include <time.h>
 #include <unistd.h>
+#include <errno.h>
+
+#include <pspthreadman.h>
 
 #ifdef F_nanosleep
 /* note: we don't use rem as we have no signals */
 int nanosleep(const struct timespec *req, struct timespec *rem)
 {
-	sceKernelDelayThreadCB( 1000000 * req->tv_sec + (req->tv_nsec / 1000) );
+	int res = 0;
+    uint32_t usec = 1000000 * req->tv_sec + (req->tv_nsec / 1000);
+    res = __set_errno(sceKernelDelayThread(usec));
 	
     if( rem != NULL ) {
         rem->tv_sec = 0;
         rem->tv_nsec = 0;
     }
 
-    return 0;
+    return res;
 }
 #endif

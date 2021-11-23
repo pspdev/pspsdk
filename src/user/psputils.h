@@ -30,6 +30,15 @@ extern "C" {
 
 #include <sys/time.h>
 
+/** 
+ *  This struct is needed because tv_sec size is different from what newlib expect
+ * Newlib expects 64bits for seconds and PSP expects 32bits
+ */
+typedef struct SceKernelTimeval {
+	uint32_t tv_sec;
+	uint32_t tv_usec;
+} SceKernelTimeval;
+
 /**
   * Get the time in seconds since the epoc (1st Jan 1970)
   *
@@ -44,7 +53,7 @@ clock_t sceKernelLibcClock(void);
 /**
   * Get the current time of time and time zone information
   */
-int sceKernelLibcGettimeofday(struct timeval *tp, struct timezone *tzp);
+int sceKernelLibcGettimeofday(struct SceKernelTimeval *tp, struct timezone *tzp);
 
 /**
   * Write back the data cache to memory
