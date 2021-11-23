@@ -24,6 +24,7 @@
 #include <unistd.h>
 
 #include <sys/time.h>
+#include <sys/timeb.h>
 #include <sys/times.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -731,6 +732,23 @@ clock_t _times(struct tms *buffer)
 	}
 
 	return clk;
+}
+#endif
+
+#ifdef F_ftime
+int ftime(struct timeb *tb)
+{
+  struct timeval tv;
+  struct timezone tz;
+
+  gettimeofday(&tv, &tz);
+
+  tb->time = tv.tv_sec;
+  tb->millitm = tv.tv_usec / 1000;
+  tb->timezone = tz.tz_minuteswest;
+  tb->dstflag = tz.tz_dsttime;
+
+  return 0;
 }
 #endif
 
