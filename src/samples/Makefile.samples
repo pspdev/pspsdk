@@ -83,6 +83,6 @@ SAMPLES = \
 
 all:
 	for sample in $(SAMPLES) ; do \
-		$(MAKE) -f Makefile.sample -C $$sample clean all || break; \
+		$(MAKE) -f Makefile.sample -C $$sample clean all || { exit 1; } \
 	done
 
