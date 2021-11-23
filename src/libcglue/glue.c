@@ -703,7 +703,18 @@ void * _sbrk(ptrdiff_t incr)
 #ifdef F__gettimeofday
 int _gettimeofday(struct timeval *tp, struct timezone *tzp)
 {
-	return __set_errno(sceKernelLibcGettimeofday(tp, tzp));
+	int ret;
+	struct SceKernelTimeval pspTimeval;
+
+	ret = __set_errno(sceKernelLibcGettimeofday(&pspTimeval, tzp));
+	if (ret < 0)
+		return ret;
+
+	/* Return the actual time since epoch */
+	tp->tv_sec = pspTimeval.tv_sec;
+	tp->tv_usec = pspTimeval.tv_usec;
+
+	return 0;
 }
 #endif
 

@@ -31,7 +31,7 @@ static int __poll_select(int n, fd_set *readfds, fd_set *writefds, fd_set *excep
 	fd_set ready_readfds, ready_writefds, ready_exceptfds;
 	fd_set scereadfds, scewritefds;
 	SceKernelMppInfo info;
-	struct timeval scetv;
+	struct SceNetInetTimeval scetv;
 
 	FD_ZERO(&ready_readfds);
 	FD_ZERO(&ready_writefds);

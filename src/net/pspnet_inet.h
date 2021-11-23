@@ -18,8 +18,17 @@
 extern "C" {
 #endif
 
+/** 
+ *  This struct is needed because tv_sec size is different from what newlib expect
+ *  Newlib expects 64bits for seconds and PSP expects 32bits
+ */
+struct SceNetInetTimeval {
+    uint32_t tv_sec;
+    uint32_t tv_usec;
+};
+
 int sceNetInetInit(void);
-int sceNetInetSelect(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+int sceNetInetSelect(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct SceNetInetTimeval *timeout);
 int sceNetInetTerm(void);
 int sceNetInetGetErrno(void);
 
