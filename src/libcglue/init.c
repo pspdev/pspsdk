@@ -8,6 +8,7 @@
  * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
+ * Copyright (c) 2021 Francisco Javier Trujillo Mata <fjtrujy@gmail.com>
  *
  */
 
@@ -16,10 +17,16 @@
 #include <string.h>
 #include <sys/param.h>
 
+#include <pspuser.h>
+
 void __init_cwd(char *argv_0);
 void __timezone_update();
 void __fdman_init();
 void __init_mutex();
+void __psp_free_heap();
+void __deinit_mutex();
+
+extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
 
 #ifdef F___libcglue_init
 /* Note: This function is being called from crt0.c/crt0_prx.c.
@@ -43,5 +50,50 @@ void __libcglue_init(int argc, char *argv[])
 
 	/* Initialize timezone */
 	__timezone_update();
+}
+#endif
+
+#ifdef F___libcglue_deinit
+/* Note: This function is being called from terminate.c.
+* It is a weak function because can be override by user program
+*/
+__attribute__((weak))
+void __libcglue_deinit()
+{
+    __psp_free_heap();
+	__deinit_mutex();
+}
+#else
+void __libcglue_deinit();
+#endif
+
+#ifdef F__exit
+void _exit(int status)
+{
+	__libcglue_deinit();
+
+	if (&sce_newlib_nocreate_thread_in_start != NULL) {
+		sceKernelSelfStopUnloadModule(1, 0, NULL);
+	} else {
+		sceKernelExitGame();
+	}
+}
+#else
+void _exit(int status);
+#endif
+
+#ifdef F_abort
+__attribute__((weak))
+void abort()
+{
+	_exit(1);
+}
+#endif
+
+#ifdef F_exit
+__attribute__((weak))
+void exit(int retval)
+{
+	_exit(retval);
 }
 #endif

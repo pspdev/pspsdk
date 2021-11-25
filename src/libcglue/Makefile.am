@@ -30,7 +30,7 @@ GLUE_OBJS = __fill_stat.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o
 	_isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o readlink.o utime.o fchown.o getentropy.o
 
 
-INIT_OBJS = __libcglue_init.o
+INIT_OBJS = __libcglue_init.o __libcglue_deinit.o _exit.o abort.o exit.o
 
 MUTEXMAN_OBJS = __malloc_mutex.o __sbrk_mutex.o __fdman_mutex.o __init_mutex.o __deinit_mutex.o
 
@@ -45,8 +45,6 @@ SLEEP_OBJS = nanosleep.o
 
 SOCKET_OBJS = socket.o __socket_close.o accept.o bind.o connect.o getsockopt.o listen.o recv.o recvfrom.o send.o sendto.o \
 	setsockopt.o shutdown.o getpeername.o getsockname.o inet_ntoa.o sendmsg.o recvmsg.o
-
-TERMINATE_OBJS = _exit.o abort.o exit.o
 
 TIMEZONE_OBJS = __timezone_update.o
 
@@ -75,11 +73,10 @@ libcglue_a_SOURCES = \
 	select.c \
 	sleep.c \
 	socket.c \
-	terminate.c \
 	timezone.c
 
 libcglue_a_LIBADD  = $(CWD_OBJS) $(ERRNO_OBJS) $(FDMAN_OBJS) $(INIT_OBJS) $(GLUE_OBJS) $(MUTEXMAN_OBJS) $(NETDB_OBJS) $(PIPE_OBJS) \
-	$(SELECT_OBJS) $(SOCKET_OBJS) $(SLEEP_OBJS) $(TERMINATE_OBJS) $(TIMEZONE_OBJS)
+	$(SELECT_OBJS) $(SOCKET_OBJS) $(SLEEP_OBJS) $(TIMEZONE_OBJS)
 
 $(CWD_OBJS): cwd.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
@@ -112,9 +109,6 @@ $(SLEEP_OBJS): sleep.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
 $(SOCKET_OBJS): socket.c
-	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
-
-$(TERMINATE_OBJS): terminate.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
 $(TIMEZONE_OBJS): timezone.c
