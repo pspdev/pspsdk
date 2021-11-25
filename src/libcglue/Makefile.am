@@ -32,7 +32,7 @@ GLUE_OBJS = __fill_stat.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o
 
 INIT_OBJS = __libcglue_init.o
 
-MUTEXMAN_OBJS = __malloc_mutex.o __sbrk_mutex.o __fdman_mutex.o __init_mutex.o
+MUTEXMAN_OBJS = __malloc_mutex.o __sbrk_mutex.o __fdman_mutex.o __init_mutex.o __deinit_mutex.o
 
 NETDB_OBJS = h_errno.o gethostbyaddr.o gethostbyname.o
 

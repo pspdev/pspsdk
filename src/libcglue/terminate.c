@@ -18,18 +18,21 @@
 extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
 
 int __psp_free_heap(void);
+void __deinit_mutex(void);
 
 void _exit(int status)
 {
 	if (&sce_newlib_nocreate_thread_in_start != NULL) {
 		/* Free the heap created by _sbrk(). */
 		__psp_free_heap();
+		__deinit_mutex();
 
 		sceKernelSelfStopUnloadModule(1, 0, NULL);
 	} else {
 		if (status == 0) {
 			/* Free the heap created by _sbrk(). */
 			__psp_free_heap();
+			__deinit_mutex();
 		}
 
 		sceKernelExitThread(status);
