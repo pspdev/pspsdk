@@ -172,11 +172,8 @@ This is generated automatically from the repository `master` branch:
 https://pspdev.github.io/pspsdk/
 
 
-### Internet Relay Chat (IRC)
-
-The PSPSDK developers can sometimes be found hanging out in the #pspdev channel
-on irc.freenode.net.
-Nowadays also discord is used for communication: https://discord.gg/bePrj9W
+### Discord
+You can find PSPDev Maintainers over at https://discord.gg/bePrj9W in the #psp-toolchain channel :)
 
 
 ## Thanks
