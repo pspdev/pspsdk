@@ -43,3 +43,13 @@ void __init_mutex()
 	sceKernelCreateLwMutex(&__fdman_mutex, "fdman mutex", 0, 0, 0);
 }
 #endif
+
+#ifdef F___deinit_mutex
+/* Create mutex used for making thread safe mallock and get fd */
+void __deinit_mutex()
+{
+	sceKernelDeleteLwMutex(&__malloc_mutex);
+	sceKernelDeleteLwMutex(&__sbrk_mutex);
+	sceKernelDeleteLwMutex(&__fdman_mutex);
+}
+#endif
