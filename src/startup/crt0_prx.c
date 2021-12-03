@@ -24,9 +24,6 @@
 #define DEFAULT_THREAD_STACK_KB_SIZE 256
 #define DEFAULT_MAIN_THREAD_NAME "user_main"
 
-/* Define us as a prx */
-int __pspsdk_is_prx = 1;
-
 /* If these variables are defined by the program, then they override the
    defaults given above. */
 extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));

@@ -41,13 +41,11 @@
 
 #include "fdman.h"
 
-#define DEFAULT_PRX_HEAP_SIZE_KB 64
 #define DEFAULT_HEAP_THRESHOLD_SIZE_KB 512
 
 /* If defined it specifies the desired size of the heap, in KB. */
 extern unsigned int sce_newlib_heap_kb_size __attribute__((weak));
 extern unsigned int sce_newlib_heap_threshold_kb_size __attribute__((weak));
-extern int __pspsdk_is_prx __attribute__((weak));
 
 /* Functions from cwd.c */
 extern char __cwd[MAXNAMLEN + 1];
@@ -666,8 +664,6 @@ void * _sbrk(ptrdiff_t incr)
 
 		if (&sce_newlib_heap_kb_size != NULL) {
 			heap_size = TO_KB(sce_newlib_heap_kb_size);
-		} else if(&__pspsdk_is_prx != NULL) {
-			heap_size = TO_KB(DEFAULT_PRX_HEAP_SIZE_KB);
 		}
 
 		if ((int)heap_size < 0) {
