@@ -47,27 +47,6 @@ enum PspModuleInfoAttr
 
 /* Declare a module.  This must be specified in the source of a library or executable. */
 #define PSP_MODULE_INFO(name, attributes, major_version, minor_version) \
-	__asm__ (                                                       \
-	"    .set push\n"                                               \
-	"    .section .lib.ent.top, \"a\", @progbits\n"                 \
-	"    .align 2\n"                                                \
-	"    .word 0\n"                                                 \
-	"__lib_ent_top:\n"                                              \
-	"    .section .lib.ent.btm, \"a\", @progbits\n"                 \
-	"    .align 2\n"                                                \
-	"__lib_ent_bottom:\n"                                           \
-	"    .word 0\n"                                                 \
-	"    .section .lib.stub.top, \"a\", @progbits\n"                \
-	"    .align 2\n"                                                \
-	"    .word 0\n"                                                 \
-	"__lib_stub_top:\n"                                             \
-	"    .section .lib.stub.btm, \"a\", @progbits\n"                \
-	"    .align 2\n"                                                \
-	"__lib_stub_bottom:\n"                                          \
-	"    .word 0\n"                                                 \
-	"    .set pop\n"                                                \
-	"    .text\n"													\
-	);                                                              \
 	extern char __lib_ent_top[], __lib_ent_bottom[];                \
 	extern char __lib_stub_top[], __lib_stub_bottom[];              \
 	extern SceModuleInfo module_info                                \
@@ -80,27 +59,6 @@ enum PspModuleInfoAttr
 #else
 /* Declare a module.  This must be specified in the source of a library or executable. */
 #define PSP_MODULE_INFO(name, attributes, major_version, minor_version) \
-	__asm__ (                                                       \
-	"    .set push\n"                                               \
-	"    .section .lib.ent.top, \"a\", @progbits\n"                 \
-	"    .align 2\n"                                                \
-	"    .word 0\n"                                                 \
-	"__lib_ent_top:\n"                                              \
-	"    .section .lib.ent.btm, \"a\", @progbits\n"                 \
-	"    .align 2\n"                                                \
-	"__lib_ent_bottom:\n"                                           \
-	"    .word 0\n"                                                 \
-	"    .section .lib.stub.top, \"a\", @progbits\n"                \
-	"    .align 2\n"                                                \
-	"    .word 0\n"                                                 \
-	"__lib_stub_top:\n"                                             \
-	"    .section .lib.stub.btm, \"a\", @progbits\n"                \
-	"    .align 2\n"                                                \
-	"__lib_stub_bottom:\n"                                          \
-	"    .word 0\n"                                                 \
-	"    .set pop\n"                                                \
-	"    .text\n"													\
-	);                                                              \
 	extern char __lib_ent_top[], __lib_ent_bottom[];                \
 	extern char __lib_stub_top[], __lib_stub_bottom[];              \
 	SceModuleInfo module_info                                       \
