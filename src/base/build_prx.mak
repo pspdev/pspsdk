@@ -31,9 +31,9 @@ ASFLAGS  := $(CFLAGS) $(ASFLAGS)
 LDFLAGS  := $(addprefix -L,$(LIBDIR)) -Wl,-q,-T$(PSPSDK)/lib/linkfile.prx -nostartfiles -Wl,-zmax-page-size=128 $(LDFLAGS)
 
 ifeq ($(USE_KERNEL_LIBS),1)
-LIBS := -nostdlib $(LIBS) -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspsdk -lpspkernel
+LIBS := -nostdlib $(LIBS) -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspkernel
 else 
-LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk
+LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl
 endif
 
 ifeq ($(PSP_FW_VERSION),)

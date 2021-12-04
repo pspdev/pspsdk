@@ -63,9 +63,9 @@ endif
 LDFLAGS +=  -Wl,-zmax-page-size=128
 
 ifeq ($(USE_KERNEL_LIBS),1)
-LIBS := -nostdlib $(LIBS) -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspsdk -lpspkernel
+LIBS := -nostdlib $(LIBS) -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspkernel
 else
-LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk \
+LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl \
 		-lpspnet -lpspnet_apctl
 endif
 
