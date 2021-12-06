@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_LoadCoreForKernel_0000
-	IMPORT_START	"LoadCoreForKernel",0x00010000
+	IMPORT_START	"LoadCoreForKernel",0x00010011
 #endif
 #ifdef F_LoadCoreForKernel_0001
 	IMPORT_FUNC	"LoadCoreForKernel",0xACE23476,sceKernelCheckPspConfig

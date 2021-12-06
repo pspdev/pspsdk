@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_LoadExecForKernel_0000
-	IMPORT_START	"LoadExecForKernel",0x00010000
+	IMPORT_START	"LoadExecForKernel",0x00090011
 #endif
 #ifdef F_LoadExecForKernel_0001
 	IMPORT_FUNC	"LoadExecForKernel",0xBD2F1094,sceKernelLoadExec

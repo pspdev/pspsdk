@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_InterruptManagerForKernel_0000
-	IMPORT_START	"InterruptManagerForKernel",0x00010000
+	IMPORT_START	"InterruptManagerForKernel",0x00010011
 #endif
 #ifdef F_InterruptManagerForKernel_0001
 	IMPORT_FUNC	"InterruptManagerForKernel",0x092968F4,sceKernelCpuSuspendIntr

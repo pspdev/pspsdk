@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_KDebugForKernel_0000
-	IMPORT_START	"KDebugForKernel",0x00010000
+	IMPORT_START	"KDebugForKernel",0x00010011
 #endif
 #ifdef F_KDebugForKernel_0001
 	IMPORT_FUNC	"KDebugForKernel",0xE7A3874D,sceKernelRegisterAssertHandler

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_UtilsForKernel_0000
-	IMPORT_START	"UtilsForKernel",0x00090000
+	IMPORT_START	"UtilsForKernel",0x00090011
 #endif
 #ifdef F_UtilsForKernel_0001
 	IMPORT_FUNC	"UtilsForKernel",0x80FE032E,sceUtilsKernelDcacheWBinvRange

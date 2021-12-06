@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_ModuleMgrForKernel_0000
-	IMPORT_START	"ModuleMgrForKernel",0x00010000
+	IMPORT_START	"ModuleMgrForKernel",0x00010011
 #endif
 #ifdef F_ModuleMgrForKernel_0001
 	IMPORT_FUNC	"ModuleMgrForKernel",0xABE84F8A,sceKernelLoadModuleBufferWithApitype
