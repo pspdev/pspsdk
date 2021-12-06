@@ -24,10 +24,10 @@
 	IMPORT_FUNC	"sceSysreg_driver",0xE2A5D1EE,sceSysregGetTachyonVersion
 #endif
 #ifdef F_sceSysreg_driver_0007
-	IMPORT_FUNC	"sceSysreg_driver",0x4F46EEDE,sceSysreg_driver_4F46EEDE
+	IMPORT_FUNC	"sceSysreg_driver",0x4F46EEDE,sceSysregGetFuseId
 #endif
 #ifdef F_sceSysreg_driver_0008
-	IMPORT_FUNC	"sceSysreg_driver",0x8F4F4E96,sceSysreg_driver_8F4F4E96
+	IMPORT_FUNC	"sceSysreg_driver",0x8F4F4E96,sceSysregGetFuseConfig
 #endif
 #ifdef F_sceSysreg_driver_0009
 	IMPORT_FUNC	"sceSysreg_driver",0xC29D614E,sceSysregTopResetEnable
