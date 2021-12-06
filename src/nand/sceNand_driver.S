@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceNand_driver_0000
-	IMPORT_START	"sceNand_driver",0x00010000
+	IMPORT_START	"sceNand_driver",0x00010011
 #endif
 #ifdef F_sceNand_driver_0001
 	IMPORT_FUNC	"sceNand_driver",0xA513BB12,sceNandInit
@@ -42,16 +42,16 @@
 	IMPORT_FUNC	"sceNand_driver",0x8AF0AB9F,sceNandWritePages
 #endif
 #ifdef F_sceNand_driver_0013
-	IMPORT_FUNC	"sceNand_driver",0xE05AE88D,sceNand_driver_E05AE88D
+	IMPORT_FUNC	"sceNand_driver",0xE05AE88D,sceNandReadPagesRawExtra
 #endif
 #ifdef F_sceNand_driver_0014
-	IMPORT_FUNC	"sceNand_driver",0x8932166A,sceNand_driver_8932166A
+	IMPORT_FUNC	"sceNand_driver",0x8932166A,sceNandWritePagesRawExtra
 #endif
 #ifdef F_sceNand_driver_0015
-	IMPORT_FUNC	"sceNand_driver",0xC478C1DE,sceNand_driver_C478C1DE
+	IMPORT_FUNC	"sceNand_driver",0xC478C1DE,sceNandReadPagesRawAll
 #endif
 #ifdef F_sceNand_driver_0016
-	IMPORT_FUNC	"sceNand_driver",0xBADD5D46,sceNand_driver_BADD5D46
+	IMPORT_FUNC	"sceNand_driver",0xBADD5D46,sceNandWritePagesRawAll
 #endif
 #ifdef F_sceNand_driver_0017
 	IMPORT_FUNC	"sceNand_driver",0x766756EF,sceNandReadAccess
@@ -75,7 +75,7 @@
 	IMPORT_FUNC	"sceNand_driver",0xB795D2ED,sceNandCollectEcc
 #endif
 #ifdef F_sceNand_driver_0024
-	IMPORT_FUNC	"sceNand_driver",0xD897C343,sceNand_driver_D897C343
+	IMPORT_FUNC	"sceNand_driver",0xD897C343,sceNandDetectChip
 #endif
 #ifdef F_sceNand_driver_0025
 	IMPORT_FUNC	"sceNand_driver",0xCE9843E6,sceNandGetPageSize
@@ -105,20 +105,26 @@
 	IMPORT_FUNC	"sceNand_driver",0x01F09203,sceNandIsBadBlock
 #endif
 #ifdef F_sceNand_driver_0034
-	IMPORT_FUNC	"sceNand_driver",0xC29DA136,sceNand_driver_C29DA136
+	IMPORT_FUNC	"sceNand_driver",0xC29DA136,sceNandDoMarkAsBadBlock
 #endif
 #ifdef F_sceNand_driver_0035
-	IMPORT_FUNC	"sceNand_driver",0x3F76BC21,sceNand_driver_3F76BC21
+	IMPORT_FUNC	"sceNand_driver",0x3F76BC21,sceNandDumpWearBBMSize
 #endif
 #ifdef F_sceNand_driver_0036
-	IMPORT_FUNC	"sceNand_driver",0xEBA0E6C6,sceNand_driver_EBA0E6C6
+	IMPORT_FUNC	"sceNand_driver",0xEBA0E6C6,sceNandCountChipMakersBBM
 #endif
 #ifdef F_sceNand_driver_0037
-	IMPORT_FUNC	"sceNand_driver",0x2FF6081B,sceNand_driver_2FF6081B
+	IMPORT_FUNC	"sceNand_driver",0x2FF6081B,sceNandDetectChipMakersBBM
 #endif
 #ifdef F_sceNand_driver_0038
 	IMPORT_FUNC	"sceNand_driver",0x2674CFFE,sceNandEraseAllBlock
 #endif
 #ifdef F_sceNand_driver_0039
 	IMPORT_FUNC	"sceNand_driver",0x9B2AC433,sceNandTestBlock
+#endif
+#ifdef F_sceNand_driver_0040
+	IMPORT_FUNC	"sceNand_driver",0x0BEE8F36,sceNand_driver_0BEE8F36
+#endif
+#ifdef F_sceNand_driver_0041
+	IMPORT_FUNC	"sceNand_driver",0x88CC9F72,sceNandCorrectEcc
 #endif
