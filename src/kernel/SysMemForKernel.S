@@ -203,7 +203,7 @@
 	IMPORT_FUNC	"SysMemForKernel",0x3FC9AE6A,sceKernelDevkitVersion
 #endif
 #ifdef F_SysMemForKernel_0066
-	IMPORT_FUNC	"SysMemForKernel",0x452E3696,SysMemForKernel_452E3696
+	IMPORT_FUNC	"SysMemForKernel",0x452E3696,sceKernelGetSystemStatus
 #endif
 #ifdef F_SysMemForKernel_0067
 	IMPORT_FUNC	"SysMemForKernel",0x95F5E8DA,SysMemForKernel_95F5E8DA
