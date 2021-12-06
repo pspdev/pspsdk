@@ -63,8 +63,8 @@ sys_nobase_includedir = @PSPSDK_INCLUDEDIR@/sys
 sys_nobase_include_HEADERS = sys/socket.h sys/ioctl.h
 
 libcglue_a_SOURCES = \
-	cwd.o \
-	errno.o \
+	cwd.c \
+	errno.c \
 	fdman.c \
 	glue.c \
 	init.c \

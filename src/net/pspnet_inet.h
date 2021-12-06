@@ -18,6 +18,8 @@
 extern "C" {
 #endif
 
+#include <sys/socket.h>
+
 /** 
  *  This struct is needed because tv_sec size is different from what newlib expect
  *  Newlib expects 64bits for seconds and PSP expects 32bits
@@ -31,9 +33,6 @@ int sceNetInetInit(void);
 int sceNetInetSelect(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct SceNetInetTimeval *timeout);
 int sceNetInetTerm(void);
 int sceNetInetGetErrno(void);
-
-/* The real sceNetInet socket prototypes are in <sys/socket.h>. */
-#ifdef DOXYGEN
 int	sceNetInetAccept(int s, struct sockaddr *addr, socklen_t *addrlen);
 int	sceNetInetBind(int s, const struct sockaddr *my_addr, socklen_t addrlen);
 int	sceNetInetConnect(int s, const struct sockaddr *serv_addr, socklen_t addrlen);
@@ -48,7 +47,10 @@ int	sceNetInetShutdown(int s, int how);
 int	sceNetInetSocket(int domain, int type, int protocol);
 int sceNetInetClose(int s);
 int sceNetInetGetErrno(void);
-#endif /* DOXYGEN */
+int	sceNetInetGetpeername(int s, struct sockaddr *name, socklen_t *namelen);
+int	sceNetInetGetsockname(int s, struct sockaddr *name, socklen_t *namelen);
+ssize_t sceNetInetSendmsg(int s, const struct msghdr *msg, int flags);
+ssize_t sceNetInetRecvmsg(int s, struct msghdr *msg, int flags);
 
 #ifdef __cplusplus
 }

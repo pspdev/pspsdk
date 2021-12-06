@@ -16,6 +16,9 @@
 
 #include <pspthreadman.h>
 
+/* Fuctions from errno.c */
+int __set_errno(int code);
+
 #ifdef F_nanosleep
 /* note: we don't use rem as we have no signals */
 int nanosleep(const struct timespec *req, struct timespec *rem)
