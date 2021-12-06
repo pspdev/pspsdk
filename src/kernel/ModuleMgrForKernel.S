@@ -71,3 +71,6 @@
 #ifdef F_ModuleMgrForKernel_0022
 	IMPORT_FUNC	"ModuleMgrForKernel",0x644395E2,sceKernelGetModuleIdList
 #endif
+#ifdef F_ModuleMgrForKernel_0023
+	IMPORT_FUNC	"ModuleMgrForKernel",0x6DE9FF11,sceKernelLoadModuleForLoadExecForUser
+#endif
