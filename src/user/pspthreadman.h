@@ -616,7 +616,7 @@ typedef struct {
  *
  * @return 0 on success, otherwise one of ::PspKernelErrorCodes
  */
-int sceKernelCreateLwMutex(SceLwMutexWorkarea *workarea, const char *name, u32 attr, int initialCount, u32 optionsPtr);
+int sceKernelCreateLwMutex(SceLwMutexWorkarea *workarea, const char *name, u32 attr, int initialCount, u32 *optionsPtr);
 
 /**
  * Delete a lightweight mutex
@@ -631,9 +631,7 @@ int sceKernelDeleteLwMutex(SceLwMutexWorkarea *workarea);
  * Try to lock a lightweight mutex
  *
  * @param workarea - The pointer to the workarea
- * @param name - The name of the lightweight mutex
  * @param lockCount - value of increase the lock counter
- * @param pTimeout - The pointer for timeout waiting
  *
  * @return 0 on success, otherwise one of ::PspKernelErrorCodes
  */
@@ -643,7 +641,6 @@ int sceKernelTryLockLwMutex(SceLwMutexWorkarea *workarea, int lockCount);
  * Lock a lightweight mutex
  *
  * @param workarea - The pointer to the workarea
- * @param name - The name of the lightweight mutex
  * @param lockCount - value of increase the lock counter
  * @param pTimeout - The pointer for timeout waiting
  *
