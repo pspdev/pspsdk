@@ -31,7 +31,7 @@ INETHELPER_OBJS = pspSdkLoadInetModules.o pspSdkInetInit.o pspSdkInetTerm.o
 MULT_SRCS = modulemgr_patches.c inethelper.c
 MULT_OBJS = $(MODULEMGR_PATCHES_OBJS) $(INETHELPER_OBJS)
 
-libpspsdk_a_SOURCES = query_mod.c loadmodule.c fixup.c threadutils.c interrupt.S k1set.S modinfo.S fpu.S $(MULT_SRCS)
+libpspsdk_a_SOURCES = query_mod.c loadmodule.c fixup.c threadutils.c interrupt.S k1set.S fpu.S $(MULT_SRCS)
 libpspsdk_a_LIBADD  = $(MULT_OBJS)
 
 $(MODULEMGR_PATCHES_OBJS): modulemgr_patches.c
