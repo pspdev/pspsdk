@@ -12,7 +12,7 @@
 #ifndef PSPIDSTORAGE_H
 #define PSPIDSTORAGE_H
 
-#include <psptypes.h>
+#include <pspkerneltypes.h>
 
 /** @defgroup IdStorage Interface to the sceIdStorage_driver library.
  */
@@ -24,6 +24,10 @@ extern "C" {
 /** @addtogroup IdStorage Interface to the sceIdStorage_driver library.*/
 /**@{*/
 
+int sceIdStorageUnformat(void);
+
+int sceIdStorageFormat(void);
+
 /**Retrieves the value associated with a key
  * @param key    - idstorage key
  * @param offset - offset within the 512 byte leaf
@@ -31,6 +35,11 @@ extern "C" {
  * @param len    - amount of data to retrieve (offset + len must be <= 512 bytes)
  */
 int sceIdStorageLookup(u16 key, u32 offset, void *buf, u32 len);
+
+int sceIdStorageCreateLeaf(u16 key);
+
+int sceIdStorage_driver_99ACCB71(u16 *leaves, int n);
+#define sceIdStorageCreateAtomicLeaves sceIdStorage_driver_99ACCB71
 
 /** Retrieves the whole 512 byte container for the key
  * @param key - idstorage key

@@ -38,6 +38,12 @@ typedef struct _PspSysmemPartitionInfo
 	unsigned int attr;
 } PspSysmemPartitionInfo;
 
+enum PspModel
+{
+	PSP_MODEL_STANDARD = 0,
+	PSP_MODEL_SLIM_AND_LITE = 1
+};
+
 /**
  * Query the parition information
  *
@@ -214,6 +220,10 @@ int sceKernelSetCompiledSdkVersion(int version);
  * @return Version number, or 0 if unset.
  */
 int sceKernelGetCompiledSdkVersion(void);
+
+int sceKernelSetQTGP3(const u8 *umdid);
+
+int sceKernelGetSystemStatus(void);
 
 #ifdef __cplusplus
 }

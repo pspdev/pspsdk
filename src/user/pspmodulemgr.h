@@ -217,6 +217,32 @@ int sceKernelGetModuleIdList(SceUID *readbuf, int readbufsize, int *idcount);
  */
 int sceKernelGetModuleIdByAddress(const void *moduleAddr);
 
+/**
+  * Load a module protected by DRM...
+  * 
+  * @param path - The path to the module to load.
+  * @param flags - Unused, always 0 .
+  * @param option  - Pointer to a mod_param_t structure. Can be NULL.
+  *
+  * @return The UID of the loaded module on success, otherwise one of ::PspKernelErrorCodes.
+  */
+SceUID ModuleMgrForUser_FEF27DC1(const char *path, int flags, SceKernelLMOption *option);
+#define sceKernelLoadModuleDNAS	ModuleMgrForUser_FEF27DC1
+
+/**
+ * Stop and unload the current module with the specified exit status code
+ *
+ * @param exitcode - The exitcode for the module
+ * @param argsize - Size (in bytes) of the arguments that will be passed to module_stop().
+ * @param argp - Poitner to arguments that will be passed to module_stop().
+ * @param status - Return value from module_stop().
+ * @param option - Pointer to an optional ::SceKernelSMOption structure.
+ *
+ * @return ??? on success, otherwise one of ::PspKernelErrorCodes.
+ */
+int	ModuleMgrForUser_8F2DF740(int exitcode, SceSize argsize, void *argp, int *status, SceKernelSMOption *option);
+#define sceKernelStopUnloadSelfModuleWithStatus ModuleMgrForUser_8F2DF740
+
 /**@}*/
 
 #ifdef __cplusplus

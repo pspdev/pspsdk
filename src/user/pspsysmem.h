@@ -50,7 +50,7 @@ typedef int SceKernelSysMemAlloc_t;
  * @param size - Size of the memory block, in bytes.
  * @param addr - If type is PSP_SMEM_Addr, then addr specifies the lowest address allocate the block from.
  *
- * @return The UID of the new block, or if less than 0 an error.
+ * @returns The UID of the new block, or if less than 0 an error.
  */
 SceUID sceKernelAllocPartitionMemory(SceUID partitionid, const char *name, int type, SceSize size, void *addr);
 
@@ -59,7 +59,7 @@ SceUID sceKernelAllocPartitionMemory(SceUID partitionid, const char *name, int t
  *
  * @param blockid - UID of the block to free.
  *
- * @return ? on success, less than 0 on error.
+ * @returns ? on success, less than 0 on error.
  */
 int sceKernelFreePartitionMemory(SceUID blockid);
 
@@ -68,14 +68,14 @@ int sceKernelFreePartitionMemory(SceUID blockid);
  *
  * @param blockid - UID of the memory block.
  *
- * @return The lowest address belonging to the memory block.
+ * @returns The lowest address belonging to the memory block.
  */
 void * sceKernelGetBlockHeadAddr(SceUID blockid);
 
 /**
  * Get the total amount of free memory.
  *
- * @return The total amount of free memory, in bytes.
+ * @returns The total amount of free memory, in bytes.
  */
 SceSize sceKernelTotalFreeMemSize(void);
 
@@ -128,6 +128,45 @@ int sceKernelSetCompiledSdkVersion(int version);
  * @return Version number, or 0 if unset.
  */
 int sceKernelGetCompiledSdkVersion(void);
+
+/**
+ *
+ * Set the SDK version of the current application.
+ * All licensed games seem to set this value in the crt0
+ *
+ * @param sdkversion - The sdkversion to set (e.g.: 0x02070110 in applicationc compiled for firmware 2.71)
+ *
+ * @return 0
+ */
+int sceKernelSetCompiledSdkVersion(int sdkversion);
+
+/**
+ *
+ * Get the SDK version of the current application, previously set with sceKernelSetCompiledSdkVersion
+ *
+ * @return The sdk version
+ */
+int sceKernelGetCompiledSdkVersion(void);
+
+/**
+ *
+ * Set the compiler version of the current application.
+ * All licensed games seem to set this value in the crt0
+ *
+ * @param version - The compiler version to set
+ *
+ * @return 0
+ */
+int sceKernelSetCompilerVersion(int version);
+
+/**
+ *
+ * Get the compiler version of the current application, previously set with sceKernelSetCompilerVersion
+ *
+ * @return The compiler version
+ */
+int sceKernelGetCompilerVersion(void);
+
 
 #ifdef __cplusplus
 }
