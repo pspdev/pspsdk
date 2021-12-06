@@ -143,3 +143,6 @@
 #ifdef F_scePower_0046
 	IMPORT_FUNC	"scePower",0x737486F2,scePowerSetClockFrequency
 #endif
+#ifdef F_scePower_0047
+	IMPORT_FUNC	"scePower",0x0442D852,scePowerRequestColdReset
+#endif

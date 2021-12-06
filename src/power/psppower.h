@@ -271,6 +271,7 @@ int scePowerRequestStandby(void);
  */
 int scePowerRequestSuspend(void);
 
+int scePowerRequestColdReset(int);
 
 #ifdef __cplusplus
 }
