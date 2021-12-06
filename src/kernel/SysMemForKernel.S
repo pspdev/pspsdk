@@ -220,3 +220,6 @@
 #ifdef F_SysMemForKernel_0071
 	IMPORT_FUNC	"SysMemForKernel",0xA291F107,sceKernelMaxFreeMemSize
 #endif
+#ifdef F_SysMemForKernel_0072
+	IMPORT_FUNC	"SysMemForKernel",0xC7E57B9C,sceKernelSetQTGP3
+#endif
