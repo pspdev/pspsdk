@@ -223,3 +223,6 @@
 #ifdef F_SysMemForKernel_0072
 	IMPORT_FUNC	"SysMemForKernel",0xC7E57B9C,sceKernelSetQTGP3
 #endif
+#ifdef F_SysMemForKernel_0073
+	IMPORT_FUNC	"SysMemForKernel",0x419DB8F4,sceKernelRegisterGetIdFunc
+#endif
