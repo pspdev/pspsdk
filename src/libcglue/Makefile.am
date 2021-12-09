@@ -28,7 +28,7 @@ GLUE_OBJS = __fill_stat.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o
 	_stat.o lstat.o access.o _fcntl.o  _lseek.o chdir.o mkdir.o rmdir.o getdents.o _seekdir.o _link.o _unlink.o \
 	_rename.o _getpid.o _kill.o _sbrk.o _gettimeofday.o _times.o ftime.o _internal_malloc_lock.o _internal_malloc_unlock.o \
 	_isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o readlink.o utime.o fchown.o getentropy.o getpwuid.o \
-	getpwnam.o
+	getpwnam.o getuid.o geteuid.o
 
 
 INIT_OBJS = __libcglue_init.o __libcglue_deinit.o _exit.o abort.o exit.o

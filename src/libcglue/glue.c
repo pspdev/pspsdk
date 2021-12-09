@@ -929,6 +929,20 @@ int getentropy(void *buffer, size_t length) {
 }
 #endif
 
+#ifdef F_getuid
+uid_t getuid(void) {
+	/* Not sure if returning root is a good idea */
+	return 0;
+}
+#endif
+
+#ifdef F_geteuid
+uid_t geteuid(void) {
+	/* Not sure if returning root is a good idea */
+	return 0;
+}
+#endif
+
 #ifdef F_getpwuid
 struct passwd *getpwuid(uid_t uid) {
 	/* There's no support for users */
