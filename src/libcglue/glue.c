@@ -931,15 +931,13 @@ int getentropy(void *buffer, size_t length) {
 
 #ifdef F_getuid
 uid_t getuid(void) {
-	/* Not sure if returning root is a good idea */
-	return 0;
+	return 1000;
 }
 #endif
 
 #ifdef F_geteuid
 uid_t geteuid(void) {
-	/* Not sure if returning root is a good idea */
-	return 0;
+	return 1000;
 }
 #endif
 
