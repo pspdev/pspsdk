@@ -22,6 +22,7 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <pwd.h>
 
 #include <sys/time.h>
 #include <sys/timeb.h>
@@ -927,3 +928,18 @@ int getentropy(void *buffer, size_t length) {
 	return 0;
 }
 #endif
+
+#ifdef F_getpwuid
+struct passwd *getpwuid(uid_t uid) {
+	/* There's no support for users */
+	return NULL;
+}
+#endif
+
+#ifdef F_getpwnam
+struct passwd *getpwnam(const char *name) {
+	/* There's no support for users */
+	return NULL;
+}
+#endif
+
