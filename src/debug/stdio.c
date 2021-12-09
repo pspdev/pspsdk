@@ -24,19 +24,19 @@ static SceUID g_in_sema = 0;
 /* Probably stdout and stderr should not be guarded by the same mutex */
 static SceUID g_out_sema = 0;
 
-static int io_init(PspIoDrvArg *arg)
+static int io_init(SceIoDeviceEntry *arg)
 {
 	return 0;
 }
 
-static int io_exit(PspIoDrvArg *arg)
+static int io_exit(SceIoDeviceEntry *arg)
 {
 	return 0;
 }
 
-static int io_open(PspIoDrvFileArg *arg, char *file, int mode, SceMode mask)
+static int io_open(SceIoIob *arg, char *file, int mode, SceMode mask)
 {
-	if((arg->fs_num != STDIN_FILENO) && (arg->fs_num != STDOUT_FILENO) && (arg->fs_num != STDERR_FILENO))
+	if((arg->i_unit != STDIN_FILENO) && (arg->i_unit != STDOUT_FILENO) && (arg->i_unit != STDERR_FILENO))
 	{
 		return SCE_KERNEL_ERROR_NOFILE;
 	}
@@ -44,17 +44,17 @@ static int io_open(PspIoDrvFileArg *arg, char *file, int mode, SceMode mask)
 	return 0;
 }
 
-static int io_close(PspIoDrvFileArg *arg)
+static int io_close(SceIoIob *arg)
 {
 	return 0;
 }
 
-static int io_read(PspIoDrvFileArg *arg, char *data, int len)
+static int io_read(SceIoIob *arg, char *data, int len)
 {
 	int ret = 0;
 
 	(void) sceKernelWaitSema(g_in_sema, 1, 0);
-	if((arg->fs_num == STDIN_FILENO) && (g_stdin_handler != NULL))
+	if((arg->i_unit == STDIN_FILENO) && (g_stdin_handler != NULL))
 	{
 		ret = g_stdin_handler(data, len);
 	}
@@ -63,16 +63,16 @@ static int io_read(PspIoDrvFileArg *arg, char *data, int len)
 	return ret;
 }
 
-static int io_write(PspIoDrvFileArg *arg, const char *data, int len)
+static int io_write(SceIoIob *arg, const char *data, int len)
 {
 	int ret = 0;
 
 	(void) sceKernelWaitSema(g_out_sema, 1, 0);
-	if((arg->fs_num == STDOUT_FILENO) && (g_stdout_handler != NULL))
+	if((arg->i_unit == STDOUT_FILENO) && (g_stdout_handler != NULL))
 	{
 		ret = g_stdout_handler(data, len);
 	}
-	else if((arg->fs_num == STDERR_FILENO) && (g_stderr_handler != NULL))
+	else if((arg->i_unit == STDERR_FILENO) && (g_stderr_handler != NULL))
 	{
 		ret = g_stderr_handler(data, len);
 	}
@@ -81,87 +81,87 @@ static int io_write(PspIoDrvFileArg *arg, const char *data, int len)
 	return ret;
 }
 
-static SceOff io_lseek(PspIoDrvFileArg *arg, SceOff ofs, int whence)
+static SceOff io_lseek(SceIoIob *arg, SceOff ofs, int whence)
 {
 	return 0;
 }
 
-static int io_ioctl(PspIoDrvFileArg *arg, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen)
+static int io_ioctl(SceIoIob *arg, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen)
 {
 	return 0;
 }
 
-static int io_remove(PspIoDrvFileArg *arg, const char *name)
+static int io_remove(SceIoIob *arg, const char *name)
 {
 	return 0;
 }
 
-static int io_mkdir(PspIoDrvFileArg *arg, const char *name, SceMode mode)
+static int io_mkdir(SceIoIob *arg, const char *name, SceMode mode)
 {
 	return 0;
 }
 
-static int io_rmdir(PspIoDrvFileArg *arg, const char *name)
+static int io_rmdir(SceIoIob *arg, const char *name)
 {
 	return 0;
 }
 
-static int io_dopen(PspIoDrvFileArg *arg, const char *dir)
+static int io_dopen(SceIoIob *arg, const char *dir)
 {
 	return 0;
 }
 
-static int io_dclose(PspIoDrvFileArg *arg)
+static int io_dclose(SceIoIob *arg)
 {
 	return 0;
 }
 
-static int io_dread(PspIoDrvFileArg *arg, SceIoDirent *dir)
+static int io_dread(SceIoIob *arg, SceIoDirent *dir)
 {
 	return 0;
 }
 
-static int io_getstat(PspIoDrvFileArg *arg, const char *file, SceIoStat *stat)
+static int io_getstat(SceIoIob *arg, const char *file, SceIoStat *stat)
 {
 	return 0;
 }
 
-static int io_chstat(PspIoDrvFileArg *arg, const char *file, SceIoStat *stat, int bits)
+static int io_chstat(SceIoIob *arg, const char *file, SceIoStat *stat, int bits)
 {
 	return 0;
 }
 
-static int io_rename(PspIoDrvFileArg *arg, const char *oldname, const char *newname)
+static int io_rename(SceIoIob *arg, const char *oldname, const char *newname)
 {
 	return 0;
 }
 
-static int io_chdir(PspIoDrvFileArg *arg, const char *dir)
+static int io_chdir(SceIoIob *arg, const char *dir)
 {
 	return 0;
 }
 
-static int io_mount(PspIoDrvFileArg *arg)
+static int io_mount(SceIoIob *arg)
 {
 	return 0;
 }
 
-static int io_umount(PspIoDrvFileArg *arg)
+static int io_umount(SceIoIob *arg)
 {
 	return 0;
 }
 
-static int io_devctl(PspIoDrvFileArg *arg, const char *devname, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen)
+static int io_devctl(SceIoIob *arg, const char *devname, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen)
 {
 	return 0;
 }
 
-static int io_unknown(PspIoDrvFileArg *arg)
+static int io_unknown(SceIoIob *arg)
 {
 	return 0;
 }
 
-static PspIoDrvFuncs tty_funcs = 
+static SceIoDeviceFunction tty_funcs = 
 {
 	io_init,
 	io_exit,
@@ -187,7 +187,7 @@ static PspIoDrvFuncs tty_funcs =
 	io_unknown,
 };
 
-static PspIoDrv tty_driver = 
+static SceIoDeviceTable tty_driver = 
 {
 	"tty", 0x10, 0x800, "TTY", &tty_funcs
 };

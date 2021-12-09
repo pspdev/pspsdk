@@ -29,72 +29,86 @@ extern "C" {
 /** @addtogroup IoFileMgr_Kernel Driver interface to IoFileMgr */
 /**@{*/
 
-struct PspIoDrv;
+struct SceIoDeviceTable;
 
 /** Structure passed to the init and exit functions of the io driver system */
-typedef struct PspIoDrvArg
+typedef struct SceIoDeviceEntry
 {
 	/** Pointer to the original driver which was added */
-	struct PspIoDrv *drv;
+	struct SceIoDeviceTable *d_dp;
 	/** Pointer to a user defined argument (if written by the driver will preseve across calls */
-	void *arg;
-} PspIoDrvArg;
+	void                    *d_private;
+	int                      d_userfd_count;
+} SceIoDeviceEntry;
+
+typedef struct SceIoCwd
+{
+    struct SceIoCwd         *next;
+    char                    *pathname;
+    struct SceIoDeviceEntry *de;
+    void                    *cwd_private;
+    int                      refcount;
+} SceIoCwd;
 
 /** Structure passed to the file functions of the io driver system */
-typedef struct PspIoDrvFileArg
+typedef struct SceIoIob
 {
 	/** Unknown */
-	u32 unk1;
+        int               i_flgs;
 	/** The file system number, e.g. if a file is opened as host5:/myfile.txt this field will be 5 */
-	u32 fs_num;
+	int               i_unit;
 	/** Pointer to the driver structure */
-	PspIoDrvArg *drv;
+	SceIoDeviceEntry *i_de;
 	/** Unknown, again */
-	u32 unk2;
+	int               d_type;
 	/** Pointer to a user defined argument, this is preserved on a per file basis */
-	void *arg;
-} PspIoDrvFileArg;
+	void             *i_private;
+	SceIoCwd         *i_cwd;
+	SceOff            i_fpos;
+	SceUID            i_thread;
+	int               dummy;
+} SceIoIob;
 
 /** Structure to maintain the file driver pointers */
-typedef struct PspIoDrvFuncs
+typedef struct SceIoDeviceFunction
 {
-	int (*IoInit)(PspIoDrvArg* arg);
-	int (*IoExit)(PspIoDrvArg* arg); 
-	int (*IoOpen)(PspIoDrvFileArg *arg, char *file, int flags, SceMode mode); 
-	int (*IoClose)(PspIoDrvFileArg *arg); 
-	int (*IoRead)(PspIoDrvFileArg *arg, char *data, int len); 
-	int (*IoWrite)(PspIoDrvFileArg *arg, const char *data, int len); 
-	SceOff (*IoLseek)(PspIoDrvFileArg *arg, SceOff ofs, int whence); 
-	int (*IoIoctl)(PspIoDrvFileArg *arg, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen);
-	int (*IoRemove)(PspIoDrvFileArg *arg, const char *name); 
-	int (*IoMkdir)(PspIoDrvFileArg *arg, const char *name, SceMode mode); 
-	int (*IoRmdir)(PspIoDrvFileArg *arg, const char *name);
-	int (*IoDopen)(PspIoDrvFileArg *arg, const char *dirname); 
-	int (*IoDclose)(PspIoDrvFileArg *arg);
-	int (*IoDread)(PspIoDrvFileArg *arg, SceIoDirent *dir);
-	int (*IoGetstat)(PspIoDrvFileArg *arg, const char *file, SceIoStat *stat);
-	int (*IoChstat)(PspIoDrvFileArg *arg, const char *file, SceIoStat *stat, int bits);
-	int (*IoRename)(PspIoDrvFileArg *arg, const char *oldname, const char *newname); 
-	int (*IoChdir)(PspIoDrvFileArg *arg, const char *dir); 
-	int (*IoMount)(PspIoDrvFileArg *arg); 
-	int (*IoUmount)(PspIoDrvFileArg *arg); 
-	int (*IoDevctl)(PspIoDrvFileArg *arg, const char *devname, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen); 
-	int (*IoUnk21)(PspIoDrvFileArg *arg); 
-} PspIoDrvFuncs;
+	int      (* df_init)(struct SceIoDeviceEntry *de);
+	int      (* df_exit)(struct SceIoDeviceEntry *);
+	int      (* df_open)(struct SceIoIob *, char *, int, SceMode);
+	int      (* df_close)(struct SceIoIob *);
+	SceSSize (* df_read)(struct SceIoIob *, void *, SceSize);
+	SceSSize (* df_write)(struct SceIoIob *, void *, SceSize);
+	SceOff   (* df_lseek)(struct SceIoIob *, SceOff, int);
+	int      (* df_ioctl)(struct SceIoIob *, int, void *, SceSize, void *, SceSize);
+	int      (* df_remove)(struct SceIoIob *, char *);
+	int      (* df_mkdir)(struct SceIoIob *, char *, SceMode);
+	int      (* df_rmdir)(struct SceIoIob *, char *);
+	int      (* df_dopen)(struct SceIoIob *, char *);
+	int      (* df_dclose)(struct SceIoIob *);
+	int      (* df_dread)(struct SceIoIob *, struct SceIoDirent *);
+	int      (* df_getstat)(struct SceIoIob *, char *, struct SceIoStat *);
+	int      (* df_chstat)(struct SceIoIob *, char *, struct SceIoStat *, u_int32_t);
+	int      (* df_rename)(struct SceIoIob *, char *, char *);
+	int      (* df_chdir)(struct SceIoIob *, char *);
+	int      (* df_mount)(struct SceIoIob *, char *, char *, int, void *, int);
+	int      (* df_umount)(struct SceIoIob *, char *);
+	int      (* df_devctl)(struct SceIoIob *, char *, int, void *, SceSize, void *, SceSize);
+	int      (* df_cancel)(struct SceIoIob *);
+} SceIoDeviceFunction;
 
-typedef struct PspIoDrv
+typedef struct SceIoDeviceTable
 {
 	/** The name of the device to add */
-	const char *name;
+	const char          *dt_string;
 	/** Device type, this 0x10 is for a filesystem driver */
-	u32 dev_type;
+	int                  dt_type;
 	/** Unknown, set to 0x800 */
-	u32 unk2;
+	int                  dt_size;
 	/** This seems to be the same as name but capitalised :/ */
-	const char *name2;
+	const char          *dt_desc;
 	/** Pointer to a filled out functions table */
-	PspIoDrvFuncs *funcs;
-} PspIoDrv;
+	SceIoDeviceFunction *dt_func;
+} SceIoDeviceTable;
 
 /** 
   * Adds a new IO driver to the system.
@@ -105,13 +119,13 @@ typedef struct PspIoDrv
   *
   * @par Example:
   * @code
-  * PspIoDrvFuncs host_funcs = { ... };
-  * PspIoDrv host_driver = { "host", 0x10, 0x800, "HOST", &host_funcs };
+  * SceIoDeviceFunction host_funcs = { ... };
+  * SceIoDeviceTable host_driver = { "host", 0x10, 0x800, "HOST", &host_funcs };
   * sceIoDelDrv("host");
   * sceIoAddDrv(&host_driver);
   * @endcode
   */
-int sceIoAddDrv(PspIoDrv *drv);
+int sceIoAddDrv(SceIoDeviceTable *drv);
 
 /**
   * Deletes a IO driver from the system.

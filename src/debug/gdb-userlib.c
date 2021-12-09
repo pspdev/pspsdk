@@ -37,17 +37,17 @@ char getDebugChar(void)
 
 int g_initialised = 0;
 
-static int io_init(PspIoDrvArg *arg)
+static int io_init(SceIoDeviceEntry *arg)
 {
 	return 0;
 }
 
-static int io_exit(PspIoDrvArg *arg)
+static int io_exit(SceIoDeviceEntry *arg)
 {
 	return 0;
 }
 
-static int io_read(PspIoDrvFileArg *arg, char *data, int len)
+static int io_read(SceIoIob *arg, char *data, int len)
 {
 	int ret = 0;
 	int ch;
@@ -68,7 +68,7 @@ static int io_read(PspIoDrvFileArg *arg, char *data, int len)
 	return ret;
 }
 
-static int io_write(PspIoDrvFileArg *arg, const char *data, int len)
+static int io_write(SceIoIob *arg, const char *data, int len)
 {
 	int ret = 0;
 
@@ -83,7 +83,7 @@ static int io_write(PspIoDrvFileArg *arg, const char *data, int len)
 void sceKernelDcacheWBinvAll(void);
 void sceKernelIcacheClearAll(void);
 
-static int io_devctl(PspIoDrvFileArg *arg, const char *devname, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen)
+static int io_devctl(SceIoIob *arg, const char *devname, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen)
 {
 	pspKernelSetKernelPC();
 	sceKernelDcacheWBinvAll();
@@ -92,7 +92,7 @@ static int io_devctl(PspIoDrvFileArg *arg, const char *devname, unsigned int cmd
 	return 0;
 }
 
-static PspIoDrvFuncs sio_funcs = 
+static SceIoDeviceFunction sio_funcs = 
 {
 	io_init,
 	io_exit,
@@ -118,7 +118,7 @@ static PspIoDrvFuncs sio_funcs =
 	NULL,
 };
 
-static PspIoDrv sio_driver = 
+static SceIoDeviceTable sio_driver = 
 {
 	"sio", 0x10, 0x800, "SIO", &sio_funcs
 };
