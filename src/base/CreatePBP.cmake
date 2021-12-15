@@ -5,6 +5,8 @@
 
 cmake_minimum_required(VERSION 3.10)
 
+option(BUILD_PRX "Build a PRX for use with PSPLink" OFF)
+
 macro(create_pbp_file)
 
   set(oneValueArgs
@@ -27,6 +29,11 @@ macro(create_pbp_file)
       set(ARG_${arg} "NULL")
     endif()
   endforeach()
+
+  # Build a PRX anyway if the -DBUILD_PRX=ON was set
+  if(${BUILD_PRX})
+    set(ARG_BUILD_PRX ${BUILD_PRX})
+  endif()
 
   if(NOT ${ARG_BUILD_PRX} AND ${ARG_ENC_PRX})
     message(WARNING "You are asking to encrypt PRX that is not built by this macro.\n"
