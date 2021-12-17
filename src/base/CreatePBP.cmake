@@ -5,6 +5,8 @@
 
 cmake_minimum_required(VERSION 3.10)
 
+option(BUILD_PRX "Build a PRX for use with PSPLink" OFF)
+
 macro(create_pbp_file)
 
   set(oneValueArgs
@@ -27,6 +29,11 @@ macro(create_pbp_file)
       set(ARG_${arg} "NULL")
     endif()
   endforeach()
+
+  # Build a PRX anyway if the -DBUILD_PRX=ON was set
+  if(${BUILD_PRX})
+    set(ARG_BUILD_PRX ${BUILD_PRX})
+  endif()
 
   if(NOT ${ARG_BUILD_PRX} AND ${ARG_ENC_PRX})
     message(WARNING "You are asking to encrypt PRX that is not built by this macro.\n"
@@ -62,24 +69,9 @@ macro(create_pbp_file)
   endif()
 
   add_custom_command(
-    TARGET ${ARG_TARGET} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory
-    $<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact
-    COMMENT "Creating psp_artifact directory."
-    )
-
-  add_custom_command(
-    TARGET ${ARG_TARGET} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    $<TARGET_FILE:${ARG_TARGET}>
-    "$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.elf"
-    COMMENT "Copying ELF to psp_arfitact directory."
-    )
-
-  add_custom_command(
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
-    "$ENV{PSPDEV}/bin/psp-fixup-imports" "$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.elf"
+    "$ENV{PSPDEV}/bin/psp-fixup-imports" "$<TARGET_FILE_DIR:${ARG_TARGET}>/${ARG_TARGET}"
     COMMENT "Calling psp-fixup-imports"
     )
 
@@ -87,8 +79,8 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/psp-prxgen" "$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.elf"
-      "$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.prx"
+      "${PSPDEV}/bin/psp-prxgen" "$<TARGET_FILE_DIR:${ARG_TARGET}>/${ARG_TARGET}"
+      "$<TARGET_FILE_DIR:${ARG_TARGET}>/${ARG_TARGET}.prx"
       COMMENT "Calling prxgen"
       )
 
@@ -96,8 +88,8 @@ macro(create_pbp_file)
       add_custom_command(
 	TARGET ${ARG_TARGET}
 	POST_BUILD COMMAND
-	"${PSPDEV}/bin/PrxEncrypter" "$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.prx"
-	"$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.prx"
+	"${PSPDEV}/bin/PrxEncrypter" "$<TARGET_FILE_DIR:${ARG_TARGET}>/${ARG_TARGET}.prx"
+	"$<TARGET_FILE_DIR:${ARG_TARGET}>/${ARG_TARGET}.prx"
 	COMMENT "Calling PrxEncrypter"
 	)
     else()
@@ -128,7 +120,7 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/pack-pbp" "EBOOT.PBP" "PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
-      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.prx" "NULL"
+      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE_DIR:${ARG_TARGET}>/${ARG_TARGET}.prx" "NULL"
       COMMENT "Calling pack-pbp with PRX file"
       )
   else()
@@ -136,7 +128,7 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/pack-pbp" "EBOOT.PBP" "PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
-      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE_DIR:${ARG_TARGET}>/psp_artifact/${ARG_TARGET}.elf" "NULL"
+      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE_DIR:${ARG_TARGET}>/${ARG_TARGET}" "NULL"
       COMMENT "Calling pack-pbp with ELF file"
       )
   endif()
