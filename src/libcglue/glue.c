@@ -50,6 +50,7 @@ extern unsigned int sce_newlib_heap_threshold_kb_size __attribute__((weak));
 
 /* Functions from cwd.c */
 extern char __cwd[MAXNAMLEN + 1];
+int __get_drive(const char *d);
 int __path_absolute(const char *in, char *out, int len);
 
 /* Functions from mutexman.c */
@@ -926,6 +927,24 @@ int getentropy(void *buffer, size_t length) {
 	}
 
 	return 0;
+}
+#endif
+
+#ifdef F_fsync
+int fsync(int fd) {
+	char devname[10]= { 0 };
+	int dr;
+
+	dr = __get_drive(__descriptormap[fd]->filename);
+	if (dr <= 0 || dr >= 10) {
+		errno = ENODEV;
+		return -1;
+	}
+
+	strncpy(devname, __descriptormap[fd]->filename, dr);
+	devname[dr] = '\0';
+
+	return __set_errno(sceIoSync(devname, 0));
 }
 #endif
 
