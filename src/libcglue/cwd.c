@@ -25,6 +25,24 @@ char __cwd[MAXNAMLEN + 1] = { 0 };
 extern char __cwd[MAXNAMLEN + 1];
 #endif
 
+#ifdef F___get_drive
+/* Return the number of bytes taken up by the "drive:" prefix,
+   or -1 if it's not found */
+int __get_drive(const char *d)
+{
+	int i;
+	for(i=0; d[i]; i++) {
+		if(! ((d[i] >= 'a' && d[i] <= 'z') ||
+		      (d[i] >= '0' && d[i] <= '9') ))
+			break;
+	}
+	if(d[i] == ':') return i+1;
+	return -1;
+}
+#else 
+int __get_drive(const char *d);
+#endif
+
 #ifdef F_getcwd
 char *getcwd(char *buf, size_t size)
 {
@@ -118,20 +136,6 @@ static int __path_normalize(char *out, int len)
 		out[i-1] = 0;
 
 	return 0;
-}
-
-/* Return the number of bytes taken up by the "drive:" prefix,
-   or -1 if it's not found */
-static int __get_drive(const char *d)
-{
-	int i;
-	for(i=0; d[i]; i++) {
-		if(! ((d[i] >= 'a' && d[i] <= 'z') ||
-		      (d[i] >= '0' && d[i] <= '9') ))
-			break;
-	}
-	if(d[i] == ':') return i+1;
-	return -1;
 }
 
 /* Convert relative path to absolute path. */
