@@ -70,6 +70,8 @@ int __pipe_nonblocking_write(int fd, const void *buf, size_t len);
 /* Functions from socket.c */
 int __socket_close(int sock);
 
+struct passwd __dummy_passwd = { "psp_user", "xxx", 1000, 1000, "", "", "/", "" };
+
 #ifdef F___fill_stat
 static time_t psp_to_posix_time(ScePspDateTime psp_time)
 {
@@ -950,27 +952,27 @@ int fsync(int fd) {
 
 #ifdef F_getuid
 uid_t getuid(void) {
-	return 1000;
+	return __dummy_passwd.pw_uid;
 }
 #endif
 
 #ifdef F_geteuid
 uid_t geteuid(void) {
-	return 1000;
+	return __dummy_passwd.pw_uid;
 }
 #endif
 
 #ifdef F_getpwuid
 struct passwd *getpwuid(uid_t uid) {
 	/* There's no support for users */
-	return NULL;
+	return &__dummy_passwd;
 }
 #endif
 
 #ifdef F_getpwnam
 struct passwd *getpwnam(const char *name) {
 	/* There's no support for users */
-	return NULL;
+	return &__dummy_passwd;
 }
 #endif
 
