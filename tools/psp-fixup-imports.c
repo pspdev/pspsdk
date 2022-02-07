@@ -183,6 +183,7 @@ unsigned char *load_file(const char *file, unsigned int *size)
 			if(*size < sizeof(Elf32_Ehdr))
 			{
 				fprintf(stderr, "Error, invalid file size\n");
+				fclose(fp);
 				break;
 			}
 
@@ -190,6 +191,7 @@ unsigned char *load_file(const char *file, unsigned int *size)
 			if(data == NULL)
 			{
 				fprintf(stderr, "Error, could not allocate memory for ELF\n");
+				fclose(fp);
 				break;
 			}
 
