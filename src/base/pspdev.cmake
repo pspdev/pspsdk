@@ -22,6 +22,8 @@ SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
+SET(PKG_CONFIG_EXECUTABLE "${PSPDEV}/bin/psp-pkg-config")
+
 ## Add Default PSPSDK Libraries according to build.mak and add stdc++ for C++ builds so this doesn't need to be done manually later
 include_directories(${PSPDEV}/psp/include ${PSPDEV}/psp/sdk/include)
 link_directories( ${PSPDEV}/lib ${PSPDEV}/psp/lib ${PSPDEV}/psp/sdk/lib)
