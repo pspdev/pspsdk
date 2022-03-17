@@ -22,7 +22,7 @@
 
 #define SELECT_POLLING_DELAY_IN_us	100
 #define SCE_FD_SET(n, p) \
-	((p)->fds_bits[((n) & 0xFF) /_NFDBITS] |= (1 << ((n) % _NFDBITS)))
+	((p)->fds_bits[((n) & 0xFF) /__NFDBITS] |= (1 << ((n) % __NFDBITS)))
 
 #ifdef F_select
 static int __poll_select(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds)
