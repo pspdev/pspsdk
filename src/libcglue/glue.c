@@ -42,6 +42,11 @@
 
 #include "fdman.h"
 
+/* compatibility with older newlib 1.20 based toolchain */
+#ifndef O_DIRECTORY
+#define O_DIRECTORY 0x200000
+#endif
+
 #define DEFAULT_HEAP_THRESHOLD_SIZE_KB 512
 
 /* If defined it specifies the desired size of the heap, in KB. */
