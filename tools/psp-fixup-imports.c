@@ -59,6 +59,8 @@ static struct ElfSection *g_modinfo = NULL;
 static struct ElfSection *g_libstub = NULL;
 static struct ElfSection *g_stubtext = NULL;
 static struct ElfSection *g_nid = NULL;
+static struct ElfSection *g_symtab = NULL;
+static struct ElfSection *g_strtab = NULL;
 static struct ImportMap  *g_map = NULL;
 static int g_reversemap = 0;
 
@@ -149,6 +151,27 @@ const unsigned char *find_data(unsigned int iAddr)
 	}
 
 	return NULL;
+}
+
+/* find symbol name. addr needs to be in host endianness */
+static const char *getsymname(unsigned addr)
+{
+	if(!g_symtab || !g_strtab) return 0;
+	if(g_symtab->iSize == 0 || g_symtab->pData == 0) return 0;
+	if(g_strtab->iSize == 0 || g_strtab->pData == 0) return 0;
+	Elf32_Sym *curr = (void*)g_symtab->pData;
+	Elf32_Sym *end = curr + (g_symtab->iSize / sizeof(Elf32_Sym));
+	addr = LW(addr);
+	while(curr < end) {
+		if(curr->st_value == addr) {
+			if(curr->st_name && curr->st_name < g_strtab->iSize)
+				return (char*)g_strtab->pData + curr->st_name;
+			else
+				return 0;
+		}
+		++curr;
+	}
+	return 0;
 }
 
 struct ImportMap *find_map_by_name(const char *name)
@@ -359,6 +382,14 @@ int load_sections(unsigned char *data)
 				else if(strcmp(g_elfsections[i].szName, PRX_NID_SECT) == 0)
 				{
 					g_nid = &g_elfsections[i];
+				}
+				else if(strcmp(g_elfsections[i].szName, ".symtab") == 0)
+				{
+					g_symtab = &g_elfsections[i];
+				}
+				else if(strcmp(g_elfsections[i].szName, ".strtab") == 0)
+				{
+					g_strtab = &g_elfsections[i];
 				}
 			}
 
@@ -653,7 +684,8 @@ int fixup_imports(void)
 
 			if(g_verbose)
 			{
-				fprintf(stderr, "Found import to fixup. pStub %08x, Nid %08x, NidInSect %08x\n", stub_addr, stub_nid, sect_nid);
+				const char *tmp = getsymname(stub_addr);
+				fprintf(stderr, "Found import to fixup. pStub %08x (%s), Nid %08x, NidInSect %08x\n", stub_addr, tmp ? tmp : "", stub_nid, sect_nid);
 			}
 
 			if(stub_nid != sect_nid)
@@ -671,8 +703,9 @@ int fixup_imports(void)
 			pImport = (struct PspModuleImport *) (g_libstub->pData + (stub_addr - g_libstub->iAddr));
 			if(g_verbose)
 			{
-				fprintf(stderr, "Import Stub %p, %08x, %08x, %02x, %02x, %04x, %08x, %08x\n", pImport, 
-						LW(pImport->name), LW(pImport->flags), pImport->entry_size, pImport->var_count, 
+				const char *tmp = getsymname(LW(pImport->name));
+				fprintf(stderr, "Import Stub %p, %08x (%s), %08x, %02x, %02x, %04x, %08x, %08x\n", pImport,
+						LW(pImport->name), tmp?tmp:"", LW(pImport->flags), pImport->entry_size, pImport->var_count,
 						LH(pImport->func_count), LW(pImport->nids), LW(pImport->funcs));
 			}
 
