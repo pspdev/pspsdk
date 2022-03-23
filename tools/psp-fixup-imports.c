@@ -721,9 +721,9 @@ int fixup_imports(void)
 			{
 				if((pLastImport) && (pImport != pLastImport))
 				{
-					fprintf(stderr, "Error, could not fixup imports, stubs out of order.\n");
-					fprintf(stderr, "Ensure the SDK libraries are linked in last to correct this error\n");
-					return 0;
+					fprintf(stderr, "Warning: could not fixup imports, stubs out of order.\n");
+					fprintf(stderr, "Ensure the SDK libraries are linked in last to correct this.\n");
+					fprintf(stderr, "Continuing, your binary may or not work.\n");
 				}
 			}
 
