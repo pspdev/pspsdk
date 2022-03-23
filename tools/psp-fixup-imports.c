@@ -505,106 +505,104 @@ int load_mapfile(const char *mapfile)
 		FILE *fp;
 
 		fp = fopen(mapfile, "r");
-		if(fp != NULL)
+		if(fp == NULL) return ret;
+		while(fgets(buf, sizeof(buf), fp))
 		{
-			while(fgets(buf, sizeof(buf), fp))
+			line++;
+			strip_wsp(buf);
+			if((buf[0]) && (buf[0] != '#'))
 			{
-				line++;
-				strip_wsp(buf);
-				if((buf[0]) && (buf[0] != '#'))
+				if(buf[0] == '@')
 				{
-					if(buf[0] == '@')
+					struct ImportMap *temp;
+
+					temp = (struct ImportMap *) malloc(sizeof(struct ImportMap));
+					if(temp == NULL)
 					{
-						struct ImportMap *temp;
+						printf("Error allocating memory for import map\n");
+						ret = 0;
+						break;
+					}
 
-						temp = (struct ImportMap *) malloc(sizeof(struct ImportMap));
-						if(temp == NULL)
-						{
-							printf("Error allocating memory for import map\n");
-							ret = 0;
-							break;
-						}
+					memset(temp, 0, sizeof(struct ImportMap));
+					if(currmap == NULL)
+					{
+						g_map = temp;
+					}
+					else
+					{
+						temp->next = currmap;
+						g_map = temp;
+					}
 
-						memset(temp, 0, sizeof(struct ImportMap));
-						if(currmap == NULL)
-						{
-							g_map = temp;
-						}
-						else
-						{
-							temp->next = currmap;
-							g_map = temp;
-						}
+					currmap = temp;
+					if(buf[1])
+					{
+						strncpy(currmap->name, &buf[1], 32);
+						currmap->name[31] = 0;
+					}
+					else
+					{
+						printf("Invalid library name at line %d\n", line);
+						break;
+					}
 
-						currmap = temp;
-						if(buf[1])
-						{
-							strncpy(currmap->name, &buf[1], 32);
-							currmap->name[31] = 0;
-						}
-						else
-						{
-							printf("Invalid library name at line %d\n", line);
-							break;
-						}
+					if(g_verbose)
+					{
+						printf("Mapping library %s\n", currmap->name);
+					}
+				}
+				else
+				{
+					unsigned int oldnid;
+					unsigned int newnid;
+					char *endp;
 
-						if(g_verbose)
+					if(currmap->count == MAX_MAPNIDS)
+					{
+						printf("Error, number of defined nids exceed maximum\n");
+						break;
+					}
+
+					/* Hex data should be prefixed with 0 */
+					if(buf[0] == '0')
+					{
+						errno = 0;
+						oldnid = strtoul(buf, &endp, 16);
+						if((errno != 0) || (*endp != ':'))
 						{
-							printf("Mapping library %s\n", currmap->name);
+							printf("Invalid NID entry on line %d\n", line);
+							continue;
 						}
 					}
 					else
 					{
-						unsigned int oldnid;
-						unsigned int newnid;
-						char *endp;
+						unsigned char hash[SHA1_DIGEST_SIZE];
 
-						if(currmap->count == MAX_MAPNIDS)
+						endp = strchr(buf, ':');
+						if(endp == NULL)
 						{
-							printf("Error, number of defined nids exceed maximum\n");
-							break;
+							printf("Invalid NID entry on line %d\n", line);
+							continue;
 						}
 
-						/* Hex data should be prefixed with 0 */
-						if(buf[0] == '0')
-						{
-							errno = 0;
-							oldnid = strtoul(buf, &endp, 16);
-							if((errno != 0) || (*endp != ':'))
-							{
-								printf("Invalid NID entry on line %d\n", line);
-								continue;
-							}
-						}
-						else
-						{
-							unsigned char hash[SHA1_DIGEST_SIZE];
-
-							endp = strchr(buf, ':');
-							if(endp == NULL)
-							{
-								printf("Invalid NID entry on line %d\n", line);
-								continue;
-							}
-
-							sha1(hash, (unsigned char *) buf, endp-buf);
-							oldnid = hash[0] | (hash[1] << 8) | (hash[2] << 16) | (hash[3] << 24);
-						}
-
-						newnid = strtoul(endp+1, &endp, 16);
-						if(g_verbose)
-						{
-							fprintf(stderr, "NID Mapping 0x%08X to 0x%08X\n", oldnid, newnid);
-						}
-
-						currmap->nids[currmap->count].oldnid = oldnid;
-						currmap->nids[currmap->count].newnid = newnid;
-						currmap->count++;
+						sha1(hash, (unsigned char *) buf, endp-buf);
+						oldnid = hash[0] | (hash[1] << 8) | (hash[2] << 16) | (hash[3] << 24);
 					}
+
+					newnid = strtoul(endp+1, &endp, 16);
+					if(g_verbose)
+					{
+						fprintf(stderr, "NID Mapping 0x%08X to 0x%08X\n", oldnid, newnid);
+					}
+
+					currmap->nids[currmap->count].oldnid = oldnid;
+					currmap->nids[currmap->count].newnid = newnid;
+					currmap->count++;
 				}
 			}
-			fclose(fp);
 		}
+		fclose(fp);
 	}
 	while(0);
 
