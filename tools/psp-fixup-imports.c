@@ -239,14 +239,14 @@ int validate_header(unsigned char *data)
 
 		if(g_verbose)
 		{
-			fprintf(stderr, "Magic %08X, Class %02X, Data %02X, Idver %02X\n", g_elfhead.iMagic,
+			fprintf(stderr, "Magic %08x, Class %02x, Data %02x, Idver %02x\n", g_elfhead.iMagic,
 					g_elfhead.iClass, g_elfhead.iData, g_elfhead.iIdver);
-			fprintf(stderr, "Type %04X, Machine %04X, Version %08X, Entry %08X\n", g_elfhead.iType,
+			fprintf(stderr, "Type %04x, Machine %04x, Version %08x, Entry %08x\n", g_elfhead.iType,
 					g_elfhead.iMachine, g_elfhead.iVersion, g_elfhead.iEntry);
-			fprintf(stderr, "Phoff %08X, Shoff %08X, Flags %08X, Ehsize %08X\n", g_elfhead.iPhoff,
+			fprintf(stderr, "Phoff %08x, Shoff %08x, Flags %08x, Ehsize %08x\n", g_elfhead.iPhoff,
 					g_elfhead.iShoff, g_elfhead.iFlags, g_elfhead.iEhsize);
-			fprintf(stderr, "Phentsize %04X, Phnum %04X\n", g_elfhead.iPhentsize, g_elfhead.iPhnum);
-			fprintf(stderr, "Shentsize %04X, Shnum %08X, Shstrndx %04X\n", g_elfhead.iShentsize,
+			fprintf(stderr, "Phentsize %04x, Phnum %04x\n", g_elfhead.iPhentsize, g_elfhead.iPhnum);
+			fprintf(stderr, "Shentsize %04x, Shnum %08x, Shstrndx %04x\n", g_elfhead.iShentsize,
 					g_elfhead.iShnum, g_elfhead.iShstrndx);
 		}
 
@@ -367,18 +367,18 @@ int load_sections(unsigned char *data)
 				for(i = 0; i < g_elfhead.iShnum; i++)
 				{
 					fprintf(stderr, "\nSection %d: %s\n", i, g_elfsections[i].szName);
-					fprintf(stderr, "Name %08X, Type %08X, Flags %08X, Addr %08X\n", 
+					fprintf(stderr, "Name %08x, Type %08x, Flags %08x, Addr %08x\n",
 							g_elfsections[i].iName, g_elfsections[i].iType,
 							g_elfsections[i].iFlags, g_elfsections[i].iAddr);
-					fprintf(stderr, "Offset %08X, Size %08X, Link %08X, Info %08X\n", 
+					fprintf(stderr, "Offset %08x, Size %08x, Link %08x, Info %08x\n",
 							g_elfsections[i].iOffset, g_elfsections[i].iSize,
 							g_elfsections[i].iLink, g_elfsections[i].iInfo);
-					fprintf(stderr, "Addralign %08X, Entsize %08X pData %p\n", 
+					fprintf(stderr, "Addralign %08x, Entsize %08x pData %p\n",
 							g_elfsections[i].iAddralign, g_elfsections[i].iEntsize,
 							g_elfsections[i].pData);
 				}
 
-				fprintf(stderr, "ELF Load Base address %08X\n", load_addr);
+				fprintf(stderr, "ELF Load Base address %08x\n", load_addr);
 			}
 
 			if(g_modinfo == NULL)
@@ -593,7 +593,7 @@ int load_mapfile(const char *mapfile)
 					newnid = strtoul(endp+1, &endp, 16);
 					if(g_verbose)
 					{
-						fprintf(stderr, "NID Mapping 0x%08X to 0x%08X\n", oldnid, newnid);
+						fprintf(stderr, "NID Mapping 0x%08x to 0x%08x\n", oldnid, newnid);
 					}
 
 					currmap->nids[currmap->count].oldnid = oldnid;
@@ -653,7 +653,7 @@ int fixup_imports(void)
 
 			if(g_verbose)
 			{
-				fprintf(stderr, "Found import to fixup. pStub %08X, Nid %08X, NidInSect %08X\n", stub_addr, stub_nid, sect_nid);
+				fprintf(stderr, "Found import to fixup. pStub %08x, Nid %08x, NidInSect %08x\n", stub_addr, stub_nid, sect_nid);
 			}
 
 			if(stub_nid != sect_nid)
@@ -671,7 +671,7 @@ int fixup_imports(void)
 			pImport = (struct PspModuleImport *) (g_libstub->pData + (stub_addr - g_libstub->iAddr));
 			if(g_verbose)
 			{
-				fprintf(stderr, "Import Stub %p, %08X, %08X, %02X, %02X, %04X, %08X, %08X\n", pImport, 
+				fprintf(stderr, "Import Stub %p, %08x, %08x, %02x, %02x, %04x, %08x, %08x\n", pImport, 
 						LW(pImport->name), LW(pImport->flags), pImport->entry_size, pImport->var_count, 
 						LH(pImport->func_count), LW(pImport->nids), LW(pImport->funcs));
 			}
@@ -779,7 +779,7 @@ int fixup_nidmap(void)
 							{
 								if(g_verbose)
 								{
-									fprintf(stderr, "Mapping 0x%08X to 0x%08X\n", oldnid, newnid);
+									fprintf(stderr, "Mapping 0x%08x to 0x%08x\n", oldnid, newnid);
 								}
 
 								*pNid = newnid;
