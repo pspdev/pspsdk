@@ -23,10 +23,24 @@ void __init_cwd(char *argv_0);
 void __timezone_update();
 void __fdman_init();
 void __init_mutex();
+void pthread_init();
 void __psp_free_heap();
 void __deinit_mutex();
 
 extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
+
+#ifdef F___libpthreadglue_init
+/* Note: This function is being called from __libcglue_init.
+* It is a weak function because can be override by user program
+*/
+__attribute__((weak))
+void __libpthreadglue_init()
+{
+    pthread_init();
+}
+#else
+void __libpthreadglue_init();
+#endif
 
 #ifdef F___libcglue_init
 /* Note: This function is being called from crt0.c/crt0_prx.c.
@@ -44,6 +58,9 @@ void __libcglue_init(int argc, char *argv[])
 
 	/* Initialize filedescriptor management */
 	__fdman_init();
+
+	/* Initialize pthread library */
+	__libpthreadglue_init();
 
 	/* Initialize cwd from this program's path */
 	__init_cwd(argv[0]);

@@ -31,7 +31,7 @@ GLUE_OBJS = __dummy_passwd.o __fill_stat.o __psp_heap_blockid.o __psp_free_heap.
 	fsync.o getpwnam.o getuid.o geteuid.o
 
 
-INIT_OBJS = __libcglue_init.o __libcglue_deinit.o _exit.o abort.o exit.o
+INIT_OBJS = __libpthreadglue_init.o __libcglue_init.o __libcglue_deinit.o _exit.o abort.o exit.o
 
 MUTEXMAN_OBJS = __malloc_mutex.o __sbrk_mutex.o __fdman_mutex.o __init_mutex.o __deinit_mutex.o
 
