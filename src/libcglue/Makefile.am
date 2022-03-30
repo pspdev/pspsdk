@@ -26,9 +26,9 @@ FDMAN_OBJS = __descriptor_data_pool.o __descriptormap.o __fdman_init.o __fdman_g
 
 GLUE_OBJS = __dummy_passwd.o __fill_stat.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o _open.o _close.o _read.o \
 	_write.o _fstat.o _stat.o lstat.o access.o _fcntl.o  _lseek.o chdir.o mkdir.o rmdir.o getdents.o _seekdir.o _link.o _unlink.o \
-	_rename.o _getpid.o _kill.o _sbrk.o _gettimeofday.o _times.o ftime.o _internal_malloc_lock.o _internal_malloc_unlock.o \
-	_isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o readlink.o utime.o fchown.o getentropy.o getpwuid.o \
-	fsync.o getpwnam.o getuid.o geteuid.o
+	_rename.o _getpid.o _kill.o _sbrk.o _gettimeofday.o _times.o ftime.o clock_getres.o clock_gettime.o clock_settime.o \
+	_internal_malloc_lock.o _internal_malloc_unlock.o _isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o \
+	readlink.o utime.o fchown.o getentropy.o getpwuid.o fsync.o getpwnam.o getuid.o geteuid.o
 
 
 INIT_OBJS = __libpthreadglue_init.o __libcglue_init.o __libcglue_deinit.o _exit.o abort.o exit.o
