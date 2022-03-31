@@ -758,6 +758,49 @@ int ftime(struct timeb *tb)
 }
 #endif
 
+#ifdef F_clock_getres
+int clock_getres(clockid_t clk_id, struct timespec *res)
+{
+	int ret;
+	struct SceKernelTimeval pspTimeval;
+
+	ret = __set_errno(sceKernelLibcGettimeofday(&pspTimeval, NULL));
+	if (ret < 0)
+		return ret;
+
+	/* Return the actual time since epoch */
+	res->tv_sec = pspTimeval.tv_sec;
+	res->tv_nsec = 1000 * pspTimeval.tv_usec;
+
+	return 0;
+}
+#endif
+
+#ifdef F_clock_gettime
+int clock_gettime(clockid_t clk_id, struct timespec *tp)
+{
+	int ret;
+	struct SceKernelTimeval pspTimeval;
+
+	ret = __set_errno(sceKernelLibcGettimeofday(&pspTimeval, NULL));
+	if (ret < 0)
+		return ret;
+
+	/* Return the actual time since epoch */
+	tp->tv_sec = pspTimeval.tv_sec;
+	tp->tv_nsec = 1000 * pspTimeval.tv_usec;
+
+	return 0;
+}
+#endif
+
+#ifdef F_clock_settime
+int clock_settime(clockid_t clk_id, const struct timespec *tp)
+{
+	return 0;
+}
+#endif
+
 #ifdef F__internal_malloc_lock
 void _internal_malloc_lock(struct _reent *ptr)
 {
