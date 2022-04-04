@@ -28,7 +28,7 @@ extern "C" {
 
 /**@{*/
 
-#include <sys/time.h>
+#include <time.h>
 
 /** 
  *  This struct is needed because tv_sec size is different from what newlib expect
