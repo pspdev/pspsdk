@@ -31,11 +31,11 @@ typedef enum {
 } __fdman_fd_types;
 
 typedef struct {
-	u_int32_t descriptor;
-	u_int32_t flags;
-	u_int32_t ref_count;
+	uint32_t descriptor;
+	uint32_t flags;
+	uint32_t ref_count;
 	char *filename;
-	u_int8_t type;
+	uint8_t type;
 } __descriptormap_type;
 	
 extern __descriptormap_type *__descriptormap[__FILENO_MAX];
