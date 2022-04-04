@@ -226,3 +226,6 @@
 #ifdef F_SysMemForKernel_0073
 	IMPORT_FUNC	"SysMemForKernel",0x419DB8F4,sceKernelRegisterGetIdFunc
 #endif
+#ifdef F_SysMemForKernel_0074
+	IMPORT_FUNC	"SysMemForKernel",0xCD617A94,sceKernelGetGameInfo
+#endif

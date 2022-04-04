@@ -225,6 +225,8 @@ int sceKernelSetQTGP3(const u8 *umdid);
 
 int sceKernelGetSystemStatus(void);
 
+void *sceKernelGetGameInfo();
+
 #ifdef __cplusplus
 }
 #endif
