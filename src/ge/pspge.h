@@ -74,6 +74,15 @@ typedef struct PspGeBreakParam {
 unsigned int sceGeEdramGetSize(void);
 
 /**
+ * Sets the EDRAM size to be enabled.
+ *
+ * @param size -size	The size (0x200000 or 0x400000). Will return an error if 0x400000 is specified for the PSP FAT.
+ *
+ * @return Zero on success, otherwise less than zero. 
+ */
+int sceGeEdramSetSize(int size);
+
+/**
   * Get the eDRAM address.
   *
   * @return A pointer to the base of the eDRAM.
@@ -271,6 +280,7 @@ int sceGeContinue(void);
  * @return The previous width if it was set, otherwise 0, < 0 on error.
  */
 int sceGeEdramSetAddrTranslation(int width);
+
 
 #ifdef __cplusplus
 }
