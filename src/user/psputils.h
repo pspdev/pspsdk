@@ -28,6 +28,7 @@ extern "C" {
 
 /**@{*/
 
+#include <sys/time.h>
 #include <time.h>
 
 /** 
