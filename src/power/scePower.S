@@ -6,10 +6,10 @@
 	IMPORT_START	"scePower",0x40010000
 #endif
 #ifdef F_scePower_0001
-	IMPORT_FUNC	"scePower",0x2B51FE2F,scePower_2B51FE2F
+	IMPORT_FUNC	"scePower",0x2B51FE2F,scePowerGetWlanActivity
 #endif
 #ifdef F_scePower_0002
-	IMPORT_FUNC	"scePower",0x442BFBAC,scePower_442BFBAC
+	IMPORT_FUNC	"scePower",0x442BFBAC,scePowerGetBacklightMaximum
 #endif
 #ifdef F_scePower_0003
 	IMPORT_FUNC	"scePower",0xEFD3C963,scePowerTick
@@ -27,7 +27,7 @@
 	IMPORT_FUNC	"scePower",0x27F3292C,scePowerBatteryUpdateInfo
 #endif
 #ifdef F_scePower_0008
-	IMPORT_FUNC	"scePower",0xE8E4E204,scePower_E8E4E204
+	IMPORT_FUNC	"scePower",0xE8E4E204,scePowerGetForceSuspendCapacity
 #endif
 #ifdef F_scePower_0009
 	IMPORT_FUNC	"scePower",0xB999184C,scePowerGetLowBatteryCapacity
@@ -48,13 +48,13 @@
 	IMPORT_FUNC	"scePower",0xD3075926,scePowerIsLowBattery
 #endif
 #ifdef F_scePower_0015
-	IMPORT_FUNC	"scePower",0x78A1A796,scePower_78A1A796
+	IMPORT_FUNC	"scePower",0x78A1A796,scePowerIsSuspendRequired
 #endif
 #ifdef F_scePower_0016
 	IMPORT_FUNC	"scePower",0x94F5A53F,scePowerGetBatteryRemainCapacity
 #endif
 #ifdef F_scePower_0017
-	IMPORT_FUNC	"scePower",0xFD18A0FF,scePower_FD18A0FF
+	IMPORT_FUNC	"scePower",0xFD18A0FF,scePowerGetBatteryFullCapacity
 #endif
 #ifdef F_scePower_0018
 	IMPORT_FUNC	"scePower",0x2085D15D,scePowerGetBatteryLifePercent
@@ -72,13 +72,13 @@
 	IMPORT_FUNC	"scePower",0x483CE86B,scePowerGetBatteryVolt
 #endif
 #ifdef F_scePower_0023
-	IMPORT_FUNC	"scePower",0x23436A4A,scePower_23436A4A
+	IMPORT_FUNC	"scePower",0x23436A4A,scePowerGetInnerTemp
 #endif
 #ifdef F_scePower_0024
-	IMPORT_FUNC	"scePower",0x0CD21B1F,scePower_0CD21B1F
+	IMPORT_FUNC	"scePower",0x0CD21B1F,scePowerSetPowerSwMode
 #endif
 #ifdef F_scePower_0025
-	IMPORT_FUNC	"scePower",0x165CE085,scePower_165CE085
+	IMPORT_FUNC	"scePower",0x165CE085,scePowerGetPowerSwMode
 #endif
 #ifdef F_scePower_0026
 	IMPORT_FUNC	"scePower",0xD6D016EF,scePowerLock
@@ -99,7 +99,7 @@
 	IMPORT_FUNC	"scePower",0xAC32C9CC,scePowerRequestSuspend
 #endif
 #ifdef F_scePower_0032
-	IMPORT_FUNC	"scePower",0x2875994B,scePower_2875994B
+	IMPORT_FUNC	"scePower",0x2875994B,scePowerRequestSuspendTouchAndGo
 #endif
 #ifdef F_scePower_0033
 	IMPORT_FUNC	"scePower",0x3951AF53,scePowerEncodeUBattery
