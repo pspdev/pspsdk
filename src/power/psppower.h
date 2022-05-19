@@ -115,6 +115,27 @@ int scePowerGetBatteryChargingStatus(void);
 int scePowerIsLowBattery(void);
 
 /**
+ * Check if a suspend is required
+ *
+ * @return 1 if suspend is required, 0 otherwise
+ */
+int scePowerIsSuspendRequired(void);
+
+/**
+ * Returns battery remaining capacity
+ *
+ * @return battery remaining capacity in mAh (milliampere hour)
+ */
+int scePowerGetBatteryRemainCapacity(void);
+
+/**
+ * Returns battery full capacity
+ *
+ * @return battery full capacity in mAh (milliampere hour)
+ */
+int scePowerGetBatteryFullCapacity(void);
+
+/**
  * Get battery life as integer percent
  *
  * @return Battery charge percentage (0-100), < 0 on error.
