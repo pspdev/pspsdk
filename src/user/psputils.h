@@ -14,6 +14,7 @@
 #define __UTILS_H__
 
 #include <psptypes.h>
+#include <sys/time.h>
 
 #ifdef __cplusplus
 extern "C" {
