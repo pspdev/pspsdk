@@ -27,7 +27,7 @@ void __timezone_update()
     int minutes = tzOffsetAbs - hours * 60;
     int pspDaylight = 0;
     sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_DAYLIGHTSAVINGS, &pspDaylight);
-    static char tz[18];
+    static char tz[33];
     sprintf(tz, "GMT%s%02i:%02i%s", tzOffset < 0 ? "+" : "-", hours, minutes, pspDaylight ? "daylight" : "");
     setenv("TZ", tz, 1);
 }
