@@ -69,28 +69,28 @@ void pspDebugProfilerPrint(void)
 	pspDebugProfilerGetRegs(&regs);
 
 	pspDebugScreenPrintf("********** Profile ***********\n");
-	pspDebugScreenPrintf("enable         : %10u\n", regs.enable);
-	pspDebugScreenPrintf("systemck       : %10u [cycles]\n", regs.systemck);
-	pspDebugScreenPrintf("cpu ck         : %10u [cycles]\n", regs.cpuck);
-	pspDebugScreenPrintf("stall          : %10u [cycles]\n", regs.internal + regs.memory +
+	pspDebugScreenPrintf("enable         : %10lu\n", regs.enable);
+	pspDebugScreenPrintf("systemck       : %10lu [cycles]\n", regs.systemck);
+	pspDebugScreenPrintf("cpu ck         : %10lu [cycles]\n", regs.cpuck);
+	pspDebugScreenPrintf("stall          : %10lu [cycles]\n", regs.internal + regs.memory +
 			regs.copz + regs.vfpu);
-	pspDebugScreenPrintf("+(internal)    : %10u [cycles]\n", regs.internal);
-	pspDebugScreenPrintf("+--(memory)    : %10u [cycles]\n", regs.memory);
-	pspDebugScreenPrintf("+----(COPz)    : %10u [cycles]\n", regs.copz);
-	pspDebugScreenPrintf("+----(VFPU)    : %10u [cycles]\n", regs.vfpu);
-	pspDebugScreenPrintf("sleep          : %10u [cycles]\n", regs.sleep);
-	pspDebugScreenPrintf("bus access     : %10u [cycles]\n", regs.bus_access);
-	pspDebugScreenPrintf("uncached load  : %10u [times]\n", regs.uncached_load);
-	pspDebugScreenPrintf("uncached store : %10u [times]\n", regs.uncached_store);
-	pspDebugScreenPrintf("cached load    : %10u [times]\n", regs.cached_load);
-	pspDebugScreenPrintf("cached store   : %10u [times]\n", regs.cached_store);
-	pspDebugScreenPrintf("I cache miss   : %10u [times]\n", regs.i_miss);
-	pspDebugScreenPrintf("D cache miss   : %10u [times]\n", regs.d_miss);
-	pspDebugScreenPrintf("D cache wb     : %10u [times]\n", regs.d_writeback);
-	pspDebugScreenPrintf("COP0 inst.     : %10u [inst.]\n", regs.cop0_inst);
-	pspDebugScreenPrintf("FPU  inst.     : %10u [inst.]\n", regs.fpu_inst);
-	pspDebugScreenPrintf("VFPU inst.     : %10u [inst.]\n", regs.vfpu_inst);
-	pspDebugScreenPrintf("local bus      : %10u [cycles]\n", regs.local_bus);
+	pspDebugScreenPrintf("+(internal)    : %10lu [cycles]\n", regs.internal);
+	pspDebugScreenPrintf("+--(memory)    : %10lu [cycles]\n", regs.memory);
+	pspDebugScreenPrintf("+----(COPz)    : %10lu [cycles]\n", regs.copz);
+	pspDebugScreenPrintf("+----(VFPU)    : %10lu [cycles]\n", regs.vfpu);
+	pspDebugScreenPrintf("sleep          : %10lu [cycles]\n", regs.sleep);
+	pspDebugScreenPrintf("bus access     : %10lu [cycles]\n", regs.bus_access);
+	pspDebugScreenPrintf("uncached load  : %10lu [times]\n", regs.uncached_load);
+	pspDebugScreenPrintf("uncached store : %10lu [times]\n", regs.uncached_store);
+	pspDebugScreenPrintf("cached load    : %10lu [times]\n", regs.cached_load);
+	pspDebugScreenPrintf("cached store   : %10lu [times]\n", regs.cached_store);
+	pspDebugScreenPrintf("I cache miss   : %10lu [times]\n", regs.i_miss);
+	pspDebugScreenPrintf("D cache miss   : %10lu [times]\n", regs.d_miss);
+	pspDebugScreenPrintf("D cache wb     : %10lu [times]\n", regs.d_writeback);
+	pspDebugScreenPrintf("COP0 inst.     : %10lu [inst.]\n", regs.cop0_inst);
+	pspDebugScreenPrintf("FPU  inst.     : %10lu [inst.]\n", regs.fpu_inst);
+	pspDebugScreenPrintf("VFPU inst.     : %10lu [inst.]\n", regs.vfpu_inst);
+	pspDebugScreenPrintf("local bus      : %10lu [cycles]\n", regs.local_bus);
 }
 
 

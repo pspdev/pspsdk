@@ -61,13 +61,13 @@ void pspDebugDumpException(PspDebugRegBlock *regs)
 	int i;
 
 	pspDebugScreenPrintf("Exception - %s\n", codeTxt[(regs->cause >> 2) & 31]);
-	pspDebugScreenPrintf("EPC       - %08X\n", regs->epc);
-	pspDebugScreenPrintf("Cause     - %08X\n", regs->cause);
-	pspDebugScreenPrintf("Status    - %08X\n", regs->status);
-	pspDebugScreenPrintf("BadVAddr  - %08X\n", regs->badvaddr);
+	pspDebugScreenPrintf("EPC       - %08lX\n", regs->epc);
+	pspDebugScreenPrintf("Cause     - %08lX\n", regs->cause);
+	pspDebugScreenPrintf("Status    - %08lX\n", regs->status);
+	pspDebugScreenPrintf("BadVAddr  - %08lX\n", regs->badvaddr);
 	for(i = 0; i < 32; i+=4)
 	{
-		pspDebugScreenPrintf("%s:%08X %s:%08X %s:%08X %s:%08X\n", regName[i], regs->r[i],
+		pspDebugScreenPrintf("%s:%08lX %s:%08lX %s:%08lX %s:%08lX\n", regName[i], regs->r[i],
 				regName[i+1], regs->r[i+1], regName[i+2], regs->r[i+2], regName[i+3], regs->r[i+3]);
 	}
 
