@@ -251,7 +251,7 @@ void pspDebugKbInit(char* str) {
 	  break;
 	case 1: // Space
 	  if (strlen(str) < PSP_DEBUG_KB_MAXLEN) {
-      char out[PSP_DEBUG_KB_MAXLEN] = {0};
+	    char out[PSP_DEBUG_KB_MAXLEN] = {0};
 	    snprintf(out, strlen(str), "%s ", str);
 	    pspDebugKbDrawString(out);
 	  }
@@ -273,7 +273,7 @@ void pspDebugKbInit(char* str) {
 	};
       } else {
 	if (strlen(str) < PSP_DEBUG_KB_MAXLEN) {
-    char out[PSP_DEBUG_KB_MAXLEN] = {0};
+	  char out[PSP_DEBUG_KB_MAXLEN] = {0};
 	  snprintf(out, strlen(str), "%s%c", str, charTable[row][col]);
 	  pspDebugKbDrawString(out);
 	}
