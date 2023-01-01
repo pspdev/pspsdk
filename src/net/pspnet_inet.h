@@ -19,6 +19,7 @@ extern "C" {
 #endif
 
 #include <sys/socket.h>
+#include <sys/select.h>
 
 /** 
  *  This struct is needed because tv_sec size is different from what newlib expect
