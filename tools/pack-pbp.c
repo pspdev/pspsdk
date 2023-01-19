@@ -158,7 +158,8 @@ int main(int argc, char *argv[]) { int loop0, result;
          }
          
          // Read in the data from the file
-         if (fread(buffer, readsize, 1, infile) < 0) {
+         size_t result = fread(buffer, readsize, 1, infile);
+         if (result < 0) {
             printf("ERROR: Could not read in the file data. (%s)\n", argv[2 + loop0]);
             return -1;
          }

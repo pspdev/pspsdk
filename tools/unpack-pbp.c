@@ -96,7 +96,8 @@ int main(int argc, char *argv[]) {
    }
    
    // Read in the header
-   if (fread(&header, sizeof(HEADER), 1, infile) < 0) {
+   size_t result = fread(&header, sizeof(HEADER), 1, infile);
+   if (result < 0) {
       printf("ERROR: Could not read the input file header.\n");
       return -1;
    }
@@ -168,7 +169,8 @@ int main(int argc, char *argv[]) {
          size -= readsize;
          
          // Read in the data from the PBP
-         if (fread(buffer, readsize, 1, infile) < 0) {
+         size_t result = fread(buffer, readsize, 1, infile);
+         if (result < 0) {
             printf("ERROR: Could not read in the section data.\n");
             free(buffer);
             return -1;

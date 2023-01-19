@@ -144,7 +144,12 @@ unsigned char *load_file(const char *file)
 				break;
 			}
 
-			(void) fread(data, 1, size, fp);
+			size_t result = fread(data, 1, size, fp);
+			if (result < 0) {
+				fprintf(stderr, "Error, could not read the ELF\n");
+				fclose(fp);
+				break;
+			}
 			fclose(fp);
 		}
 		else
