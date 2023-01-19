@@ -181,7 +181,12 @@ int load_elf(char *elff)
 	fseek(fp, 0, SEEK_END);
 	int size = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
-	fread(elf, 1, size, fp);
+	size_t result = fread(elf, 1, size, fp);
+	if (result < 0) {
+		fprintf(stderr, "Error, could not read the ELF\n");
+		fclose(fp);
+		return -1;
+	}
 	fclose(fp);
 
 	return size;
