@@ -245,7 +245,7 @@ int main(int argc, char *argv[])
 {
     u32 fd_size, start = 0, end = 0xffffffff, size = 0xffffffff;
     unsigned char * buffer;
-    FILE * source, * dest;
+    FILE * source = NULL, * dest = NULL;
     char * f_source = 0, * f_dest = 0, * f_label = 0;
     int i;
 
@@ -363,12 +363,14 @@ int main(int argc, char *argv[])
     if (buffer == NULL) {
 	printf("Failed to allocate memory.\n");
 	fclose(source);
+	free(buffer);
 	return 1;
     }
 
     if (fread(buffer, 1, size, source) != size) {
 	printf("Failed to read file.\n");
 	fclose(source);
+	free(buffer);
 	return 1;
     }
     fclose(source);
