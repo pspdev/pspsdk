@@ -362,13 +362,13 @@ int main(int argc, char *argv[])
     buffer = malloc(size);
     if (buffer == NULL) {
 	printf("Failed to allocate memory.\n");
-	fclose(dest);
+	fclose(source);
 	return 1;
     }
 
     if (fread(buffer, 1, size, source) != size) {
 	printf("Failed to read file.\n");
-	fclose(dest);
+	fclose(source);
 	return 1;
     }
     fclose(source);
