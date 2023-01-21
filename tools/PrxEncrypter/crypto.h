@@ -47,8 +47,8 @@ void AES_CMAC_forge (AES_ctx *ctx, unsigned char *input, int length, unsigned ch
 
 int	rijndaelKeySetupEnc(unsigned int [], const unsigned char [], int);
 int	rijndaelKeySetupDec(unsigned int [], const unsigned char [], int);
-void rijndaelEncrypt(const unsigned int [], int, const unsigned char [],
-	    unsigned char []);
+void rijndaelEncrypt(const unsigned int [], int, const unsigned char [16],
+	    unsigned char [16]);
 
 typedef struct SHA1Context
 {
