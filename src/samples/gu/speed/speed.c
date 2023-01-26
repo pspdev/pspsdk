@@ -40,9 +40,9 @@ struct Vertex
 	unsigned short u, v;
 	unsigned short color;
 	short x, y, z;
-};
+} __attribute__ ((packed));
 
-void simpleBlit(int sx, int sy, int sw, int sh, int dx, int dy)
+static void spriteBlit(int sx, int sy, int sw, int sh, int dx, int dy)
 {
 	// simple blit, this just copies A->B, with all the cache-misses that apply
 
@@ -59,27 +59,112 @@ void simpleBlit(int sx, int sy, int sw, int sh, int dx, int dy)
 	sceGuDrawArray(GU_SPRITES,GU_TEXTURE_16BIT|GU_COLOR_4444|GU_VERTEX_16BIT|GU_TRANSFORM_2D,2,0,vertices);
 }
 
-void advancedBlit(int sx, int sy, int sw, int sh, int dx, int dy, int slice)
+static void triangleBlit(int sx, int sy, int sw, int sh, int dx, int dy)
 {
-	int start, end;
+	// simple blit, this just copies A->B, with all the cache-misses that apply
+
+	struct Vertex* vertices = (struct Vertex*)sceGuGetMemory(6 * sizeof(struct Vertex));
+
+	vertices[0].u = sx; vertices[0].v = sy;
+	vertices[0].color = 0;
+	vertices[0].x = dx; vertices[0].y = dy; vertices[0].z = 0;
+
+	vertices[1].u = sx+sw; vertices[1].v = sy;
+	vertices[1].color = 0;
+	vertices[1].x = dx+sw; vertices[1].y = dy; vertices[1].z = 0;
+
+	vertices[2].u = sx+sw; vertices[2].v = sy+sh;
+	vertices[2].color = 0;
+	vertices[2].x = dx+sw; vertices[2].y = dy+sh; vertices[2].z = 0;
+
+	vertices[3].u = sx; vertices[3].v = sy;
+	vertices[3].color = 0;
+	vertices[3].x = dx; vertices[3].y = dy; vertices[3].z = 0;
+
+	vertices[4].u = sx+sw; vertices[4].v = sy+sh;
+	vertices[4].color = 0;
+	vertices[4].x = dx+sw; vertices[4].y = dy+sh; vertices[4].z = 0;
+
+	vertices[5].u = sx; vertices[5].v = sy+sh;
+	vertices[5].color = 0;
+	vertices[5].x = dx; vertices[5].y = dy+sh; vertices[5].z = 0;
+
+	sceGuDrawArray(GU_TRIANGLES,GU_TEXTURE_16BIT|GU_COLOR_4444|GU_VERTEX_16BIT|GU_TRANSFORM_2D,6,0,vertices);
+}
+
+static void advancedSpriteBlit(int sx, int sy, int sw, int sh, int dx, int dy, int slice)
+{
+	int start, end, i;
 
 	// blit maximizing the use of the texture-cache
 
-	for (start = sx, end = sx+sw; start < end; start += slice, dx += slice)
+	// Calculate needed vertices
+	int numVertices = 0;
+	for (start = sx, end = sx+sw; start < end; start += slice)
+		numVertices += 2;
+
+	struct Vertex* vertices = (struct Vertex*)sceGuGetMemory(numVertices * sizeof(struct Vertex));
+
+	for (start = sx, end = sx+sw, i = 0; start < end; start += slice, dx += slice, i += 2)
 	{
-		struct Vertex* vertices = (struct Vertex*)sceGuGetMemory(2 * sizeof(struct Vertex));
 		int width = (start + slice) < end ? slice : end-start;
 
-		vertices[0].u = start; vertices[0].v = sy;
-		vertices[0].color = 0;
-		vertices[0].x = dx; vertices[0].y = dy; vertices[0].z = 0;
+		vertices[i+0].u = start; vertices[i+0].v = sy;
+		vertices[i+0].color = 0;
+		vertices[i+0].x = dx; vertices[i+0].y = dy; vertices[i+0].z = 0;
 
-		vertices[1].u = start + width; vertices[1].v = sy + sh;
-		vertices[1].color = 0;
-		vertices[1].x = dx + width; vertices[1].y = dy + sh; vertices[1].z = 0;
+		vertices[i+1].u = start + width; vertices[i+1].v = sy + sh;
+		vertices[i+1].color = 0;
+		vertices[i+1].x = dx + width; vertices[i+1].y = dy + sh; vertices[i+1].z = 0;
 
-		sceGuDrawArray(GU_SPRITES,GU_TEXTURE_16BIT|GU_COLOR_4444|GU_VERTEX_16BIT|GU_TRANSFORM_2D,2,0,vertices);
 	}
+	sceGuDrawArray(GU_SPRITES,GU_TEXTURE_16BIT|GU_COLOR_4444|GU_VERTEX_16BIT|GU_TRANSFORM_2D,numVertices,0,vertices);
+}
+
+static void advancedTriangleBlit(int sx, int sy, int sw, int sh, int dx, int dy, int slice)
+{
+	int start, end, i;
+
+	// blit maximizing the use of the texture-cache
+	
+	// Calculate needed vertices
+	int numVertices = 0;
+	for (start = sx, end = sx+sw; start < end; start += slice)
+		numVertices += 6;
+
+	struct Vertex* vertices = (struct Vertex*)sceGuGetMemory(numVertices * sizeof(struct Vertex));
+
+	for (start = sx, end = sx+sw, i=0; start < end; start += slice, dx += slice, i +=6)
+	{
+		
+		int width = (start + slice) < end ? slice : end-start;
+
+		vertices[i+0].u = start; vertices[i+0].v = sy;
+		vertices[i+0].color = 0;
+		vertices[i+0].x = dx; vertices[i+0].y = dy; vertices[i+0].z = 0;
+
+		vertices[i+1].u = start+width; vertices[i+1].v = sy;
+		vertices[i+1].color = 0;
+		vertices[i+1].x = dx+width; vertices[i+1].y = dy; vertices[i+1].z = 0;
+
+		vertices[i+2].u = start+width; vertices[i+2].v = sy+sh;
+		vertices[i+2].color = 0;
+		vertices[i+2].x = dx+width; vertices[i+2].y = dy+sh; vertices[i+2].z = 0;
+
+		vertices[i+3].u = start; vertices[i+3].v = sy;
+		vertices[i+3].color = 0;
+		vertices[i+3].x = dx; vertices[i+3].y = dy; vertices[i+3].z = 0;
+
+		vertices[i+4].u = start+width; vertices[i+4].v = sy+sh;
+		vertices[i+4].color = 0;
+		vertices[i+4].x = dx+width; vertices[i+4].y = dy+sh; vertices[i+4].z = 0;
+
+		vertices[i+5].u = start; vertices[i+5].v = sy+sh;
+		vertices[i+5].color = 0;
+		vertices[i+5].x = dx; vertices[i+5].y = dy+sh; vertices[i+5].z = 0;
+
+	}
+		sceGuDrawArray(GU_TRIANGLES,GU_TEXTURE_16BIT|GU_COLOR_4444|GU_VERTEX_16BIT|GU_TRANSFORM_2D,numVertices,0,vertices);
 }
 
 void swizzle_fast(u8* out, const u8* in, unsigned int width, unsigned int height)
@@ -114,6 +199,35 @@ void swizzle_fast(u8* out, const u8* in, unsigned int width, unsigned int height
      }
      ysrc += src_row;
    }
+}
+
+enum BlitMode
+{
+	BLITMODE_SPRITE,
+	BLITMODE_TRIANGLE,
+	BLITMODE_ADVANCED_SPRITE,
+	BLITMODE_ADVANCED_TRIANGLE,
+	BLITMODE_COUNT
+};
+
+static char *blitName(enum BlitMode blit_mode) {
+	switch (blit_mode) {
+		case BLITMODE_SPRITE: return "Sprite";
+		case BLITMODE_TRIANGLE: return "Triangle";
+		case BLITMODE_ADVANCED_SPRITE: return "Adv Sprite";
+		case BLITMODE_ADVANCED_TRIANGLE: return "Adv Triangle";
+		default: return "Unknown BlitMode";
+	}
+}
+
+static void blitTexture(enum BlitMode blit_mode, int sx, int sy, int sw, int sh, int dx, int dy, int slice) {
+	switch (blit_mode) {
+		case BLITMODE_SPRITE: spriteBlit(sx, sy, sw, sh, dx, dy); break;
+		case BLITMODE_TRIANGLE: triangleBlit(sx, sy, sw, sh, dx, dy); break;
+		case BLITMODE_ADVANCED_SPRITE: advancedSpriteBlit(sx, sy, sw, sh, dx, dy, slice); break;
+		case BLITMODE_ADVANCED_TRIANGLE: advancedTriangleBlit(sx, sy, sw, sh, dx, dy, slice); break;
+		case BLITMODE_COUNT: break;
+	}
 }
 
 struct StripWidthDeclaration
@@ -198,7 +312,7 @@ int main(int argc, char* argv[])
 	sceKernelDcacheWritebackAll();
 
 	float curr_ms = 1.0f;
-	int blit_method = 0;
+	enum BlitMode blit_method = BLITMODE_SPRITE;
 	int swizzle = 0;
 	int vram_select = 0;
 	int strip_width = 0;
@@ -226,8 +340,11 @@ int main(int argc, char* argv[])
 		{
 			if (pad.Buttons != oldPad.Buttons)
 			{
-				if (pad.Buttons & PSP_CTRL_CROSS)
-					blit_method ^= 1;
+				if (pad.Buttons & PSP_CTRL_CROSS) {
+					blit_method += 1;
+					if (blit_method == BLITMODE_COUNT)
+						blit_method = BLITMODE_SPRITE;
+				}
 
 				if (pad.Buttons & PSP_CTRL_CIRCLE)
 				{
@@ -294,10 +411,7 @@ int main(int argc, char* argv[])
 		sceGuTexFunc(GU_TFX_REPLACE,GU_TCC_RGBA); // don't get influenced by any vertex colors
 		sceGuTexFilter(GU_NEAREST,GU_NEAREST); // point-filtered sampling
 
-		if (blit_method)
-			advancedBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0, strip_widths[strip_width].width);
-		else
-			simpleBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0);
+		blitTexture(blit_method,0,0,SCR_WIDTH,SCR_HEIGHT,0,0,strip_widths[strip_width].width);
 
 		sceGuFinish();
 		sceGuSync(0,0);
@@ -317,7 +431,7 @@ int main(int argc, char* argv[])
 			pspDebugScreenSetXY(0,0);
 			pspDebugScreenPrintf("fps: %d.%03d (%dMB/s)",(int)curr_fps,(int)((curr_fps-(int)curr_fps) * 1000.0f),transfer_rate);
 			pspDebugScreenSetXY(0,1);
-			pspDebugScreenPrintf("%s %s %s %s",blit_method ? "optimized" : "normal", swizzle ? "swizzled" : "linear",vram_select ? "video ram" : "system ram", strip_widths[strip_width].name);
+			pspDebugScreenPrintf("%s %s %s %s", blitName(blit_method), swizzle ? "swizzled" : "linear",vram_select ? "video ram" : "system ram", strip_widths[strip_width].name);
 			pspDebugScreenSetXY(0,2);
 			pspDebugScreenPrintf("%s",pixel_formats[pixel_format].name);
 
