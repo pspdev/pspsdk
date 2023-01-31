@@ -4,7 +4,7 @@ else()
     message(FATAL_ERROR "The environment variable PSPDEV needs to be defined.")
 endif()
 
-SET(CMAKE_SYSTEM_NAME Generic)
+SET(CMAKE_SYSTEM_NAME PSP)
 SET(CMAKE_SYSTEM_VERSION 1)
 SET(CMAKE_SYSTEM_PROCESSOR mips)
 SET(CMAKE_C_COMPILER psp-gcc)
