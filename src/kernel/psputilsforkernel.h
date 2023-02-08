@@ -23,10 +23,10 @@ extern "C" {
  * @param dest - pointer to destination buffer
  * @param destSize - size of destination buffer
  * @param src - pointer to source (compressed) data
- * @param unknown - unknown, pass NULL
+ * @param src_out - if not NULL, it will store the pointer to src + compressed_bytes_processed
  * @return size decompressed on success, < 0 on error
  */
-int sceKernelGzipDecompress(u8 *dest, u32 destSize, const u8 *src, u32 unknown);
+int sceKernelGzipDecompress(u8 *dest, u32 destSize, const u8 *src, u8** src_out);
 
 /**
  * Decompress deflate'd data (requires kernel mode)
@@ -34,10 +34,10 @@ int sceKernelGzipDecompress(u8 *dest, u32 destSize, const u8 *src, u32 unknown);
  * @param dest - pointer to destination buffer
  * @param destSize - size of destination buffer
  * @param src - pointer to source (compressed) data
- * @param unknown - unknown, pass NULL
+ * @param src_out - if not NULL, it will store the pointer to src + compressed_bytes_processed
  * @return size decompressed on success, < 0 on error
  */
-int sceKernelDeflateDecompress(u8 *dest, u32 destSize, const u8 *src, u32 unknown);
+int sceKernelDeflateDecompress(u8 *dest, u32 destSize, const u8 *src, u8** src_out);
 
 /**
  * Invalidate the entire data cache
