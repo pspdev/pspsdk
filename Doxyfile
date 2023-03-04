@@ -1157,7 +1157,7 @@ HTML_STYLESHEET        =
 
 HTML_EXTRA_STYLESHEET  = doc/style.css
 
-# required with Doxygen >= 1.9.5
+# required with Doxygen >= 1.9.5 for awesome-doxygen stylesheets
 
 HTML_COLORSTYLE        = LIGHT 
 
