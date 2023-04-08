@@ -286,6 +286,17 @@ unsigned int pspSdkGetK1(void);
  */
 void pspSdkDisableFPUExceptions(void);
 
+/**
+ * Gets the amount of memory available in the user partition(s).
+ * 
+ * @note This is not to be confused with sceKernelTotalFreeMemSize, which
+ * rather contradictorily only returns the amount of memory free in the
+ * kernel memory partition.
+ * 
+ * @return The amount of user memory available, in bytes.
+ */
+SceSize pspSdkTotalFreeUserMemSize(void);
+
 /**@}*/
 
 #ifdef __cplusplus
