@@ -5,9 +5,13 @@
  *
  * memory.c - Code to get accurate reporting of available (video) memory.
  *
- * Copyright (c) 2023 Ivy Bowling <motolegacy.git@gmail.com>
+ * Copyright (c) 2023 Ivy Bowling <motolegacy@proton.me>
  *
  */
+
+#include <stdlib.h>
+#include <stddef.h>
+#include <pspsdk.h>
 
 static u32 _pspSdkGetMaxLineareMemorySize(void)
 {
@@ -44,6 +48,8 @@ SceSize pspSdkTotalFreeUserMemSize(void)
 
     ram = NULL;
     size = count = 0;
+
+    int intc = pspSdkDisableInterrupts();
 
     while (1) 
     {
@@ -86,6 +92,8 @@ SceSize pspSdkTotalFreeUserMemSize(void)
 
         free(ram);
     }
+
+    pspSdkEnableInterrupts(intc);
 
     /* Amount we were able to allocate before running out, in bytes. */
     return size;
