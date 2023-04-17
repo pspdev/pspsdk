@@ -74,10 +74,10 @@ struct SceNetAdhocctlParams
 	int channel;
 	/** Name of the connection */
 	char name[8];
-	/** The BSSID */
-	unsigned char bssid[6];
 	/** Nickname */
 	char nickname[128];
+	/** The BSSID */
+	unsigned char bssid[6];
 };
 
 /**
