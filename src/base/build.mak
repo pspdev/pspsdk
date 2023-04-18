@@ -38,23 +38,25 @@ ifeq ($(PSP_FW_VERSION),)
 PSP_FW_VERSION=150
 endif
 
+EXPAND_MEMORY = 0
+
 # CFW versions after M33 3.90 guard against expanding the
 # user memory partition on PSP-1000, making MEMSIZE obsolete.
 # It is now an opt-out policy with PSP_LARGE_MEMORY=0
 ifeq ($(shell test $(PSP_FW_VERSION) -gt 390; echo $$?),0)
+EXPAND_MEMORY = 1
 ifeq ($(PSP_LARGE_MEMORY),1)
 $(warning "PSP_LARGE_MEMORY" flag is not necessary targeting firmware versions above 3.90)
 else ifeq ($(PSP_LARGE_MEMORY),0)
-SFOFLAGS := -d MEMSIZE=0 $(SFOFLAGS)
-else
-SFOFLAGS := -d MEMSIZE=1 $(SFOFLAGS)
-endif
+EXPAND_MEMORY = 0
+endif # PSP_LARGE_MEMORY
 else
 ifeq ($(PSP_LARGE_MEMORY),1)
-SFOFLAGS := -d MEMSIZE=1 $(SFOFLAGS)
-endif
-endif
+EXPAND_MEMORY = 1
+endif # PSP_LARGE_MEMORY
+endif # PSP_FW_VERSION
 
+SFOFLAGS := -d MEMSIZE=$(EXPAND_MEMORY) $(SFOFLAGS)
 
 CFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
 CXXFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
