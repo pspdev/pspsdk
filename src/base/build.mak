@@ -21,7 +21,7 @@ LD       = psp-gcc
 AR       = psp-gcc-ar
 RANLIB   = psp-gcc-ranlib
 STRIP    = psp-strip
-MKSFO    = mksfo
+MKSFO    = mksfoex
 PACK_PBP = pack-pbp
 FIXUP    = psp-fixup-imports
 ENC		 = PrxEncrypter
@@ -34,13 +34,29 @@ CFLAGS   := $(addprefix -I,$(INCDIR)) -G0 $(CFLAGS)
 CXXFLAGS := $(CFLAGS) $(CXXFLAGS)
 ASFLAGS  := $(CFLAGS) $(ASFLAGS)
 
-ifeq ($(PSP_LARGE_MEMORY),1)
-MKSFO = mksfoex -d MEMSIZE=1
-endif
-
 ifeq ($(PSP_FW_VERSION),)
 PSP_FW_VERSION=150
 endif
+
+EXPAND_MEMORY = 0
+
+# CFW versions after M33 3.90 guard against expanding the
+# user memory partition on PSP-1000, making MEMSIZE obsolete.
+# It is now an opt-out policy with PSP_LARGE_MEMORY=0
+ifeq ($(shell test $(PSP_FW_VERSION) -gt 390; echo $$?),0)
+EXPAND_MEMORY = 1
+ifeq ($(PSP_LARGE_MEMORY),1)
+$(warning "PSP_LARGE_MEMORY" flag is not necessary targeting firmware versions above 3.90)
+else ifeq ($(PSP_LARGE_MEMORY),0)
+EXPAND_MEMORY = 0
+endif # PSP_LARGE_MEMORY
+else
+ifeq ($(PSP_LARGE_MEMORY),1)
+EXPAND_MEMORY = 1
+endif # PSP_LARGE_MEMORY
+endif # PSP_FW_VERSION
+
+SFOFLAGS := -d MEMSIZE=$(EXPAND_MEMORY) $(SFOFLAGS)
 
 CFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
 CXXFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
@@ -152,7 +168,7 @@ $(TARGET_LIB): $(OBJS)
 	$(RANLIB) $@
 
 $(PSP_EBOOT_SFO): 
-	$(MKSFO) '$(PSP_EBOOT_TITLE)' $@
+	$(MKSFO) $(SFOFLAGS) '$(PSP_EBOOT_TITLE)' $@
 
 ifeq ($(BUILD_PRX),1)
 $(PSP_EBOOT): $(TARGET).prx $(PSP_EBOOT_SFO)
