@@ -23,7 +23,7 @@
 #include <pspnet_inet.h>
 #include <pspnet_apctl.h>
 
-#if _defined(_PSP_FW_VERSION) && PSP_FW_VERSION >= 200
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 PSP_MODULE_INFO("Net Dialog Sample", 0, 1, 1);
 #else
 PSP_MODULE_INFO("Net Dialog Sample", 0x1000, 1, 1);
