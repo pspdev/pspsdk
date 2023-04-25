@@ -102,7 +102,7 @@ SceSize sceKernelMaxFreeMemSize(void);
  */
 int sceKernelDevkitVersion(void);
 
-#if _PSP_FW_VERSION >= 150
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 150
 
 /**
  * Kernel printf function.

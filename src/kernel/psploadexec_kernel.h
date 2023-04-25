@@ -47,7 +47,7 @@ struct SceKernelLoadExecVSHParam {
     u32 unk5;
 }; 
 
-#if _PSP_FW_VERSION < 200
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION < 200
 /**
  * Executes a new executable from a buffer.
  *
@@ -72,7 +72,7 @@ int sceKernelLoadExecBufferPlain(SceSize bufsize, void *buf, struct SceKernelLoa
 */
 int sceKernelExitVSHVSH(struct SceKernelLoadExecVSHParam *param);
 
-#if _PSP_FW_VERSION >= 200
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 /**
  * Restart the vsh (to be used by a kernel module)
  *
@@ -141,7 +141,7 @@ int sceKernelLoadExecVSHMs2(const char *file, struct SceKernelLoadExecVSHParam *
 */
 int sceKernelLoadExecVSHMs3(const char *file, struct SceKernelLoadExecVSHParam *param);
 
-#if _PSP_FW_VERSION >= 300
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 300
 /***
  * Executes a new executable from a memory stick.
  * It is the function used by the firmware to execute psx games

@@ -126,7 +126,7 @@ typedef struct SceUtilitySavedataParam
 	/** unknown2: ? */
 	int unknown2[4];
 
-#if _PSP_FW_VERSION >= 200
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 
 	/** key: encrypt/decrypt key for save with firmware >= 2.00 */
 	char key[16];
