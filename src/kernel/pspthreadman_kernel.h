@@ -193,7 +193,7 @@ typedef struct SceKernelThreadKInfo {
 	int     	wakeupCount;
 	/** Number of clock cycles run */
 	SceKernelSysClock   runClocks;
-#if _PSP_FW_VERSION >= 200
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 	SceUInt unk3; /* Unknown extra field on later firmwares */
 #endif
 	/** Interrupt preemption count */

@@ -27,7 +27,7 @@
 
 PSP_MODULE_INFO("Savedata Sample", 0, 1, 1);
 
-#if _PSP_FW_VERSION >= 200
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 PSP_HEAP_SIZE_KB(20480);
 #endif
 
@@ -231,7 +231,7 @@ void initSavedata(SceUtilitySavedataParam * savedata, int mode)
 	savedata->overwrite = 1;
 	savedata->focus = PSP_UTILITY_SAVEDATA_FOCUS_LATEST; // Set initial focus to the newest file (for loading)
 
-#if _PSP_FW_VERSION >= 200
+#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 	strncpy(savedata->key, key, 16);
 #endif
 
