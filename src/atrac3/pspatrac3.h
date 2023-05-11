@@ -66,7 +66,7 @@ typedef struct {
 	u32 uiReadPositionSecondBuf;
 } PspBufferInfo;
 
-int sceAtracGetAtracID(uint  uiCodecType);
+int sceAtracGetAtracID(u32  uiCodecType);
 
 /**
  * Creates a new Atrac ID from the specified data
