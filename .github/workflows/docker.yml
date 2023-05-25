@@ -6,8 +6,6 @@ on:
       - master
     tags:
       - v*
-  schedule:
-      - cron: 0 7 * * *
   repository_dispatch:
     types: [run_build]
 
