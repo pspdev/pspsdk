@@ -61,6 +61,7 @@ SAMPLES = \
 	power \
 	prx/prx_loader \
 	prx/testprx \
+	prx/image_display \
 	savedata/utility \
 	savedata/decrypt \
 	savedata/encrypt \
