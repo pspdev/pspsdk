@@ -16,12 +16,6 @@
 #include <string.h>
 #include <pspthreadman.h>
 
-#ifdef F___malloc_mutex
-SceLwMutexWorkarea __malloc_mutex;
-#else
-extern SceLwMutexWorkarea __malloc_mutex;
-#endif
-
 #ifdef F___sbrk_mutex
 SceLwMutexWorkarea __sbrk_mutex;
 #else
@@ -38,7 +32,6 @@ extern SceLwMutexWorkarea __fdman_mutex;
 /* Create mutex used for making thread safe mallock and get fd */
 void __init_mutex()
 {
-	sceKernelCreateLwMutex(&__malloc_mutex, "malloc mutex", 0, 0, 0);
 	sceKernelCreateLwMutex(&__sbrk_mutex, "sbrk mutex", 0, 0, 0);
 	sceKernelCreateLwMutex(&__fdman_mutex, "fdman mutex", 0, 0, 0);
 }
@@ -48,7 +41,6 @@ void __init_mutex()
 /* Create mutex used for making thread safe mallock and get fd */
 void __deinit_mutex()
 {
-	sceKernelDeleteLwMutex(&__malloc_mutex);
 	sceKernelDeleteLwMutex(&__sbrk_mutex);
 	sceKernelDeleteLwMutex(&__fdman_mutex);
 }

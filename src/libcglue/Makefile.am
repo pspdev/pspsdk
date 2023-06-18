@@ -27,13 +27,16 @@ FDMAN_OBJS = __descriptor_data_pool.o __descriptormap.o __fdman_init.o __fdman_g
 GLUE_OBJS = __dummy_passwd.o __fill_stat.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o _open.o _close.o _read.o \
 	_write.o _fstat.o _stat.o lstat.o access.o _fcntl.o  _lseek.o chdir.o mkdir.o rmdir.o getdents.o _seekdir.o _link.o _unlink.o \
 	_rename.o _getpid.o _kill.o _sbrk.o _gettimeofday.o _times.o ftime.o clock_getres.o clock_gettime.o clock_settime.o \
-	_internal_malloc_lock.o _internal_malloc_unlock.o _isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o \
-	readlink.o utime.o fchown.o getentropy.o getpwuid.o fsync.o getpwnam.o getuid.o geteuid.o basename.o
-
+	_isatty.o symlink.o truncate.o chmod.o fchmod.o fchmodat.o pathconf.o readlink.o utime.o fchown.o getentropy.o getpwuid.o \
+	fsync.o getpwnam.o getuid.o geteuid.o basename.o
 
 INIT_OBJS = __libpthreadglue_init.o __libcglue_init.o __libcglue_deinit.o _exit.o abort.o exit.o
 
-MUTEXMAN_OBJS = __malloc_mutex.o __sbrk_mutex.o __fdman_mutex.o __init_mutex.o __deinit_mutex.o
+LOCK_OBJS = __retarget_lock_init.o __retarget_lock_acquire.o __retarget_lock_release.o __retarget_lock_try_acquire.o \
+	__retarget_lock_close.o __retarget_lock_init_recursive.o __retarget_lock_acquire_recursive.o __retarget_lock_release_recursive.o \
+	__retarget_lock_try_acquire_recursive.o __retarget_lock_close_recursive.o
+
+MUTEXMAN_OBJS = __sbrk_mutex.o __fdman_mutex.o __init_mutex.o __deinit_mutex.o
 
 NETDB_OBJS = h_errno.o gethostbyaddr.o gethostbyname.o
 
@@ -76,8 +79,8 @@ libcglue_a_SOURCES = \
 	socket.c \
 	timezone.c
 
-libcglue_a_LIBADD  = $(CWD_OBJS) $(ERRNO_OBJS) $(FDMAN_OBJS) $(INIT_OBJS) $(GLUE_OBJS) $(MUTEXMAN_OBJS) $(NETDB_OBJS) $(PIPE_OBJS) \
-	$(SELECT_OBJS) $(SOCKET_OBJS) $(SLEEP_OBJS) $(TIMEZONE_OBJS)
+libcglue_a_LIBADD  = $(CWD_OBJS) $(ERRNO_OBJS) $(FDMAN_OBJS) $(GLUE_OBJS) $(INIT_OBJS) $(LOCK_OBJS) $(MUTEXMAN_OBJS) \
+	$(NETDB_OBJS) $(PIPE_OBJS) $(SELECT_OBJS) $(SOCKET_OBJS) $(SLEEP_OBJS) $(TIMEZONE_OBJS)
 
 $(CWD_OBJS): cwd.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
@@ -88,10 +91,13 @@ $(ERRNO_OBJS): errno.c
 $(FDMAN_OBJS): fdman.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
+$(GLUE_OBJS): glue.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
+
 $(INIT_OBJS): init.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
-$(GLUE_OBJS): glue.c
+$(LOCK_OBJS): lock.c
 	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
 $(MUTEXMAN_OBJS): mutexman.c
