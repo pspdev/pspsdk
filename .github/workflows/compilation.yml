@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/pspdev/psptoolchain:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install dependencies
       run: |
@@ -27,7 +27,7 @@ jobs:
     
     - name: Get short SHA
       id: slug
-      run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      run: echo "sha8=$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_OUTPUT
 
     - name: Compile Examples
       run: |
@@ -39,7 +39,7 @@ jobs:
     
     - name: Upload Samples artifacts
       if: ${{ success() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: samples-${{ steps.slug.outputs.sha8 }}
         path: samples.tar.gz
