@@ -23,7 +23,7 @@ jobs:
             -i Doxyfile
 
     - name: Doxygen documentation generation
-      uses: mattnotmitt/doxygen-action@v1.9.5
+      uses: mattnotmitt/doxygen-action@v1
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
