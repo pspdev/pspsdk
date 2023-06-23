@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Prepare Doxyfile
       run: |
@@ -23,7 +23,7 @@ jobs:
             -i Doxyfile
 
     - name: Doxygen documentation generation
-      uses: mattnotmitt/doxygen-action@v1
+      uses: mattnotmitt/doxygen-action@v1.9.5
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
