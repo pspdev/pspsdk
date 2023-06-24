@@ -13,6 +13,8 @@
 #ifndef __PSPRTC_H__
 #define __PSPRTC_H__
 
+#include <time.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

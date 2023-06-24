@@ -54,7 +54,6 @@ int __get_drive(const char *d);
 int __path_absolute(const char *in, char *out, int len);
 
 /* Functions from mutexman.c */
-extern SceLwMutexWorkarea __malloc_mutex;
 extern SceLwMutexWorkarea __sbrk_mutex;
 
 /* Fuctions from errno.c */
@@ -798,20 +797,6 @@ int clock_gettime(clockid_t clk_id, struct timespec *tp)
 int clock_settime(clockid_t clk_id, const struct timespec *tp)
 {
 	return 0;
-}
-#endif
-
-#ifdef F__internal_malloc_lock
-void _internal_malloc_lock(struct _reent *ptr)
-{
-	sceKernelLockLwMutex(&__malloc_mutex, 1, 0);
-}
-#endif
-
-#ifdef F__internal_malloc_unlock
-void _internal_malloc_unlock(struct _reent *ptr)
-{
-	sceKernelUnlockLwMutex(&__malloc_mutex, 1);
 }
 #endif
 
