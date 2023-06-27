@@ -647,7 +647,21 @@ int sceGuSync(int mode, int what);
   *   - GU_TRANSFORM_3D - Coordinate is transformed before passed to rasterizer
   *
   * @note Every vertex must align to 32 bits, which means that you HAVE to pad if it does not add up!
-  *
+  * 
+  * @par Notes on 16 bit vertex/texture/normal formats:
+  *   - Values are stored as 16-bit signed integers, with a range of -32768 to 32767
+  *   - In the floating point coordinate space this is mapped as -1.0 to 1.0
+  *   - To scale this use sceGumScale() for vertices; (see pspgum.h)
+  *      - Caveat: you need to use the sceGumDrawArray method to apply the affine transform to the vertices.
+  *      - sceGuDrawArray() will not apply the affine transform to the vertices.
+  *   - To scale this for texture coordinates use sceGuTexOffset() and sceGuTexScale() (see below)
+  *   - You can't scale the normals with any functions, which is expected since normals by definition are unit vectors.
+  * 
+  * @code 
+  * sceGumScale(1.0f/32768.0f,1.0f/32768.0f,1.0f/32768.0f); // This is an identity mapping -- 1 unit in floating point space is 1 unit in 16-bit space
+  * sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF|GU_VERTEX_16BIT, 3, 0, vertices);
+  * @endcode
+  * 
   * Vertex order:
   * [for vertices(1-8)]
   * [weights (0-8)]
