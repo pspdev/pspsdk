@@ -1,4 +1,7 @@
-# PSP Software Development Kit ![CI][ci-badge]
+# PSP Software Development Kit
+
+[![CI](https://img.shields.io/github/actions/workflow/status/pspdev/pspsdk/.github/workflows/compilation.yml?branch=master&style=for-the-badge&logo=github&label=CI)](https://github.com/pspdev/pspsdk/actions?query=workflow:CI) [![CI-Docker](https://img.shields.io/github/actions/workflow/status/pspdev/pspsdk/.github/workflows/docker.yml?branch=master&style=for-the-badge&logo=github&label=CI-Docker)](https://github.com/pspdev/pspsdk/actions?query=workflow:CI-Docker) [![Docker Pulls](https://img.shields.io/docker/pulls/pspdev/pspsdk?style=for-the-badge)](https://hub.docker.com/r/pspdev/pspsdk/tags)
+
 Version 1.0+beta2 - https://github.com/pspdev/pspsdk
 
 
