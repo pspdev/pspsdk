@@ -651,16 +651,24 @@ int sceGuSync(int mode, int what);
   * @par Notes on 16 bit vertex/texture/normal formats:
   *   - Values are stored as 16-bit signed integers, with a range of -32768 to 32767
   *   - In the floating point coordinate space this is mapped as -1.0 to 1.0
-  *   - To scale this use sceGumScale() for vertices; (see pspgum.h)
+  *   - To scale this to be such that the value 1 in 16 bit space is 1 unit in floating point space, use sceGumScale() for vertices; (see pspgum.h)
+  *      - You can technically use this to create whatever fixed-point space you want (a common one is 5 bits for the decimals)
   *      - Caveat: you need to use the sceGumDrawArray method to apply the affine transform to the vertices.
   *      - sceGuDrawArray() will not apply the affine transform to the vertices.
   *   - To scale this for texture coordinates use sceGuTexOffset() and sceGuTexScale() (see below)
   *   - You can't scale the normals with any functions, which is expected since normals by definition are unit vectors.
   * 
   * @code 
-  * sceGumScale(1.0f/32768.0f,1.0f/32768.0f,1.0f/32768.0f); // This is an identity mapping -- 1 unit in floating point space is 1 unit in 16-bit space
+  * sceGumScale(32768.0f, 32768.0f, 32768.0f); // This is an identity mapping -- 1 unit in floating point space is 1 unit in 16-bit space
   * sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF|GU_VERTEX_16BIT, 3, 0, vertices);
   * @endcode
+  *
+  * @par Notes on 8 bit vertex/texture/normal formats:
+  *   - Values are stored as 8-bit signed integers with a range of -128 to 127
+  *   - In the floating point coordinate space this is mapped as -1.0 to 1.0
+  *   - To scale this to be such that the value 1 in 8 bit space is 1 unit in floating point space, use sceGumScale() for vertices; (see above).
+  *   - The scaling factor as demonstrated will be 128.0f.
+  *   - See above for notes on texture and normals.
   * 
   * Vertex order:
   * [for vertices(1-8)]
