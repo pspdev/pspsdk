@@ -58,8 +58,6 @@ void _main(SceSize args, void *argp)
 	int loc = 0;
 	char *ptr = argp;
 
-	_init();
-
 	/* Turn our thread arguments into main()'s argc and argv[]. */
 	while(loc < args)
 	{
@@ -76,6 +74,9 @@ void _main(SceSize args, void *argp)
 
 	/* Call libc initialization hook */
 	__libcglue_init(argc, argv);	
+
+	/* Init can contain C++ constructors that require working threading */
+	_init();
 
 	/* Make sure _fini() is called when the program ends. */
 	atexit((void *) _fini);
