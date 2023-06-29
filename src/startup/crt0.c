@@ -75,6 +75,9 @@ void _main(SceSize args, void *argp)
 	/* Call libc initialization hook */
 	__libcglue_init(argc, argv);
 
+	/* Init can contain C++ constructors that require working threading */
+	_init();
+
 	/* Make sure _fini() is called when the program ends. */
 	atexit((void *) _fini);
 
@@ -96,20 +99,12 @@ void _main(SceSize args, void *argp)
 int _start(SceSize args, void *argp)
 {
 	void (*_main_func)(SceSize args, void *argp) = _main;
-	void (*_init_func)(void) = _init;
 
-	if ((&module_info != NULL) && (module_info.modattribute & 0x1000)) {
+	if ((&module_info != NULL) && (module_info.modattribute & PSP_MODULE_KERNEL)) {
 		/* If we're running in kernel mode, the addresses of our _main() thread
-		   and _init() function must also reside in kernel mode. */
+		   must also reside in kernel mode. */
 		_main_func = (void *) ((u32) _main_func | 0x80000000);
-		_init_func = (void *) ((u32) _init_func | 0x80000000);
 	}
-
-	/* Call _init() here, because an app may have code that needs to run in
-	   kernel mode, but want their main() thread to run in user mode.  If they
-	   define "constructors" they can do any kernel mode initialization here
-	   before their app is switched. */
-	_init_func();
 
 	if (&sce_newlib_nocreate_thread_in_start != NULL) {
 		/* The program does not want main() to be run in a seperate thread. */
