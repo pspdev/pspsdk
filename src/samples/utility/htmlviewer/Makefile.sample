@@ -1,5 +1,5 @@
 TARGET = htmlsample
-OBJS = main.o 
+OBJS = main.o graphics.o
 
 INCDIR = 
 CFLAGS = -O2 -Wall
