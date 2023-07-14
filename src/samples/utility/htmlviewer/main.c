@@ -21,6 +21,7 @@
 
 PSP_MODULE_INFO("HtmlViewer", PSP_MODULE_USER, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);
+PSP_HEAP_THRESHOLD_SIZE_KB(0x8000);
 
 void throwError(int milisecs, char *fmt, ...)
 {
@@ -272,7 +273,7 @@ int updateHtmlViewer()
 
 int main(int argc, char *argv[])
 {
-	char url[] = "http://www.ps2dev.org/";
+	char url[] = "http://hitmen.c02.at/files/yapspd/";
 
 	setupGu();
 	netInit();
