@@ -19,9 +19,7 @@ int getExp(int val)
 	asm("clz %0, %1\n":"=r"(i):"r"(val&0x3FF));
 	return 31-i;
 #else
-	unsigned int i;
-	for (i = 9; (i > 0) && !((val >> i) & 1); --i);
-	return i;
+	return 31 - __builtin_clz(val & 0x3FF);
 #endif
 }
 
