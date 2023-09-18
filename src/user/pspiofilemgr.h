@@ -17,6 +17,7 @@
 #include <pspiofilemgr_fcntl.h>
 #include <pspiofilemgr_stat.h>
 #include <pspiofilemgr_dirent.h>
+#include <pspiofilemgr_devctl.h>
 
 /** @defgroup FileIO File IO Library 
  *  This module contains the imports for the kernel's IO routines.
