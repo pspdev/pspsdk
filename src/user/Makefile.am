@@ -35,6 +35,7 @@ IMPOSE_OBJS = sceImpose_0000.o sceImpose_0001.o sceImpose_0002.o sceImpose_0003.
 libpspuserincludedir = @PSPSDK_INCLUDEDIR@
 libpspuserinclude_HEADERS =	\
 	pspiofilemgr.h		\
+	pspiofilemgr_devctl.h	\
 	pspiofilemgr_dirent.h	\
 	pspiofilemgr_fcntl.h	\
 	pspiofilemgr_stat.h	\
