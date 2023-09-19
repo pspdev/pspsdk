@@ -24,9 +24,9 @@ typedef struct SceDevInf {
     /* cluster of empty logical block */
     uint32_t maxSectors;
     /* bytes x logical sector */
-    int sectorSize;
+    int32_t sectorSize;
     /* sector x cluster */
-    int sectorCount;
+    int32_t sectorCount;
 } SceDevInf;
 
 typedef struct SceDevctlCmd {
