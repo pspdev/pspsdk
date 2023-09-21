@@ -18,7 +18,7 @@ MODMGR_OBJS = ModuleMgrForUser_0000.o ModuleMgrForUser_0001.o ModuleMgrForUser_0
 
 STDIO_OBJS = StdioForUser_0000.o StdioForUser_0001.o StdioForUser_0002.o StdioForUser_0003.o StdioForUser_0004.o StdioForUser_0005.o StdioForUser_0006.o StdioForUser_0007.o StdioForUser_0008.o StdioForUser_0009.o
 
-SUSPEND_OBJS = sceSuspendForUser_0000.o sceSuspendForUser_0001.o sceSuspendForUser_0002.o sceSuspendForUser_0003.o sceSuspendForUser_0004.o sceSuspendForUser_005.o sceSuspendForUser_0006.o
+SUSPEND_OBJS = sceSuspendForUser_0000.o sceSuspendForUser_0001.o sceSuspendForUser_0002.o sceSuspendForUser_0003.o sceSuspendForUser_0004.o sceSuspendForUser_0005.o sceSuspendForUser_0006.o
 
 SYSMEM_OBJS = SysMemUserForUser_0000.o SysMemUserForUser_0001.o SysMemUserForUser_0002.o SysMemUserForUser_0003.o SysMemUserForUser_0004.o SysMemUserForUser_0005.o SysMemUserForUser_0006.o SysMemUserForUser_0007.o SysMemUserForUser_0008.o SysMemUserForUser_0009.o
 
