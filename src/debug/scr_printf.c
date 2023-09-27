@@ -420,6 +420,7 @@ void pspDebugScreenPrintf(const char *format, ...)
    va_start(opt, format);
    bufsz = vsnprintf( buff, (size_t) sizeof(buff), format, opt);
    (void) pspDebugScreenPrintData(buff, bufsz);
+   va_end(opt);
 }
 #endif
 
