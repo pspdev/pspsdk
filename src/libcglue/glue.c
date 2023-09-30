@@ -30,6 +30,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/statvfs.h>
 
 #include <psptypes.h>
 #include <pspiofilemgr.h>
@@ -1027,3 +1028,23 @@ char* basename (char *path)
 	return p + 1;
 }
 #endif /* F_basename  */
+
+#ifdef F_statvfs
+int statvfs (const char *__path, struct statvfs *__buf)
+{
+	SceDevInf inf;
+	SceDevctlCmd cmd;
+
+	cmd.dev_inf = &inf;
+	memset(&inf, 0, sizeof(SceDevInf));
+	sceIoDevctl(__path, SCE_PR_GETDEV, &cmd, sizeof(SceDevctlCmd), NULL, 0);
+
+	memset(__buf, 0, sizeof(struct statvfs));
+	__buf->f_bsize = (inf.sectorSize * inf.sectorCount);
+	__buf->f_frsize = (inf.sectorSize * inf.sectorCount);
+	__buf->f_blocks = inf.maxClusters;
+	__buf->f_bfree = inf.freeClusters;
+	__buf->f_bavail = inf.freeClusters;
+	__buf->f_namemax = MAXNAMLEN;
+}
+#endif /* F_statvfs  */
