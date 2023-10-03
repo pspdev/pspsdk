@@ -92,6 +92,7 @@ int main(int argc, char *argv[]) {
    fseek(infile, 0, SEEK_SET);
    if (total_size < 0) {
       printf("ERROR: Could not get the input file size.\n");
+      fclose(infile);
       return -1;
    }
    
@@ -99,6 +100,7 @@ int main(int argc, char *argv[]) {
    size_t result = fread(&header, sizeof(HEADER), 1, infile);
    if (result < 0) {
       printf("ERROR: Could not read the input file header.\n");
+      fclose(infile);
       return -1;
    }
    
