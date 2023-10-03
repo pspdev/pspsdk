@@ -14,6 +14,7 @@
 #define __PSPRTC_H__
 
 #include <time.h>
+#include <psptypes.h>
 
 #ifdef __cplusplus
 extern "C" {
