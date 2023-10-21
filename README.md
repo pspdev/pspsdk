@@ -58,88 +58,101 @@ build.mak is used.
 
 ## Installation
 
-PSPSDK is distributed in both source and binary packages. If you only want to
+PSPSDK is distributed in both source and docker image. If you only want to
 use the PSPSDK tools and libraries to develop your software you'll want to grab
-the binary distribution of PSPSDK specific to your development platform. If you
+the docker image distribution of PSPSDK. If you
 need fine-grained control over how PSPSDK is installed on your system, or if you
-would like to modify PSPSDK then grab the source distribution. You can also
-install PSPSDK from Git, see "Installation from Git" below for details.
+would like to modify PSPSDK then grab the source distribution.
 
 ### Requirements
 
 To use PSPSDK you must have the following software installed:
 
-* The PSPDEV Toolchain. PSPSDK requires the GNU toolchain (GCC and binutils)
-  targetted to the PSP. You can find binary packages of these tools at
-  https://github.com/pspdev/. You can find a script to build and install the
-  toolchain at https://github.com/pspdev/psptoolchain.
+* **PSPDEV Toolchain** - PSPSDK requires the GNU toolchain (GCC and binutils) targetted to the PSP.
+You can find binary packages of these tools at https://github.com/pspdev/.
+You can find a script to build and install the toolchain at https://github.com/pspdev/psptoolchain.
 
 In addition to the above requirements, if you plan on building PSPSDK from
 source, you will need:
 
-* Make. Note: GNU Make may not be required, but if you run into problems
-  building from source you may want to install it. You can find GNU Make
-  at http://www.gnu.org/software/make/.
+* **GNU Make** - You can find GNU Make at http://www.gnu.org/software/make/.
 
-If you plan on building PSPSDK directly from the Git repository you will need:
+* **GNU autotools** - You will need a recent version of autoconf (http://www.gnu.org/software/autoconf/) and automake (http://sourceware.org/automake/).
 
-* A Git client. A popular client for Windows is TortoiseGit 
-  (https://tortoisegit.org/).
-* GNU autotools. You will need a recent version of autoconf
-  (http://www.gnu.org/software/autoconf/) and automake
-  (http://sourceware.org/automake/).
+The following packages are not required to build PSPSDK, but are used to build documentation and other optional resources:
 
-The following packages are not required to build PSPSDK, but are used to build
-documentation and other optional resources:
-
-* Doxygen. You can find Doxygen at http://doxygen.nl/.
-  If you want to view the pretty source dependency graphs, then you will also
-  need to install Graphviz (http://www.graphviz.org/).
-
-### Installation from binary
-
-Download the PSPSDK binary package specific to your development system.
-For example, if you are using Windows, you will want to download the file
-pspsdk-1.0-win32.zip.
-
-Extract or unzip the package into the folder where the PSPDEV toolchain is
-installed.  For example, on a Windows system you may have installed the PSPDEV
-toolchain to C:\pspdev. You would then unzip PSPSDK into C:\pspdev.
-
-Update your PATH environment variable to point to the PSPSDK tools directory.
-In the above example, if you installed PSPSDK to C:\pspdev, you would add
-C:\pspdev\bin to your PATH.
+* **Doxygen** - You can find Doxygen at http://doxygen.nl/. If you want to view the pretty source dependency graphs, 
+  then you will also need to install Graphviz (http://www.graphviz.org/).
 
 ### Installation from source
 
-PSPSDK uses the GNU autotools (autoconf and automake) for its build system. To
-install PSPSDK from a source distribution, run the following commands after
-unpacking it:
-
-    ./configure
-    make
-    make doxygen-doc
-    make install
-
-If you haven't installed Doxygen or don't want to build the library
-documentation, you can skip the third step.
-
-### Installation from Git
-
 PSPSDK can be found in the Git repository located at
 https://github.com/pspdev/pspsdk. If you are using the command line version of
-the git client, you can the following command to download PSPSDK:
+the git client, you can do the following command to download PSPSDK:
 
-    git clone https://github.com/pspdev/pspsdk.git
+```
+git clone https://github.com/pspdev/pspsdk.git
+```
 
-Once you've downloaded PSPSDK, run the following from the pspsdk directory to
-create the configure script and support files (you must have autoconf and
-automake installed):
+Once you've downloaded PSPSDK, run this command to create the configure script and support files.
 
-    ./bootstrap
+```
+cd pspsdk && ./bootstrap
+```
 
-You can now run the commands listed in the "Installation from source" section.
+> **Note**
+> PSPSDK uses the GNU autotools (autoconf and automake) for its build system.
 
+This command will configure the system for the PSPSDK installation
+
+```
+./configure
+```
+
+This will build the PSPSDK using all available processor cores
+
+```
+make -j $(getconf _NPROCESSORS_ONLN)
+```
+
+This will build the PSPSDK documentation
+
+```
+make doxygen-doc
+```
+
+> **Note** 
+> If you haven't installed Doxygen or don't want to build the library documentation, you can skip this.
+
+This will install the PSPSDK(Default installation path: `/usr/local/pspdev/`)
+
+```
+make install
+```
+
+> **Note**
+> If you are on Windows, you can use WSL2 and follow this installation as is. 
+
+### Installation from Docker Image
+
+If you want to develop apps and games for PSP without installing from the source
+you can use Docker, see https://docs.docker.com/get-docker/ how to get started 
+according to your OS.
+
+after you install the Docker, just run this command to download the docker image:
+
+```
+docker pull pspdev/pspdev:latest
+```
+
+when it successfully downloaded, run this command to get 
+started(It will use your WSL2 env):
+
+```
+docker run -it pspdev/pspdev:latest
+```
+
+and after that you will see the `/ #`, meaning you are in the terminal and you are good to go.
 
 ## Notes
 
@@ -176,6 +189,7 @@ https://pspdev.github.io/pspsdk/
 
 
 ### Discord
+
 You can find PSPDev Maintainers over at https://discord.gg/bePrj9W in the #psp-toolchain channel :)
 
 
@@ -185,6 +199,3 @@ The pspsdk developers wish to thank all the people who have contributed bug
 fixes, ideas and support for the project. Also big thanks to nem for kicking off
 PSP development with all his work, the original imports system is based on his
 work in the hello world demo.
-
-
-[ci-badge]: https://github.com/pspdev/pspsdk/workflows/CI/badge.svg
