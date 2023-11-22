@@ -487,6 +487,12 @@ int getdents(int fd, void *dd_buf, int count)
    strncpy(dirp->d_name, sceiode.d_name, MAXNAMLEN);
    dirp->d_name[MAXNAMLEN] = 0;
    dirp->d_reclen = count;
+   switch (sceiode.d_stat.st_mode & FIO_S_IFMT) {
+      case FIO_S_IFLNK: dirp->d_type = DT_LNK;     break;
+      case FIO_S_IFDIR: dirp->d_type = DT_DIR;     break;
+      case FIO_S_IFREG: dirp->d_type = DT_REG;     break;
+      default:          dirp->d_type = DT_UNKNOWN; break;
+   }
 	
 	return read;
 }
