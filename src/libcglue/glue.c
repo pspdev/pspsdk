@@ -77,53 +77,6 @@ struct passwd __dummy_passwd = { "psp_user", "xxx", 1000, 1000, "", "", "/", "" 
 extern struct passwd __dummy_passwd;
 #endif
 
-
-#ifdef F___fill_stat
-static time_t psp_to_posix_time(ScePspDateTime psp_time)
-{
-	struct tm conv_time;
-	conv_time.tm_year = psp_time.year;
-	conv_time.tm_mon = psp_time.month;
-	conv_time.tm_mday = psp_time.day;
-	conv_time.tm_hour = psp_time.hour;
-	conv_time.tm_min = psp_time.minute;
-	conv_time.tm_sec = psp_time.second;
-	conv_time.tm_isdst = -1;
-	return mktime(&conv_time);
-}
-
-static mode_t io_to_posix_mode(SceMode sceMode)
-{
-        mode_t posixmode = 0;
-        if (sceMode & FIO_SO_IFREG) posixmode |= S_IFREG;
-        if (sceMode & FIO_SO_IFDIR) posixmode |= S_IFDIR;
-        if (sceMode & FIO_SO_IROTH) posixmode |= S_IRUSR|S_IRGRP|S_IROTH;
-        if (sceMode & FIO_SO_IWOTH) posixmode |= S_IWUSR|S_IWGRP|S_IWOTH;
-        if (sceMode & FIO_SO_IXOTH) posixmode |= S_IXUSR|S_IXGRP|S_IXOTH;
-        return posixmode;
-}
-
-
-void __fill_stat(struct stat *stat, const SceIoStat *sce_stat)
-{
-        stat->st_dev = 0;
-        stat->st_ino = 0;
-        stat->st_mode = io_to_posix_mode(sce_stat->st_attr);
-        stat->st_nlink = 0;
-        stat->st_uid = 0;
-        stat->st_gid = 0;
-        stat->st_rdev = 0;
-        stat->st_size = sce_stat->st_size;
-        stat->st_atime = psp_to_posix_time(sce_stat->sce_st_atime);
-        stat->st_mtime = psp_to_posix_time(sce_stat->sce_st_mtime);
-        stat->st_ctime = psp_to_posix_time(sce_stat->sce_st_ctime);
-        stat->st_blksize = 16*1024;
-        stat->st_blocks = stat->st_size / 512;
-}
-#else
-void __fill_stat(struct stat *stat, const SceIoStat *sce_stat);
-#endif
-
 #ifdef F___psp_heap_blockid
 /* UID of the memory block that represents the heap. */
 SceUID __psp_heap_blockid;
@@ -311,6 +264,48 @@ int _write(int fd, const void *buf, size_t nbytes) {
 #endif
 
 #ifdef F__stat
+static time_t psp_to_posix_time(ScePspDateTime psp_time)
+{
+	struct tm conv_time;
+	conv_time.tm_year = psp_time.year;
+	conv_time.tm_mon = psp_time.month;
+	conv_time.tm_mday = psp_time.day;
+	conv_time.tm_hour = psp_time.hour;
+	conv_time.tm_min = psp_time.minute;
+	conv_time.tm_sec = psp_time.second;
+	conv_time.tm_isdst = -1;
+	return mktime(&conv_time);
+}
+
+static mode_t io_to_posix_mode(SceMode sceMode)
+{
+        mode_t posixmode = 0;
+        if (sceMode & FIO_SO_IFREG) posixmode |= S_IFREG;
+        if (sceMode & FIO_SO_IFDIR) posixmode |= S_IFDIR;
+        if (sceMode & FIO_SO_IROTH) posixmode |= S_IRUSR|S_IRGRP|S_IROTH;
+        if (sceMode & FIO_SO_IWOTH) posixmode |= S_IWUSR|S_IWGRP|S_IWOTH;
+        if (sceMode & FIO_SO_IXOTH) posixmode |= S_IXUSR|S_IXGRP|S_IXOTH;
+        return posixmode;
+}
+
+
+static void __fill_stat(struct stat *stat, const SceIoStat *sce_stat)
+{
+        stat->st_dev = 0;
+        stat->st_ino = 0;
+        stat->st_mode = io_to_posix_mode(sce_stat->st_attr);
+        stat->st_nlink = 0;
+        stat->st_uid = 0;
+        stat->st_gid = 0;
+        stat->st_rdev = 0;
+        stat->st_size = sce_stat->st_size;
+        stat->st_atime = psp_to_posix_time(sce_stat->sce_st_atime);
+        stat->st_mtime = psp_to_posix_time(sce_stat->sce_st_mtime);
+        stat->st_ctime = psp_to_posix_time(sce_stat->sce_st_ctime);
+        stat->st_blksize = 16*1024;
+        stat->st_blocks = stat->st_size / 512;
+}
+
 int _stat(const char *filename, struct stat *buf)
 {
 	SceIoStat psp_stat;
@@ -360,15 +355,7 @@ int _fstat(int fd, struct stat *buf) {
 			break;		
 		case __DESCRIPTOR_TYPE_FILE:
 			if (__descriptormap[fd]->filename != NULL) {
-				ret = _stat(__descriptormap[fd]->filename, buf);
-				
-				/* Find true size of the open file */
-				oldpos = sceIoLseek(__descriptormap[fd]->descriptor, 0, SEEK_CUR);
-				if (oldpos != (off_t) -1) {
-					buf->st_size = (off_t) sceIoLseek(__descriptormap[fd]->descriptor, 0, SEEK_END);
-					sceIoLseek(__descriptormap[fd]->descriptor, oldpos, SEEK_SET);
-				}
-				return ret;
+				return _stat(__descriptormap[fd]->filename, buf);
 			}
 			break;
 		case __DESCRIPTOR_TYPE_PIPE:
@@ -498,27 +485,30 @@ int getdents(int fd, void *dd_buf, int count)
 }
 #endif
 
-#ifdef F__seekdir
-void _seekdir(DIR *dirp, long loc)
+#ifdef F__lseek
+static off_t _lseekDir(int fd, off_t offset, int whence)
 {
 	int i;
 	SceUID uid;
 	SceIoDirent sceiode;
 
-	if (__descriptormap[dirp->dd_fd]->filename != NULL) {
-		sceIoDclose(__descriptormap[dirp->dd_fd]->descriptor);
-		uid = sceIoDopen(__descriptormap[dirp->dd_fd]->filename);
-		__descriptormap[dirp->dd_fd]->descriptor = uid;
-		for (i = 0; i < loc; i++) {
-   			// NEEDED otherwise it will crash!!!
-   			memset(&sceiode, 0, sizeof(SceIoDirent));
-   			sceIoDread(uid, &sceiode);
-		}
+	if (whence != SEEK_SET || __descriptormap[fd]->filename == NULL) {
+		errno = EINVAL;
+		return -1;
 	}
-}
-#endif
 
-#ifdef F__lseek
+	sceIoDclose(__descriptormap[fd]->descriptor);
+	uid = sceIoDopen(__descriptormap[fd]->filename);
+	__descriptormap[fd]->descriptor = uid;
+	for (i = 0; i < offset; i++) {
+		// NEEDED otherwise it will crash!!!
+		memset(&sceiode, 0, sizeof(SceIoDirent));
+		sceIoDread(uid, &sceiode);
+	}
+
+	return offset;
+}
+
 off_t _lseek(int fd, off_t offset, int whence)
 {
 	if (!__IS_FD_VALID(fd)) {
@@ -531,6 +521,9 @@ off_t _lseek(int fd, off_t offset, int whence)
 		case __DESCRIPTOR_TYPE_FILE:
 			/* We don't have to do anything with the whence argument because SEEK_* == PSP_SEEK_*. */
 			return (off_t) __set_errno(sceIoLseek(__descriptormap[fd]->descriptor, offset, whence));
+			break;
+		case __DESCRIPTOR_TYPE_FOLDER:
+			return _lseekDir(fd, offset, whence);
 			break;
 		case __DESCRIPTOR_TYPE_PIPE:
 			break;
