@@ -601,8 +601,13 @@ int _link(const char *old, const char *new) {
 
 #ifdef F__unlink
 int _unlink(const char *path) {
-    errno = ENOSYS;
-	return -1; /* not supported */
+	char dest[MAXNAMLEN + 1];
+	if(__path_absolute(path, dest, MAXNAMLEN) < 0) {
+		errno = ENAMETOOLONG;
+		return -1;
+	}
+
+    return __set_errno(sceIoRemove(dest));
 }
 #endif
 
