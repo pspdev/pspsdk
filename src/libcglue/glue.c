@@ -1038,6 +1038,12 @@ int statvfs (const char *__path, struct statvfs *__buf)
 {
 	SceDevInf inf;
 	SceDevctlCmd cmd;
+	char dest[MAXNAMLEN + 1];
+
+	if(__path_absolute(__path, dest, MAXNAMLEN) < 0) {
+		errno = ENAMETOOLONG;
+		return -1;
+	}
 
 	cmd.dev_inf = &inf;
 	memset(&inf, 0, sizeof(SceDevInf));
