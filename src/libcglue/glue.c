@@ -601,8 +601,13 @@ int _link(const char *old, const char *new) {
 
 #ifdef F__unlink
 int _unlink(const char *path) {
-    errno = ENOSYS;
-	return -1; /* not supported */
+	char dest[MAXNAMLEN + 1];
+	if(__path_absolute(path, dest, MAXNAMLEN) < 0) {
+		errno = ENAMETOOLONG;
+		return -1;
+	}
+
+    return __set_errno(sceIoRemove(dest));
 }
 #endif
 
@@ -1033,6 +1038,12 @@ int statvfs (const char *__path, struct statvfs *__buf)
 {
 	SceDevInf inf;
 	SceDevctlCmd cmd;
+	char dest[MAXNAMLEN + 1];
+
+	if(__path_absolute(__path, dest, MAXNAMLEN) < 0) {
+		errno = ENAMETOOLONG;
+		return -1;
+	}
 
 	cmd.dev_inf = &inf;
 	memset(&inf, 0, sizeof(SceDevInf));
