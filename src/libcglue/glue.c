@@ -956,8 +956,8 @@ int fchown(int fd, uid_t owner, gid_t group)
 }
 #endif
 
-#ifdef F_getentropy
-int getentropy(void *buffer, size_t length) {
+#ifdef F__getentropy
+int _getentropy(void *buffer, size_t length) {
 	size_t i;
 	SceKernelUtilsMt19937Context ctx;
 	sceKernelUtilsMt19937Init(&ctx, time(NULL));
