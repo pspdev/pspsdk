@@ -20,16 +20,6 @@
 extern "C" {
 #endif
 
-typedef struct {
-	u16 year;
-	u16 month;
-	u16 day;
-	u16 hour;
-	u16 minutes;
-	u16 seconds;
-	u32 microseconds;
-} pspTime;
-
 enum pspRtcCheckValidErrors {
 	PSP_TIME_INVALID_YEAR = -1,
 	PSP_TIME_INVALID_MONTH = -2,
@@ -58,19 +48,19 @@ int sceRtcGetCurrentTick(u64 *tick);
 /**
  * Get current tick count, adjusted for local time zone
  *
- * @param time - pointer to pspTime struct to receive time
+ * @param time - pointer to ScePspDateTime struct to receive time
  * @param tz - time zone to adjust to (minutes from UTC)
  * @return 0 on success, < 0 on error
  */
-int sceRtcGetCurrentClock(pspTime *time, int tz);
+int sceRtcGetCurrentClock(ScePspDateTime *time, int tz);
 
 /**
- * Get current local time into a pspTime struct
+ * Get current local time into a ScePspDateTime struct
  *
- * @param time - pointer to pspTime struct to receive time
+ * @param time - pointer to ScePspDateTime struct to receive time
  * @return 0 on success, < 0 on error
  */
-int sceRtcGetCurrentClockLocalTime(pspTime *time);
+int sceRtcGetCurrentClockLocalTime(ScePspDateTime *time);
 
 /**
  * Convert a UTC-based tickcount into a local time tick count
@@ -123,25 +113,25 @@ int sceRtcGetDayOfWeek(int year, int month, int day);
  * @param date - pointer to pspDate struct to be checked
  * @return 0 on success, one of ::pspRtcCheckValidErrors on error
  */
-int sceRtcCheckValid(const pspTime* date);
+int sceRtcCheckValid(const ScePspDateTime* date);
 
 /**
- * Set a pspTime struct based on ticks
+ * Set a ScePspDateTime struct based on ticks
  *
- * @param date - pointer to pspTime struct to set
+ * @param date - pointer to ScePspDateTime struct to set
  * @param tick - pointer to ticks to convert
  * @return 0 on success, < 0 on error
  */
-int sceRtcSetTick(pspTime* date, const u64* tick);
+int sceRtcSetTick(ScePspDateTime* date, const u64* tick);
 
 /**
- * Set ticks based on a pspTime struct
+ * Set ticks based on a ScePspDateTime struct
  *
- * @param date - pointer to pspTime to convert
+ * @param date - pointer to ScePspDateTime to convert
  * @param tick - pointer to tick to set
  * @return 0 on success, < 0 on error
  */
-int sceRtcGetTick(const pspTime* date, u64 *tick);
+int sceRtcGetTick(const ScePspDateTime* date, u64 *tick);
 
 /**
  * Compare two ticks
@@ -243,12 +233,12 @@ int sceRtcTickAddMonths(u64* destTick, const u64* srcTick, int numMonths);
  */
 int sceRtcTickAddYears(u64* destTick, const u64* srcTick, int numYears);
 
-int sceRtcSetTime_t(pspTime* date, const time_t time);
-int sceRtcGetTime_t(const pspTime* date, time_t *time);
-int sceRtcSetDosTime(pspTime* date, u32 dosTime);
-int sceRtcGetDosTime(pspTime* date, u32 dosTime);
-int sceRtcSetWin32FileTime(pspTime* date, u64* win32Time);
-int sceRtcGetWin32FileTime(pspTime* date, u64* win32Time);
+int sceRtcSetTime_t(ScePspDateTime* date, const time_t time);
+int sceRtcGetTime_t(const ScePspDateTime* date, time_t *time);
+int sceRtcSetDosTime(ScePspDateTime* date, u32 dosTime);
+int sceRtcGetDosTime(ScePspDateTime* date, u32 dosTime);
+int sceRtcSetWin32FileTime(ScePspDateTime* date, u64* win32Time);
+int sceRtcGetWin32FileTime(ScePspDateTime* date, u64* win32Time);
 
 int sceRtcParseDateTime(u64 *destTick, const char *dateString);
 
