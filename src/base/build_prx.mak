@@ -24,7 +24,7 @@ FIXUP    = psp-fixup-imports
 INCDIR   := $(INCDIR) . $(PSPDEV)/psp/include $(PSPSDK)/include
 LIBDIR   := $(LIBDIR) . $(PSPDEV)/psp/lib $(PSPSDK)/lib
 
-CFLAGS   := $(addprefix -I,$(INCDIR)) -G0 $(CFLAGS)
+CFLAGS   := $(addprefix -I,$(INCDIR)) $(CFLAGS)
 CXXFLAGS := $(CFLAGS) $(CXXFLAGS)
 ASFLAGS  := $(CFLAGS) $(ASFLAGS)
 
