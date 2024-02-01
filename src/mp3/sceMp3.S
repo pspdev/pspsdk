@@ -65,3 +65,18 @@
 #ifdef F_sceMp3_0019
 	IMPORT_FUNC	"sceMp3",0xF5478233,sceMp3ReleaseMp3Handle
 #endif
+#ifdef F_sceMp3_0020
+	IMPORT_FUNC	"sceMp3",0xAE6D2027,sceMp3GetMPEGVersion
+#endif
+#ifdef F_sceMp3_0021
+	IMPORT_FUNC	"sceMp3",0x3548AEC8,sceMp3GetFrameNum
+#endif
+#ifdef F_sceMp3_0022
+	IMPORT_FUNC	"sceMp3",0x0840E808,sceMp3ResetPlayPositionByFrame
+#endif
+#ifdef F_sceMp3_0023
+	IMPORT_FUNC	"sceMp3",0x1B839B83,sceMp3LowLevelInit
+#endif
+#ifdef F_sceMp3_0024
+	IMPORT_FUNC	"sceMp3",0xE3EE2C81,sceMp3LowLevelDecode
+#endif
