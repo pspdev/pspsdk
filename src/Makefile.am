@@ -31,6 +31,7 @@ SUBDIRS = \
 	usb \
 	usbstor \
 	user \
+	vaudio \
 	utility \
 	vfpu \
 	video \
