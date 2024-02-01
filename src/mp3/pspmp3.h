@@ -21,19 +21,15 @@ extern "C" {
 
 typedef struct SceMp3InitArg {
 	/** Stream start position */
-	SceUInt32	mp3StreamStart;
-	/** Unknown - set to 0 */
-	SceUInt32	unk1;
+	SceOff		mp3StreamStart;
 	/** Stream end position */
-	SceUInt32	mp3StreamEnd;
-	/** Unknown - set to 0 */
-	SceUInt32	unk2;
+	SceOff		mp3StreamEnd;
 	/** Pointer to a buffer to contain raw mp3 stream data (+1472 bytes workspace) */
-	SceVoid*	mp3Buf;
+	SceUChar8*	mp3Buf;
 	/** Size of mp3Buf buffer (must be >= 8192) */
 	SceInt32	mp3BufSize;
 	/** Pointer to decoded pcm samples buffer */
-	SceVoid*	pcmBuf;
+	SceUChar8*	pcmBuf;
 	/** Size of pcmBuf buffer (must be >= 9216) */
 	SceInt32	pcmBufSize;
 } SceMp3InitArg;
@@ -135,7 +131,7 @@ SceInt32 sceMp3SetLoopNum(SceInt32 handle, SceInt32 loop);
  *
  * @param handle - sceMp3 handle
  *
- * @return Number of loops
+ * @return Number of loops, < 0 on error.
  */
 SceInt32 sceMp3GetLoopNum(SceInt32 handle);
 
@@ -144,7 +140,7 @@ SceInt32 sceMp3GetLoopNum(SceInt32 handle);
  *
  * @param handle - sceMp3 handle
  *
- * @return Number of decoded samples
+ * @return Number of decoded samples, < 0 on error.
  */
 SceInt32 sceMp3GetSumDecodedSample(SceInt32 handle);
 
@@ -153,7 +149,7 @@ SceInt32 sceMp3GetSumDecodedSample(SceInt32 handle);
  *
  * @param handle - sceMp3 handle
  *
- * @return Number of max samples to output
+ * @return Number of max samples to output, < 0 on error.
  */
 SceInt32 sceMp3GetMaxOutputSample(SceInt32 handle);
 
@@ -162,7 +158,7 @@ SceInt32 sceMp3GetMaxOutputSample(SceInt32 handle);
  *
  * @param handle - sceMp3 handle
  *
- * @return Sampling rate of the mp3
+ * @return Sampling rate of the mp3, < 0 on error.
  */
 SceInt32 sceMp3GetSamplingRate(SceInt32 handle);
 
@@ -171,7 +167,7 @@ SceInt32 sceMp3GetSamplingRate(SceInt32 handle);
  *
  * @param handle - sceMp3 handle
  *
- * @return Bitrate of the mp3
+ * @return Bitrate of the mp3, < 0 on error.
  */
 SceInt32 sceMp3GetBitRate(SceInt32 handle);
 
@@ -180,7 +176,7 @@ SceInt32 sceMp3GetBitRate(SceInt32 handle);
  *
  * @param handle - sceMp3 handle
  *
- * @return Number of channels of the mp3
+ * @return Number of channels of the mp3, < 0 on error.
  */
 SceInt32 sceMp3GetMp3ChannelNum(SceInt32 handle);
 
@@ -189,9 +185,60 @@ SceInt32 sceMp3GetMp3ChannelNum(SceInt32 handle);
  *
  * @param handle - sceMp3 handle
  *
- * @return < 0 on error
+ * @return 0 if success, < 0 on error.
  */
-SceInt32 sceMp3ResetPlayPosition(SceInt32 handle); 
+SceInt32 sceMp3ResetPlayPosition(SceInt32 handle);
+
+/**
+ * sceMp3GetFrameNum
+ *
+ * @param handle - sceMp3 handle
+ *
+ * @return Number of audio frames, < 0 on error
+ */
+SceInt32 sceMp3GetFrameNum(SceInt32 handle);
+
+/**
+ * sceMp3ResetPlayPositionByFrame
+ *
+ * @param handle - sceMp3 handle
+ * @param frame - frame
+ *
+ * @return 0 if success, < 0 on error.
+ */
+SceInt32 sceMp3ResetPlayPositionByFrame(SceInt32 handle, SceUInt32 frame);
+
+/**
+ * sceMp3GetMPEGVersion
+ *
+ * @param handle - sceMp3 handle
+ *
+ * @return MPEG Version, < 0 on error
+ */
+SceInt32 sceMp3GetMPEGVersion(SceInt32 handle);
+
+/**
+ * sceMp3LowLevelInit
+ *
+ * @param handle - sceMp3 handle
+ * @param src - Pointer to a buffer to contain raw mp3 stream data
+ *
+ * @return 0 if success, < 0 on error.
+ */
+SceInt32 sceMp3LowLevelInit(SceInt32 handle, SceUChar8* src);
+
+/**
+ * sceMp3LowLevelDecode
+ *
+ * @param handle - sceMp3 handle
+ * @param mp3src - Pointer to a buffer to contain raw mp3 stream data
+ * @param mp3srcused - mp3 data size consumed by decoding
+ * @param pcmdst - Pointer to destination pcm samples buffer
+ * @param pcmdstoutsz - Size of pcm data output by decoding
+ *
+ * @return 0 if success, < 0 on error.
+ */
+SceInt32 sceMp3LowLevelDecode(SceInt32 handle, SceUChar8* mp3src, SceUInt32* mp3srcused, SceShort16* pcmdst, SceUInt32* pcmdstoutsz);
 
 
 #ifdef __cplusplus
