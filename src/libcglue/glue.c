@@ -922,12 +922,12 @@ int utime(const char *pathname, const struct utimbuf *times)
 		return __set_errno(ret);
 	}
 
-	ret = sceRtcSetTime_t((pspTime *)&psp_stat.sce_st_atime, times->actime);
+	ret = sceRtcSetTime_t(&psp_stat.sce_st_atime, times->actime);
 	if (ret < 0) {
 		return __set_errno(ret);
 	}
 
-	ret = sceRtcSetTime_t((pspTime *)&psp_stat.sce_st_mtime, times->modtime);
+	ret = sceRtcSetTime_t(&psp_stat.sce_st_mtime, times->modtime);
 	if (ret < 0) {
 		return __set_errno(ret);
 	}
