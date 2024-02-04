@@ -118,6 +118,7 @@ AC_CONFIG_FILES([Makefile
                  src/usbstor/Makefile
                  src/user/Makefile
                  src/utility/Makefile
+                 src/vaudio/Makefile
                  src/vfpu/Makefile
                  src/video/Makefile
                  src/vsh/Makefile
