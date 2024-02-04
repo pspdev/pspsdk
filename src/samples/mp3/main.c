@@ -23,7 +23,7 @@ PSP_MODULE_INFO("Mp3Test", 0, 0, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);
 PSP_HEAP_SIZE_KB(-1024);
 
-#define MP3FILE "ms0:/MUSIC/Test.mp3"
+#define MP3FILE "Test.mp3"
 
 /* Define printf, just to make typing easier */
 #define printf  pspDebugScreenPrintf
