@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005 Jesper Svennevid
  */
-      
+
 #ifndef __pspgu_h__
 #define __pspgu_h__
 
@@ -614,7 +614,7 @@ int sceGuSync(int mode, int what);
   *   - GU_TRIANGLE_FAN - Filled triangle-fan (3 vertices for the first primitive, 1 for every following)
   *   - GU_SPRITES - Filled blocks (2 vertices per primitive)
   *
-  * The vertex-type decides how the vertices align and what kind of information they contain.
+  * The vertex-type decides how the vertices align and what kind of information they contain.\n
   * The following flags are ORed together to compose the final vertex format:
   *   - GU_TEXTURE_8BIT - 8-bit texture coordinates
   *   - GU_TEXTURE_16BIT - 16-bit texture coordinates
@@ -646,8 +646,17 @@ int sceGuSync(int mode, int what);
   *   - GU_TRANSFORM_2D - Coordinate is passed directly to the rasterizer
   *   - GU_TRANSFORM_3D - Coordinate is transformed before passed to rasterizer
   *
-  * @note Every vertex must align to 32 bits, which means that you HAVE to pad if it does not add up!
-  * 
+  * Vertex member order:
+  * [for vertices(1-8)]\n
+  * \t[weights(0-8)]\n
+  * \t[texture coordinates]\n
+  * \t[color]\n
+  * \t[normal]\n
+  * \t[vertex]\n
+  * [/for]
+  *
+  * @note Every vertex member must be aligned to 16 bits.
+  *
   * @par Notes on 16 bit vertex/texture/normal formats:
   *   - Values are stored as 16-bit signed integers, with a range of -32768 to 32767
   *   - In the floating point coordinate space this is mapped as -1.0 to 1.0
@@ -657,8 +666,8 @@ int sceGuSync(int mode, int what);
   *      - sceGuDrawArray() will not apply the affine transform to the vertices.
   *   - To scale this for texture coordinates use sceGuTexOffset() and sceGuTexScale() (see below)
   *   - You can't scale the normals with any functions, which is expected since normals by definition are unit vectors.
-  * 
-  * @code 
+  *
+  * @code
   * sceGumScale(32768.0f, 32768.0f, 32768.0f); // This is an identity mapping -- 1 unit in floating point space is 1 unit in 16-bit space
   * sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF|GU_VERTEX_16BIT, 3, 0, vertices);
   * @endcode
@@ -669,15 +678,6 @@ int sceGuSync(int mode, int what);
   *   - To scale this to be such that the value 1 in 8 bit space is 1 unit in floating point space, use sceGumScale() for vertices; (see above).
   *   - The scaling factor as demonstrated will be 128.0f.
   *   - See above for notes on texture and normals.
-  * 
-  * Vertex order:
-  * [for vertices(1-8)]
-  * [weights (0-8)]
-  * [texture uv]
-  * [color]
-  * [normal]
-  * [vertex]
-  * [/for]
   *
   * @par Example: Render 400 triangles, with floating-point texture coordinates, and floating-point position, no indices
   * @code
@@ -943,7 +943,7 @@ void sceGuColorMaterial(int components);
 
 /**
   * Set the alpha test parameters
-  * 
+  *
   * Available comparison functions are:
   *   - GU_NEVER
   *   - GU_ALWAYS
@@ -1072,7 +1072,7 @@ void sceGuFrontFace(int order);
   * Available operations are:
   *   - GU_CLEAR
   *   - GU_AND
-  *   - GU_AND_REVERSE 
+  *   - GU_AND_REVERSE
   *   - GU_COPY
   *   - GU_AND_INVERTED
   *   - GU_NOOP
@@ -1194,7 +1194,7 @@ void sceGuTexFlush(void);
   *   - GU_TFX_MODULATE - The texture is multiplied with the current diffuse fragment
   *   - GU_TFX_REPLACE - The texture replaces the fragment
   *   - GU_TFX_ADD - The texture is added on-top of the diffuse fragment
-  *   
+  *
   * Available component-modes are: (TCC)
   *   - GU_TCC_RGB - The texture alpha does not have any effect
   *   - GU_TCC_RGBA - The texture alpha is taken into account
@@ -1351,7 +1351,7 @@ void sceGuClutMode(unsigned int cpsm, unsigned int shift, unsigned int mask, uns
   * Set virtual coordinate offset
   *
   * The PSP has a virtual coordinate-space of 4096x4096, this controls where rendering is performed
-  * 
+  *
   * @par Example: Center the virtual coordinate range
   * @code
   * sceGuOffset(2048-(480/2),2048-(480/2));
