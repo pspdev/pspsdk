@@ -646,16 +646,17 @@ int sceGuSync(int mode, int what);
   *   - GU_TRANSFORM_2D - Coordinate is passed directly to the rasterizer
   *   - GU_TRANSFORM_3D - Coordinate is transformed before passed to rasterizer
   *
-  * Vertex member order:
-  * [for vertices(1-8)]\n
-  * \t[weights(0-8)]\n
-  * \t[texture coordinates]\n
-  * \t[color]\n
-  * \t[normal]\n
-  * \t[vertex]\n
-  * [/for]
+  * Data members inside a vertex are laid out in the following order:
+  * - Weights - if GU_WEIGHTS(n) is used N weights are present
+  * - Texture Coordinates
+  * - Color
+  * - Normal
+  * - Position
   *
-  * @note Every vertex member must be aligned to 16 bits.
+  * If GU_VERTICES(n) is used the entire vertex structure is repeated N-times.\n
+  * A member is only present if related type flag has been used (look at examples below).
+  *
+  * @note Every member making up a vertex must be aligned to 16 bits.
   *
   * @par Notes on 16 bit vertex/texture/normal formats:
   *   - Values are stored as 16-bit signed integers, with a range of -32768 to 32767
