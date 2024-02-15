@@ -195,7 +195,7 @@ typedef struct SceUtilitySavedataParam
 
 	PspUtilitySavedataMode mode;
 	
-	int unknown1;
+	int bind;
 	
 	int overwrite;
 
@@ -231,16 +231,29 @@ typedef struct SceUtilitySavedataParam
 	/** Initial focus for lists */
 	PspUtilitySavedataFocus focus;
 
-	/** unknown2: ? */
-	int unknown2[4];
+	int abortStatus;
+
+	/* Function SCE_UTILITY_SAVEDATA_TYPE_SIZES */
+	SceUtilitySavedataMsFreeInfo *msFree;
+	SceUtilitySavedataMsDataInfo *msData;
+	SceUtilitySavedataUsedDataInfo *utilityData;
 
 #if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 
 	/** key: encrypt/decrypt key for save with firmware >= 2.00 */
 	char key[16];
 
-	/** unknown3: ? */
-	char unknown3[20];
+	uint32_t secureVersion;
+	int multiStatus;
+
+	/* Function 11 LIST */
+	SceUtilitySavedataIdListInfo *idList;
+
+	/* Function 12 FILES */
+	SceUtilitySavedataFileListInfo *fileList;
+
+	/* Function 22 GETSIZES */
+	PspUtilitySavedataSizeInfo *sizeInfo;
 
 #endif
 
