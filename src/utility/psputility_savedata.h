@@ -33,8 +33,22 @@ typedef enum
 	PSP_UTILITY_SAVEDATA_LISTLOAD,
 	PSP_UTILITY_SAVEDATA_LISTSAVE,
 	PSP_UTILITY_SAVEDATA_LISTDELETE,
-	PSP_UTILITY_SAVEDATADELETE,
-
+	PSP_UTILITY_SAVEDATA_LISTALLDELETE,
+	SCE_UTILITY_SAVEDATA_SIZES,
+	SCE_UTILITY_SAVEDATA_AUTODELETE,
+	SCE_UTILITY_SAVEDATA_DELETE,
+	SCE_UTILITY_SAVEDATA_LIST,
+	SCE_UTILITY_SAVEDATA_FILES,
+	SCE_UTILITY_SAVEDATA_MAKEDATASECURE,
+	SCE_UTILITY_SAVEDATA_MAKEDATA,
+	SCE_UTILITY_SAVEDATA_READDATASECURE,
+	SCE_UTILITY_SAVEDATA_READDATA,
+	SCE_UTILITY_SAVEDATA_WRITEDATASECURE,
+	SCE_UTILITY_SAVEDATA_WRITEDATA,
+	SCE_UTILITY_SAVEDATA_ERASESECURE,
+	SCE_UTILITY_SAVEDATA_ERASE,
+	SCE_UTILITY_SAVEDATA_DELETEDATA,
+	SCE_UTILITY_SAVEDATA_GETSIZE,
 } PspUtilitySavedataMode;
 
 /** Initial focus position for list selection types */
@@ -45,9 +59,9 @@ typedef enum
 	PSP_UTILITY_SAVEDATA_FOCUS_LASTLIST,	/* Last in list */
 	PSP_UTILITY_SAVEDATA_FOCUS_LATEST,	/* Most recent date */
 	PSP_UTILITY_SAVEDATA_FOCUS_OLDEST,	/* Oldest date */
-	PSP_UTILITY_SAVEDATA_FOCUS_UNKNOWN2,
-	PSP_UTILITY_SAVEDATA_FOCUS_UNKNOWN3,
-	PSP_UTILITY_SAVEDATA_FOCUS_FIRSTEMPTY, /* First empty slot */
+	PSP_UTILITY_SAVEDATA_FOCUS_FIRSTDATA,	/* first non-empty (first if none) */
+	PSP_UTILITY_SAVEDATA_FOCUS_LASTDATA,	/* last non-empty (first if none) */
+	PSP_UTILITY_SAVEDATA_FOCUS_FIRSTEMPTY,	/* First empty slot */
 	PSP_UTILITY_SAVEDATA_FOCUS_LASTEMPTY,	/*Last empty slot */
 	
 } PspUtilitySavedataFocus;
@@ -73,6 +87,100 @@ typedef struct PspUtilitySavedataFileData {
 	
 } PspUtilitySavedataFileData;
 
+typedef struct PspUtilitySavedataSizeEntry {
+	uint64_t size;
+	char name[16];
+
+} PspUtilitySavedataSizeEntry;
+
+typedef struct PspUtilitySavedataSizeInfo {
+	int numSecureEntries;
+	int numNormalEntries;
+	PspUtilitySavedataSizeEntry *secureEntries;
+	PspUtilitySavedataSizeEntry *normalEntries;
+	int sectorSize;
+	int freeSectors;
+	int freeKB;
+	char freeString[8];
+	int neededKB;
+	char neededString[8];
+	int overwriteKB;
+	char overwriteString[8];
+
+} PspUtilitySavedataSizeInfo;
+
+typedef struct SceUtilitySavedataIdListEntry
+{
+	int st_mode;
+	ScePspDateTime st_ctime;
+	ScePspDateTime st_atime;
+	ScePspDateTime st_mtime;
+	char name[20];
+
+} SceUtilitySavedataIdListEntry;
+
+typedef struct SceUtilitySavedataIdListInfo
+{
+	int maxCount;
+	int resultCount;
+	SceUtilitySavedataIdListEntry *entries;
+
+} SceUtilitySavedataIdListInfo;
+
+typedef struct SceUtilitySavedataFileListEntry
+{
+	int st_mode;
+	uint32_t st_unk0;
+	uint64_t st_size;
+	ScePspDateTime st_ctime;
+	ScePspDateTime st_atime;
+	ScePspDateTime st_mtime;
+	char name[16];
+
+} SceUtilitySavedataFileListEntry;
+
+typedef struct SceUtilitySavedataFileListInfo
+{
+	uint32_t maxSecureEntries;
+	uint32_t maxNormalEntries;
+	uint32_t maxSystemEntries;
+	uint32_t resultNumSecureEntries;
+	uint32_t resultNumNormalEntries;
+	uint32_t resultNumSystemEntries;
+	SceUtilitySavedataFileListEntry *secureEntries;
+	SceUtilitySavedataFileListEntry *normalEntries;
+	SceUtilitySavedataFileListEntry *systemEntries;
+
+} SceUtilitySavedataFileListInfo;
+
+typedef struct SceUtilitySavedataMsFreeInfo
+{
+	int clusterSize;
+	int freeClusters;
+	int freeSpaceKB;
+	char freeSpaceStr[8];
+
+} SceUtilitySavedataMsFreeInfo;
+
+typedef struct SceUtilitySavedataUsedDataInfo
+{
+	int usedClusters;
+	int usedSpaceKB;
+	char usedSpaceStr[8];
+	int usedSpace32KB;
+	char usedSpace32Str[8];
+
+} SceUtilitySavedataUsedDataInfo;
+
+typedef struct SceUtilitySavedataMsDataInfo
+{
+	char gameName[13];
+	char pad[3];
+	char saveName[20];
+	SceUtilitySavedataUsedDataInfo info;
+
+} SceUtilitySavedataMsDataInfo;
+
 typedef struct PspUtilitySavedataListSaveNewData
 {
 	PspUtilitySavedataFileData icon0;
@@ -87,7 +195,7 @@ typedef struct SceUtilitySavedataParam
 
 	PspUtilitySavedataMode mode;
 	
-	int unknown1;
+	int bind;
 	
 	int overwrite;
 
@@ -123,16 +231,29 @@ typedef struct SceUtilitySavedataParam
 	/** Initial focus for lists */
 	PspUtilitySavedataFocus focus;
 
-	/** unknown2: ? */
-	int unknown2[4];
+	int abortStatus;
+
+	/* Function SCE_UTILITY_SAVEDATA_TYPE_SIZES */
+	SceUtilitySavedataMsFreeInfo *msFree;
+	SceUtilitySavedataMsDataInfo *msData;
+	SceUtilitySavedataUsedDataInfo *utilityData;
 
 #if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
 
 	/** key: encrypt/decrypt key for save with firmware >= 2.00 */
 	char key[16];
 
-	/** unknown3: ? */
-	char unknown3[20];
+	uint32_t secureVersion;
+	int multiStatus;
+
+	/* Function 11 LIST */
+	SceUtilitySavedataIdListInfo *idList;
+
+	/* Function 12 FILES */
+	SceUtilitySavedataFileListInfo *fileList;
+
+	/* Function 22 GETSIZES */
+	PspUtilitySavedataSizeInfo *sizeInfo;
 
 #endif
 
