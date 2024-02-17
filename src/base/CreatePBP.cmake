@@ -16,12 +16,20 @@ macro(create_pbp_file)
     ICON_PATH       # optional, absolute path to .png file, 144x82
     BACKGROUND_PATH # optional, absolute path to .png file, 480x272
     PREVIEW_PATH    # optional, absolute path to .png file, 480x272
+    VERSION         # optional, adds version information to PARAM.SFO
     )
   set(options
     BUILD_PRX # optional, generates and uses PRX file instead of ELF in EBOOT.PBP
     ENC_PRX   # optional, replaces PRX file with encrypted version.
     )
   cmake_parse_arguments("ARG" "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  # set mksfoex parameter if VERSION has been defined
+  if (DEFINED ARG_VERSION)
+    set(ARG_VERSION "-s APP_VER=${ARG_VERSION}")
+  else()
+    set(ARG_VERSION "")
+  endif()
 
   # As pack-pbp takes undefined arguments in form of "NULL" string,
   # set each undefined macro variable to such value:
@@ -117,7 +125,7 @@ macro(create_pbp_file)
   add_custom_command(
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
-    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "${ARG_TITLE}" "PARAM.SFO"
+    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "${ARG_VERSION}" "${ARG_TITLE}" "PARAM.SFO"
     COMMENT "Calling mksfoex"
     )
 
