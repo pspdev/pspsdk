@@ -112,9 +112,9 @@ typedef struct PspUtilitySavedataSizeInfo {
 typedef struct SceUtilitySavedataIdListEntry
 {
 	int st_mode;
-	ScePspDateTime st_ctime;
-	ScePspDateTime st_atime;
-	ScePspDateTime st_mtime;
+	ScePspDateTime sce_st_ctime;
+	ScePspDateTime sce_st_atime;
+	ScePspDateTime sce_st_mtime;
 	char name[20];
 
 } SceUtilitySavedataIdListEntry;
@@ -132,9 +132,9 @@ typedef struct SceUtilitySavedataFileListEntry
 	int st_mode;
 	uint32_t st_unk0;
 	uint64_t st_size;
-	ScePspDateTime st_ctime;
-	ScePspDateTime st_atime;
-	ScePspDateTime st_mtime;
+	ScePspDateTime sce_st_ctime;
+	ScePspDateTime sce_st_atime;
+	ScePspDateTime sce_st_mtime;
 	char name[16];
 
 } SceUtilitySavedataFileListEntry;
