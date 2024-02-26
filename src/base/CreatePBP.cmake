@@ -24,10 +24,8 @@ macro(create_pbp_file)
     )
   cmake_parse_arguments("ARG" "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-  # set mksfoex parameter if VERSION has been defined
-  if (DEFINED ARG_VERSION)
-    set(ARG_VERSION "-s APP_VER=${ARG_VERSION}")
-  else()
+  # set mksfoex parameter if VERSION was not defined
+  if (NOT DEFINED ARG_VERSION)
     set(ARG_VERSION "")
   endif()
 
@@ -125,7 +123,7 @@ macro(create_pbp_file)
   add_custom_command(
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
-    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "${ARG_VERSION}" "${ARG_TITLE}" "PARAM.SFO"
+    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "PARAM.SFO"
     COMMENT "Calling mksfoex"
     )
 
