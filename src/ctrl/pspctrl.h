@@ -26,9 +26,15 @@ extern "C" {
 /**@{*/
 
 /**
- * Enumeration for the digital controller buttons.
+ * @brief Enumeration representing digital controller button flags.
  *
- * @note PSP_CTRL_HOME, PSP_CTRL_NOTE, PSP_CTRL_SCREEN, PSP_CTRL_VOLUP, PSP_CTRL_VOLDOWN, PSP_CTRL_DISC, PSP_CTRL_WLAN_UP, PSP_CTRL_REMOTE, PSP_CTRL_MS can only be read in kernel mode
+ * Each flag corresponds to a different button and can be used to extract button states from ::SceCtrlData and ::SceCtrlLatch structures.
+ * Flags can be combined using bitwise OR operation to check for mutliple key states at once.
+ *
+ * @note Some button states are available only in kernel mode.
+ *
+ * @see ::SceCtrlData
+ * @see ::SceCtrlLatch
  */
 enum PspCtrlButtons
 {
@@ -56,79 +62,94 @@ enum PspCtrlButtons
 	PSP_CTRL_CROSS      = 0x004000,
 	/** Square button. */
 	PSP_CTRL_SQUARE     = 0x008000,
-	/** Home button. In user mode this bit is set if the exit dialog is visible. */
+	/**
+	 * Kernel mode: Home button state.
+	 * User mode: Exit dialog visible.
+	 */
 	PSP_CTRL_HOME       = 0x010000,
 	/** Hold button. */
 	PSP_CTRL_HOLD       = 0x020000,
-	/** Music Note button. */
+	/** Music note button - kernel mode only.*/
 	PSP_CTRL_NOTE       = 0x800000,
-	/** Screen button. */
+	/** Screen button - kernel mode only.*/
 	PSP_CTRL_SCREEN     = 0x400000,
-	/** Volume up button. */
+	/** Volume up button - kernel mode only.*/
 	PSP_CTRL_VOLUP      = 0x100000,
-	/** Volume down button. */
+	/** Volume down button - kernel mode only.*/
 	PSP_CTRL_VOLDOWN    = 0x200000,
-	/** Wlan switch up. */
+	/** Wlan switch up - kernel mode only.*/
 	PSP_CTRL_WLAN_UP    = 0x040000,
-	/** Remote hold position. */
-	PSP_CTRL_REMOTE     = 0x080000,	
-	/** Disc present. */
+	/** Remote hold position - kernel mode only.*/
+	PSP_CTRL_REMOTE     = 0x080000,
+	/** Disc present - kernel mode only.*/
 	PSP_CTRL_DISC       = 0x1000000,
-	/** Memory stick present. */
+	/** Memory stick present - kernel mode only.*/
 	PSP_CTRL_MS         = 0x2000000,
 };
 
-/** Controller mode. */
+/**
+ * @brief Controller mode.
+ *
+ * Specifies if analog data should be included in ::SceCtrlData.
+ *
+ * @see ::sceCtrlSetSamplingMode()
+ * @see ::sceCtrlGetSamplingMode()
+ * @see ::SceCtrlData
+ */
 enum PspCtrlMode
 {
 	/* Digital. */
 	PSP_CTRL_MODE_DIGITAL = 0,
 	/* Analog. */
-	PSP_CTRL_MODE_ANALOG
+	PSP_CTRL_MODE_ANALOG = 1,
 };
 
-/** Returned controller data */
+/**
+ * @brief Controller data.
+ *
+ * Contains current button and axis state.
+ *
+ * @note Axis state is present only in ::PSP_CTRL_MODE_ANALOG controller mode.
+ *
+ * @see ::sceCtrlPeekBufferPositive()
+ * @see ::sceCtrlPeekBufferNegative()
+ * @see ::sceCtrlReadBufferPositive()
+ * @see ::sceCtrlReadBufferNegative()
+ * @see ::PspCtrlMode
+ */
 typedef struct SceCtrlData {
-	/** The current read frame. */
+	/** Current read frame. */
 	unsigned int 	TimeStamp;
-	/** Bit mask containing zero or more of ::PspCtrlButtons. */
+	/**
+	 * Buttons in pressed state.
+	 *
+	 * Mask the value with one or more ::PspCtrlButtons flags to access specific buttons.
+	 */
 	unsigned int 	Buttons;
-	/** Analogue stick, X axis. */
+	/** X-axis value of the Analog Stick.*/
 	unsigned char 	Lx;
-	/** Analogue stick, Y axis. */
+	/** Y-axis value of the Analog Stick.*/
 	unsigned char 	Ly;
 	/** Reserved. */
 	unsigned char 	Rsrv[6];
 } SceCtrlData;
 
 /** 
- * This structure represents controller button latch data.
+ * @brief Controller latch data.
  * 
- * With each sampling cycle, the controller service compares the new pressed & released button states
- * with the previously collected pressed button states. This comparison will result in the following possible
- * states for each button:
+ * Contains information about button state changes between two controller service sampling cycles.
  *
- *    • [make]: The button has just been pressed with its prior state being the released state. Transition from
- *      'released' state to 'pressed' state.\n 
- *    • [press]: The button is currently in the 'pressed' state.\n 
- *    • [break]: The button has just been released with its prior state being the 'pressed' state. Transition from
- *      'pressed' state to 'release' state.\n 
- *    • [release]: The button is currently in the 'released' state.
- * 
- * It is possible for a button to (briefly) be in two states at the same time. Valid combinations are as follows:
- * 
- *    • [make] & [press]\n 
- *    • [break] & [release]
- * 
- * In other words, if a button is in the [make] state, then it is also in the [press] state. However, this is not the case
- * for the inverse. A button in the [press] state does not need to be in the [make] state.
- * 
- * These comparison results are stored internally as latch data and can be retrieved using the APIs ::sceCtrlPeekLatch() and 
- * ::sceCtrlReadLatch(). ::PspCtrlButtons can be used to find out the state of each button.
- * 
- * @remark The same can be accomplished by using the different sceCtrl[Read/Peek]Buffer[Positive/Negative]() APIs
- * and comparing the currently collected button sampling data with the previously collected one.
- * 
+ * @parblock
+ * @note Mask **uiMake**, **uiBreak**, **uiPress** or **uiRelease** with one or more
+ * ::PspCtrlButtonsflags to access specific buttons.
+ * @endparblock
+ * @parblock
+ * @note If a button transitioned to pressed state between two cycles, corresponding
+ * ::PspCtrlButtons flag will be present in both **uiMake** and **uiPress** bit fields.
+ * Similarly, when a button is released a flag will be present in **uiBreak** and **uiRelease**.
+ * @endparblock
+ *
+ * @see ::PspCtrlButtons
  * @see ::sceCtrlPeekLatch()
  * @see ::sceCtrlReadLatch()
  */
@@ -164,7 +185,7 @@ int sceCtrlGetSamplingCycle(int *pcycle);
 /**
  * Set the controller mode.
  *
- * @param mode - One of ::PspCtrlMode. If this is PSP_CTRL_MODE_DIGITAL, no data about the analog stick 
+ * @param mode - One of ::PspCtrlMode. If this is ::PSP_CTRL_MODE_DIGITAL, no data about the analog stick
  * will be present in the SceCtrlData struct read by SceCtrlReadBuffer.
  *
  * @return The previous mode.
@@ -180,42 +201,52 @@ int sceCtrlSetSamplingMode(int mode);
  */
 int sceCtrlGetSamplingMode(int *pmode);
 
+/**
+ * @brief Read latest controller data from the controller service.
+ *
+ * Controller data contains current button and axis state.
+ *
+ * @note Axis state is present only in ::PSP_CTRL_MODE_ANALOG controller mode.
+ *
+ * @param pad_data - A pointer to ::SceCtrlData structure that receives controller data.
+ * @param count - Number of ::SceCtrlData structures to read.
+ *
+ * @see ::SceCtrlData
+ * @see ::sceCtrlPeekBufferNegative()
+ * @see ::sceCtrlReadBufferPositive()
+ */
 int sceCtrlPeekBufferPositive(SceCtrlData *pad_data, int count);
 
 int sceCtrlPeekBufferNegative(SceCtrlData *pad_data, int count);
 
 /**
- * Read buffer positive
+ * @brief Read new controller data from the controller service.
  *
- * @par Example:
- * @code
- * SceCtrlData pad;
-
- * sceCtrlSetSamplingCycle(0);
- * sceCtrlSetSamplingMode(1);
- * sceCtrlReadBufferPositive(&pad, 1);
- * // Do something with the read controller data
- * @endcode
+ * Controller data contains current button and axis state.
  *
- * @param pad_data - Pointer to a ::SceCtrlData structure used hold the returned pad data.
- * @param count - Number of ::SceCtrlData buffers to read.
+ * @note Axis state is present only in ::PSP_CTRL_MODE_ANALOG controller mode.
+ *
+ * @warning Controller data is collected once every controller sampling cycle.
+ * If controller data was already read during a cycle, trying to read it again
+ * will block the execution until the next one.
+ *
+ * @param pad_data - A pointer to ::SceCtrlData structure that receives controller data.
+ * @param count - Number of ::SceCtrlData structures to read.
+ *
+ * @see ::SceCtrlData
+ * @see ::sceCtrlReadBufferNegative()
+ * @see ::sceCtrlPeekBufferPositive()
  */
 int sceCtrlReadBufferPositive(SceCtrlData *pad_data, int count);
 
 int sceCtrlReadBufferNegative(SceCtrlData *pad_data, int count);
 
 /**
- * @brief Get the latch data.
+ * @brief Read latest latch data from the controller service.
  *
- * This function reads the latch data collected by the controller service. At each sampling
- * interval, the controller service compares the new pressed/released button states with the previously sampled pressed
- * button states and stores that comparison as latch data.
+ * Latch data contains information about button state changes between two controller service sampling cycles.
  *
- * Compared to ::sceCtrlReadLatch(), calling this API will not result in clearing the internal latch data. As such,
- * the data returned is the accumulated latch data since the last time ::sceCtrlReadLatch() was called. Consequently,
- * the returned data should not be relied on whether a button is currently in a pressed or released state.
- *
- * @param latch_data Pointer to a ::SceCtrlLatch variable which is to receive the accumulated button latch data.
+ * @param latch_data A pointer to ::SceCtrlLatch structure that receives latch data.
  *
  * @return On success, the number of times the controller service performed sampling since the last time
  * ::sceCtrlReadLatch() was called.
@@ -227,57 +258,18 @@ int sceCtrlReadBufferNegative(SceCtrlData *pad_data, int count);
 int sceCtrlPeekLatch(SceCtrlLatch *latch_data);
 
 /**
- * @brief Get the latch data. 
+ * @brief Read new latch data from the controller service.
  * 
- * This function reads the most recent latch data collected by the controller service. At each sampling
- * interval, the controller service compares the new pressed/released button states with the previously sampled pressed
- * button states and stores that comparison as latch data.
+ * Latch data contains information about button state changes between two controller service sampling cycles.
  * 
- * Compared to ::sceCtrlPeekLatch(), calling this API will result in clearing the internal latch data. As such,
- * calling code might have to explicitly wait for the controller service to update its collected latch data.
+ * @warning Latch data is produced once every controller sampling cycle. If latch data was already read
+ * during a cycle, trying to read it again will block the execution until the next one.
  * 
- * @param latch_data Pointer to a ::SceCtrlLatch variable which is to receive the current button latch data.
+ * @param latch_data A pointer to ::SceCtrlLatch structure that receives latch data.
  * 
  * @return On success, the number of times the controller service performed sampling since the last time
  * ::sceCtrlReadLatch() was called.
  * @return < 0 on error.
- * 
- * @par Example:
- * @code
- * SceCtrlLatch latchData;
- * 
- * while (1) {
- *     // Obtain latch data
- *     sceCtrlReadLatch(&latchData);
- * 
- *     if (latchData.buttonMake & PSP_CTRL_CROSS)
- *     {
- *         // The Cross button has just been pressed (transition from 'released' state to 'pressed' state)
- *     }
- * 
- *     if (latchData.buttonPress & PSP_CTRL_SQUARE)
- *     {
- *         // The Square button is currently in the 'pressed' state
- *     }
- * 
- *    if (latchData.buttonBreak & PSP_CTRL_TRIANGLE)
- *    {
- *        // The Triangle button has just been released (transition from 'pressed' state to 'released' state)
- *    }
- * 
- *    if (latchData.buttonRelease & PSP_CTRL_CIRCLE)
- *    {
- *        // The Circle button is currently in the 'released' state
- *    }
- * 
- *    // As we clear the internal latch data with the ReadLatch() call, we can explicitly wait for the VBLANK interval
- *    // to give the controller service the time it needs to collect new latch data again. This guarantees the next call
- *    // to sceCtrlReadLatch() will return collected data again.
- *    //
- *    // Note: The sceCtrlReadBuffer*() APIs are implicitly waiting for a VBLANK interval if necessary.
- *    sceDisplayWaitVBlank();
- * }
- * @endcode
  * 
  * @see ::SceCtrlLatch
  * @see ::sceCtrlPeekLatch()
