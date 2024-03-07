@@ -72,7 +72,7 @@ int main(void)
 	while(!done){
 		pspDebugScreenSetXY(0, 2);
 
-    	sceCtrlReadBufferPositive(&pad, 1);
+		sceCtrlReadBufferPositive(&pad, 1);
 
 		pspDebugScreenPrintf("Analog X = %d ", pad.Lx);
 		pspDebugScreenPrintf("Analog Y = %d \n", pad.Ly);
