@@ -138,16 +138,31 @@ typedef struct SceCtrlData {
  * @brief Controller latch data.
  * 
  * Contains information about button state changes between two controller service sampling cycles.
+ * With each sampling cycle, the controller service compares the new pressed & releasedbutton states
+ * with the previously collected pressed button states. This comparison will result in the following possible
+ * states for each button:
  *
- * @parblock
- * @note Mask **uiMake**, **uiBreak**, **uiPress** or **uiRelease** with one or more
- * ::PspCtrlButtonsflags to access specific buttons.
- * @endparblock
- * @parblock
- * @note If a button transitioned to pressed state between two cycles, corresponding
- * ::PspCtrlButtons flag will be present in both **uiMake** and **uiPress** bit fields.
- * Similarly, when a button is released a flag will be present in **uiBreak** and **uiRelease**.
- * @endparblock
+ * - **Make** - The button has just been pressed with its prior state being the released state.
+ * Transition from 'released' state to 'pressed' state.
+ * - **Press** - The button is currently in the 'pressed' state.
+ * - **Break** - The button has just been released with its prior state being the 'pressed' state.
+ * Transition from 'pressed' state to 'release' state.
+ * - **Release** - The button is currently in the 'released' state.
+ *
+ * It is possible for a button to (briefly) be in two states at the same time. Valid combinations are as follows:
+ * - **Make** & **Press**
+ * - **Break** & **Release**
+ *
+ * In other words, if a button is in the **Make** state, then it is also in the **Press** state. However, this is not the case
+ * for the inverse. A button in the **Press** state does not need to be in the **Make** state.
+ *
+ * Mask the values with one or more ::PspCtrlButtons flags to access specific buttons.
+ *
+ * These comparison results are stored internally as latch data and can be retrieved using the APIs ::sceCtrlPeekLatch() and
+ * ::sceCtrlReadLatch().
+ *
+ * @remark The same can be accomplished by using the different sceCtrl[Read/Peek]Buffer[Positive/Negative]() APIs
+ * and comparing the currently collected button sampling data with the previously collected one.
  *
  * @see ::PspCtrlButtons
  * @see ::sceCtrlPeekLatch()
@@ -224,6 +239,15 @@ int sceCtrlPeekBufferNegative(SceCtrlData *pad_data, int count);
  *
  * Controller data contains current button and axis state.
  *
+ * **Example:**
+ * @code
+ * SceCtrlData pad;
+ * sceCtrlSetSamplingCycle(0);
+ * sceCtrlSetSamplingMode(1);
+ * sceCtrlReadBufferPositive(&pad, 1);
+ * // Do something with the read controller data
+ * @endcode
+ *
  * @note Axis state is present only in ::PSP_CTRL_MODE_ANALOG controller mode.
  *
  * @warning Controller data is collected once every controller sampling cycle.
@@ -261,6 +285,43 @@ int sceCtrlPeekLatch(SceCtrlLatch *latch_data);
  * @brief Read new latch data from the controller service.
  * 
  * Latch data contains information about button state changes between two controller service sampling cycles.
+ *
+ * **Example:**
+ * @code
+ * SceCtrlLatch latchData;
+ *
+ * while (1) {
+ *     // Obtain latch data
+ *     sceCtrlReadLatch(&latchData);
+ *
+ *     if (latchData.buttonMake & PSP_CTRL_CROSS)
+ *     {
+ *         // The Cross button has just been pressed (transition from 'released' state to 'pressed' state)
+ *     }
+ *
+ *     if (latchData.buttonPress & PSP_CTRL_SQUARE)
+ *     {
+ *         // The Square button is currently in the 'pressed' state
+ *     }
+ *
+ *    if (latchData.buttonBreak & PSP_CTRL_TRIANGLE)
+ *    {
+ *        // The Triangle button has just been released (transition from 'pressed' state to 'released' state)
+ *    }
+ *
+ *    if (latchData.buttonRelease & PSP_CTRL_CIRCLE)
+ *    {
+ *        // The Circle button is currently in the 'released' state
+ *    }
+ *
+ *    // As we clear the internal latch data with the ReadLatch() call, we can explicitly wait for the VBLANK interval
+ *    // to give the controller service the time it needs to collect new latch data again. This guarantees the next call
+ *    // to sceCtrlReadLatch() will return collected data again.
+ *    //
+ *    // Note: The sceCtrlReadBuffer*() APIs are implicitly waiting for a VBLANK interval if necessary.
+ *    sceDisplayWaitVBlank();
+ * }
+ * @endcode
  * 
  * @warning Latch data is produced once every controller sampling cycle. If latch data was already read
  * during a cycle, trying to read it again will block the execution until the next one.
