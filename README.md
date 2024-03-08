@@ -33,27 +33,27 @@ See the LICENSE files for more information.
   Engine.
 * An implementation of the libGUM library. libGUM provides an interface for
   manipulating matrices for use in 3D software.
-* A simple audio library which can be used to play back PCM audio streams.
+* A simple audio library that can be used to play back PCM audio streams.
 * Support for building static executables and PRX files (relocatable modules).
 
 ### PSPSDK also includes several tools to assist in building PSP software:
 
-* bin2c, bin2o, and bin2s for converting binary files into C source, object
+* `bin2c`, `bin2o`, and `bin2s` for converting binary files into C source, object
   files, and assembler source files, respectively.
-* mksfo for creating PARAM.SFO files.
-* pack-pbp and unpack-pbp for adding files to and removing files from EBOOT.PBP.
-* psp-config for locating PSPDEV tools and libraries.
-* psp-prxgen for converting specially made ELFs to PRX files.
-* psp-build-exports for creating export tables
-* psp-fixup-imports for fixing up import tables post-linking to remove unused
+* `mksfo` and `mksfoex` for creating PARAM.SFO files.
+* `pack-pbp` and `unpack-pbp` for adding and removing files from EBOOT.PBP.
+* `psp-config` for locating PSPDEV tools and libraries.
+* `psp-prxgen` for converting specially made ELFs to PRX files.
+* `psp-build-exports` for creating export tables
+* `psp-fixup-imports` for fixing up import tables post-linking to remove unused
   functions from the executable.
 
 Documentation for the libraries are also provided, and can be found in the
 doc/ directory of the PSPSDK source and binary distributions.
 
-A library for Make (build.mak) is also included to provide an easy way to build
+A library for Make (`build.mak`) is also included to provide an easy way to build
 simple programs and libraries. See any PSPSDK sample program for details on how
-build.mak is used.
+`build.mak` is used.
 
 
 ## Installation
