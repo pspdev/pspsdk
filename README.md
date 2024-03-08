@@ -159,7 +159,7 @@ https://pspdev.github.io/pspsdk/
 
 ### Discord
 
-You can find PSPDev Maintainers over at https://discord.gg/bePrj9W in the #psp-toolchain channel :)
+You can find PSPDev Maintainers over at https://discord.gg/bePrj9W in the `#psp-toolchain` channel :)
 
 
 ## Thanks
