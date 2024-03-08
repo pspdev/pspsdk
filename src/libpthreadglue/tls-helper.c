@@ -9,6 +9,7 @@
  *
  */
 
+#ifndef PSP_WITHOUT_PTHREAD
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -252,3 +253,5 @@ pte_osResult pte_osTlsFree(unsigned int index)
   return pteTlsFree(index);
 }
 #endif
+
+#endif /* PSP_WITHOUT_PTHREAD */
