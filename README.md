@@ -12,10 +12,12 @@ and libraries written for Sony's Playstation Portable (PSP) gaming console.
 It also includes documentation and other resources developers can use to write
 software for the PSP.
 
-PSPSDK is distributed under a BSD-compatible license, with the exception of the
-files located in tools/PrxEncrypter. The files located in the tools/PrxEncrypter
+## License
+
+PSPSDK is distributed under a [BSD-compatible license](LICENSE), with the exception of the
+files located in `tools/PrxEncrypter`. The files located in the `tools/PrxEncrypter`
 directory are subject to the terms of the GNU General Public License version 3.
-See the LICENSE files for more information.
+See the `LICENSE` files for more information.
 
 
 ## Features
@@ -161,6 +163,11 @@ https://pspdev.github.io/pspsdk/
 
 You can find PSPDev Maintainers over at https://discord.gg/bePrj9W in the `#psp-toolchain` channel :)
 
+### Code of Conduct
+
+We're all here to build software and have fun with our PSPs, and everyone deserves to be able to do that without fear of harassment.
+
+Please follow our [Code of Conduct](CODE_OF_CONDUCT.md), and we encourage you to contact the PSPDev Maintainers if you think something isn't right.
 
 ## Thanks
 
