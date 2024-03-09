@@ -161,6 +161,11 @@ https://pspdev.github.io/pspsdk/
 
 You can find PSPDev Maintainers over at https://discord.gg/bePrj9W in the #psp-toolchain channel :)
 
+### Code of Conduct
+
+We're all here to build software and have fun with our PSPs, and everyone deserves to be able to do that without fear of harassment.
+
+Please follow our [Code of Conduct](CODE_OF_CONDUCT.md), and feel free to contact the PSPDev Maintainers if you think something isn't right.
 
 ## Thanks
 
