@@ -12,10 +12,12 @@ and libraries written for Sony's Playstation Portable (PSP) gaming console.
 It also includes documentation and other resources developers can use to write
 software for the PSP.
 
-PSPSDK is distributed under a BSD-compatible license, with the exception of the
-files located in tools/PrxEncrypter. The files located in the tools/PrxEncrypter
+## License
+
+PSPSDK is distributed under a [BSD-compatible license](LICENSE), with the exception of the
+files located in `tools/PrxEncrypter`. The files located in the `tools/PrxEncrypter`
 directory are subject to the terms of the GNU General Public License version 3.
-See the LICENSE files for more information.
+See the `LICENSE` files for more information.
 
 
 ## Features
