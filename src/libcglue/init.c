@@ -29,7 +29,7 @@ void __deinit_mutex();
 
 extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
 
-#ifdef F___libpthreadglue_init
+#if defined(F___libpthreadglue_init) && !defined(PSP_WITHOUT_PTHREAD)
 /* Note: This function is being called from __libcglue_init.
 * It is a weak function because can be override by user program
 */
@@ -38,6 +38,8 @@ void __libpthreadglue_init()
 {
     pthread_init();
 }
+#elif defined(PSP_WITHOUT_PTHREAD)
+#define __libpthreadglue_init() do{}while(0)
 #else
 void __libpthreadglue_init();
 #endif

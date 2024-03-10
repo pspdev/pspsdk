@@ -9,6 +9,7 @@
  *
  */
 
+#ifndef PSP_WITHOUT_PTHREAD
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -786,3 +787,5 @@ int pte_osAtomicIncrement(int *pdest)
   return val;
 }
 #endif
+
+#endif /* PSP_WITHOUT_PTHREAD */
