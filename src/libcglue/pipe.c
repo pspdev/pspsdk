@@ -49,7 +49,7 @@ size_t __pipe_peekmsgsize(int fd)
 size_t __pipe_peekmsgsize(int fd);
 #endif
 
-#ifdef D_pipe
+#ifdef F_pipe
 int pipe(int fildes[2])
 {
 	static int iIndex = 0;
