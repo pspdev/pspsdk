@@ -661,6 +661,14 @@ pid_t _wait(int *unused)
 }
 #endif
 
+#ifdef F__execve
+int _execve(const char *name, char *const argv[], char *const env[])
+{
+	errno = ENOSYS;
+	return (pid_t) -1; /* not supported */
+}
+#endif
+
 #ifdef F__sbrk
 #define TO_KB(value) (value * 1024)
 void * _sbrk(ptrdiff_t incr)

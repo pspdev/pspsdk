@@ -24,7 +24,7 @@ ERRNO_OBJS = __set_errno.o
 FDMAN_OBJS = __descriptor_data_pool.o __descriptormap.o __fdman_init.o __fdman_get_new_descriptor.o __fdman_get_dup_descriptor.o \
 	__fdman_release_descriptor.o
 
-GLUE_OBJS = __dummy_passwd.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o _open.o _close.o _read.o \
+GLUE_OBJS = __dummy_passwd.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wait.o _execve.o _open.o _close.o _read.o \
 	_write.o _fstat.o _stat.o lstat.o access.o _fcntl.o  _lseek.o chdir.o mkdir.o rmdir.o getdents.o _link.o _unlink.o \
 	_rename.o _getpid.o _kill.o _sbrk.o _gettimeofday.o _times.o ftime.o clock_getres.o clock_gettime.o clock_settime.o \
 	_isatty.o symlink.o truncate.o chmod.o fchmod.o pathconf.o readlink.o utime.o fchown.o _getentropy.o getpwuid.o \
