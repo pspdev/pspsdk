@@ -37,7 +37,7 @@ LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl
 endif
 
 ifeq ($(PSP_FW_VERSION),)
-PSP_FW_VERSION=150
+PSP_FW_VERSION=600
 endif
 
 CFLAGS += -D_PSP_FW_VERSION=$(PSP_FW_VERSION)
