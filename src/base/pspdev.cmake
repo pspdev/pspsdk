@@ -30,6 +30,7 @@ link_directories( ${PSPDEV}/lib ${PSPDEV}/psp/lib ${PSPDEV}/psp/sdk/lib)
 
 add_definitions("-D__PSP__")
 add_definitions("-DPSP")
+add_definitions("-D_PSP_FW_VERSION=600")
 SET(PLATFORM_PSP TRUE)
 SET(PSP TRUE)
 

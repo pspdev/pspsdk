@@ -72,7 +72,7 @@ AC_SUBST(PSPSDK_INCLUDEDIR)
 AC_SUBST(PSPSDK_LIBDIR)
 
 # CFLAGS and CXXFLAGS used to build pspsdk libraries.
-PSPSDK_CFLAGS="$CFLAGS -mno-gpopt -Wall"
+PSPSDK_CFLAGS="$CFLAGS -mno-gpopt -Wall -D_PSP_FW_VERSION=600"
 PSPSDK_CXXFLAGS="$PSPSDK_CFLAGS -fno-exceptions -fno-rtti"
 if test "$with_pthread" = no ; then
 	PSPSDK_CFLAGS="$PSPSDK_CFLAGS -DPSP_WITHOUT_PTHREAD"
