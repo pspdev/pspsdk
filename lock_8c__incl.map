@@ -1,0 +1,21 @@
+<map id="libcglue/lock.c" name="libcglue/lock.c">
+<area shape="rect" id="Node000001" title="The lock API functions required by newlib." alt="" coords="77,5,180,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,65,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,34,64,72,61,67,111,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="89,79,168,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,31,131,63,126,63,126,31"/>
+<area shape="rect" id="Node000004" href="$pspthreadman_8h.html" title=" " alt="" coords="192,79,305,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,29,216,68,214,73,147,34"/>
+<area shape="rect" id="Node000005" href="$psptypes_8h.html" title=" " alt="" coords="207,226,290,252"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="227,107,201,127,180,154,178,171,185,187,198,202,215,216,211,220,194,206,180,190,172,172,175,152,197,123,224,103"/>
+<area shape="rect" id="Node000007" href="$pspkerneltypes_8h.html" title=" " alt="" coords="189,153,308,178"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="251,105,251,137,246,137,246,105"/>
+<area shape="rect" id="Node000008" href="$pspdebug_8h.html" title=" " alt="" coords="331,153,419,178"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="271,103,342,142,339,147,269,108"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="217,300,280,326"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="251,252,251,284,246,284,246,252"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="251,179,251,211,246,211,246,179"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="355,181,284,221,282,216,352,177"/>
+<area shape="rect" id="Node000009" href="$pspmoduleinfo_8h.html" title=" " alt="" coords="317,226,433,252"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="378,179,378,211,372,211,372,179"/>
+</map>
