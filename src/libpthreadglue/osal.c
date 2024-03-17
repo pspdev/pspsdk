@@ -339,8 +339,9 @@ pte_osResult pte_osThreadWaitForEnd(pte_osThreadHandle threadHandle)
 
   while (1) {
     SceKernelThreadRunStatus info;
-
     /* Poll task to see if it has ended */
+    
+    /* Prepare info before be use in sceKernelReferThreadRunStatus */
     memset(&info,0,sizeof(info));
     info.size = sizeof(info);
     sceKernelReferThreadRunStatus(threadHandle, &info);      
@@ -355,6 +356,9 @@ pte_osResult pte_osThreadWaitForEnd(pte_osThreadHandle threadHandle)
       if (pThreadData != NULL) {
         SceUID osResult;
 
+        /* Prepare semInfo before be use in sceKernelReferSemaStatus */
+        memset(&semInfo, 0, sizeof(semInfo));
+        semInfo.size = sizeof(semInfo);
         osResult = sceKernelReferSemaStatus(pThreadData->cancelSem, &semInfo);
         if (osResult == SCE_KERNEL_ERROR_OK) {
           if (semInfo.currentCount > 0) {
@@ -390,7 +394,9 @@ int pte_osThreadGetPriority(pte_osThreadHandle threadHandle)
 {
   SceKernelThreadInfo thinfo;
 
-  thinfo.size = sizeof(SceKernelThreadInfo);
+  /* Prepare info before be use in sceKernelReferThreadRunStatus */
+  memset(&thinfo,0,sizeof(thinfo));
+  thinfo.size = sizeof(thinfo);
   sceKernelReferThreadStatus(threadHandle, &thinfo);
 
   return thinfo.currentPriority;
@@ -435,6 +441,9 @@ pte_osResult pte_osThreadCheckCancel(pte_osThreadHandle threadHandle)
 
   pThreadData = __getThreadData(threadHandle);
   if (pThreadData != NULL) {
+    /* Prepare semInfo before be use in sceKernelReferSemaStatus */
+    memset(&semInfo, 0, sizeof(semInfo));
+    semInfo.size = sizeof(semInfo);
     osResult = sceKernelReferSemaStatus(pThreadData->cancelSem, &semInfo);
 
     if (osResult == SCE_KERNEL_ERROR_OK) {
@@ -687,6 +696,9 @@ pte_osResult pte_osSemaphoreCancellablePend(pte_osSemaphoreHandle semHandle, uns
       if (pThreadData != NULL) {
         SceUID osResult;
 
+        /* Prepare semInfo before be use in sceKernelReferSemaStatus */
+        memset(&semInfo, 0, sizeof(semInfo));
+        semInfo.size = sizeof(semInfo);
         osResult = sceKernelReferSemaStatus(pThreadData->cancelSem, &semInfo);
         if (osResult == SCE_KERNEL_ERROR_OK) {
           if (semInfo.currentCount > 0) {
