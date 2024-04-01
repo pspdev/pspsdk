@@ -443,6 +443,19 @@ int _fcntl(int fd, int cmd, ...)
 			return 0;
 			break;
 		}
+		case F_SETFD:
+		{
+			int newfl;
+			va_list args;
+	
+			va_start (args, cmd);         /* Initialize the argument list. */
+			newfl =  va_arg(args, int);
+			va_end (args);                /* Clean up. */
+
+			__descriptormap[fd]->flags = newfl;
+			return 0;
+			break;
+		}
 	}
 
 	errno = EBADF;
