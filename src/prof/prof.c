@@ -130,6 +130,7 @@ static void initialize()
         int thid = sceKernelGetThreadId();
         
         SceKernelThreadInfo info;
+        memset(&info, 0, sizeof(info));
         info.size = sizeof(info);
         int ret = sceKernelReferThreadStatus(thid, &info);
         

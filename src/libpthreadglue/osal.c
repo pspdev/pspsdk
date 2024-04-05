@@ -180,6 +180,12 @@ pte_osResult pte_osTerminate(void) {
  * Threads
  *
  ***************************************************************************/
+
+static inline int invert_priority(int priority)
+{
+	return (pte_osThreadGetMinPriority() - priority) + pte_osThreadGetMaxPriority();
+}
+
 #ifdef F_pte_osThreadCreate
 pte_osResult pte_osThreadCreate(pte_osThreadEntryPoint entryPoint,
                                 int stackSize,
@@ -255,7 +261,7 @@ pte_osResult pte_osThreadCreate(pte_osThreadEntryPoint entryPoint,
   //  printf("%s %p %d %d %d\n",threadName, __pspStubThreadEntry, initialPriority, stackSize, pspAttr);
   threadId = sceKernelCreateThread(threadName,
                                    __pspStubThreadEntry,
-                                   initialPriority,
+                                   invert_priority(initialPriority),
                                    stackSize,
                                    pspAttr,
                                    NULL);
@@ -339,8 +345,9 @@ pte_osResult pte_osThreadWaitForEnd(pte_osThreadHandle threadHandle)
 
   while (1) {
     SceKernelThreadRunStatus info;
-
     /* Poll task to see if it has ended */
+    
+    /* Prepare info before be use in sceKernelReferThreadRunStatus */
     memset(&info,0,sizeof(info));
     info.size = sizeof(info);
     sceKernelReferThreadRunStatus(threadHandle, &info);      
@@ -355,6 +362,9 @@ pte_osResult pte_osThreadWaitForEnd(pte_osThreadHandle threadHandle)
       if (pThreadData != NULL) {
         SceUID osResult;
 
+        /* Prepare semInfo before be use in sceKernelReferSemaStatus */
+        memset(&semInfo, 0, sizeof(semInfo));
+        semInfo.size = sizeof(semInfo);
         osResult = sceKernelReferSemaStatus(pThreadData->cancelSem, &semInfo);
         if (osResult == SCE_KERNEL_ERROR_OK) {
           if (semInfo.currentCount > 0) {
@@ -390,17 +400,19 @@ int pte_osThreadGetPriority(pte_osThreadHandle threadHandle)
 {
   SceKernelThreadInfo thinfo;
 
-  thinfo.size = sizeof(SceKernelThreadInfo);
+  /* Prepare info before be use in sceKernelReferThreadRunStatus */
+  memset(&thinfo,0,sizeof(thinfo));
+  thinfo.size = sizeof(thinfo);
   sceKernelReferThreadStatus(threadHandle, &thinfo);
 
-  return thinfo.currentPriority;
+  return invert_priority(thinfo.currentPriority);
 }
 #endif
 
 #ifdef F_pte_osThreadSetPriority
 pte_osResult pte_osThreadSetPriority(pte_osThreadHandle threadHandle, int newPriority)
 {
-  sceKernelChangeThreadPriority(threadHandle, newPriority);
+  sceKernelChangeThreadPriority(threadHandle, invert_priority(newPriority));
   return PTE_OS_OK;
 }
 #endif
@@ -435,6 +447,9 @@ pte_osResult pte_osThreadCheckCancel(pte_osThreadHandle threadHandle)
 
   pThreadData = __getThreadData(threadHandle);
   if (pThreadData != NULL) {
+    /* Prepare semInfo before be use in sceKernelReferSemaStatus */
+    memset(&semInfo, 0, sizeof(semInfo));
+    semInfo.size = sizeof(semInfo);
     osResult = sceKernelReferSemaStatus(pThreadData->cancelSem, &semInfo);
 
     if (osResult == SCE_KERNEL_ERROR_OK) {
@@ -466,21 +481,21 @@ void pte_osThreadSleep(unsigned int msecs)
 #ifdef  F_pte_osThreadGetMinPriority
 int pte_osThreadGetMinPriority()
 {
-  return 17;
+  return pte_osThreadGetDefaultPriority() - 32;
 }
 #endif
 
 #ifdef F_pte_osThreadGetMaxPriority
 int pte_osThreadGetMaxPriority()
 {
-  return 30;
+  return pte_osThreadGetDefaultPriority() + 32;
 }
 #endif
 
 #ifdef F_pte_osThreadGetDefaultPriority
 int pte_osThreadGetDefaultPriority()
 {
-  return 18;
+  return 60;
 }
 #endif
 
@@ -612,7 +627,7 @@ pte_osResult pte_osSemaphorePend(pte_osSemaphoreHandle handle, unsigned int *pTi
 {
   unsigned int timeoutUsecs;
   unsigned int *pTimeoutUsecs;
-  SceUInt result;
+  int result;
   pte_osResult osResult;
 
   if (pTimeoutMsecs == NULL) {
@@ -652,17 +667,14 @@ pte_osResult pte_osSemaphoreCancellablePend(pte_osSemaphoreHandle semHandle, uns
   clock_t start_time;
   pte_osResult result =  PTE_OS_OK;
   unsigned int timeout;
-  unsigned char timeoutEnabled;
 
   start_time = clock();
 
   // clock() is in microseconds, timeout as passed in was in milliseconds
   if (pTimeout == NULL) {
     timeout = 0;
-    timeoutEnabled = 0;
   } else {
     timeout = *pTimeout * 1000;
-    timeoutEnabled = 1;
   }
 
   while (1) {
@@ -677,7 +689,7 @@ pte_osResult pte_osSemaphoreCancellablePend(pte_osSemaphoreHandle semHandle, uns
       /* User semaphore posted to */
       result = PTE_OS_OK;
       break;
-    } else if ((timeoutEnabled) && ((clock() - start_time) > timeout)) {
+    } else if ((pTimeout) && ((clock() - start_time) > timeout)) {
       /* Timeout expired */
       result = PTE_OS_TIMEOUT;
       break;
@@ -687,6 +699,9 @@ pte_osResult pte_osSemaphoreCancellablePend(pte_osSemaphoreHandle semHandle, uns
       if (pThreadData != NULL) {
         SceUID osResult;
 
+        /* Prepare semInfo before be use in sceKernelReferSemaStatus */
+        memset(&semInfo, 0, sizeof(semInfo));
+        semInfo.size = sizeof(semInfo);
         osResult = sceKernelReferSemaStatus(pThreadData->cancelSem, &semInfo);
         if (osResult == SCE_KERNEL_ERROR_OK) {
           if (semInfo.currentCount > 0) {

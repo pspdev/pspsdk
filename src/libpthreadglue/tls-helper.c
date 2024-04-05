@@ -158,7 +158,9 @@ void *__getTlsStructFromThread(SceUID thid)
   int numMatches;
 
 
-  thinfo.size = sizeof(SceKernelThreadInfo);
+  /* Prepare thinfo before be use in sceKernelReferThreadRunStatus */
+  memset(&thinfo,0,sizeof(thinfo));
+  thinfo.size = sizeof(thinfo);
   sceKernelReferThreadStatus(thid, &thinfo);
   numMatches = sscanf(thinfo.name,"pthread%04d__%x", &thrNum, &ptr);
 
