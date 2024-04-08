@@ -27,10 +27,18 @@ FIXUP    = psp-fixup-imports
 ENC		 = PrxEncrypter
 
 # Add PSPSDK includes and libraries.
+ifeq ($(USE_SYSTEM_LIBC), 1)
 INCDIR   := $(INCDIR) . $(PSPSDK)/include
 LIBDIR   := $(LIBDIR) . $(PSPDEV)/psp/lib $(PSPSDK)/lib
 
 CFLAGS   := -isystem $(PSPDEV)/psp/include $(addprefix -I,$(INCDIR)) $(CFLAGS)
+else
+INCDIR   := $(INCDIR) . $(PSPDEV)/psp/include $(PSPSDK)/include
+LIBDIR   := $(LIBDIR) . $(PSPDEV)/psp/lib $(PSPSDK)/lib
+
+CFLAGS   := $(addprefix -I,$(INCDIR)) $(CFLAGS)
+endif # USE_SYSTEM_LIBC
+
 CXXFLAGS := $(CFLAGS) $(CXXFLAGS)
 ASFLAGS  := $(CFLAGS) $(ASFLAGS)
 
