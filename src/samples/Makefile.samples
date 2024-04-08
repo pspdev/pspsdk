@@ -37,6 +37,7 @@ SAMPLES = \
 	gu/timing \
 	gu/vertex \
 	gu/zbufferfog \
+	helloworld/cxx \
 	ir/sircs \
 	ir/irda \
 	kernel/kdumper \
