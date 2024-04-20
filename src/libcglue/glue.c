@@ -1099,7 +1099,7 @@ int renameat(int olddirfd, const char *oldpath, int newdirfd, const char *newpat
 {
 	// TODO: Do better implementation following https://linux.die.net/man/2/renameat
 	// for now use the same as rename
-	return _rename(oldpath, newpath);
+	return rename(oldpath, newpath);
 }
 #endif /* F_renameat  */
 
