@@ -589,6 +589,17 @@ int sceKernelPollSema(SceUID semaid, int signal);
  */
 int sceKernelReferSemaStatus(SceUID semaid, SceKernelSemaInfo *info);
 
+/** Attribute for lightweight mutex. */
+enum PspLwMutexAttributes
+{
+	/** The wait thread is queued using FIFO. */
+	PSP_LW_MUTEX_ATTR_THFIFO = 0x0000U,
+	/** The wait thread is queued by thread priority . */
+	PSP_LW_MUTEX_ATTR_THPRI = 0x0100U,
+	/** A recursive lock is allowed by the thread that acquired the lightweight mutex */
+	PSP_LW_MUTEX_ATTR_RECURSIVE = 0x0200U
+};
+
 /** Struct as workarea for lightweight mutex */
 typedef struct {
     /** Count */
@@ -610,13 +621,13 @@ typedef struct {
  *
  * @param workarea - The pointer to the workarea
  * @param name - The name of the lightweight mutex
- * @param attr - 
+ * @param attr - The LwMutex attributes, zero or more of ::PspLwMutexAttributes.
  * @param initialCount - THe inital value of the mutex
  * @param optionsPTr - Other optioons for mutex
  *
  * @return 0 on success, otherwise one of ::PspKernelErrorCodes
  */
-int sceKernelCreateLwMutex(SceLwMutexWorkarea *workarea, const char *name, u32 attr, int initialCount, u32 *optionsPtr);
+int sceKernelCreateLwMutex(SceLwMutexWorkarea *workarea, const char *name, SceUInt32 attr, int initialCount, u32 *optionsPtr);
 
 /**
  * Delete a lightweight mutex
