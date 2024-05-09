@@ -92,7 +92,7 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/psp-prxgen" "$<TARGET_FILE:${ARG_TARGET}>"
-      "$<TARGET_FILE_DIR:${ARG_TARGET}>/$<TARGET_FILE_NAME:${ARG_TARGET}>.prx"
+      "$<TARGET_FILE:${ARG_TARGET}>.prx"
       COMMENT "Calling prxgen"
       )
 
@@ -101,7 +101,7 @@ macro(create_pbp_file)
 	TARGET ${ARG_TARGET}
 	POST_BUILD COMMAND
 	"${PSPDEV}/bin/PrxEncrypter" "$<TARGET_FILE_DIR:${ARG_TARGET}>/$<TARGET_FILE_NAME:${ARG_TARGET}>.prx"
-	"$<TARGET_FILE_DIR:${ARG_TARGET}>/$<TARGET_FILE_NAME:${ARG_TARGET}>.prx"
+	"$<TARGET_FILE:${ARG_TARGET}>.prx"
 	COMMENT "Calling PrxEncrypter"
 	)
     else()
@@ -132,7 +132,7 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/pack-pbp" "EBOOT.PBP" "PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
-      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE_DIR:${ARG_TARGET}>/$<TARGET_FILE_NAME:${ARG_TARGET}>.prx" "NULL"
+      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE:${ARG_TARGET}>.prx" "NULL"
       COMMENT "Calling pack-pbp with PRX file"
       )
   else()
@@ -140,7 +140,7 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/pack-pbp" "EBOOT.PBP" "PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
-      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE_DIR:${ARG_TARGET}>/$<TARGET_FILE_NAME:${ARG_TARGET}>" "NULL"
+      "${ARG_BACKGROUND_PATH}" "NULL" "$<TARGET_FILE:${ARG_TARGET}>" "NULL"
       COMMENT "Calling pack-pbp with ELF file"
       )
   endif()
