@@ -41,7 +41,6 @@ void pspAudioEndPre();
 void pspAudioEnd();
 
 void pspAudioSetVolume(int channel, int left, int right);
-void pspAudioChannelThreadCallback(int channel, void *buf, unsigned int reqn);
 void pspAudioSetChannelCallback(int channel, pspAudioCallback_t callback, void *pdata);
 int  pspAudioOutBlocking(unsigned int channel, unsigned int vol1, unsigned int vol2, void *buf);
 

@@ -12,6 +12,7 @@
 #include <pspkernel.h>
 #include <pspdebug.h>
 #include <string.h>
+#include <stddef.h>
 
 #define CALL		 0x0C000000
 #define CALL_MASK 	 0xFC000000
@@ -21,9 +22,13 @@
 extern u32 _ftext;
 extern u32 _etext;
 
-/* Ideally should be something which is automatic */
-#define ELF_START    (&_ftext)
-#define ELF_END		 (&_etext)
+static inline int validAddress(u32 *addr)
+{
+	u32 *elf_start = &_ftext;
+	u32 *elf_end = &_etext;
+	ptrdiff_t startDiff = addr - elf_start;
+	return (startDiff >= 2) && (addr < elf_end);
+}
 
 /* This is a blatently wrong way of doing a stack trace, but I felt as long as you use some intelligence you 
    could easily work out if some calls in the trace were invalid :P */
@@ -32,7 +37,7 @@ static int _pspDebugDoStackTrace(u32 *sp, u32 *sp_end, u32 *ra, PspDebugStackTra
 	int count = 0;
 	int recurse = 0;
 
-	if((ra >= (ELF_START + 2)) && (ra < ELF_END) && (IS_CALL(ra[-2])))
+	if (validAddress(ra) && (IS_CALL(ra[-2])))
 	{
 		trace[count].func_addr = CALL_ADDR(ra[-2]);
 		trace[count].call_addr = (u32) (&ra[-2]);
@@ -48,7 +53,7 @@ static int _pspDebugDoStackTrace(u32 *sp, u32 *sp_end, u32 *ra, PspDebugStackTra
 		addr = (u32*) *sp;
 
 		/* Check that the address could possibly be a valid ra address */
-		if((addr >= (ELF_START + 2)) && (addr < ELF_END))
+		if (validAddress(addr))
 		{
 			if(IS_CALL(addr[-2]))
 			{

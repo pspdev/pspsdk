@@ -15,6 +15,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/lock.h>
 #include <pspthreadman.h>
 
