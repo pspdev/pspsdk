@@ -26,6 +26,8 @@ void __init_mutex();
 void pthread_init();
 void __psp_free_heap();
 void __deinit_mutex();
+void __locks_init();
+void __locks_deinit();
 
 extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
 
@@ -54,6 +56,8 @@ __attribute__((weak))
 void __libcglue_init(int argc, char *argv[])
 {
     (void) argc;
+    /* Initialize lock API */
+	__locks_init();
 
     /* Initialize mutex used in malloc and fdman */
     __init_mutex();
@@ -81,6 +85,7 @@ void __libcglue_deinit()
 {
     __psp_free_heap();
 	__deinit_mutex();
+	__locks_deinit();
 }
 #else
 void __libcglue_deinit();
