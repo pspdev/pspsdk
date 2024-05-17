@@ -30,13 +30,6 @@ void pspAudioSetVolume(int channel, int left, int right)
   AudioStatus[channel].volumeleft  = left;
 }
 
-void pspAudioChannelThreadCallback(int channel, void *buf, unsigned int reqn)
-{
-	pspAudioCallback_t callback;
-	callback=AudioStatus[channel].callback;
-}
-
-
 void pspAudioSetChannelCallback(int channel, pspAudioCallback_t callback, void *pdata)
 {
 	volatile psp_audio_channelinfo *pci = &AudioStatus[channel];

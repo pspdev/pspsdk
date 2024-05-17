@@ -92,7 +92,8 @@ void __libcglue_deinit();
 #endif
 
 #ifdef F__exit
-void _exit(int status)
+__attribute__((__noreturn__))
+void _exit (int __status)
 {
 	__libcglue_deinit();
 
@@ -101,9 +102,12 @@ void _exit(int status)
 	} else {
 		sceKernelExitGame();
 	}
+	
+	while (1); // Avoid warning
 }
 #else
-void _exit(int status);
+__attribute__((__noreturn__))
+void _exit (int __status);
 #endif
 
 #ifdef F_abort

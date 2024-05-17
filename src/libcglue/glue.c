@@ -152,7 +152,8 @@ int _open(const char *buf, int flags, int mode) {
 		return __set_errno(scefd);
 	}
 }
-
+#else
+int _open(const char *buf, int flags, int mode);
 #endif
 
 #ifdef F__close
@@ -339,8 +340,6 @@ int lstat(const char *filename, struct stat *buf)
 
 #ifdef F__fstat
 int _fstat(int fd, struct stat *buf) {
-	int ret;
-	SceOff oldpos;
 	if (!__IS_FD_VALID(fd)) {
 		errno = EBADF;
 		return -1;
@@ -1070,6 +1069,8 @@ int statvfs (const char *__path, struct statvfs *__buf)
 	__buf->f_bfree = inf.freeClusters;
 	__buf->f_bavail = inf.freeClusters;
 	__buf->f_namemax = MAXNAMLEN;
+
+	return 0;
 }
 #endif /* F_statvfs  */
 

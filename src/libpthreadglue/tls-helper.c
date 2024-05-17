@@ -12,6 +12,7 @@
 #ifndef PSP_WITHOUT_PTHREAD
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <pspkerneltypes.h>
 #include <pspthreadman.h>
