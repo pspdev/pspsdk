@@ -38,11 +38,11 @@ int sceDisplay_driver_63E22A26(int pri, void *topaddr, int bufferwidth, int pixe
  * @param topaddr - pointer to void* to receive address of start of framebuffer
  * @param bufferwidth - pointer to int to receive buffer width (must be power of 2)
  * @param pixelformat - pointer to int to receive one of ::PspDisplayPixelFormats.
- * @param sync - One of ::PspDisplaySetBufSync
+ * @param sync - pointer to int to receive one of ::PspDisplaySetBufSync
  *
  * @return 0 on success
  */
-int sceDisplay_driver_5B5AEFAD(int pri, void **topaddr, int *bufferwidth, int *pixelformat, int sync);
+int sceDisplay_driver_5B5AEFAD(int pri, void **topaddr, int *bufferwidth, int *pixelformat, int *sync);
 
 /* Define some names to make it nicer */
 #define sceDisplaySetFrameBufferInternal sceDisplay_driver_63E22A26
