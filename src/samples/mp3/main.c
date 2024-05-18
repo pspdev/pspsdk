@@ -60,8 +60,8 @@ int SetupCallbacks(void)
 
 
 // Input and Output buffers
-char	mp3Buf[16*1024]  __attribute__((aligned(64)));
-short	pcmBuf[16*(1152/2)]  __attribute__((aligned(64)));
+unsigned char	mp3Buf[16*1024]  __attribute__((aligned(64)));
+unsigned char	pcmBuf[16*(1152/2)]  __attribute__((aligned(64)));
 
 
 // Macro to allow formatted input without having to use stdargs.h
@@ -87,9 +87,9 @@ void error( char* msg )
 
 int fillStreamBuffer( int fd, int handle )
 {
-	char* dst;
-	int write;
-	int pos;
+	unsigned char* dst;
+	long int write;
+	long int pos;
 	// Get Info on the stream (where to fill to, how much to fill, where to fill from)
 	int status = sceMp3GetInfoToAddStreamData( handle, &dst, &write, &pos);
 	if (status<0)
@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
 		printf("PSP Mp3 Sample v1.0 by Raphael\n\n");
 		printf("Playing '%s'...\n", MP3FILE);
 		printf(" %i Hz\n", samplingRate);
-		printf(" %i kbit/s\n", sceMp3GetBitRate( handle ));
+		printf(" %li kbit/s\n", sceMp3GetBitRate( handle ));
 		printf(" %s\n", numChannels==2?"Stereo":"Mono");
 		printf(" %s\n\n", loop==0?"No loop":"Loop");
 		int playTime = samplingRate>0?numPlayed / samplingRate:0;
