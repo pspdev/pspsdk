@@ -77,14 +77,14 @@ struct Vertex __attribute__((aligned(16))) vertices[12*3] =
 
 int done = 0;
 /* Exit callback */
-int exit_callback(void)
+int exit_callback(int arg1, int arg2, void *common)
 {
 	done = 1;
 	return 0;
 }
 
 /* Callback thread */
-void CallbackThread(void *arg)
+int CallbackThread(SceSize args, void *arg)
 {
 	int cbid;
 
@@ -92,6 +92,7 @@ void CallbackThread(void *arg)
 	sceKernelRegisterExitCallback(cbid);
 
 	sceKernelSleepThreadCB();
+	return cbid;
 }
 
 /* Sets up the callback thread and returns its thread id */
