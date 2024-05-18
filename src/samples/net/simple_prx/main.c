@@ -65,7 +65,7 @@ void start_server(const char *szIpAddr)
 	int sock;
 	int new = -1;
 	struct sockaddr_in client;
-	size_t size;
+	long unsigned int size;
 	int readbytes;
 	char data[1024];
 	fd_set set;

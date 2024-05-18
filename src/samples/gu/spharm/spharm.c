@@ -18,6 +18,7 @@
 #include <pspgu.h>
 #include <pspgum.h>
 
+#include <math.h>
 #include "mt19937.h"
 
 /*
@@ -31,7 +32,7 @@
 
 float shift23=(float)(1<<23);
 float OOshift23=1.0f/(float)(1<<23);
-static inline float floorf(float i)
+inline float floorf(float i)
 { // return largest integer that is less than or equal to i
   float k = (float)((int) i);
   if (k <= i) 
