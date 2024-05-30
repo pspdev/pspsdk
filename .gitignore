@@ -3,6 +3,8 @@ doc
 *.o
 *.a
 *~
+*.elf
+*.prx
 
 tools/PrxEncrypter/PrxEncrypter
 tools/bin2c
@@ -20,6 +22,7 @@ tools/unpack-pbp
 Makefile.in
 Makefile
 .deps/
+.vscode/
 aclocal.m4
 autom4te.cache/
 compile
@@ -33,3 +36,5 @@ install-sh
 missing
 src/base/linkfile.prx
 stamp-h1
+EBOOT.PBP
+PARAM.SFO
