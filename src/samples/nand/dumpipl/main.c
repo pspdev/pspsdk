@@ -125,7 +125,7 @@ int ReadIPLBlockTable(void *pBlockBuf)
 				die("can't read IPL block table!");
 			}
 
-			printf("Found IPL block table at block %d\n", uiBlockNum);
+			printf("Found IPL block table at block %ld\n", uiBlockNum);
 			break;
 		}
 

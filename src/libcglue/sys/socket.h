@@ -170,6 +170,22 @@ struct sockaddr {
 };
 
 /*
+ * RFC 2553: protocol-independent placeholder for socket addresses
+ */
+#define _SS_MAXSIZE	128
+#define _SS_ALIGNSIZE	(sizeof(int64_t))
+#define _SS_PAD1SIZE	(_SS_ALIGNSIZE - 2)
+#define _SS_PAD2SIZE	(_SS_MAXSIZE - 2 - _SS_PAD1SIZE - _SS_ALIGNSIZE)
+
+struct sockaddr_storage {
+	uint8_t	ss_len;		/* address length */
+	sa_family_t	ss_family;	/* address family */
+	char		__ss_pad1[_SS_PAD1SIZE];
+	int64_t     __ss_align;/* force desired structure storage alignment */
+	char		__ss_pad2[_SS_PAD2SIZE];
+};
+
+/*
  * Protocol families, same as address families for now.
  */
 #define	PF_UNSPEC	AF_UNSPEC

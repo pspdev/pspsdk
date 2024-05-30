@@ -36,5 +36,7 @@ install-sh
 missing
 src/base/linkfile.prx
 stamp-h1
+.clang-format
+compile_flags.txt
 EBOOT.PBP
 PARAM.SFO
