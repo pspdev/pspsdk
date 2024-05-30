@@ -13,15 +13,24 @@
 
 typedef struct
 {
-	unsigned int size;	/** Size of the structure */
-	int language;		/** Language */
-	int buttonSwap;		/** Set to 1 for X/O button swap */
-	int graphicsThread;	/** Graphics thread priority */
-	int accessThread;	/** Access/fileio thread priority (SceJobThread) */
-	int fontThread;		/** Font thread priority (ScePafThread) */
-	int soundThread;	/** Sound thread priority */
-	int result;			/** Result */
-	int reserved[4];	/** Set to 0 */
+	/** Size of the structure */
+	unsigned int size;
+	/** Language */
+	int language;
+	/** Set to 1 for X/O button swap */	
+	int buttonSwap;
+	/** Graphics thread priority */
+	int graphicsThread;
+	/** Access/fileio thread priority (SceJobThread) */
+	int accessThread;
+	/** Font thread priority (ScePafThread) */
+	int fontThread;
+	/** Sound thread priority */
+	int soundThread;
+	/** Result */	
+	int result;
+	/** Set to 0 */		
+	int reserved[4];
 
 } pspUtilityDialogCommon;
 
