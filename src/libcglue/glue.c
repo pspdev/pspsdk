@@ -1179,3 +1179,25 @@ int unlinkat(int dirfd, const char *pathname, int flags)
 	}
 }
 #endif /* F_unlinkat  */
+
+#ifdef F_realpath
+char *realpath(const char *path, char *resolved_path)
+{
+	if (path == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+
+	if (resolved_path == NULL) {
+		resolved_path = malloc(PATH_MAX);
+		if (resolved_path == NULL) {
+			errno = ENOMEM;
+			return NULL;
+		}
+	}
+
+	__path_absolute(path, resolved_path, PATH_MAX);
+
+	return resolved_path;
+}
+#endif /* F_realpath */
