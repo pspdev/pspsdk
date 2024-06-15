@@ -1188,6 +1188,63 @@ char *realpath(const char *path, char *resolved_path)
 		return NULL;
 	}
 
+	if (strlen(path) > PATH_MAX) {
+		errno = ENAMETOOLONG;
+		return NULL;
+	}
+
+	/* check the length of every component of path arg */
+	char component[NAME_MAX + 1];
+	const char *start = path;
+	const char *end;
+	while (*start != '\0') {
+		end = start;
+
+		// find  the next '/'
+		while (*end != '/' && *end != '\0') { end++; }
+
+		// compute path component length
+		size_t len = end - start;
+		if (len > NAME_MAX) {
+			errno = ENAMETOOLONG;
+			return NULL;
+		}
+
+		// copy start to component buffer
+		memcpy(component, start, len);
+		component[len] = '\0';
+
+		// move to the next component
+		if (*end == '/') { start = end + 1; } 
+		else { start = end; }
+	}
+
+	/* check if file or directory exist */
+	struct stat st;
+	if (stat(path, &st) == 0) {
+		if (S_ISREG(st.st_mode)) {
+			SceUID uid = sceIoOpen(path, PSP_O_RDONLY, 0644);
+			if(uid < 0) {
+				errno = ENOENT;
+				return NULL;
+			}
+			sceIoClose(uid);
+		} else if (S_ISDIR(st.st_mode)) {
+			SceUID uid = sceIoDopen(path);
+			if(uid < 0) {
+				errno = ENOTDIR;
+				return NULL;
+			}
+			sceIoDclose(uid);
+		} else {
+			errno = ENOENT;
+			return NULL;
+		}
+	} else {
+		return NULL;
+	}
+
+	// if resolved_path arg is NULL, use malloc instead
 	if (resolved_path == NULL) {
 		resolved_path = malloc(PATH_MAX);
 		if (resolved_path == NULL) {
