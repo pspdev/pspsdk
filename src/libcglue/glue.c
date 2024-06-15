@@ -1194,28 +1194,23 @@ char *realpath(const char *path, char *resolved_path)
 	}
 
 	/* check if file or directory exist */
-	struct stat st;
-	if (stat(path, &st) == 0) {
-		if (S_ISREG(st.st_mode)) {
-			SceUID uid = sceIoOpen(path, PSP_O_RDONLY, 0644);
+	SceIoStat psp_stat;
+	if (sceIoGetstat(path, &psp_stat) >= 0) {
+		if (FIO_S_ISREG(psp_stat.st_mode)) {
+			SceUID uid = sceIoOpen(path, PSP_O_RDONLY, 0777);
 			if(uid < 0) {
 				errno = ENOENT;
 				return NULL;
 			}
 			sceIoClose(uid);
-		} else if (S_ISDIR(st.st_mode)) {
+		} else if (FIO_S_ISDIR(psp_stat.st_mode)) {
 			SceUID uid = sceIoDopen(path);
 			if(uid < 0) {
 				errno = ENOTDIR;
 				return NULL;
 			}
 			sceIoDclose(uid);
-		} else {
-			errno = ENOENT;
-			return NULL;
 		}
-	} else {
-		return NULL;
 	}
 
 	// if resolved_path arg is NULL, use malloc instead
