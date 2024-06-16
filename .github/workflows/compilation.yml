@@ -11,11 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/pspdev/psptoolchain:latest
     steps:
-    - uses: actions/checkout@v4
 
     - name: Install dependencies
       run: |
         apk add build-base autoconf automake zlib-dev bash git
+
+    - uses: actions/checkout@v4
 
     - name: Compile PSPSDK
       run: |
