@@ -20,6 +20,9 @@ jobs:
 
     - name: Compile PSPSDK
       run: |
+        chown -R $(id -nu):$(id -ng) .
+        export PSPDEV=$PWD/pspdev
+        export PATH=$PATH:$PSPDEV/bin
         ./build-and-install.sh
     
     - name: Get short SHA
