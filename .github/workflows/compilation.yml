@@ -15,7 +15,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apk add build-base autoconf automake zlib-dev
+        apk add build-base autoconf automake zlib-dev bash git
 
     - name: Compile PSPSDK
       run: |
