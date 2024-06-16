@@ -1179,3 +1179,38 @@ int unlinkat(int dirfd, const char *pathname, int flags)
 	}
 }
 #endif /* F_unlinkat  */
+
+#ifdef F_realpath
+char *realpath(const char *path, char *resolved_path)
+{
+	if (path == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+
+	if (strlen(path) > PATH_MAX) {
+		errno = ENAMETOOLONG;
+		return NULL;
+	}
+
+	/* check if file or directory exist */
+	struct stat st;
+	if (stat(path, &st) < 0) {
+		errno = ENOENT;
+		return NULL;
+	}
+
+	// if resolved_path arg is NULL, use malloc instead
+	if (resolved_path == NULL) {
+		resolved_path = (char *)malloc(PATH_MAX * sizeof(char));
+		if (resolved_path == NULL) {
+			errno = ENOMEM;
+			return NULL;
+		}
+	}
+
+	__path_absolute(path, resolved_path, PATH_MAX);
+
+	return resolved_path;
+}
+#endif /* F_realpath */
