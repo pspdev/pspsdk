@@ -76,7 +76,7 @@ void pspDebugScreenSetBackColor(u32 color);
 /**
   * Set the text color 
   *
-  * @param color - A 32 bit RGB color
+  * @param color - A 32 bit BGR color
   */
 void pspDebugScreenSetTextColor(u32 color);
 
