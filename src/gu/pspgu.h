@@ -1501,6 +1501,42 @@ void guSwapBuffersBehaviour(int behaviour);
 **/
 void guSwapBuffersCallback(GuSwapBuffersCallback callback);
 
+/**
+  * Allocate a draw buffer in vram
+  *
+  * Available pixel formats are:
+  *   - GU_PSM_5650 - Hicolor, 16-bit
+  *   - GU_PSM_5551 - Hicolor, 16-bit
+  *   - GU_PSM_4444 - Hicolor, 16-bit
+  *   - GU_PSM_8888 - Truecolor, 32-bit
+  *
+  * @param width - Width of the buffer, usually 512 (must be a power of 2)
+  * @param height - Height of the buffer, normally the height of the screen 272 (must be a power of 2)
+  * @param psm - Which pixel format to use
+  * 
+  * @return A pointer to the buffer's relative to vram start (as required by sceGuDispBuffer, sceGuDrawBuffer, sceGuDepthBuffer and sceGuDrawBufferList)
+**/
+void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm);
+
+/**
+  * Allocate a texture buffer in vram
+  *
+  * Available texture-formats are:
+  *   - GU_PSM_5650 - Hicolor, 16-bit
+  *   - GU_PSM_5551 - Hicolor, 16-bit
+  *   - GU_PSM_4444 - Hicolor, 16-bit
+  *   - GU_PSM_8888 - Truecolor, 32-bit
+  *   - GU_PSM_T4 - Indexed, 4-bit (2 pixels per byte)
+  *   - GU_PSM_T8 - Indexed, 8-bit
+  *
+  * @param width - Width of the buffer (must be a power of 2)
+  * @param height - Height of the buffer (must be a power of 2)
+  * @param psm - Which pixel format to use
+  * 
+  * @return A pointer to the buffer
+**/
+void* getStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm);
+
 /**@}*/
 
 #if defined(__cplusplus)
