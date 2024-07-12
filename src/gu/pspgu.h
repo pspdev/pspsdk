@@ -1519,7 +1519,7 @@ void guSwapBuffersCallback(GuSwapBuffersCallback callback);
 void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm);
 
 /**
-  * Allocate a texture buffer in vram
+  * Allocate a texture in vram
   *
   * Available texture-formats are:
   *   - GU_PSM_5650 - Hicolor, 16-bit
@@ -1529,11 +1529,11 @@ void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int 
   *   - GU_PSM_T4 - Indexed, 4-bit (2 pixels per byte)
   *   - GU_PSM_T8 - Indexed, 8-bit
   *
-  * @param width - Width of the buffer (must be a power of 2)
-  * @param height - Height of the buffer (must be a power of 2)
+  * @param width - Width of the texture (must be a power of 2)
+  * @param height - Height of the texture (must be a power of 2)
   * @param psm - Which pixel format to use
   * 
-  * @return A pointer to the buffer
+  * @return A pointer to the texture
 **/
 void* getStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm);
 
