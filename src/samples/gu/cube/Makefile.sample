@@ -1,5 +1,5 @@
 TARGET = cube
-OBJS = cube.o logo.o ../common/callbacks.o ../common/vram.o
+OBJS = cube.o logo.o ../common/callbacks.o
 
 INCDIR =
 CFLAGS = -Wall

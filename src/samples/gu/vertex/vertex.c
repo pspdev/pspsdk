@@ -20,7 +20,6 @@
 #include <pspgum.h>
 
 #include "../common/callbacks.h"
-#include "../common/vram.h"
 #include "../common/menu.h"
 
 PSP_MODULE_INFO("Vertex Speed Sample", 0, 1, 1);

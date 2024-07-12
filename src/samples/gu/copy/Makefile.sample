@@ -1,5 +1,5 @@
 TARGET = copy
-OBJS = copy.o ../common/callbacks.o ../common/vram.o
+OBJS = copy.o ../common/callbacks.o
 
 INCDIR =
 CFLAGS = -Wall -O2

@@ -1,5 +1,5 @@
 TARGET = zbufferfog
-OBJS = zbufferfog.o ../common/callbacks.o ../common/geometry.o ../common/vram.o
+OBJS = zbufferfog.o ../common/callbacks.o ../common/geometry.o
 
 INCDIR =
 CFLAGS = -Wall

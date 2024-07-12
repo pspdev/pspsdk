@@ -1,4 +1,10 @@
-#include "vram.h"
+/*
+ * PSP Software Development Kit - https://github.com/pspdev
+ * -----------------------------------------------------------------------
+ * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
+ *
+ * Copyright (c) 2010 Dan Peori
+ */
 
 #include <pspge.h>
 #include <pspgu.h>

@@ -18,7 +18,6 @@
 #include <pspgu.h>
 
 #include "../common/callbacks.h"
-#include "../common/vram.h"
 
 PSP_MODULE_INFO("Blend Sample", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);

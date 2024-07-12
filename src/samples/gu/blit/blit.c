@@ -19,7 +19,6 @@
 #include <psprtc.h>
 
 #include "../common/callbacks.h"
-#include "../common/vram.h"
 
 PSP_MODULE_INFO("Blit Sample", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);

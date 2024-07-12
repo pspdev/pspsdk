@@ -1,5 +1,5 @@
 TARGET = speed
-OBJS = speed.o ../common/callbacks.o ../common/vram.o
+OBJS = speed.o ../common/callbacks.o
 
 INCDIR =
 CFLAGS = -Wall -O2
