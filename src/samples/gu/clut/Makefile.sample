@@ -1,5 +1,5 @@
 TARGET = clut
-OBJS = clut.o ../common/callbacks.o ../common/vram.o
+OBJS = clut.o ../common/callbacks.o
 
 INCDIR =
 CFLAGS = -Wall -O2

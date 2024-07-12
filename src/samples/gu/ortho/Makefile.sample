@@ -2,7 +2,7 @@ PSPSDK=$(shell psp-config --pspsdk-path)
 PSPDIR=$(shell psp-config --psp-prefix)
 
 TARGET = ortho
-OBJS = ortho.o ../common/callbacks.o ../common/vram.o
+OBJS = ortho.o ../common/callbacks.o
 
 CFLAGS = -O2 -Wall -g
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
