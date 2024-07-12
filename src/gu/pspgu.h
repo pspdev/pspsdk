@@ -1511,7 +1511,7 @@ void guSwapBuffersCallback(GuSwapBuffersCallback callback);
   *   - GU_PSM_8888 - Truecolor, 32-bit
   *
   * @param width - Width of the buffer, usually 512 (must be a power of 2)
-  * @param height - Height of the buffer, normally the height of the screen 272 (must be a power of 2)
+  * @param height - Height of the buffer, normally the height of the screen 272
   * @param psm - Which pixel format to use
   * 
   * @return A pointer to the buffer's relative to vram start (as required by sceGuDispBuffer, sceGuDrawBuffer, sceGuDepthBuffer and sceGuDrawBufferList)
