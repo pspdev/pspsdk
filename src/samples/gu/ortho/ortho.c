@@ -17,7 +17,6 @@
 #include <pspgum.h>
 
 #include "../common/callbacks.h"
-#include "../common/vram.h"
 
 PSP_MODULE_INFO("Orthographic Projection", 0, 1, 1);
 

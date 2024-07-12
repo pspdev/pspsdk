@@ -19,7 +19,6 @@
 
 #include "../common/callbacks.h"
 #include "../common/geometry.h"
-#include "../common/vram.h"
 
 PSP_MODULE_INFO("Lights Sample", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);
