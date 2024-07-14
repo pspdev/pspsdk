@@ -32,7 +32,14 @@ GLUE_OBJS = __dummy_passwd.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wai
 	openat.o renameat.o fchmodat.o fstatat.o mkdirat.o faccessat.o fchownat.o linkat.o readlinkat.o unlinkat.o \
 	realpath.o
 
-INIT_OBJS = __libpthreadglue_init.o __libcglue_init.o __libcglue_deinit.o _exit.o abort.o exit.o
+INIT_OBJS = \
+	__libpthreadglue_init.o \
+	__libcglue_init.o \
+	__gprof_cleanup.o \
+	__libcglue_deinit.o \
+	_exit.o \
+	abort.o \
+	exit.o
 
 LOCK_OBJS = \
 	__lock___sfp_recursive_mutex.o \

@@ -31,6 +31,14 @@ void __locks_deinit();
 
 extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
 
+#ifdef F___gprof_cleanup
+/* Note: This function is being called from _exit and it is overrided when compiling with -pg */
+__attribute__((weak))
+void __gprof_cleanup() {}
+#else
+void __gprof_cleanup();
+#endif
+
 #if defined(F___libpthreadglue_init) && !defined(PSP_WITHOUT_PTHREAD)
 /* Note: This function is being called from __libcglue_init.
 * It is a weak function because can be override by user program
@@ -95,6 +103,7 @@ void __libcglue_deinit();
 __attribute__((__noreturn__))
 void _exit (int __status)
 {
+	__gprof_cleanup();
 	__libcglue_deinit();
 
 	if (&sce_newlib_nocreate_thread_in_start != NULL) {

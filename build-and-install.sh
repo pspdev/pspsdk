@@ -21,11 +21,12 @@ make -j $(getconf _NPROCESSORS_ONLN)
 ## Install pspsdk
 make install
 
-## gcc needs to include libcglue libpthreadglue libpsputility libpsprtc libpspnet_inet libpspnet_resolver libpspsdk libpspmodinfo libpspuser libpspkernel
+## gcc needs to include libcglue libpthreadglue libpspprof libpsputility libpsprtc libpspnet_inet libpspnet_resolver libpspsdk libpspmodinfo libpspuser libpspkernel
 ## from pspsdk to be able to build executables, because they are part of the standard libraries
 cd "$PSPDEV/psp/lib"
 ln -sf "../sdk/lib/libcglue.a" "libcglue.a" || { exit 1; }
 ln -sf "../sdk/lib/libpthreadglue.a" "libpthreadglue.a" || { exit 1; }
+ln -sf "../sdk/lib/libpspprof.a" "libpspprof.a" || { exit 1; }
 ln -sf "../sdk/lib/libpsputility.a" "libpsputility.a" || { exit 1; }
 ln -sf "../sdk/lib/libpsprtc.a" "libpsprtc.a" || { exit 1; }
 ln -sf "../sdk/lib/libpspnet_inet.a" "libpspnet_inet.a" || { exit 1; }
