@@ -78,7 +78,7 @@ extern int _ftext;
 extern int _etext;
 
 /* forward declarations */
-void gprof_cleanup(void);
+void __gprof_cleanup(void);
 void __mcount(unsigned int, unsigned int);
 static SceUInt timer_handler(SceUID uid, SceKernelSysClock *c1, SceKernelSysClock *c2, void *common);
 
@@ -156,7 +156,7 @@ static void initialize()
     Called from atexit() handler; will dump out a host:gmon.out file 
     with all collected information.
 */
-void gprof_cleanup()
+void __gprof_cleanup()
 {
         FILE *fp;
         int i;
