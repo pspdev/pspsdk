@@ -1516,7 +1516,7 @@ void guSwapBuffersCallback(GuSwapBuffersCallback callback);
   * 
   * @return A pointer to the buffer's relative to vram start (as required by sceGuDispBuffer, sceGuDrawBuffer, sceGuDepthBuffer and sceGuDrawBufferList)
 **/
-void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm);
+void* guGetStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm);
 
 /**
   * Allocate a texture in vram
@@ -1535,7 +1535,7 @@ void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int 
   * 
   * @return A pointer to the texture
 **/
-void* getStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm);
+void* guGetStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm);
 
 /**@}*/
 
