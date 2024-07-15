@@ -1537,6 +1537,17 @@ void* guGetStaticVramBuffer(unsigned int width, unsigned int height, unsigned in
 **/
 void* guGetStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm);
 
+/**
+  * Get state of display
+  *
+  * Available states are:
+  *   - GU_TRUE (1) - Display is turned on
+  *   - GU_FALSE (0) - Display is turned off
+  *
+  * @return State of the display
+**/
+int guGetDisplayState();
+
 /**@}*/
 
 #if defined(__cplusplus)
