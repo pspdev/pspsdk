@@ -21,3 +21,8 @@ int sceGuDisplay(int state)
 	gu_display_on = state;
 	return state;
 }
+
+int guGetDisplayState()
+{
+	return gu_display_on;
+}
