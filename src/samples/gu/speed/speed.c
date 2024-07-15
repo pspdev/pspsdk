@@ -270,9 +270,9 @@ int main(int argc, char* argv[])
 
 	// setup GU
 
-	void* fbp0 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-	void* fbp1 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-	void* zbp = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
+	void* fbp0 = guGetStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+	void* fbp1 = guGetStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+	void* zbp = guGetStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
 
 	pspDebugScreenInit();
 	sceGuInit();
@@ -304,7 +304,7 @@ int main(int argc, char* argv[])
 	// get vram buffer for vram -> vram blit
 
 	void* vram_buffer;
-	vram_buffer = getStaticVramTexture(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+	vram_buffer = guGetStaticVramTexture(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
 
 	// flush caches to make sure no stray data remains
 

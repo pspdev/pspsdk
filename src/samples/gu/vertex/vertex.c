@@ -209,9 +209,9 @@ int main(int argc, char* argv[])
 
 	// setup GU
 
-	void* fbp0 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-	void* fbp1 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-	void* zbp = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
+	void* fbp0 = guGetStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+	void* fbp1 = guGetStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+	void* zbp = guGetStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
 
 	pspDebugScreenInit();
 	sceGuInit();
@@ -244,12 +244,12 @@ int main(int argc, char* argv[])
 	int maxVertexSize = getVertexSize(GU_TEXTURE_32BITF|GU_COLOR_8888|GU_NORMAL_32BITF|GU_VERTEX_32BITF|GU_WEIGHT_32BITF|GU_WEIGHTS(8)|GU_VERTICES(8));
 	int batchSize = 1536; // max size = 608, 608 * 1536 = ~1MB, make sure you don't overrun vram limits if you change this
 	void* ramVertexBuffer = malloc(batchSize * maxVertexSize);
-	void* vramVertexBuffer = getStaticVramTexture(batchSize,maxVertexSize,GU_PSM_T8);
+	void* vramVertexBuffer = guGetStaticVramTexture(batchSize,maxVertexSize,GU_PSM_T8);
 
 	// allocate index buffers
 
 	void* ramIndexBuffer = malloc(batchSize * sizeof(unsigned short));
-	void* vramIndexBuffer = getStaticVramTexture(batchSize,sizeof(unsigned short),GU_PSM_T8);
+	void* vramIndexBuffer = guGetStaticVramTexture(batchSize,sizeof(unsigned short),GU_PSM_T8);
 
 	// run sample
 

@@ -117,9 +117,9 @@ int main(int argc, char* argv[])
 
 	sceGuInit();
 
-	void* fbp0 = getStaticVramBuffer(BUFFER_WIDTH,SCREEN_HEIGHT,SCREEN_PSM); // drawbuffer 1, 512x272 (480x272 visible)
-	void* fbp1 = getStaticVramBuffer(BUFFER_WIDTH,SCREEN_HEIGHT,SCREEN_PSM); // drawbuffer 2
-	void* zbp = getStaticVramBuffer(BUFFER_WIDTH,SCREEN_HEIGHT,GU_PSM_4444); // zbuffer, always 16bit
+	void* fbp0 = guGetStaticVramBuffer(BUFFER_WIDTH,SCREEN_HEIGHT,SCREEN_PSM); // drawbuffer 1, 512x272 (480x272 visible)
+	void* fbp1 = guGetStaticVramBuffer(BUFFER_WIDTH,SCREEN_HEIGHT,SCREEN_PSM); // drawbuffer 2
+	void* zbp = guGetStaticVramBuffer(BUFFER_WIDTH,SCREEN_HEIGHT,GU_PSM_4444); // zbuffer, always 16bit
 
 	sceGuStart(GU_DIRECT,list);
 	sceGuDrawBuffer(SCREEN_PSM,fbp0,BUFFER_WIDTH);

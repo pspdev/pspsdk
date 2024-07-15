@@ -36,7 +36,7 @@ static unsigned int getMemorySize(unsigned int width, unsigned int height, unsig
 	}
 }
 
-void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm)
+void* guGetStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm)
 {
 	unsigned int memSize = getMemorySize(width,height,psm);
 	void* result = (void*)staticOffset;
@@ -45,8 +45,8 @@ void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int 
 	return result;
 }
 
-void* getStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm)
+void* guGetStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm)
 {
-	void* result = getStaticVramBuffer(width,height,psm);
+	void* result = guGetStaticVramBuffer(width,height,psm);
 	return (void*)(((unsigned int)result) + ((unsigned int)sceGeEdramGetAddr()));
 }
