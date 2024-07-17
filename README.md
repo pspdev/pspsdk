@@ -12,14 +12,6 @@ and libraries written for Sony's Playstation Portable (PSP) gaming console.
 It also includes documentation and other resources developers can use to write
 software for the PSP.
 
-## License
-
-PSPSDK is distributed under a [BSD-compatible license](LICENSE), with the exception of the
-files located in `tools/PrxEncrypter`. The files located in the `tools/PrxEncrypter`
-directory are subject to the terms of the GNU General Public License version 3.
-See the `LICENSE` files for more information.
-
-
 ## Features
 
 ### PSPSDK provides a full set of libraries for creating PSP software:
@@ -51,48 +43,28 @@ See the `LICENSE` files for more information.
   functions from the executable.
 
 Documentation for the libraries are also provided, and can be found in the
-doc/ directory of the PSPSDK source and binary distributions.
+`doc/` directory of the PSPSDK source and binary distributions.
 
 A library for Make (`build.mak`) is also included to provide an easy way to build
 simple programs and libraries. See any PSPSDK sample program for details on how
 `build.mak` is used.
 
-
 ## Installation
-
-PSPSDK is distributed in both source and docker image. If you only want to
-use the PSPSDK tools and libraries to develop your software you'll want to pull
-the docker image distribution of PSPSDK using https://github.com/pspdev/pspsdk/pkgs/container/pspsdk. If you need fine-grained control over how PSPSDK is installed on your system, or if you
-would like to modify PSPSDK then grab the source distribution.
 
 ### Requirements
 
 To use PSPSDK you must have the following software installed:
 
-* The PSPDEV Toolchain. PSPSDK requires the GNU toolchain (GCC and binutils)
-  targetted to the PSP. You can find binary packages of these tools at
-  https://github.com/pspdev/. You can find a script to build and install the
-  toolchain at https://github.com/pspdev/psptoolchain.
-
-In addition to the above requirements, if you plan on building PSPSDK from
-source, you will need:
-
-* Make. Note: GNU Make may not be required, but if you run into problems
-  building from source you may want to install it. You can find GNU Make
-  at http://www.gnu.org/software/make/.
-
-* A Git client. Check https://git-scm.com/downloads how to install git 
-  according to your system.
-* GNU autotools. You will need a recent version of autoconf
-  (http://www.gnu.org/software/autoconf/) and automake
-  (http://sourceware.org/automake/).
+* [PSPDEV Toolchain](https://github.com/pspdev/psptoolchain-allegrex)
+* [GNU Make](http://www.gnu.org/software/make/)
+* [Git client](https://git-scm.com/downloads)
+* [GNU autoconf](http://www.gnu.org/software/autoconf/) and [automake](http://sourceware.org/automake/)(GNU Autotools)
 
 The following packages are not required to build PSPSDK, but are used to build
-documentation and other optional resources:
+documentation:
 
-* Doxygen. You can find Doxygen at http://doxygen.nl/.
-  If you want to view the pretty source dependency graphs, then you will also
-  need to install Graphviz (http://www.graphviz.org/).
+* [Doxygen](http://doxygen.nl/)
+* [Graphviz](http://www.graphviz.org/)
 
 ### Installation from source
 
@@ -104,15 +76,14 @@ git clone https://github.com/pspdev/pspsdk.git
 ```
 
 Once you've downloaded PSPSDK, run the following command from the pspsdk directory to
-create the configure script and support files (you must have autoconf and
-automake installed):
-
+create the configure script and support files (you must have `autoconf` and
+`automake` installed):
 
 ```bash
 ./bootstrap
 ```
 
-PSPSDK uses the GNU autotools (autoconf and automake) for its build system. To
+PSPSDK uses the GNU autotools (`autoconf` and `automake`) for its build system. To
 install PSPSDK, run the following commands:
 
 ```bash
@@ -122,8 +93,11 @@ make doxygen-doc
 make install
 ```
 
-> If you haven't installed Doxygen or don't want to build the library
-documentation, you can skip the `make doxygen-doc` command.
+> [!NOTE]
+> If you haven't installed Doxygen or don't want to build the library documentation, you can skip the `make doxygen-doc` command.
+
+> [!TIP]
+> You can use `build-and-install.sh` script for convenience.
 
 ## Notes
 
@@ -143,13 +117,18 @@ documentation, you can skip the `make doxygen-doc` command.
   that you will have to structure your project so that each library and
   executable are built in a seperate directory.
 
-
 ## Bugs
 
-If you find a bug in PSPSDK, open an issue at GitHub. If possible, include any
+If you find a bug in PSPSDK, open an issue at  https://github.com/pspdev/pspsdk/issues. If possible, include any
 code or documentation that can be used by the PSPSDK developers to recreate the
 bug.
 
+## License
+
+PSPSDK is distributed under a [BSD-compatible license](LICENSE), with the exception of the
+files located in `tools/PrxEncrypter`. The files located in the `tools/PrxEncrypter`
+directory are subject to the terms of the GNU General Public License version 3.
+See the `LICENSE` files for more information.
 
 ## Resources
 
