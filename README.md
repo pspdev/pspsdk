@@ -36,7 +36,7 @@ software for the PSP.
   files, and assembler source files, respectively.
 * `mksfo` and `mksfoex` for creating PARAM.SFO files.
 * `pack-pbp` and `unpack-pbp` for adding and removing files from EBOOT.PBP.
-* `psp-config` and `psp-pkgconf` for locating PSPDEV tools and libraries respectively.
+* `psp-config` and `psp-pkg-config` for locating PSPDEV tools and libraries respectively.
 * `psp-prxgen` for converting specially made ELFs to PRX files.
 * `psp-build-exports` for creating export tables
 * `psp-fixup-imports` for fixing up import tables post-linking to remove unused
