@@ -9,11 +9,14 @@
  *
  */
 
+#include <stdlib.h>
+#include <string.h>
+
 #include <pspkerneltypes.h>
 #include <pspmoduleinfo.h>
 #include <pspthreadman.h>
-#include <stdlib.h>
-#include <string.h>
+#include <psploadexec.h>
+#include <pspmodulemgr.h>
 
 /* The maximum number of arguments that can be passed to main(). */
 #define ARG_MAX 19
@@ -39,6 +42,7 @@ extern SceModuleInfo module_info __attribute__((weak));
 
 /* Allow to provide a libc init hook to be called before main */
 extern void __libcglue_init(int argc, char *argv[]);
+extern void __libcglue_deinit();
 extern void _init(void);
 extern void _fini(void);
 extern int main(int argc, char *argv[]);
@@ -78,14 +82,29 @@ void _main(SceSize args, void *argp)
 	/* Init can contain C++ constructors that require working threading */
 	_init();
 
-	/* Make sure _fini() is called when the program ends. */
-	atexit((void *) _fini);
-
 	/* Call main(). */
 	int res = main(argc, argv);
 
-	/* Return control to the operating system. */
+	/* Return control to the operating system. This will end calling `_exit`*/
 	exit(res);
+}
+
+__attribute__((__noreturn__))
+void _exit(int status)
+{
+	/* call global destructors*/
+	_fini();
+
+	// uninitialize libcglue
+	__libcglue_deinit();
+
+	if (&sce_newlib_nocreate_thread_in_start != NULL) {
+		sceKernelSelfStopUnloadModule(1, 0, NULL);
+	} else {
+		sceKernelExitGame();
+	}
+
+	while (1); // Avoid warning
 }
 
 /**
