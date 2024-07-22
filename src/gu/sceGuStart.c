@@ -11,10 +11,10 @@
 #include <pspkernel.h>
 #include <pspge.h>
 
-void sceGuStart(int cid, void* list)
+void sceGuStart(int cid, void *list)
 {
-	GuContext* context = &gu_contexts[cid];
-	unsigned int* local_list = (unsigned int*)(((unsigned int)list) | 0x40000000);
+	GuContext *context = &gu_contexts[cid];
+	unsigned int *local_list = (unsigned int *)(((unsigned int)list) | 0x40000000);
 
 	// setup display list
 
@@ -29,27 +29,27 @@ void sceGuStart(int cid, void* list)
 
 	if (!cid)
 	{
-		ge_list_executed[0] = sceGeListEnQueue(local_list,local_list,gu_settings.ge_callback_id,0);
+		ge_list_executed[0] = sceGeListEnQueue(local_list, local_list, gu_settings.ge_callback_id, 0);
 		gu_settings.signal_offset = 0;
 	}
 
 	if (!gu_init)
 	{
 		static int dither_matrix[16] =
-		{
-			-4, 0,-3, 1,
-			 2,-2, 3,-1,
-			-3, 1,-4, 0,
-			 3,-1, 2,-2
-		};
+			{
+				-4, 0, -3, 1,
+				2, -2, 3, -1,
+				-3, 1, -4, 0,
+				3, -1, 2, -2
+			};
 
-		sceGuSetDither((ScePspIMatrix4*)dither_matrix);
-		sceGuPatchDivide(16,16);
-		sceGuColorMaterial(GU_AMBIENT|GU_DIFFUSE|GU_SPECULAR);
+		sceGuSetDither((ScePspIMatrix4 *)dither_matrix);
+		sceGuPatchDivide(16, 16);
+		sceGuColorMaterial(GU_AMBIENT | GU_DIFFUSE | GU_SPECULAR);
 
 		sceGuSpecular(1.0f);
-		sceGuTexScale(1.0f,1.0f);
-		
+		sceGuTexScale(1.0f, 1.0f);
+
 		gu_init = 1;
 	}
 
@@ -57,8 +57,8 @@ void sceGuStart(int cid, void* list)
 	{
 		if (gu_draw_buffer.frame_width)
 		{
-			sendCommandi(156, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
-			sendCommandi(157, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
+			sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
+			sendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
 		}
 	}
 }

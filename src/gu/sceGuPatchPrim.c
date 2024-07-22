@@ -10,10 +10,16 @@
 
 void sceGuPatchPrim(int prim)
 {
-	switch(prim)
+	switch (prim)
 	{
-		case GU_POINTS: sendCommandi(55,2); break;
-		case GU_LINE_STRIP: sendCommandi(55,1); break;
-		case GU_TRIANGLE_STRIP: sendCommandi(55,0); break;
+	case GU_POINTS:
+		sendCommandi(PATCH_PRIMITIVE, 2);
+		break;
+	case GU_LINE_STRIP:
+		sendCommandi(PATCH_PRIMITIVE, 1);
+		break;
+	case GU_TRIANGLE_STRIP:
+		sendCommandi(PATCH_PRIMITIVE, 0);
+		break;
 	}
 }

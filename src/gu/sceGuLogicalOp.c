@@ -10,5 +10,5 @@
 
 void sceGuLogicalOp(int op)
 {
-	sendCommandi(230,op & 0x0f);
+	sendCommandi(LOGIC_OP, op & 0x0f);
 }

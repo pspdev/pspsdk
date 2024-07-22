@@ -10,5 +10,5 @@
 
 void sceGuDepthMask(int mask)
 {
-	sendCommandi(231,mask);
+	sendCommandi(Z_MASK, mask);
 }

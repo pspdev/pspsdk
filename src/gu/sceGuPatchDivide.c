@@ -10,5 +10,5 @@
 
 void sceGuPatchDivide(unsigned int a0, unsigned int a1)
 {
-	sendCommandi(54,(a1 << 8)|a0);
+	sendCommandi(PATCH_DIVISION, (a1 << 8) | a0);
 }

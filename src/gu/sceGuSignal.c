@@ -10,14 +10,14 @@
 
 void sceGuSignal(int signal, int argument)
 {
-	sendCommandi(14,((signal & 0xff) << 16) | (argument & 0xffff));
-	sendCommandi(12,0);
+	sendCommandi(SIGNAL, ((signal & 0xff) << 16) | (argument & 0xffff));
+	sendCommandi(END, 0);
 
 	if (signal == 3)
 	{
-		sendCommandi(15,0);
-		sendCommandi(12,0);
+		sendCommandi(FINISH, 0);
+		sendCommandi(END, 0);
 	}
 
-	sendCommandiStall(0,0);
+	sendCommandiStall(NOP, 0);
 }

@@ -10,5 +10,5 @@
 
 void sceGuColorMaterial(int a0)
 {
-	sendCommandi(83,a0);
+	sendCommandi(MATERIAL_COLOR, a0);
 }

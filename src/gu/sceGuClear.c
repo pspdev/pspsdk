@@ -10,30 +10,40 @@
 
 void sceGuClear(int flags)
 {
-	GuContext* context = &gu_contexts[gu_curr_context];
+	GuContext *context = &gu_contexts[gu_curr_context];
 	unsigned int filter;
 	struct Vertex
 	{
 		u32 color;
-		u16 x,y,z;
+		u16 x, y, z;
 		u16 pad;
 	};
 
 	switch (gu_draw_buffer.pixel_size)
 	{
-		case 0: filter = context->clear_color & 0xffffff; break;
-		case 1: filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 31); break;
-		case 2: filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 28); break;
-		case 3: filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 24); break;
-		default: filter = 0; break;
+	case 0:
+		filter = context->clear_color & 0xffffff;
+		break;
+	case 1:
+		filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 31);
+		break;
+	case 2:
+		filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 28);
+		break;
+	case 3:
+		filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 24);
+		break;
+	default:
+		filter = 0;
+		break;
 	}
 
-	struct Vertex* vertices;
+	struct Vertex *vertices;
 	int count;
 
 	if (!(flags & GU_FAST_CLEAR_BIT))
 	{
-		vertices = (struct Vertex*)sceGuGetMemory(2 * sizeof(struct Vertex));
+		vertices = (struct Vertex *)sceGuGetMemory(2 * sizeof(struct Vertex));
 		count = 2;
 
 		vertices[0].color = 0;
@@ -48,27 +58,27 @@ void sceGuClear(int flags)
 	}
 	else
 	{
-		struct Vertex* curr;
+		struct Vertex *curr;
 		unsigned int i;
-		count = ((gu_draw_buffer.width+63)/64)*2;
-		vertices = (struct Vertex*)sceGuGetMemory(count * sizeof(struct Vertex));
+		count = ((gu_draw_buffer.width + 63) / 64) * 2;
+		vertices = (struct Vertex *)sceGuGetMemory(count * sizeof(struct Vertex));
 		curr = vertices;
 
 		for (i = 0; i < count; ++i, ++curr)
 		{
-			unsigned int j,k;
+			unsigned int j, k;
 
 			j = i >> 1;
 			k = (i & 1);
 
 			curr->color = filter;
-			curr->x = (j+k) * 64;
+			curr->x = (j + k) * 64;
 			curr->y = k * gu_draw_buffer.height;
 			curr->z = context->clear_depth;
 		}
 	}
 
-	sendCommandi(211,((flags & (GU_COLOR_BUFFER_BIT|GU_STENCIL_BUFFER_BIT|GU_DEPTH_BUFFER_BIT)) << 8) | 0x01);
-	sceGuDrawArray(GU_SPRITES,GU_COLOR_8888|GU_VERTEX_16BIT|GU_TRANSFORM_2D,count,0,vertices);
-	sendCommandi(211,0);
+	sendCommandi(CLEAR_MODE, ((flags & (GU_COLOR_BUFFER_BIT | GU_STENCIL_BUFFER_BIT | GU_DEPTH_BUFFER_BIT)) << 8) | 0x01);
+	sceGuDrawArray(GU_SPRITES, GU_COLOR_8888 | GU_VERTEX_16BIT | GU_TRANSFORM_2D, count, 0, vertices);
+	sendCommandi(CLEAR_MODE, 0);
 }

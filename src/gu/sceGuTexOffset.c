@@ -10,6 +10,6 @@
 
 void sceGuTexOffset(float u, float v)
 {
-	sendCommandf(74,u);
-	sendCommandf(75,v);
+	sendCommandf(TEX_OFFSET_U, u);
+	sendCommandf(TEX_OFFSET_V, v);
 }

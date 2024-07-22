@@ -10,6 +10,6 @@
 
 void sceGuPixelMask(unsigned int mask)
 {
-	sendCommandi(232,mask & 0xffffff);
-	sendCommandi(233,mask >> 24);
+	sendCommandi(MASK_COLOR, mask & 0xffffff);
+	sendCommandi(MASK_ALPHA, mask >> 24);
 }

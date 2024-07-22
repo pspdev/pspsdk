@@ -11,5 +11,5 @@
 void sceGuClutMode(unsigned int cpsm, unsigned int shift, unsigned int mask, unsigned int a3)
 {
 	unsigned int argument = (cpsm) | (shift << 2) | (mask << 8) | (a3 << 16);
-	sendCommandi(197,argument);
+	sendCommandi(CLUT_FORMAT, argument);
 }

@@ -20,5 +20,5 @@ void sceGuTexLevelMode(unsigned int mode, float bias)
 	else if (offset < -128)
 		offset = -128;
 
-	sendCommandi(200,(((unsigned int)(offset)) << 16) | mode);
+	sendCommandi(TEX_LEVEL, (((unsigned int)(offset)) << 16) | mode);
 }

@@ -10,5 +10,5 @@
 
 void sceGuDepthFunc(int function)
 {
-	sendCommandi(222,function);
+	sendCommandi(Z_TEST, function);
 }
