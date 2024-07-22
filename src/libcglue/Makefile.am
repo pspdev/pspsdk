@@ -37,8 +37,6 @@ INIT_OBJS = \
 	__libcglue_init.o \
 	__gprof_cleanup.o \
 	__libcglue_deinit.o \
-	_exit.o \
-	abort.o \
 	exit.o
 
 LOCK_OBJS = \

@@ -29,8 +29,6 @@ void __deinit_mutex();
 void __locks_init();
 void __locks_deinit();
 
-extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
-
 #ifdef F___gprof_cleanup
 /* Note: This function is being called from _exit and it is overrided when compiling with -pg */
 __attribute__((weak))
@@ -91,40 +89,13 @@ void __libcglue_init(int argc, char *argv[])
 __attribute__((weak))
 void __libcglue_deinit()
 {
+    __gprof_cleanup();
     __psp_free_heap();
 	__deinit_mutex();
 	__locks_deinit();
 }
 #else
 void __libcglue_deinit();
-#endif
-
-#ifdef F__exit
-__attribute__((__noreturn__))
-void _exit (int __status)
-{
-	__gprof_cleanup();
-	__libcglue_deinit();
-
-	if (&sce_newlib_nocreate_thread_in_start != NULL) {
-		sceKernelSelfStopUnloadModule(1, 0, NULL);
-	} else {
-		sceKernelExitGame();
-	}
-	
-	while (1); // Avoid warning
-}
-#else
-__attribute__((__noreturn__))
-void _exit (int __status);
-#endif
-
-#ifdef F_abort
-__attribute__((weak))
-void abort()
-{
-	_exit(1);
-}
 #endif
 
 #ifdef F_exit
