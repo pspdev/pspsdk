@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceGe_driver_0000
-	IMPORT_START	"sceGe_driver",0x00010000
+	IMPORT_START	"sceGe_driver",0x00010011
 #endif
 #ifdef F_sceGe_driver_0001
 	IMPORT_FUNC	"sceGe_driver",0x71FCD1D6,sceGeInit
@@ -73,4 +73,7 @@
 #endif
 #ifdef F_sceGe_driver_0023
 	IMPORT_FUNC	"sceGe_driver",0x114E1745,sceGe_driver_114E1745
+#endif
+#ifdef F_sceGe_driver_0024
+	IMPORT_FUNC	"sceGe_driver",0x5BAA5439,sceGeEdramSetSize
 #endif
