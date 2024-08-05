@@ -40,6 +40,7 @@
 #include <psputils.h>
 #include <pspsdk.h>
 #include <psprtc.h>
+#include <psputility.h>
 
 #include "fdman.h"
 
@@ -1214,3 +1215,17 @@ char *realpath(const char *path, char *resolved_path)
 	return resolved_path;
 }
 #endif /* F_realpath */
+
+#ifdef F_gethostname
+int gethostname (char *__name, size_t __len) {
+	char nickname[_SC_HOST_NAME_MAX];
+	memset(nickname, 0, _SC_HOST_NAME_MAX);
+
+	if (sceUtilityGetSystemParamString(PSP_SYSTEMPARAM_ID_STRING_NICKNAME, nickname, _SC_HOST_NAME_MAX) != PSP_SYSTEMPARAM_RETVAL_FAIL) {
+		strlcpy(__name, nickname, __len);
+		return 0;
+	}
+
+	return __set_errno(EINVAL);
+}
+#endif /* F_gethostname */
