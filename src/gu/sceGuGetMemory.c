@@ -6,7 +6,7 @@
  * Copyright (c) 2005 Jesper Svennevid
  */
 
-#include "guInternal.h"
+#include <pspgu.h>
 
 #include <pspkernel.h>
 #include <pspge.h>

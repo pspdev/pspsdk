@@ -6,7 +6,7 @@
  * Copyright (c) 2005 Jesper Svennevid
  */
 
-#include "guInternal.h"
+#include <pspgu.h>
 
 #include <pspkernel.h>
 #include <pspge.h>
@@ -57,8 +57,8 @@ void sceGuStart(int cid, void *list)
 	{
 		if (gu_draw_buffer.frame_width)
 		{
-			sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
-			sendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
+			sceGuSendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
+			sceGuSendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
 		}
 	}
 }
