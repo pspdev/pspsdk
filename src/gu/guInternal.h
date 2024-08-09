@@ -463,10 +463,10 @@ typedef enum GECommand
 	/* Texture buffer width 7 */
 	TEX_BUF_WIDTH7 = 0xaf, 
 
-	/* CLUT address */
-	CLUT_ADDR = 0xb0,		
-	/* CLUT address upper */
-	CLUT_ADDR_UPPER = 0xb1, 
+	/* CLUT buffer pointer */
+	CLUT_BUF_PTR = 0xb0,
+	/* CLUT buffer width */
+	CLUT_BUF_WIDTH = 0xb1, 
 
 	/* Transfer source */
 	TRANSFER_SRC = 0xb2,   
@@ -503,7 +503,7 @@ typedef enum GECommand
 	/* Texture format */
 	TEX_FORMAT = 0xc3,		  
 	/* Load CLUT */
-	LOAD_CLUT = 0xc4,		  
+	CLUT_LOAD = 0xc4,		  
 	/* CLUT format */
 	CLUT_FORMAT = 0xc5,		  
 	/* Texture filter */
