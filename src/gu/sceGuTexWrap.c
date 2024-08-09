@@ -10,5 +10,5 @@
 
 void sceGuTexWrap(int u, int v)
 {
-	sendCommandi(199,(v << 8)|(u));
+	sendCommandi(TEX_WRAP, (v << 8) | (u));
 }

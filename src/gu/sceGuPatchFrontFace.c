@@ -10,5 +10,5 @@
 
 void sceGuPatchFrontFace(unsigned int a0)
 {
-	sendCommandi(56,a0);
+	sendCommandi(PATCH_FACING, a0);
 }

@@ -8,9 +8,9 @@
 
 #include "guInternal.h"
 
-void sceGuClutLoad(int num_blocks, const void* cbp)
+void sceGuClutLoad(int num_blocks, const void *cbp)
 {
-	sendCommandi(176,((unsigned int)cbp) & 0xffffff);
-	sendCommandi(177,(((unsigned int)cbp) >> 8) & 0xf0000);
-	sendCommandi(196,num_blocks);
+	sendCommandi(CLUT_ADDR, ((unsigned int)cbp) & 0xffffff);
+	sendCommandi(CLUT_ADDR_UPPER, (((unsigned int)cbp) >> 8) & 0xf0000);
+	sendCommandi(LOAD_CLUT, num_blocks);
 }

@@ -12,28 +12,28 @@ int sceGuFinish(void)
 {
 	switch (gu_curr_context)
 	{
-		case GU_DIRECT:
-		case GU_SEND:
-		{
-			sendCommandi(15,0);
-			sendCommandiStall(12,0);
-		}
-		break;
+	case GU_DIRECT:
+	case GU_SEND:
+	{
+		sendCommandi(FINISH, 0);
+		sendCommandiStall(END, 0);
+	}
+	break;
 
-		case GU_CALL:
+	case GU_CALL:
+	{
+		if (gu_call_mode == 1)
 		{
-			if (gu_call_mode == 1)
-			{
-				sendCommandi(14,0x120000);
-				sendCommandi(12,0);
-				sendCommandiStall(0,0);
-			}
-			else
-			{
-				sendCommandi(11,0);
-			}
+			sendCommandi(SIGNAL, 0x120000);
+			sendCommandi(END, 0);
+			sendCommandiStall(NOP, 0);
 		}
-		break;
+		else
+		{
+			sendCommandi(RET, 0);
+		}
+	}
+	break;
 	}
 
 	unsigned int size = ((unsigned int)gu_list->current) - ((unsigned int)gu_list->start);
@@ -48,28 +48,28 @@ int sceGuFinishId(unsigned int id)
 {
 	switch (gu_curr_context)
 	{
-		case GU_DIRECT:
-		case GU_SEND:
-		{
-			sendCommandi(15,id & 0xffff);
-			sendCommandiStall(12,0);
-		}
-		break;
+	case GU_DIRECT:
+	case GU_SEND:
+	{
+		sendCommandi(FINISH, id & 0xffff);
+		sendCommandiStall(END, 0);
+	}
+	break;
 
-		case GU_CALL:
+	case GU_CALL:
+	{
+		if (gu_call_mode == 1)
 		{
-			if (gu_call_mode == 1)
-			{
-				sendCommandi(14,0x120000);
-				sendCommandi(12,0);
-				sendCommandiStall(0,0);
-			}
-			else
-			{
-				sendCommandi(11,0);
-			}
+			sendCommandi(SIGNAL, 0x120000);
+			sendCommandi(END, 0);
+			sendCommandiStall(NOP, 0);
 		}
-		break;
+		else
+		{
+			sendCommandi(RET, 0);
+		}
+	}
+	break;
 	}
 
 	unsigned int size = ((unsigned int)gu_list->current) - ((unsigned int)gu_list->start);

@@ -10,6 +10,6 @@
 
 void sceGuAmbient(unsigned int color)
 {
-	sendCommandi(92,(color & 0xffffff));
-	sendCommandi(93,(color >> 24));
+	sendCommandi(AMBIENT_LIGHT_COLOR,(color & 0xffffff));
+	sendCommandi(AMBIENT_LIGHT_ALPHA,(color >> 24));
 }

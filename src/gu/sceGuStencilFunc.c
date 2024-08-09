@@ -10,5 +10,5 @@
 
 void sceGuStencilFunc(int func, int ref, int mask)
 {
-	sendCommandi(220,func | ((ref & 0xff) << 8) | ((mask & 0xff) << 16));
+	sendCommandi(STENCIL_TEST, func | ((ref & 0xff) << 8) | ((mask & 0xff) << 16));
 }

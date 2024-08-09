@@ -10,8 +10,5 @@
 
 void sceGuFrontFace(int order)
 {
-	if (order)
-		sendCommandi(155,0);
-	else
-		sendCommandi(155,1);
+	sendCommandi(CULL, order ? 0 : 1);
 }

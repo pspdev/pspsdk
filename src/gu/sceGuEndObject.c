@@ -12,11 +12,11 @@ void sceGuEndObject(void)
 {
 	// rewrite commands from sceGuBeginObject()
 
-	unsigned int* current = gu_list->current;
-	gu_list->current = gu_object_stack[gu_object_stack_depth-1];
+	unsigned int *current = gu_list->current;
+	gu_list->current = gu_object_stack[gu_object_stack_depth - 1];
 
-	sendCommandi(16, (((unsigned int)current) >> 8) & 0xf0000);
-	sendCommandi(9, ((unsigned int)current) & 0xffffff);
+	sendCommandi(BASE, (((unsigned int)current) >> 8) & 0xf0000);
+	sendCommandi(BJUMP, ((unsigned int)current) & 0xffffff);
 	gu_list->current = current;
 
 	gu_object_stack_depth--;

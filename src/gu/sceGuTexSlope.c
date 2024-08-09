@@ -10,5 +10,5 @@
 
 void sceGuTexSlope(float slope)
 {
-	sendCommandf(208,slope);
+	sendCommandf(TEX_LOD_SLOPE, slope);
 }

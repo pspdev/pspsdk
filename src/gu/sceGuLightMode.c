@@ -10,5 +10,5 @@
 
 void sceGuLightMode(int mode)
 {
-	sendCommandi(94,mode);
+	sendCommandi(LIGHT_MODE, mode);
 }

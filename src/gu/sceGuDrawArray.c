@@ -8,22 +8,22 @@
 
 #include "guInternal.h"
 
-void sceGuDrawArray(int prim, int vtype, int count, const void* indices, const void* vertices)
+void sceGuDrawArray(int prim, int vtype, int count, const void *indices, const void *vertices)
 {
   if (vtype)
-    sendCommandi(18,vtype);
+    sendCommandi(VERTEX_TYPE, vtype);
 
   if (indices)
   {
-    sendCommandi(16,(((unsigned int)indices) >> 8) & 0xf0000);
-    sendCommandi(2,((unsigned int)indices) & 0xffffff);
+    sendCommandi(BASE, (((unsigned int)indices) >> 8) & 0xf0000);
+    sendCommandi(IADDR, ((unsigned int)indices) & 0xffffff);
   }
 
   if (vertices)
   {
-    sendCommandi(16,(((unsigned int)vertices) >> 8) & 0xf0000);
-    sendCommandi(1,((unsigned int)vertices) & 0xffffff);
-  }  
+    sendCommandi(BASE, (((unsigned int)vertices) >> 8) & 0xf0000);
+    sendCommandi(VADDR, ((unsigned int)vertices) & 0xffffff);
+  }
 
-  sendCommandiStall(4,(prim << 16)|count);
+  sendCommandiStall(PRIM, (prim << 16) | count);
 }

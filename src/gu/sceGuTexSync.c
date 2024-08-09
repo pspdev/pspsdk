@@ -10,5 +10,5 @@
 
 void sceGuTexSync()
 {
-	sendCommandi(204,0);
+	sendCommandi(TEX_SYNC, 0);
 }

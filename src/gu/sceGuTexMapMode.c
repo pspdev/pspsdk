@@ -10,10 +10,10 @@
 
 void sceGuTexMapMode(int mode, unsigned int a1, unsigned int a2)
 {
-	GuContext* context = &gu_contexts[gu_curr_context];
+	GuContext *context = &gu_contexts[gu_curr_context];
 
 	context->texture_map_mode = mode & 0x03;
 
-	sendCommandi(192,context->texture_proj_map_mode | (mode & 0x03));
-	sendCommandi(193,(a2 << 8)|(a1 & 0x03));
+	sendCommandi(TEX_MAP_MODE, context->texture_proj_map_mode | (mode & 0x03));
+	sendCommandi(TEX_SHADE_MAPPING, (a2 << 8) | (a1 & 0x03));
 }

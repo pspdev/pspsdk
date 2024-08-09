@@ -10,6 +10,6 @@
 
 void sceGuTexScale(float u, float v)
 {
-	sendCommandf(72,u);
-	sendCommandf(73,v);
+	sendCommandf(TEX_SCALE_U, u);
+	sendCommandf(TEX_SCALE_V, v);
 }

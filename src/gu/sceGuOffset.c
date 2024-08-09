@@ -10,6 +10,6 @@
 
 void sceGuOffset(unsigned int x, unsigned int y)
 {
-	sendCommandi(76,x << 4);
-	sendCommandi(77,y << 4);
+	sendCommandi(OFFSET_X, x << 4);
+	sendCommandi(OFFSET_Y, y << 4);
 }

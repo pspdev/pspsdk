@@ -10,5 +10,5 @@
 
 void sceGuTexFilter(int min, int mag)
 {
-	sendCommandi(198,(mag << 8)|min);
+	sendCommandi(TEX_FILTER, (mag << 8) | min);
 }

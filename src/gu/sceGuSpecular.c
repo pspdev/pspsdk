@@ -10,5 +10,5 @@
 
 void sceGuSpecular(float power) // specular power
 {
-	sendCommandf(91,power);
+	sendCommandf(MATERIAL_SPECULAR_COEF, power);
 }
