@@ -8,19 +8,18 @@
 
 #include "guInternal.h"
 
-static int tbpcmd_tbl[8] = { 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7 };		// 0x30A18
-static int tbwcmd_tbl[8] = { 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf };		// 0x30A38
-static int tsizecmd_tbl[8] = { 0xb8, 0xb9, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf };	// 0x30A58
-
-int getExp(int val)
+static inline int getExp(int val)
 {
 	return 31 - __builtin_clz(val & 0x3FF);
 }
 
-void sceGuTexImage(int mipmap, int width, int height, int tbw, const void* tbp)
+void sceGuTexImage(int mipmap, int width, int height, int tbw, const void *tbp)
 {
-	sendCommandi(tbpcmd_tbl[mipmap],((unsigned int)tbp) & 0xffffff);
-	sendCommandi(tbwcmd_tbl[mipmap],((((unsigned int)tbp) >> 8) & 0x0f0000)|tbw);
-	sendCommandi(tsizecmd_tbl[mipmap],(getExp(height) << 8)|(getExp(width)));
+	GECommand texAddr = (GECommand)(TEX_ADDR0 + mipmap);
+	GECommand texBufWidth = (GECommand)(TEX_BUF_WIDTH0 + mipmap);
+	GECommand texSize = (GECommand)(TEX_SIZE0 + mipmap);
+	sendCommandi(texAddr, ((unsigned int)tbp) & 0xffffff);
+	sendCommandi(texBufWidth, ((((unsigned int)tbp) >> 8) & 0x0f0000) | tbw);
+	sendCommandi(texSize, (getExp(height) << 8) | (getExp(width)));
 	sceGuTexFlush();
 }

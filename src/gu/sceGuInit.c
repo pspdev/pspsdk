@@ -235,6 +235,25 @@ static unsigned int __attribute__((aligned(16))) ge_init_list[] =
 	ZV(END),
 };
 
+void callbackFin(int id, void* arg)
+{
+	GuSettings* settings = (GuSettings*)arg;
+	if (settings->fin)
+		settings->fin(id & 0xffff);
+}
+
+void callbackSig(int id, void* arg)
+{
+	GuSettings* settings = (GuSettings*)arg;
+
+	settings->signal_history[(settings->signal_offset++) & 15] = id & 0xffff;
+
+	if (settings->sig)
+		settings->sig(id & 0xffff);
+
+	sceKernelSetEventFlag(settings->kernel_event_flag,1);
+}
+
 void sceGuInit(void)
 {
 	PspGeCallbackData callback;

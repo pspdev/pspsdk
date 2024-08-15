@@ -11,7 +11,7 @@
 #include <pspkernel.h>
 #include <pspdisplay.h>
 
-void drawRegion(int x, int y, int width, int height)
+static inline void drawRegion(int x, int y, int width, int height)
 {
 	sendCommandi(REGION1, (y << 10) | x);
 	sendCommandi(REGION2, (((y + height) - 1) << 10) | ((x + width) - 1));
