@@ -78,8 +78,11 @@ extern int _ftext;
 extern int _etext;
 
 /* forward declarations */
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void __gprof_cleanup(void);
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void __mcount(unsigned int, unsigned int);
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 static SceUInt timer_handler(SceUID uid, SceKernelSysClock *c1, SceKernelSysClock *c2, void *common);
 
 /** Initializes pg library
@@ -89,6 +92,7 @@ static SceUInt timer_handler(SceUID uid, SceKernelSysClock *c1, SceKernelSysCloc
     for sampling statistics. Note that this also installs a timer that
     runs at 1000 hert.
 */
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 static void initialize()
 {
         initialized = 1;
@@ -156,6 +160,7 @@ static void initialize()
     Called from atexit() handler; will dump out a host:gmon.out file 
     with all collected information.
 */
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void __gprof_cleanup()
 {
         FILE *fp;
@@ -205,6 +210,7 @@ void __gprof_cleanup()
     beginning of each compiled routine, which eventually brings the 
     control to here. 
 */
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void __mcount(unsigned int frompc, unsigned int selfpc)
 { 
         int e;
@@ -238,6 +244,7 @@ void __mcount(unsigned int frompc, unsigned int selfpc)
 
 /** Internal timer handler
 */
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 static SceUInt timer_handler(SceUID uid, SceKernelSysClock *requested, SceKernelSysClock *actual, void *common)
 {
         unsigned int frompc = gp.pc;

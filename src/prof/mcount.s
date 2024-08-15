@@ -17,29 +17,11 @@ _mcount:
         sd   $6,  32($29)
         sd   $7,  40($29)
 
-# Make sure we're not recursively called when compiling __mcount() 
-# With -pg
-        la   $4, _busy
-        lw   $5, 0($4)
-        bnez $5, done
-        nop
-
-# Mark busy
-        li   $5, 1
-        sw   $5, 0($4)
-
 # Call internal C handler
         move $4, $1
         move $5, $31
         jal  __mcount
         nop
-
-# Unmark busy
-        la   $4, _busy
-        li   $5, 0
-        sw   $5, 0($4)
-
-        done:
 
 # Restore registers
         ld   $31, 0($29)
@@ -51,9 +33,6 @@ _mcount:
         addu $29, $29, 48      # generated code substracts 8 bytes
         j    $31
         move $31, $1           # restore caller's ra
-
-_busy:
-        .space	4
 
         .end _mcount
 
