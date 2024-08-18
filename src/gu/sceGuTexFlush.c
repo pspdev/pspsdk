@@ -10,5 +10,5 @@
 
 void sceGuTexFlush(void)
 {
-	sendCommandf(TEX_FLUSH, 0.0f);
+	sendCommandi(TEX_FLUSH, 0);
 }
