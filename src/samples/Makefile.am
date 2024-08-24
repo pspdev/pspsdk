@@ -12,6 +12,8 @@ SAMPLES = \
 	debug/debugkb \
 	debug/sio \
 	debug/gdb \
+	gprof/basic \
+	gprof/custom \
 	gu/beginobject \
 	gu/blend \
 	gu/blit \
