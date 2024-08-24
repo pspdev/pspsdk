@@ -564,8 +564,9 @@ int sceGuCheckList(void);
   * @param mode - Whether to place the list first or last in queue
   * @param list - List to send
   * @param context - Temporary storage for the GE context
+  * @return 0 for success, < 0 for failure
 **/
-void sceGuSendList(int mode, const void* list, PspGeContext* context);
+int sceGuSendList(int mode, const void* list, PspGeContext* context);
 
 /**
   * Swap display and draw buffer
