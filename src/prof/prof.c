@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <pspprof.h>
+
 #define	GMON_PROF_ON	0
 #define	GMON_PROF_BUSY	1
 #define	GMON_PROF_ERROR	2
@@ -126,6 +128,15 @@ static void initialize()
         memset((void *)gp.samples, '\0', gp.nsamples * (sizeof(unsigned int )));
 
         gp.timer = sceKernelCreateVTimer("gprof timer", NULL);
+        if (gp.timer < 0)
+        {
+                free(gp.arcs);
+                free(gp.samples);
+                gp.arcs = 0;
+                gp.samples = 0;
+                gp.state = GMON_PROF_ERROR;
+                return;
+        }
 
         SceKernelSysClock sc;
         sc.hi = 0;
@@ -155,13 +166,17 @@ static void initialize()
         }
 }
 
-/** Writes gmon.out dump file and stops profiling
-
-    Called from atexit() handler; will dump out a host:gmon.out file 
-    with all collected information.
-*/
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
-void __gprof_cleanup()
+void gprof_start(void) {
+        // There is already a profiling session running, let's stop it and ignore the result
+        if (gp.state == GMON_PROF_ON) {
+                gprof_stop(NULL, 0);
+        }
+        initialize();
+}
+
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
+void gprof_stop(const char* filename, int should_dump)
 {
         FILE *fp;
         int i;
@@ -176,29 +191,47 @@ void __gprof_cleanup()
         /* disable profiling before we make plenty of libc calls */
         gp.state = GMON_PROF_OFF;
 
+        // Delete timer
         sceKernelStopVTimer(gp.timer);
+        sceKernelDeleteVTimer(gp.timer);
 
-        fp = fopen("gmon.out", "wb");
-        hdr.lpc = gp.lowpc;
-        hdr.hpc = gp.highpc;
-        hdr.ncnt = sizeof(hdr) + (sizeof(unsigned int) * gp.nsamples);
-        hdr.version = GMONVERSION;
-        hdr.profrate = SAMPLE_FREQ;
-        hdr.resv[0] = 0;
-        hdr.resv[1] = 0;
-        hdr.resv[2] = 0;
-        fwrite(&hdr, 1, sizeof(hdr), fp);
-        fwrite(gp.samples, gp.nsamples, sizeof(unsigned int), fp);
+        if (should_dump) {
+                fp = fopen(filename, "wb");
+                hdr.lpc = gp.lowpc;
+                hdr.hpc = gp.highpc;
+                hdr.ncnt = sizeof(hdr) + (sizeof(unsigned int) * gp.nsamples);
+                hdr.version = GMONVERSION;
+                hdr.profrate = SAMPLE_FREQ;
+                hdr.resv[0] = 0;
+                hdr.resv[1] = 0;
+                hdr.resv[2] = 0;
+                fwrite(&hdr, 1, sizeof(hdr), fp);
+                fwrite(gp.samples, gp.nsamples, sizeof(unsigned int), fp);
 
-        for (i=0; i<gp.narcs; i++)
-        {
-                if (gp.arcs[i].count > 0)
+                for (i=0; i<gp.narcs; i++)
                 {
-                        fwrite(gp.arcs + i, sizeof(struct rawarc), 1, fp);
+                        if (gp.arcs[i].count > 0)
+                        {
+                                fwrite(gp.arcs + i, sizeof(struct rawarc), 1, fp);
+                        }
                 }
+
+                fclose(fp);
         }
 
-        fclose(fp);
+        // Free memory
+        free(gp.arcs);
+        free(gp.samples);
+}
+
+/** Writes gmon.out dump file and stops profiling
+    Called from atexit() handler; will dump out a gmon.out file 
+    at cwd with all collected information.
+*/
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
+void __gprof_cleanup()
+{
+        gprof_stop("gmon.out", 1);
 }
 
 /** Internal C handler for _mcount()
