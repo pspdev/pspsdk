@@ -125,7 +125,7 @@ bug.
 
 ## License
 
-PSPSDK is distributed under a [BSD-compatible license](LICENSE), with the exception of the
+PSPSDK is distributed under a [BSD-compatible license](https://github.com/pspdev/pspsdk/blob/master/LICENSE), with the exception of the
 files located in `tools/PrxEncrypter`. The files located in the `tools/PrxEncrypter`
 directory are subject to the terms of the GNU General Public License version 3.
 See the `LICENSE` files for more information.
