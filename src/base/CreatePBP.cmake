@@ -121,15 +121,10 @@ macro(create_pbp_file)
       )
   endif()
   
-  get_target_property(PBP_TARGET_OUTPUT_DIR ${ARG_TARGET} RUNTIME_OUTPUT_DIRECTORY)
-  if(PBP_TARGET_OUTPUT_DIR STREQUAL PBP_TARGET_OUTPUT_DIR-NOTFOUND)
-	set(PBP_TARGET_OUTPUT_DIR ".")
-  endif()
-
   add_custom_command(
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
-    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${PBP_TARGET_OUTPUT_DIR}/PARAM.SFO"
+    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "$<TARGET_FILE_DIR:${ARG_TARGET}>/PARAM.SFO"
     COMMENT "Calling mksfoex"
     )
 
@@ -137,7 +132,7 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "${PBP_TARGET_OUTPUT_DIR}/EBOOT.PBP" "${PBP_TARGET_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "$<TARGET_FILE_DIR:${ARG_TARGET}>/EBOOT.PBP" "$<TARGET_FILE_DIR:${ARG_TARGET}>/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>.prx" "NULL"
       COMMENT "Calling pack-pbp with PRX file"
       )
@@ -145,7 +140,7 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "${PBP_TARGET_OUTPUT_DIR}/EBOOT.PBP" "${PBP_TARGET_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "$<TARGET_FILE_DIR:${ARG_TARGET}>/EBOOT.PBP" "$<TARGET_FILE_DIR:${ARG_TARGET}>/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>" "NULL"
       COMMENT "Calling pack-pbp with ELF file"
       )
