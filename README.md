@@ -69,7 +69,7 @@ documentation:
 ### Installation from source
 
 PSPSDK can be found in the Git repository located at
-https://github.com/pspdev/pspsdk. you can do the following command to download PSPSDK:
+https://github.com/pspdev/pspsdk. You can do the following command to download PSPSDK:
 
 ```bash
 git clone https://github.com/pspdev/pspsdk.git
@@ -119,7 +119,7 @@ make install
 
 ## Bugs
 
-If you find a bug in PSPSDK, open an issue at  https://github.com/pspdev/pspsdk/issues. If possible, include any
+If you find a bug in PSPSDK, open an issue at https://github.com/pspdev/pspsdk/issues. If possible, include any
 code or documentation that can be used by the PSPSDK developers to recreate the
 bug.
 
