@@ -30,7 +30,7 @@ GLUE_OBJS = __dummy_passwd.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wai
 	_isatty.o symlink.o truncate.o chmod.o fchmod.o pathconf.o readlink.o utime.o fchown.o _getentropy.o getpwuid.o \
 	fsync.o getpwnam.o getuid.o geteuid.o basename.o statvfs.o \
 	openat.o renameat.o fchmodat.o fstatat.o mkdirat.o faccessat.o fchownat.o linkat.o readlinkat.o unlinkat.o \
-	realpath.o
+	realpath.o gethostname.o
 
 INIT_OBJS = \
 	__libpthreadglue_init.o \
