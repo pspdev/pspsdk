@@ -74,8 +74,8 @@ int main(void)
 
 		sceCtrlReadBufferPositive(&pad, 1);
 
-		pspDebugScreenPrintf("Analog X = %d ", pad.Lx);
-		pspDebugScreenPrintf("Analog Y = %d \n", pad.Ly);
+		pspDebugScreenPrintf("Analog X = %3d ", pad.Lx);
+		pspDebugScreenPrintf("Analog Y = %3d \n", pad.Ly);
 
 		if (pad.Buttons != 0){
 			if (pad.Buttons & PSP_CTRL_SQUARE){
