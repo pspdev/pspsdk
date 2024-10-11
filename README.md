@@ -2,7 +2,7 @@
 
 [![CI](https://img.shields.io/github/actions/workflow/status/pspdev/pspsdk/.github/workflows/compilation.yml?branch=master&style=for-the-badge&logo=github&label=CI)](https://github.com/pspdev/pspsdk/actions?query=workflow:CI) [![CI-Docker](https://img.shields.io/github/actions/workflow/status/pspdev/pspsdk/.github/workflows/docker.yml?branch=master&style=for-the-badge&logo=github&label=CI-Docker)](https://github.com/pspdev/pspsdk/actions?query=workflow:CI-Docker)
 
-Version 1.0+beta2 - https://github.com/pspdev/pspsdk
+https://github.com/pspdev/pspsdk
 
 
 ## Introduction

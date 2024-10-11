@@ -15,7 +15,7 @@ jobs:
     - name: Prepare Doxyfile
       run: |
         sed -e 's/\$(PROJECT)/PSPSDK/' \
-            -e 's/\$(VERSION)/'`cat VERSION | xargs echo -n`'/' \
+            -e 's/\$(VERSION)/'`date +"%Y.%m.%d" | xargs echo -n`'/' \
             -e 's/\$(SRCDIR)/src/g' \
             -e 's/\$(GENERATE_LATEX)/NO/' \
             -e 's/\$(HAVE_DOT)/YES/' \
