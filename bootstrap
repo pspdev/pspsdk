@@ -36,12 +36,6 @@ msg() {
   [ $quiet -eq 0 ] && echo $1
 }
 
-if [ ! -f $top_srcdir/VERSION ]; then
-  echo "${progname}:"
-  echo "	Installation problem: Can't find file VERSION"
-  exit 1
-fi
-
 while [ $# -gt 0 ]; do
   case $1 in
   -h|--help)
@@ -63,6 +57,9 @@ while [ $# -gt 0 ]; do
     usage ;;
   esac
 done
+
+# Create version file used while building
+date +"%Y-%m-%d" > $top_srcdir/VERSION
 
 # default mode is generation
 if [ $generate -eq 1 ]; then
