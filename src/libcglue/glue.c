@@ -282,11 +282,11 @@ static time_t psp_to_posix_time(ScePspDateTime psp_time)
 static mode_t io_to_posix_mode(SceMode sceMode)
 {
         mode_t posixmode = 0;
-        if (sceMode & FIO_SO_IFREG) posixmode |= S_IFREG;
-        if (sceMode & FIO_SO_IFDIR) posixmode |= S_IFDIR;
-        if (sceMode & FIO_SO_IROTH) posixmode |= S_IRUSR|S_IRGRP|S_IROTH;
-        if (sceMode & FIO_SO_IWOTH) posixmode |= S_IWUSR|S_IWGRP|S_IWOTH;
-        if (sceMode & FIO_SO_IXOTH) posixmode |= S_IXUSR|S_IXGRP|S_IXOTH;
+        if (sceMode & FIO_S_IFREG) posixmode |= S_IFREG;
+        if (sceMode & FIO_S_IFDIR) posixmode |= S_IFDIR;
+        if (sceMode & FIO_S_IROTH) posixmode |= S_IRUSR|S_IRGRP|S_IROTH;
+        if (sceMode & FIO_S_IWOTH) posixmode |= S_IWUSR|S_IWGRP|S_IWOTH;
+        if (sceMode & FIO_S_IXOTH) posixmode |= S_IXUSR|S_IXGRP|S_IXOTH;
         return posixmode;
 }
 
@@ -295,7 +295,7 @@ static void __fill_stat(struct stat *stat, const SceIoStat *sce_stat)
 {
         stat->st_dev = 0;
         stat->st_ino = 0;
-        stat->st_mode = io_to_posix_mode(sce_stat->st_attr);
+        stat->st_mode = io_to_posix_mode(sce_stat->st_mode);
         stat->st_nlink = 0;
         stat->st_uid = 0;
         stat->st_gid = 0;
