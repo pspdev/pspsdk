@@ -35,4 +35,4 @@ SET(PLATFORM_PSP TRUE)
 SET(PSP TRUE)
 
 include("${PSPDEV}/psp/share/CreatePBP.cmake")
-include("${PSPDEV}/psp/share/CreatePRX.cmake")
+include("${PSPDEV}/psp/share/AddPrxModule.cmake")
