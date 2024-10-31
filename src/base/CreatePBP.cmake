@@ -34,15 +34,15 @@ macro(create_pbp_file)
   # set output directory to where the target is build if not set
   if (NOT DEFINED ARG_OUTPUT_DIR)
     set(ARG_OUTPUT_DIR $<TARGET_FILE_DIR:${ARG_TARGET}>)
-  endif()
-
-  # Make sure the output directory exists
-  if(NOT IS_DIRECTORY ${ARG_OUTPUT_DIR})
-    add_custom_command(
-      TARGET ${APP} POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E make_directory
-      ${ARG_OUTPUT_DIR}
-  )
+  else()
+    # Make sure the output directory exists
+    if(NOT IS_DIRECTORY ${ARG_OUTPUT_DIR})
+      add_custom_command(
+        TARGET ${APP} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory
+        ${ARG_OUTPUT_DIR}
+      )
+    endif()
   endif()
 
   # As pack-pbp takes undefined arguments in form of "NULL" string,
