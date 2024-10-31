@@ -163,7 +163,7 @@ macro(create_pbp_file)
   endif()
 
   add_custom_command(
-    TARGET ${APP} POST_BUILD
+    TARGET ${ARG_TARGET} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E remove
     ${ARG_OUTPUT_DIR}/PARAM.SFO
     COMMENT "Cleaning up PARAM.SFO for target ${ARG_TARGET}"
