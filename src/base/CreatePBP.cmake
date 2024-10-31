@@ -81,19 +81,19 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/psp-strip" "$<TARGET_FILE:${ARG_TARGET}>"
-      COMMENT "Stripping binary"
+      COMMENT "Stripping binary for target ${ARG_TARGET}"
       )
   elseif(${ARG_BUILD_PRX})
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not stripping binary because building PRX."
+      ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not stripping binary for target ${ARG_TARGET} because building PRX."
       )
   else()
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not stripping binary, build type is ${CMAKE_BUILD_TYPE}."
+      ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not stripping binary for target ${ARG_TARGET}, build type is ${CMAKE_BUILD_TYPE}."
       )
   endif()
 
@@ -101,7 +101,7 @@ macro(create_pbp_file)
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
     "$ENV{PSPDEV}/bin/psp-fixup-imports" "$<TARGET_FILE:${ARG_TARGET}>"
-    COMMENT "Calling psp-fixup-imports"
+    COMMENT "Calling psp-fixup-imports for target ${ARG_TARGET}"
     )
 
   if (${ARG_BUILD_PRX})
@@ -110,7 +110,7 @@ macro(create_pbp_file)
       POST_BUILD COMMAND
       "${PSPDEV}/bin/psp-prxgen" "$<TARGET_FILE:${ARG_TARGET}>"
       "$<TARGET_FILE:${ARG_TARGET}>.prx"
-      COMMENT "Calling prxgen"
+      COMMENT "Calling prxgen for target ${ARG_TARGET}"
       )
 
     if(${ARG_ENC_PRX})
@@ -119,13 +119,13 @@ macro(create_pbp_file)
 	POST_BUILD COMMAND
 	"${PSPDEV}/bin/PrxEncrypter" "$<TARGET_FILE_DIR:${ARG_TARGET}>/$<TARGET_FILE_NAME:${ARG_TARGET}>.prx"
 	"$<TARGET_FILE:${ARG_TARGET}>.prx"
-	COMMENT "Calling PrxEncrypter"
+	COMMENT "Calling PrxEncrypter for target ${ARG_TARGET}"
 	)
     else()
       add_custom_command(
 	TARGET ${ARG_TARGET}
 	POST_BUILD COMMAND
-	${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not encrypting PRX, use ENC_PRX flag if you need to."
+	${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not encrypting PRX for target ${ARG_TARGET}, use ENC_PRX flag if you need to."
 	)
     endif()
     
@@ -133,32 +133,32 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not building PRX"
+      ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not building PRX for target ${ARG_TARGET}"
       )
   endif()
   
   add_custom_command(
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
-    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "$<TARGET_FILE_DIR:${ARG_TARGET}>/PARAM.SFO"
-    COMMENT "Calling mksfoex"
+    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${ARG_OUTPUT_DIR}/PARAM.SFO"
+    COMMENT "Calling mksfoex for target ${ARG_TARGET}"
     )
 
   if(${ARG_BUILD_PRX})
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "$<TARGET_FILE_DIR:${ARG_TARGET}>/EBOOT.PBP" "$<TARGET_FILE_DIR:${ARG_TARGET}>/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>.prx" "NULL"
-      COMMENT "Calling pack-pbp with PRX file"
+      COMMENT "Calling pack-pbp with PRX file for target ${ARG_TARGET}"
       )
   else()
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "$<TARGET_FILE_DIR:${ARG_TARGET}>/EBOOT.PBP" "$<TARGET_FILE_DIR:${ARG_TARGET}>/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>" "NULL"
-      COMMENT "Calling pack-pbp with ELF file"
+      COMMENT "Calling pack-pbp with ELF file for target ${ARG_TARGET}"
       )
   endif()
 
@@ -172,7 +172,7 @@ macro(create_pbp_file)
   add_custom_command(
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
-    ${CMAKE_COMMAND} -E cmake_echo_color --cyan "EBOOT.PBP file created."
-    )
+    ${CMAKE_COMMAND} -E cmake_echo_color --cyan "EBOOT.PBP file created for target ${ARG_TARGET}."
+  )
   
 endmacro()
