@@ -41,7 +41,7 @@ function(add_prx_module name)
     TARGET ${name}
     POST_BUILD COMMAND
     "$ENV{PSPDEV}/bin/psp-fixup-imports" "$<TARGET_FILE:${name}>"
-    COMMENT "Calling psp-fixup-imports"
+    COMMENT "Calling psp-fixup-imports for target ${name}"
   )
 
   # Generate the .prx module from executable target
@@ -50,6 +50,6 @@ function(add_prx_module name)
     POST_BUILD COMMAND
     "${PSPDEV}/bin/psp-prxgen" "$<TARGET_FILE:${name}>"
     "$<TARGET_FILE:${name}>.prx"
-    COMMENT "Calling prxgen"
+    COMMENT "Calling prxgen for target ${name}"
   )
 endfunction()
