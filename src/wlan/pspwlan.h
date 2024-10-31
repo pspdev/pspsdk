@@ -11,6 +11,8 @@
 #ifndef __PSPWLAN_H__
 #define __PSPWLAN_H__
 
+#include <psptypes.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
