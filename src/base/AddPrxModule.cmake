@@ -11,7 +11,7 @@ function(add_prx_module name)
     get_filename_component(FILE_EXTENSION ${FILE} EXT)
 
     # Generate a .c file from .exp files
-    if ("${FILE_EXTENSION}" MATCHES ".exp")
+    if ("${FILE_EXTENSION}" STREQUAL ".exp")
       # Get the filename without extension
       get_filename_component(EXP_FILE_NAME ${FILE} NAME_WE)
 
