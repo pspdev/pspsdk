@@ -38,8 +38,9 @@ macro(create_pbp_file)
     # Make sure the output directory exists
     if(NOT IS_DIRECTORY ${ARG_OUTPUT_DIR})
       add_custom_command(
-        TARGET ${APP} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E make_directory
+        TARGET ${ARG_TARGET}
+        POST_BUILD COMMAND
+        ${CMAKE_COMMAND} -E make_directory
         ${ARG_OUTPUT_DIR}
       )
     endif()
