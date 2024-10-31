@@ -18,6 +18,7 @@ macro(create_pbp_file)
     PREVIEW_PATH    # optional, absolute path to .png file, 480x272
     MUSIC_PATH      # optional, absolute path to .at3 file   
     VERSION         # optional, adds version information to PARAM.SFO
+    OUTPUT_DIR      # optional, set the output directory for the EBOOT.PBP
     )
   set(options
     BUILD_PRX # optional, generates and uses PRX file instead of ELF in EBOOT.PBP
@@ -28,6 +29,20 @@ macro(create_pbp_file)
   # set mksfoex parameter if VERSION was not defined
   if (NOT DEFINED ARG_VERSION)
     set(ARG_VERSION "")
+  endif()
+
+  # set output directory to where the target is build if not set
+  if (NOT DEFINED ARG_OUTPUT_DIR)
+    set(ARG_OUTPUT_DIR $<TARGET_FILE_DIR:${ARG_TARGET}>)
+  else()
+    # Make sure the output directory exists
+    if(NOT IS_DIRECTORY ${ARG_OUTPUT_DIR})
+      add_custom_command(
+        TARGET ${APP} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory
+        ${ARG_OUTPUT_DIR}
+      )
+    endif()
   endif()
 
   # As pack-pbp takes undefined arguments in form of "NULL" string,
@@ -145,6 +160,13 @@ macro(create_pbp_file)
       COMMENT "Calling pack-pbp with ELF file"
       )
   endif()
+
+  add_custom_command(
+    TARGET ${APP} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E remove
+    ${ARG_OUTPUT_DIR}/PARAM.SFO
+    COMMENT "Cleaning up PARAM.SFO for target ${ARG_TARGET}"
+  )
 
   add_custom_command(
     TARGET ${ARG_TARGET}
