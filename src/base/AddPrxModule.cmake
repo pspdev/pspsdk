@@ -11,7 +11,7 @@ function(add_prx_module name)
     get_filename_component(FILE_EXTENSION ${FILE} EXT)
 
     # Generate a .c file from .exp files
-    if (${FILE_EXTENSION} EQUAL ".exp")
+    if ("${FILE_EXTENSION}" MATCHES ".exp")
       # Get the filename without extension
       get_filename_component(EXP_FILE_NAME ${FILE} NAME_WE)
 
@@ -21,9 +21,9 @@ function(add_prx_module name)
       # Add a custom command for each .exp file to generate a .c file
       add_custom_command(
           OUTPUT ${GENERATED_C_FILE}
-          COMMAND psp-build-exports -b ${EXP_FILE} > ${GENERATED_C_FILE}
-          DEPENDS ${EXP_FILE}
-          COMMENT "Generating ${EXP_FILE_NAME}.c from ${EXP_FILE_NAME}.exp"
+          COMMAND psp-build-exports -b ${FILE} > ${GENERATED_C_FILE}
+          DEPENDS ${FILE}
+          COMMENT "Generating ${EXP_FILE_NAME}.c from ${FILE}"
       )
 
       # Add the generated .c file to the list
