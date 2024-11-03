@@ -13,9 +13,9 @@ AC_PSPDEV_PATH
 AM_INIT_AUTOMAKE([1.14 foreign])
 AM_SILENT_RULES([yes])
 
-# Disable autoconf default compilation flags
+# Initialize autoconf default compilation flags
 : ${CXXFLAGS=""}
-: ${CFLAGS=""}
+: ${CFLAGS="-g -O2"}
 
 # Checks for programs.
 AC_PSPDEV_TOOLCHAIN
@@ -77,7 +77,7 @@ AC_SUBST(PSPSDK_INCLUDEDIR)
 AC_SUBST(PSPSDK_LIBDIR)
 
 # CFLAGS and CXXFLAGS used to build pspsdk libraries.
-PSPSDK_CFLAGS="$CFLAGS -g -O2 -mno-gpopt -Wall -Werror -D_PSP_FW_VERSION=600"
+PSPSDK_CFLAGS="$CFLAGS -mno-gpopt -Wall -Werror -D_PSP_FW_VERSION=600"
 if test "$with_gprofflags" = yes ; then
 	PSPSDK_CFLAGS="$PSPSDK_CFLAGS -pg -g"
 fi
