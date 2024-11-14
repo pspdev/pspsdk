@@ -146,6 +146,14 @@ int sceDisplayIsForeground(void);
  */
 int sceDisplayIsVblank(void);
 
+int sceDisplayGetBrightness(void);
+int sceDisplayGetResumeMode(void);
+int sceDisplayGetVblankRest(void);
+int sceDisplayIsVsync(void);
+int sceDisplayWaitVblankStartMulti(void);
+int sceDisplayWaitVblankStartMultiCB(void);
+int sceDisplayAdjustAccumulatedHcount(void);
+
 #ifdef __cplusplus
 }
 #endif
