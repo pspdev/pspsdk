@@ -158,6 +158,10 @@ int sceDisplayGetBrightness(int *level, int *unk1);
 
 int sceDisplayGetResumeMode(void);
 int sceDisplayGetVblankRest(void);
+
+/**
+ * Test whether VSYNC is active
+ */
 int sceDisplayIsVsync(void);
 
 /**
