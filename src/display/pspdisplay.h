@@ -161,7 +161,15 @@ int sceDisplayGetVblankRest(void);
 int sceDisplayIsVsync(void);
 int sceDisplayWaitVblankStartMulti(void);
 int sceDisplayWaitVblankStartMultiCB(void);
-int sceDisplayAdjustAccumulatedHcount(void);
+
+/**
+ * Adjust the accumulated HSYNC count
+ *
+ * @param hcount - Set accumulated HSYNC count
+ *
+ * @return 0 on success
+ */
+int sceDisplayAdjustAccumulatedHcount(int hcount);
 
 #ifdef __cplusplus
 }
