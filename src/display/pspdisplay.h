@@ -146,7 +146,16 @@ int sceDisplayIsForeground(void);
  */
 int sceDisplayIsVblank(void);
 
-int sceDisplayGetBrightness(void);
+/**
+ * Get current display brightness
+ *
+ * @param level - Pointer to int to receive the current brightness level (0-100)
+ * @param unk1 - Pointer to int, receives unknown, it's 1 or 0
+ *
+ * @return 0 on success
+ */
+int sceDisplayGetBrightness(int *level, int *unk1);
+
 int sceDisplayGetResumeMode(void);
 int sceDisplayGetVblankRest(void);
 int sceDisplayIsVsync(void);
