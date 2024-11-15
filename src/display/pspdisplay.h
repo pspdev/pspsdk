@@ -157,6 +157,16 @@ int sceDisplayIsVblank(void);
 int sceDisplayGetBrightness(int *level, int *unk1);
 
 int sceDisplayGetResumeMode(void);
+
+/**
+ * Get the time remaining until the next vertical blank
+ *
+ * @note start with sceDisplayWaitVblankStart() to take effect
+ *
+ * @return time remaining(in microsecond? or millisecond?)
+ *
+ * @return < 0 on error
+ */
 int sceDisplayGetVblankRest(void);
 
 /**
