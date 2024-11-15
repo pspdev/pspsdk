@@ -159,8 +159,24 @@ int sceDisplayGetBrightness(int *level, int *unk1);
 int sceDisplayGetResumeMode(void);
 int sceDisplayGetVblankRest(void);
 int sceDisplayIsVsync(void);
-int sceDisplayWaitVblankStartMulti(void);
-int sceDisplayWaitVblankStartMultiCB(void);
+
+/**
+ * Wait for vertical blank start after specified number of vertical periods
+ *
+ * @param vblank_count - Number of vertical periods before waiting for vertical blank start
+ *
+ * @return 0 on success
+ */
+int sceDisplayWaitVblankStartMulti(unsigned int vblank_count);
+
+/**
+ * Wait for vertical blank start with callback after specified number of vertical periods
+ *
+ * @param vblank_count - Number of vertical periods before waiting for vertical blank start
+ *
+ * @return 0 on success
+ */
+int sceDisplayWaitVblankStartMultiCB(unsigned int vblank_count);
 
 /**
  * Adjust the accumulated HSYNC count
