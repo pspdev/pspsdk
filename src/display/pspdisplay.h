@@ -156,7 +156,16 @@ int sceDisplayIsVblank(void);
  */
 int sceDisplayGetBrightness(int *level, int *unk1);
 
-int sceDisplayGetResumeMode(void);
+/**
+ * Get resume mode
+ *
+ * @warning This function can crash your app or worst(unexpected forced turn off your PSP)
+ *
+ * @param resume_mode - Pointer to int to receive the current resume mode
+ *
+ * @return ???
+ */
+int sceDisplayGetResumeMode(int *resume_mode);
 
 /**
  * Get the time remaining until the next vertical blank
