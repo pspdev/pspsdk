@@ -37,6 +37,13 @@ ln -sf "../sdk/lib/libpspuser.a" "libpspuser.a" || { exit 1; }
 ln -sf "../sdk/lib/libpspkernel.a" "libpspkernel.a" || { exit 1; }
 cd -
 
+# Copy licenses
+mkdir -p $PSPDEV/psp/share/licenses/pspsdk
+cp LICENSE $PSPDEV/psp/share/licenses/pspsdk/
+
+mkdir -p $PSPDEV/share/licenses/PrxEncrypter
+cp tools/PrxEncrypter/LICENSE $PSPDEV/share/licenses/PrxEncrypter
+
 ## Store build information
 BUILD_FILE="${PSPDEV}/build.txt"
 if [[ -f "${BUILD_FILE}" ]]; then
