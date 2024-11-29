@@ -92,6 +92,7 @@ int pipe(int fildes[2])
 #endif
 
 #ifdef F___pipe_close
+__attribute__((weak))
 int __pipe_close(int fd)
 {
 	int ret = 0;
@@ -124,6 +125,7 @@ int __pipe_close(int fd)
 #endif
 
 #ifdef F___pipe_nonblocking_read
+__attribute__((weak))
 int __pipe_nonblocking_read(int fd, void *buf, size_t len)
 {
 	int ret;
@@ -180,6 +182,7 @@ int __pipe_nonblocking_read(int fd, void *buf, size_t len)
 #endif
 
 #ifdef F___pipe_read
+__attribute__((weak))
 int __pipe_read(int fd, void *buf, size_t len)
 {
 	int ret;
@@ -241,6 +244,7 @@ int __pipe_read(int fd, void *buf, size_t len)
 #endif
 
 #ifdef F___pipe_write
+__attribute__((weak))
 int __pipe_write(int fd, const void *buf, size_t len)
 {
 	int ret;
@@ -286,6 +290,7 @@ int __pipe_write(int fd, const void *buf, size_t len)
 #endif
 
 #ifdef F___pipe_nonblocking_write
+__attribute__((weak))
 int __pipe_nonblocking_write(int fd, const void *buf, size_t len)
 {
 	int ret;

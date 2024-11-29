@@ -53,6 +53,7 @@ int	socket(int domain, int type, int protocol)
    them in and have expanded socket capability. */
 
 #ifdef F___socket_close
+__attribute__((weak))
 int __socket_close(int sock)
 {
 	int ret = 0;
@@ -170,6 +171,7 @@ int	listen(int s, int backlog)
 #endif
 
 #ifdef F_recv
+__attribute__((weak))
 ssize_t	recv(int s, void *buf, size_t len, int flags)
 {
 	int ret;
@@ -212,6 +214,7 @@ ssize_t	recvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *from,
 #endif
 
 #ifdef F_send
+__attribute__((weak))
 ssize_t	send(int s, const void *buf, size_t len, int flags)
 {
 	int ret;
@@ -275,6 +278,7 @@ int	getsockopt(int s, int level, int optname, void *optval, socklen_t *optlen)
 #endif
 
 #ifdef F_setsockopt
+__attribute__((weak))
 int	setsockopt(int s, int level, int optname, const void *optval, socklen_t optlen)
 {
 	int ret;

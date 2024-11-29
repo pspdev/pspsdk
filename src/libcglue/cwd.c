@@ -178,6 +178,7 @@ int __path_absolute(const char *in, char *out, int len)
 
 #ifdef F___init_cwd
 /* Set the current working directory (CWD) to the path where the module was launched. */
+__attribute__((weak))
 void __init_cwd(char *argv_0)
 {
 	if (argv_0 != NULL) {
