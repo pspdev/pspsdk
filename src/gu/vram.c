@@ -9,8 +9,9 @@
 #include <pspge.h>
 #include <pspgu.h>
 
+#define ALIGNMENT 16
+
 static unsigned int staticOffset = 0;
-static const unsigned int alignment = 16;
 
 static unsigned int getMemorySize(unsigned int width, unsigned int height, unsigned int psm)
 {
@@ -40,7 +41,7 @@ static unsigned int getMemorySize(unsigned int width, unsigned int height, unsig
 void* guGetStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm)
 {
 	unsigned int memSize = getMemorySize(width,height,psm);
-	staticOffset = (staticOffset + (alignment-1)) &~ (alignment-1);
+	staticOffset = (staticOffset + (ALIGNMENT-1)) &~ (ALIGNMENT-1);
 	void* result = (void*)staticOffset;
 	staticOffset += memSize;
 
