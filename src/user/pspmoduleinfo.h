@@ -107,6 +107,37 @@ enum PspModuleInfoAttr
 	void __libcglue_init(int argc, char *argv[]) {} \
 	void __libcglue_deinit() {}
 
+/* Disable using pipe suuport from POSIX functions. */
+#define PSP_DISABLE_NEWLIB_PIPE_SUPPORT() \
+	static int __pipe_not_supported() { \
+		errno = ENOSYS; \
+		return -1; \
+	} \
+	int __pipe_close(int fd) { return __pipe_not_supported(); } \
+	int __pipe_nonblocking_read(int fd, void *buf, size_t len) { return __pipe_not_supported(); } \
+	int __pipe_read(int fd, void *buf, size_t len) { return __pipe_not_supported(); } \
+	int __pipe_write(int fd, const void *buf, size_t len) { return __pipe_not_supported(); } \
+	int __pipe_nonblocking_write(int fd, const void *buf, size_t len) { return __pipe_not_supported(); }
+
+/* Disable using socket suuport from POSIX functions. */
+#define PSP_DISABLE_NEWLIB_SOCKET_SUPPORT() \
+	static int __socket_not_supported() { \
+		errno = ENOSYS; \
+		return -1; \
+	} \
+	int __socket_close(int sock) { return __socket_not_supported(); } \
+	ssize_t	recv(int s, void *buf, size_t len, int flags) { return __socket_not_supported(); } \
+	ssize_t	send(int s, const void *buf, size_t len, int flags) { return __socket_not_supported(); } \
+	int	setsockopt(int s, int level, int optname, const void *optval, socklen_t optlen) { return __socket_not_supported(); } 
+
+/* Disable the timezone support from newlib. */
+#define PSP_DISABLE_NEWLIB_TIMEZONE_SUPPORT() \
+	void __timezone_update() { }
+
+/* Disable the CWD support from newlib. */
+#define PSP_DISABLE_NEWLIB_CWD_SUPPORT() \
+	void __init_cwd(char *argv_0) {}
+
 /* Disable the auto start of pthread on init for reducing binary size if not used. */
 #define PSP_DISABLE_AUTOSTART_PTHREAD() \
 	void __libpthreadglue_init() {}
