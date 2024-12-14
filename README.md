@@ -137,6 +137,16 @@ See the `LICENSE` files for more information.
 This is generated automatically from the repository `master` branch:
 https://pspdev.github.io/pspsdk/
 
+### Additional Documentation
+
+Here are links to additional community made documentation, mostly on the PSP hardware:
+
+ - [PSP Allegrex documentation](https://pspdev.github.io/vfpu-docs/):
+   Non-official documentation on the PSP CPU and VFPU.
+ - [Unofficial PSP docs](https://uofw.github.io/upspd/docs/): A collection of docs
+   from different authors and sources, covering more specific topics.
+ - [Yet Another PSP Documentation](http://hitmen.c02.at/files/yapspd/): A very
+   detailed hardware documentation, including software interfaces.
 
 ### Discord
 
