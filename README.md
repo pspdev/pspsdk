@@ -139,7 +139,7 @@ https://pspdev.github.io/pspsdk/
 
 ### Additional Documentation
 
-Here are links to additional community made documentation, mostly on the PSP hardware:
+Here are links to additional community made documentation for contributors to the PSPSDK, mostly on the PSP hardware:
 
  - [PSP Allegrex documentation](https://pspdev.github.io/vfpu-docs/):
    Non-official documentation on the PSP CPU and VFPU.
