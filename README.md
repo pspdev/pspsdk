@@ -59,6 +59,7 @@ To use PSPSDK you must have the following software installed:
 * [GNU Make](http://www.gnu.org/software/make/)
 * [Git client](https://git-scm.com/downloads)
 * [GNU autoconf](http://www.gnu.org/software/autoconf/) and [automake](http://sourceware.org/automake/)(GNU Autotools)
+* [Zlib development libraries and headers](https://www.zlib.net/)
 
 The following packages are not required to build PSPSDK, but are used to build
 documentation:
