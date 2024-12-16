@@ -1,0 +1,9 @@
+<map id="net/psphttp.h" name="net/psphttp.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="16,5,113,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="5,79,124,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,31,67,63,62,63,62,31"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="23,153,106,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="67,105,67,137,62,137,62,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="33,226,96,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="67,179,67,211,62,211,62,179"/>
+</map>
