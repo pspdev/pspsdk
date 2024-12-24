@@ -29,12 +29,15 @@ AC_DEFUN([AC_PSPDEV_PATH],
   pspdev_includedir="$pspdev/psp/include"
   pspdev_libdir="$pspdev/psp/lib"
   pspdev_sharedir="$pspdev/psp/share"
+  pspdev_bindir="$pspdev/bin"
   PSPDEV_INCLUDEDIR="$pspdev_includedir"
   PSPDEV_LIBDIR="$pspdev_libdir"
   PSPDEV_SHAREDIR="$pspdev_sharedir"
+  PSPDEV_BINDIR="$pspdev_bindir"
   AC_SUBST(PSPDEV_INCLUDEDIR)
   AC_SUBST(PSPDEV_LIBDIR)
   AC_SUBST(PSPDEV_SHAREDIR)
+  AC_SUBST(PSPDEV_BINDIR)
 ])
 
 dnl Check for a tool prefixed with "psp-".

@@ -21,3 +21,6 @@ psp_prxgen_SOURCES = psp-prxgen.c getopt_long.c
 psp_fixup_imports_SOURCES = psp-fixup-imports.c getopt_long.c sha1.c
 
 noinst_HEADERS = elftypes.h getopt.h prxtypes.h sha1.h types.h
+
+psp_create_license_directorydir = @PSPDEV_BINDIR@
+psp_create_license_directory_SCRIPTS = psp-create-license-directory
