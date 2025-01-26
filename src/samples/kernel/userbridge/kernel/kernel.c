@@ -8,7 +8,6 @@
  * Copyright (c) 2025 Joel16 - joel16dev@gmail.com
  *
  */
- 
 #include <pspsdk.h>
 #include <pspsysreg.h>
 
