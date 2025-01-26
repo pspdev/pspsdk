@@ -1,7 +1,8 @@
-SUBDIRS = kernel user
+SAMPLES = \
+	kernel \
+	user
 
 all:
-	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir; done
-
-clean:
-	@for dir in $(SUBDIRS); do $(MAKE) clean -C $$dir; done
+	for sample in $(SAMPLES) ; do \
+		$(MAKE) -f Makefile.sample -C $$sample clean all || { exit 1; } \
+	done
