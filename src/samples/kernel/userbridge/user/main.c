@@ -1,3 +1,13 @@
+/*
+ * PSP Software Development Kit - https://github.com/pspdev
+ * -----------------------------------------------------------------------
+ * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
+ *
+ * main.c - A basic example for checking the GProf profiler.
+ *
+ * Copyright (c) 2025 Joel16 - joel16dev@gmail.com
+ *
+ */
 #include <pspdebug.h>
 #include <pspkernel.h>
 #include <pspmodulemgr.h>
