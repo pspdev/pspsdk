@@ -31,6 +31,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/statvfs.h>
+#include <sys/syslimits.h>
 
 #include <psptypes.h>
 #include <pspiofilemgr.h>
