@@ -1,0 +1,21 @@
+<map id="user/pspiofilemgr.h" name="user/pspiofilemgr.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="134,5,263,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="90,226,208,252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,25,102,31,70,41,41,58,18,81,9,99,10,118,18,137,32,156,71,190,113,216,110,221,68,194,28,160,13,140,5,120,4,98,13,77,38,53,68,37,101,26,133,20"/>
+<area shape="rect" id="Node000005" href="$pspiofilemgr__fcntl_8h.html" title=" " alt="" coords="28,79,160,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="182,34,126,72,123,68,179,29"/>
+<area shape="rect" id="Node000006" href="$pspiofilemgr__stat_8h.html" title=" " alt="" coords="147,153,276,178"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="202,31,212,137,206,137,197,32"/>
+<area shape="rect" id="Node000007" href="$pspiofilemgr__dirent_8h.html" title=" " alt="" coords="235,79,375,105"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="218,29,276,68,273,72,215,34"/>
+<area shape="rect" id="Node000008" href="$pspiofilemgr__devctl_8h.html" title=" " alt="" coords="327,153,469,178"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="264,20,296,27,330,37,362,54,388,77,397,91,402,107,404,137,399,137,397,108,392,93,384,81,359,58,328,42,295,32,263,26"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="203,300,287,326"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="167,250,219,289,215,293,164,255"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="213,374,277,399"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="248,326,248,358,242,358,242,326"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="203,180,172,216,168,213,199,177"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="217,178,241,284,236,285,212,179"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="291,107,241,145,238,141,288,103"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="388,181,270,291,267,287,384,177"/>
+</map>
