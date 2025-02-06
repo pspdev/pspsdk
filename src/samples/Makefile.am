@@ -56,6 +56,7 @@ SAMPLES = \
 	kernel/regenum \
 	kernel/systimer \
 	kernel/sysevent \
+	libcglue/light_elf \
 	mp3 \
 	ms/callback \
 	nand/dumpipl \
