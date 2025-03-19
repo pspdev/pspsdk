@@ -18,6 +18,11 @@
 extern "C" {
 #endif
 
+/** @defgroup Audio User Audio Library
+  * This module contains the imports for audio frequencies.
+  */
+
+
 /** @defgroup Audio User Audio Library */
 
 /** @addtogroup Audio */

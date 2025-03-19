@@ -22,6 +22,10 @@
 extern "C" {
 #endif
 
+/** @defgroup Ctrl Controller Kernel Library
+  * This module contains the imports for controllers (buttons, pad).
+  */
+
 /** @addtogroup Ctrl Controller Kernel Library */
 /**@{*/
 

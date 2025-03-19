@@ -17,6 +17,10 @@
 extern "C" {
 #endif
 
+/** @defgroup UMD UMD Kernel Library
+  * This module contains the imports for UMD drive.
+  */
+
 /** @addtogroup UMD UMD Kernel Library */
 /**@{*/
 
