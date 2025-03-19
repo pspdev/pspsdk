@@ -1,0 +1,35 @@
+<map id="sdk/query_mod.c" name="sdk/query_mod.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="166,5,285,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="204,226,322,252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,34,115,52,89,65,66,81,38,104,16,127,10,139,8,151,10,163,18,177,44,194,87,208,189,227,188,233,85,214,42,199,14,180,5,165,3,151,5,137,12,124,34,100,62,77,87,61,113,47,165,29"/>
+<area shape="rect" id="Node000005" href="$psploadcore_8h.html" title=" " alt="" coords="28,153,129,178"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="166,30,118,48,97,62,80,80,74,94,71,108,74,138,68,138,66,108,68,92,75,78,93,58,116,43,164,25"/>
+<area shape="rect" id="Node000006" href="$pspmodulemgr_8h.html" title=" " alt="" coords="205,153,321,178"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="237,30,250,52,261,78,267,109,267,137,262,137,261,109,256,80,245,54,232,33"/>
+<area shape="rect" id="Node000007" href="$pspmodulemgr__kernel_8h.html" title=" " alt="" coords="89,79,247,105"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="218,33,189,68,185,65,214,30"/>
+<area shape="rect" id="Node000008" href="$pspsdk_8h.html" title=" " alt="" coords="322,79,395,105"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="249,29,324,69,321,74,247,34"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="419,79,482,105"/>
+<area shape="poly" id="edge21_Node000001_Node000012" title=" " alt="" coords="264,29,405,73,403,78,263,34"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="337,300,420,326"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="284,250,348,289,345,294,281,255"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="347,374,410,399"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="381,326,381,358,376,358,376,326"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="111,176,218,218,216,223,109,181"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="265,179,265,211,260,211,260,179"/>
+<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="172,105,178,139,194,177,212,198,232,215,229,219,208,202,190,180,173,140,167,106"/>
+<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="186,103,236,141,233,145,183,107"/>
+<area shape="poly" id="edge12_Node000008_Node000002" title=" " alt="" coords="360,106,353,140,336,180,317,202,296,219,293,215,314,198,331,177,348,139,355,105"/>
+<area shape="poly" id="edge13_Node000008_Node000006" title=" " alt="" coords="344,107,292,146,289,141,341,103"/>
+<area shape="rect" id="Node000009" href="$pspmoduleinfo_8h.html" title=" " alt="" coords="470,300,586,326"/>
+<area shape="poly" id="edge14_Node000008_Node000009" title=" " alt="" coords="397,102,475,127,507,140,525,151,540,184,545,221,543,256,538,286,533,285,538,255,540,221,535,186,521,154,505,145,473,132,395,107"/>
+<area shape="rect" id="Node000010" href="$pspthreadman_8h.html" title=" " alt="" coords="397,153,510,178"/>
+<area shape="poly" id="edge15_Node000008_Node000010" title=" " alt="" coords="376,103,427,141,424,145,373,107"/>
+<area shape="poly" id="edge17_Node000010_Node000002" title=" " alt="" coords="422,181,310,223,308,218,420,176"/>
+<area shape="poly" id="edge16_Node000010_Node000003" title=" " alt="" coords="443,181,424,202,406,228,394,257,386,285,381,284,389,255,402,225,420,198,439,177"/>
+<area shape="rect" id="Node000011" href="$pspdebug_8h.html" title=" " alt="" coords="416,226,504,252"/>
+<area shape="poly" id="edge18_Node000010_Node000011" title=" " alt="" coords="457,178,460,211,455,211,452,179"/>
+<area shape="poly" id="edge19_Node000011_Node000003" title=" " alt="" coords="448,255,405,292,402,288,445,251"/>
+<area shape="poly" id="edge20_Node000011_Node000009" title=" " alt="" coords="473,250,508,287,504,291,469,254"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="kernel/pspsysmem_kernel.h" name="kernel/pspsysmem_kernel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,188,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="37,153,156,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,32,80,79,81,109,88,137,83,139,76,110,75,79,89,31"/>
+<area shape="rect" id="Node000005" href="$pspsysmem_8h.html" title=" " alt="" coords="90,79,191,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="106,30,127,64,123,67,101,33"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="55,226,138,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,179,99,211,94,211,94,179"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="65,300,128,326"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="99,252,99,284,94,284,94,252"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="136,106,114,141,110,138,131,103"/>
+</map>
