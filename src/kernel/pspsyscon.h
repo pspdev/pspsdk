@@ -25,15 +25,15 @@ extern "C" {
 /**@{*/
 
 /**
-  * Force the PSP to go into standby
+  * Force the PSP to go into standby.
   */
 void sceSysconPowerStandby(void);
 
 /**
- * Reset the PSP
+ * Reset the PSP.
  *
- * @param unk1 - Unknown, pass 1
- * @param unk2 - Unknown, pass 1
+ * @param unk1 - Unknown, pass 1.
+ * @param unk2 - Unknown, pass 1.
  */
 void sceSysconResetDevice(int unk1, int unk2);
 
@@ -41,19 +41,19 @@ void sceSysconResetDevice(int unk1, int unk2);
 #define LED_ON 1
 #define LED_OFF 0
 /**
- * Control an LED
+ * Control an LED.
  *
- * @param SceLED - The led to toggle (only SCE_LED_POWER)
- * @param state - Whether to turn on or off
+ * @param SceLED - The led to toggle (only SCE_LED_POWER).
+ * @param state - Whether to turn on or off.
  */
 int sceSysconCtrlLED(int SceLED, int state);
 
 /**
- * Control the remote control power
+ * Control the remote control power.
  *
- * @param power - 1 is on, 0 is off
+ * @param power - 1 is on, 0 is off.
  * 
- * @return < 0 on error
+ * @return < 0 on error.
  */
 int sceSysconCtrlHRPower(int power);
 
@@ -68,22 +68,28 @@ int sceSysconSetHPConnectCallback(void (*)(int), int unk0);
 int sceSysconSetHRPowerCallback(void (*)(int), int unk0);
 
 /**
- * Get the PSP's Pommel version
- * @param version - A pointer to an int to receive the Pommel version into
+ * Get the PSP's Pommel version.
+ * @param version - A pointer to an int to receive the Pommel version into.
  */
 int sceSysconGetPommelVersion(int* version);
 
 /**
- * Get the PSP's Baryon version
- * @param version - A pointer to an int to receive the Baryon version into
+ * Get the PSP's Baryon version.
+ * @param version - A pointer to an int to receive the Baryon version into.
  */
 int sceSysconGetBaryonVersion(int* version);
 
 /**
- * Get the PSP's Polestar version
- * @param version - A pointer to an int to receive the Polestar version into
+ * Get the PSP's Polestar version.
+ * @param version - A pointer to an int to receive the Polestar version into.
  */
- int sceSysconGetPolestarVersion(int* version);
+int sceSysconGetPolestarVersion(int* version);
+
+/**
+ * Get the baryon timestamp string.
+ * @param timeStamp A pointer to a string at least 12 bytes long.
+ */
+int sceSysconGetTimeStamp(s8 *timeStamp);
 
 /**@}*/
 
