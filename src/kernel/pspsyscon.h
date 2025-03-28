@@ -57,24 +57,33 @@ int sceSysconCtrlLED(int SceLED, int state);
  */
 int sceSysconCtrlHRPower(int power);
 
+/**
+ * Get the headphone connection status.
+ * @return 1 if the headphone is connected, 0 if the headphone is disconnected.
+ */
+s8 sceSysconGetHPConnect(void);
 
-int	sceSysconGetHPConnect(void);
+int sceSysconSetHPConnectCallback(void (*)(int), int unk0);
 
-int sceSysconSetHPConnectCallback( void (*)(int), int unk0 );
-
-int sceSysconSetHRPowerCallback( void (*)(int), int unk0 );
+int sceSysconSetHRPowerCallback(void (*)(int), int unk0);
 
 /**
  * Get the PSP's Pommel version
  * @param version - A pointer to an int to receive the Pommel version into
  */
-int sceSysconGetPommelVersion( int* version );
+int sceSysconGetPommelVersion(int* version);
 
 /**
  * Get the PSP's Baryon version
  * @param version - A pointer to an int to receive the Baryon version into
  */
-int sceSysconGetBaryonVersion( int* version );
+int sceSysconGetBaryonVersion(int* version);
+
+/**
+ * Get the PSP's Polestar version
+ * @param version - A pointer to an int to receive the Polestar version into
+ */
+ int sceSysconGetPolestarVersion(int* version);
 
 /**@}*/
 
