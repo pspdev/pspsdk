@@ -623,7 +623,7 @@ typedef struct {
  * @param name - The name of the lightweight mutex
  * @param attr - The LwMutex attributes, zero or more of ::PspLwMutexAttributes.
  * @param initialCount - THe inital value of the mutex
- * @param optionsPTr - Other optioons for mutex
+ * @param optionsPtr - Other options for mutex
  *
  * @return 0 on success, otherwise one of ::PspKernelErrorCodes
  */
@@ -663,7 +663,6 @@ int sceKernelLockLwMutex(SceLwMutexWorkarea *workarea, int lockCount, unsigned i
  * Lock a lightweight mutex
  *
  * @param workarea - The pointer to the workarea
- * @param name - The name of the lightweight mutex
  * @param lockCount - value of decrease the lock counter
  *
  * @return 0 on success, otherwise one of ::PspKernelErrorCodes
