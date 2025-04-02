@@ -2,8 +2,7 @@
 
 [![CI](https://img.shields.io/github/actions/workflow/status/pspdev/pspsdk/.github/workflows/compilation.yml?branch=master&style=for-the-badge&logo=github&label=CI)](https://github.com/pspdev/pspsdk/actions?query=workflow:CI) [![CI-Docker](https://img.shields.io/github/actions/workflow/status/pspdev/pspsdk/.github/workflows/docker.yml?branch=master&style=for-the-badge&logo=github&label=CI-Docker)](https://github.com/pspdev/pspsdk/actions?query=workflow:CI-Docker)
 
-https://github.com/pspdev/pspsdk
-
+[https://pspdev.github.io/](https://pspdev.github.io/)
 
 ## Introduction
 
@@ -51,6 +50,10 @@ simple programs and libraries. See any PSPSDK sample program for details on how
 
 ## Installation
 
+See [https://pspdev.github.io/](https://pspdev.github.io/installation.html) for instructions on how to easily install the pspsdk.
+
+## Installation from source
+
 ### Requirements
 
 To use PSPSDK you must have the following software installed:
@@ -67,7 +70,7 @@ documentation:
 * [Doxygen](http://doxygen.nl/)
 * [Graphviz](http://www.graphviz.org/)
 
-### Installation from source
+### Building
 
 PSPSDK can be found in the Git repository located at
 https://github.com/pspdev/pspsdk. You can do the following command to download PSPSDK:
