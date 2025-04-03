@@ -62,7 +62,7 @@ int sceVaudioOutputBlocking(int volume, void *buffer);
   *                      output call. One of 256, 576, 1024, 1152, 2048.
   *                      It must be a value between ::PSP_VAUDIO_SAMPLE_MIN and ::PSP_VAUDIO_SAMPLE_MAX.
   * @param frequency - The frequency. One of 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11050, 8000.
-  * @param format - The output format to use for the channel. One of ::PSP_VAUDIO_FORMAT_
+  * @param format - The output format to use for the channel. One of ::PSP_VAUDIO_FORMAT_MONO or ::PSP_VAUDIO_FORMAT_STEREO
   *
   * @return 0 if success, < 0 on error.
   */
@@ -78,7 +78,7 @@ int sceVaudioChRelease(void);
 /**
   * Set effect type
   *
-  * @param effect - The effect type. One of ::PSP_VAUDIO_EFFECT_
+  * @param effect - The effect type. One of ::PSP_VAUDIO_EFFECT_OFF or ::PSP_VAUDIO_EFFECT_HEAVY or ::PSP_VAUDIO_EFFECT_POPS or ::PSP_VAUDIO_EFFECT_JAZZ or ::PSP_VAUDIO_EFFECT_UNIQUE or ::PSP_VAUDIO_EFFECT_MAX
   * @param volume - The volume. It must be a value between 0 and ::PSP_VAUDIO_VOLUME_MAX
   *
   * @return The volume value on success, < 0 on error.
@@ -88,7 +88,7 @@ int sceVaudioSetEffectType(int effect, int volume);
 /**
   * Set ALC(dynamic normalizer)
   *
-  * @param mode - The mode. One of ::PSP_VAUDIO_ALC_
+  * @param mode - The mode. One of ::PSP_VAUDIO_ALC_OFF or ::PSP_VAUDIO_ALC_MODE1 or ::PSP_VAUDIO_ALC_MODE_MAX
   *
   * @return 0 if success, < 0 on error.
   */
