@@ -24,6 +24,7 @@ extern "C" {
  */
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void gprof_start(void);
+
 /**
  * Stop the profiler.
  * If the profiler is not running, this function does nothing.
