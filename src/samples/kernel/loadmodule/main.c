@@ -16,6 +16,7 @@
 #include <pspuser.h>
 #include <pspdebug.h>
 #include <pspsdk.h>
+#include <psptypes.h>
 #include <string.h>
 
 /* Define the module info section, note the 0x1000 flag to enable start in kernel mode */

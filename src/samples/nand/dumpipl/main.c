@@ -26,6 +26,7 @@
 #include <pspuser.h>
 #include <pspdebug.h>
 #include <pspnand_driver.h>
+#include <psptypes.h>
 
 /* Define the module info section */
 PSP_MODULE_INFO("dumpipl", 0x1000, 1, 1);

@@ -19,6 +19,7 @@
 #include <pspwlan.h>
 #include <pspctrl.h>
 #include <pspdisplay.h>
+#include <psptypes.h>
 
 #define printf pspDebugScreenPrintf
 

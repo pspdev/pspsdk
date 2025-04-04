@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <pspdebugkb.h>
+#include <psptypes.h>
 
 /* Define the module info section */
 PSP_MODULE_INFO("Debug Screen Text Input", 0, 1, 1);

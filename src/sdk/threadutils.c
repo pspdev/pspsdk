@@ -13,6 +13,7 @@
 
 #include "pspthreadman.h"
 #include "pspsdk.h"
+#include "psptypes.h"
 
 #define MAX_UIDS 256
 

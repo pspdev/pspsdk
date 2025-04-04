@@ -14,6 +14,7 @@
 #define __PSPHTTP_H__
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 
 #if defined(__cplusplus)
 extern "C" {

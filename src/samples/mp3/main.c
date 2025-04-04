@@ -16,6 +16,7 @@
 #include <pspaudio.h>
 #include <pspmp3.h>
 #include <psputility.h>
+#include <psptypes.h>
 
 
 /* Define the module info section */

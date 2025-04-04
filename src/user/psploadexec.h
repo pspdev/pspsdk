@@ -24,6 +24,8 @@
 extern "C" {
 #endif
 
+#include <psptypes.h>
+
 /** @addtogroup LoadExec */
 
 /**@{*/

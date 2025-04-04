@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <pspmoduleinfo.h>
 #include <psppower.h>
+#include <psptypes.h>
 
 /* Define the module info section */
 PSP_MODULE_INFO("PowerTest", 0, 0, 71);

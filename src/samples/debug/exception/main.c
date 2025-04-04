@@ -14,6 +14,7 @@
 #include <pspdebug.h>
 #include <pspctrl.h>
 #include <pspdisplay.h>
+#include <psptypes.h>
 
 PSP_MODULE_INFO("EXTEST", 0x1000, 1, 1);
 /* Define the main thread's attribute value (optional) */

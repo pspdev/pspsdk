@@ -10,6 +10,7 @@
  */
 #include <pspkernel.h>
 #include <pspdebug.h>
+#include <psptypes.h>
 #include <pspidstorage.h>
 
 /* Start in kernel mode */

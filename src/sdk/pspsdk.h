@@ -15,6 +15,7 @@
 #define PSPSDK_H
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 #include <pspmodulemgr.h>
 #include <pspmoduleinfo.h>
 #include <pspthreadman.h>

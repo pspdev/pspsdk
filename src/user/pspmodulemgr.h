@@ -19,6 +19,7 @@
 #define __MODLOAD_H__
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 
 /** @defgroup ModuleMgr Module Manager Library
   * This module contains the imports for the kernel's module management routines.

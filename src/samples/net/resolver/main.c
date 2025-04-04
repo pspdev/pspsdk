@@ -19,6 +19,7 @@
 #include <pspnet_inet.h>
 #include <pspnet_apctl.h>
 #include <pspnet_resolver.h>
+#include <psptypes.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/select.h>

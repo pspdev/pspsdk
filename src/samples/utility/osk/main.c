@@ -4,6 +4,7 @@
 #include <pspgu.h>
 #include <string.h>
 #include <psputility.h>
+#include <psptypes.h>
 
 PSP_MODULE_INFO("OSK Sample", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);

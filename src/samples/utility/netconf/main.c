@@ -16,6 +16,7 @@
 #include <pspmoduleinfo.h>
 #include <psputility.h>
 #include <pspctrl.h>
+#include <psptypes.h>
 
 /* Define the module info section */
 PSP_MODULE_INFO("NetParam Sample", 0, 1, 00);

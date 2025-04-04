@@ -15,6 +15,7 @@
 #include <string.h>
 #include <pspmoduleinfo.h>
 #include <psputility.h>
+#include <psptypes.h>
 
 /* Define the module info section */
 PSP_MODULE_INFO("SystemParam Sample", 0, 1, 0);

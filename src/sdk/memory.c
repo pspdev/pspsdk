@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <pspsdk.h>
+#include <psptypes.h>
 
 static u32 _pspSdkGetMaxLineareMemorySize(void)
 {

@@ -14,6 +14,7 @@
 #include <pspctrl.h>
 #include <pspdebug.h>
 #include <pspdisplay.h>
+#include <psptypes.h>
 #include <pspumd.h>
 
 #include <string.h>

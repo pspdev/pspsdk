@@ -13,6 +13,7 @@
 #include <pspdisplay.h>
 #include <pspctrl.h>
 #include <pspsircs.h>
+#include <psptypes.h>
 #include <stdlib.h>
 #include <string.h>
 

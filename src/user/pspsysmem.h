@@ -17,6 +17,7 @@
 #define PSPSYSMEM_H
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 
 /** @defgroup SysMem System Memory Manager
   * This module contains routines to manage heaps of memory.

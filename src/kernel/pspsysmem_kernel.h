@@ -17,6 +17,7 @@
 #define PSPSYSMEMKERNEL_H
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 #include <pspsysmem.h>
 
 /** @defgroup SysMemKern System Memory Manager Kernel
