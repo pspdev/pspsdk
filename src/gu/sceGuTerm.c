@@ -6,10 +6,13 @@
  * Copyright (c) 2005 Jesper Svennevid
  */
 
-#include "guInternal.h"
+#include <pspgu.h>
 
 #include <pspkernel.h>
 #include <pspge.h>
+
+// To avoid including whole headers
+int sceKernelDeleteEventFlag(int evid);
 
 void sceGuTerm(void)
 {
