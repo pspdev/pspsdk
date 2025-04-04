@@ -2,6 +2,7 @@
 #include <pspdisplay.h>
 #include <pspdebug.h>
 #include <pspctrl.h>
+#include <psptypes.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>

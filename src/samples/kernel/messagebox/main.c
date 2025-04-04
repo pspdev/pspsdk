@@ -11,6 +11,7 @@
 #include <pspkernel.h>
 #include <pspdebug.h>
 #include <pspthreadman.h>
+#include <psptypes.h>
 #include <stdlib.h>
 #include <string.h>
 

@@ -13,6 +13,7 @@
 #define PSPNAND_DRIVER_H
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 
 #ifdef __cplusplus
 extern "C" {

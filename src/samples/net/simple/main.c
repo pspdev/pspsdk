@@ -15,6 +15,7 @@
 #include <pspnet_apctl.h>
 #include <pspsdk.h>
 #include <psputility.h>
+#include <psptypes.h>
 #include <string.h>
 #include <unistd.h>
 

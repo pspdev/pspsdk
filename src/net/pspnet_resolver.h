@@ -20,6 +20,7 @@ extern "C" {
 
 #include <netinet/in.h>
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 
 /**
  * Inititalise the resolver library

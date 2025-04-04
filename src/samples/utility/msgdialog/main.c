@@ -19,6 +19,7 @@
 #include <psputility.h>
 #include <pspgu.h>
 #include <pspgum.h>
+#include <psptypes.h>
 
 /* Define the module info section */
 PSP_MODULE_INFO("MsgDialog Sample", 0, 1, 0);

@@ -16,6 +16,8 @@
 extern "C" {
 #endif
 
+#include <psptypes.h>
+
 /** @addtogroup Reg Registry Kernel Library */
 /**@{*/
 

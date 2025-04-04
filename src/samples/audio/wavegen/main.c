@@ -12,6 +12,7 @@
 #include <pspaudio.h>
 #include <pspdisplay.h>
 #include <pspctrl.h>
+#include <psptypes.h>
 
 #include <stdlib.h>
 #include <string.h>

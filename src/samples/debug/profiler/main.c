@@ -13,6 +13,7 @@
 #include <pspkernel.h>
 #include <pspdebug.h>
 #include <pspdisplay.h>
+#include <psptypes.h>
 #include <string.h>
 
 PSP_MODULE_INFO("PROFILER", 0x1000, 1, 1);

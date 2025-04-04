@@ -17,6 +17,7 @@
 #include <pspctrl.h>
 #include <stdlib.h>
 #include <string.h>
+#include <psptypes.h>
 
 /* Define the module info section */
 PSP_MODULE_INFO("CONTROLTEST", 0, 1, 1);

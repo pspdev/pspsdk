@@ -13,6 +13,7 @@
 #include <pspgu.h>
 #include <pspgum.h>
 #include <pspdisplay.h>
+#include <psptypes.h>
 
 #include <string.h>
 #include <math.h>

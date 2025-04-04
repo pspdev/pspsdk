@@ -11,6 +11,7 @@
  *
  */
 #include <pspkernel.h>
+#include <psptypes.h>
 #include <stdio.h>
 
 PSP_MODULE_INFO("template", PSP_MODULE_KERNEL, 1, 1);

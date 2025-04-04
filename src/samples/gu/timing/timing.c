@@ -21,6 +21,7 @@
 #include <pspgu.h>
 #include <pspgum.h>
 #include <pspctrl.h>
+#include <psptypes.h>
 
 PSP_MODULE_INFO("Timing Sample", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);

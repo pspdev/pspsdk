@@ -15,6 +15,7 @@
 #define __MODMGRKERNEL_H__
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 #include <pspmodulemgr.h>
 
 /** @defgroup ModuleMgrKern Kernel Module Manager Library

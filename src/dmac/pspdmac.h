@@ -12,7 +12,6 @@
 #define __DMAC_H__
 
 #include <psptypes.h>
-#include <pspkerneltypes.h>
 
 #ifdef __cplusplus
 extern "C" {

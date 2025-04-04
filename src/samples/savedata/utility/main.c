@@ -22,6 +22,7 @@
 #include <pspgum.h>
 #include <psputility.h>
 #include <pspctrl.h>
+#include <psptypes.h>
 
 #include "data.h"
 

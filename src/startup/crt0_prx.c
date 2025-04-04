@@ -13,6 +13,7 @@
 #include <string.h>
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 #include <pspmoduleinfo.h>
 #include <pspthreadman.h>
 #include <psploadexec.h>

@@ -15,6 +15,8 @@
 extern "C" {
 #endif
 
+#include <psptypes.h>
+
 #define PSP_USBCAM_PID				    (0x282)
 #define PSP_USBCAM_DRIVERNAME		  "USBCamDriver"
 #define PSP_USBCAMMIC_DRIVERNAME	"USBCamMicDriver"

@@ -11,6 +11,7 @@
 #include <pspkernel.h>
 #include <pspdebug.h>
 #include <pspaudiolib.h>
+#include <psptypes.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>

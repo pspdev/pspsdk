@@ -21,6 +21,7 @@
 #include <pspthreadman.h>
 #include <pspctrl.h>
 #include <pspsdk.h>
+#include <psptypes.h>
 
 /**
  * Define the module info section

@@ -13,6 +13,7 @@
 #define PSPLOADEXEC_KERNEL_H
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 #include <psploadexec.h>
 
 /** @defgroup LoadExecKernel Interface to the LoadExecForKernel library.

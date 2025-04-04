@@ -13,6 +13,7 @@
 #define PSPTHREADMANKERNEL_H
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 #include <pspthreadman.h>
 
 /** @defgroup ThreadmanKern Thread Manager kernel functions

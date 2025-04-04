@@ -100,6 +100,7 @@ typedef int SceBool;
 typedef void SceVoid;
 typedef void * ScePVoid;
 
+typedef unsigned int SceSize;
 
 /* PSP types. */
 

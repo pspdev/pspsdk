@@ -12,6 +12,7 @@
  */
 #include <pspkernel.h>
 #include <pspdebug.h>
+#include <psptypes.h>
 
 PSP_MODULE_INFO("KPTEST", 0x1000, 1, 1);
 /* Define the main thread's attribute value (optional) */

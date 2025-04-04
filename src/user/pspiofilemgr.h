@@ -14,6 +14,7 @@
 #define __FILEIO_H__
 
 #include <pspkerneltypes.h>
+#include <psptypes.h>
 #include <pspiofilemgr_fcntl.h>
 #include <pspiofilemgr_stat.h>
 #include <pspiofilemgr_dirent.h>
