@@ -6,10 +6,7 @@
 
 ## Introduction
 
-The PSP Software Development Kit (PSPSDK) is a collection of Open Source tools
-and libraries written for Sony's Playstation Portable (PSP) gaming console.
-It also includes documentation and other resources developers can use to write
-software for the PSP.
+PSPSDK is a collection of open source libraries and tools written for Sony's Playstation Portable (PSP) gaming console. It is part of the [PSPDEV SDK](https://pspdev.github.io/).
 
 ## Features
 
@@ -50,7 +47,7 @@ simple programs and libraries. See any PSPSDK sample program for details on how
 
 ## Installation
 
-See [https://pspdev.github.io/](https://pspdev.github.io/installation.html) for instructions on how to easily install the pspsdk.
+See [https://pspdev.github.io/](https://pspdev.github.io/installation.html) for instructions on how to easily install PSPSDK along with other tools provided in the PSPDEV SDK.
 
 ## Installation from source
 
@@ -154,17 +151,17 @@ Here are links to additional community made documentation for contributors to th
 
 ### Discord
 
-You can find PSPDev Maintainers over at https://discord.gg/bePrj9W in the `#psp-toolchain` channel :)
+You can find PSPDEV Maintainers over at https://discord.gg/bePrj9W in the `#psp-toolchain` channel :)
 
 ### Code of Conduct
 
 We're all here to build software and have fun with our PSPs, and everyone deserves to be able to do that without fear of harassment.
 
-Please follow our [Code of Conduct](CODE_OF_CONDUCT.md), and we encourage you to contact the PSPDev Maintainers if you think something isn't right.
+Please follow our [Code of Conduct](CODE_OF_CONDUCT.md), and we encourage you to contact the PSPDEV Maintainers if you think something isn't right.
 
 ## Thanks
 
-The pspsdk developers wish to thank all the people who have contributed bug
+The PSPSDK developers wish to thank all the people who have contributed bug
 fixes, ideas and support for the project. Also big thanks to nem for kicking off
 PSP development with all his work, the original imports system is based on his
 work in the hello world demo.
