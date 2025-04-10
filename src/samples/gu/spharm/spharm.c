@@ -560,7 +560,7 @@ void SpharmGenTest(int rendermode)
 
 
   // Start list
-  sceGuStart(0,(unsigned int *)spharmlist);
+  sceGuStart(GU_DIRECT,(unsigned int *)spharmlist);
 
   set_rendermode(rendermode,&color);
 

@@ -127,7 +127,7 @@ int main(int argc, char* argv[])
 	sceGuEnable(GU_LIGHTING);
 	sceGuEnable(GU_LIGHT0);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
@@ -182,7 +182,7 @@ int main(int argc, char* argv[])
 		sceGumDrawArray(GU_TRIANGLES,GU_COLOR_8888|GU_NORMAL_32BITF|GU_VERTEX_32BITF|GU_VERTICES(2)|GU_INDEX_16BIT|GU_TRANSFORM_3D,sizeof(indices)/sizeof(unsigned short),indices,vertices);
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		sceDisplayWaitVblankStart();
 		sceGuSwapBuffers();

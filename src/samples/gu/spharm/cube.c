@@ -152,7 +152,7 @@ int main(int argc, char* argv[])
   logo_temp2 = convertimage(logo_start,64);
 
 	// setup
-	sceGuStart(0,list);
+	sceGuStart(GU_DIRECT,list);
 	sceGuDrawBuffer(GU_PSM_8888,(void*)0,BUF_WIDTH);
 	sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,(void*)0x88000,BUF_WIDTH);
 	sceGuDepthBuffer((void*)0x110000,BUF_WIDTH);
@@ -170,7 +170,7 @@ int main(int argc, char* argv[])
 	sceGuEnable(GU_CULL_FACE);
 	//sceGuEnable(GU_STATE_TEXTURE);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(1);
@@ -183,7 +183,7 @@ int main(int argc, char* argv[])
 	{
 		unsigned int x,y;
 
-		sceGuStart(0,list);
+		sceGuStart(GU_DIRECT,list);
 
 		sceGuClearColor(0);
 		sceGuClearDepth(0);
@@ -236,7 +236,7 @@ int main(int argc, char* argv[])
 		sceGumRotateXYZ(&rot);
 	}
 		sceGuFinish();
-		//sceGuSync(0,0);
+		//sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
     SpharmGenTest(rendermode);
 
@@ -257,7 +257,7 @@ int main(int argc, char* argv[])
     }
     buttonsold = pad.Buttons;
 
-    sceGuSync(0,0);
+    sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
     sceDisplayWaitVblankStart();
 		sceGuSwapBuffers();
 	}

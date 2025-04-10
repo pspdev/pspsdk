@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 	sceGuShadeModel(GU_SMOOTH);
 	sceGuDisable(GU_TEXTURE_2D);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
  
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(1);
@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
                 sceGumDrawArray(GU_TRIANGLES,GU_COLOR_8888|GU_VERTEX_32BITF|GU_TRANSFORM_3D,1*3,0,vertices);
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		pspDebugScreenSetOffset((int)fbp0);
 		pspDebugScreenSetXY(0,0);

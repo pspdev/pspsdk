@@ -580,7 +580,7 @@ void* sceGuSwapBuffers(void);
   *
   * @par Example: Wait for the currently executing display list
   * @code
-  * sceGuSync(0,0);
+  * sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
   * @endcode
   *
   * Available what are:

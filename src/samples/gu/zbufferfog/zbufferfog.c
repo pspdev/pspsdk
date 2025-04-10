@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
 	sceGuEnable(GU_CULL_FACE);
 	sceGuEnable(GU_CLIP_PLANES);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
@@ -235,7 +235,7 @@ int main(int argc, char* argv[])
 		sceGuDepthMask(0);	
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		pspDebugScreenSetOffset((int)fbp0);
 		pspDebugScreenSetXY(0,0);

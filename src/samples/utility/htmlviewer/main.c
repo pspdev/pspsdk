@@ -72,7 +72,7 @@ void setupGu(void)
 	sceGuClearStencil(0);
 
 	sceGuFinish();
-	sceGuSync(0, 0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 	
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
@@ -83,7 +83,7 @@ void draw()
 	sceGuStart(GU_DIRECT, list);
 	sceGuClear(GU_COLOR_BUFFER_BIT|GU_STENCIL_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
 	sceGuFinish();
-	sceGuSync(0, 0);	
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 }
 
 void loadNetModules()

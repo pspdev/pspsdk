@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
 	sceGuShadeModel(GU_SMOOTH);
 	sceGuEnable(GU_CULL_FACE);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
@@ -256,7 +256,7 @@ int main(int argc, char* argv[])
 		sceGuDisable(GU_TEXTURE_2D);
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		sceDisplayWaitVblankStart();
 		sceGuSwapBuffers();

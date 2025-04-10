@@ -234,7 +234,7 @@ int main(int argc, char* argv[])
 	sceGuEnable(GU_CLIP_PLANES);
 
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
@@ -560,7 +560,7 @@ int main(int argc, char* argv[])
 		sceGumLoadIdentity();
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		// draw cube
 
@@ -575,7 +575,7 @@ int main(int argc, char* argv[])
 		u64 tick1,tick2;
 		sceRtcGetCurrentTick(&tick1);
 		sceGuSendList(GU_TAIL,list,&tempGeContext);
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 		sceRtcGetCurrentTick(&tick2);
 
 		// rescale number of batches if they rendered faster/slower than threshold

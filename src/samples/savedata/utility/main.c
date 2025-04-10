@@ -156,7 +156,7 @@ static void SetupGu()
     sceGuEnable(GU_CULL_FACE);
     sceGuEnable(GU_CLIP_PLANES);
     sceGuFinish();
-    sceGuSync(0,0);
+    sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
     
     sceDisplayWaitVblankStart();
     sceGuDisplay(GU_TRUE);
@@ -195,7 +195,7 @@ static void DrawStuff(void)
     sceGumDrawArray(GU_TRIANGLES,GU_TEXTURE_32BITF|GU_COLOR_8888|GU_VERTEX_32BITF|GU_TRANSFORM_3D,12*3,0,vertices);
     
     sceGuFinish();
-    sceGuSync(0,0);
+    sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
     val ++;
 }
