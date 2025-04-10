@@ -152,7 +152,7 @@ int main(int argc, char* argv[])
   logo_temp2 = convertimage(logo_start,64);
 
 	// setup
-	sceGuStart(0,list);
+	sceGuStart(GU_DIRECT,list);
 	sceGuDrawBuffer(GU_PSM_8888,(void*)0,BUF_WIDTH);
 	sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,(void*)0x88000,BUF_WIDTH);
 	sceGuDepthBuffer((void*)0x110000,BUF_WIDTH);
@@ -183,7 +183,7 @@ int main(int argc, char* argv[])
 	{
 		unsigned int x,y;
 
-		sceGuStart(0,list);
+		sceGuStart(GU_DIRECT,list);
 
 		sceGuClearColor(0);
 		sceGuClearDepth(0);
