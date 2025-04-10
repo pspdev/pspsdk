@@ -50,7 +50,7 @@ DX_RTF_FEATURE(OFF)
 DX_XML_FEATURE(OFF)
 DX_PDF_FEATURE(OFF)
 DX_PS_FEATURE(OFF)
-DX_INIT_DOXYGEN(PSPSDK, Doxyfile, doc)
+DX_INIT_DOXYGEN(PSPSDK, Doxyfile, doc/build)
 
 # Override the default prefix to point to where the pspdev tools should be installed.
 # The binaries will end up in $prefix/bin, but pspsdk itself will end up in $prefix/$target/sdk.
