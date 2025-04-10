@@ -6,7 +6,7 @@
  * Copyright (c) 2005 Jesper Svennevid
  */
 
-#include "guInternal.h"
+#include <pspgu.h>
 
 unsigned int gu_current_frame;
 GuContext gu_contexts[3];
