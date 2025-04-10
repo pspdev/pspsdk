@@ -296,7 +296,7 @@ int main(int argc, char* argv[])
 	sceGuClutLoad(256/8,palette);
 
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(1);
@@ -413,7 +413,7 @@ int main(int argc, char* argv[])
 		blitTexture(blit_method,0,0,SCR_WIDTH,SCR_HEIGHT,0,0,strip_widths[strip_width].width);
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		// sum results and update report if more than one second has passed since last time
 

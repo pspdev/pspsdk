@@ -174,7 +174,7 @@ int main(int argc, char** argv) {
 	sceGuTexWrap(GU_REPEAT, GU_REPEAT);
 	sceGuTexFilter(GU_NEAREST, GU_NEAREST);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 	sceGuDisplay(GU_TRUE);
 
 	while(1) {
@@ -211,7 +211,7 @@ int main(int argc, char** argv) {
 		drawString("Hello World from pspdev", 0, 224, c, 0);
 
 		sceGuFinish();
-		sceGuSync(0, 0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		sceDisplayWaitVblankStart();
 		sceGuSwapBuffers();

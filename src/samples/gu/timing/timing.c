@@ -199,7 +199,7 @@ int main(int argc, char** argv) {
 	sceGuDisable(GU_TEXTURE_2D);
 	sceGuSetCallback(GU_CALLBACK_SIGNAL, gucallback);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
@@ -277,7 +277,7 @@ int main(int argc, char** argv) {
 				break;
 		}
 		sceGuFinish();
-		sceGuSync(0, 0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		pspDebugScreenSetOffset((int)frameBuffer);
 		pspDebugScreenSetXY(0,0);

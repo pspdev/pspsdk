@@ -215,7 +215,7 @@ int main(int argc, char* argv[]) {
 	sceGuAmbientColor(0xffffffff);
 
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
 	
@@ -269,7 +269,7 @@ int main(int argc, char* argv[]) {
 		old = pad.Buttons;
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		pspDebugScreenSetOffset((int)buffer);
 		pspDebugScreenSetXY(0, 0);

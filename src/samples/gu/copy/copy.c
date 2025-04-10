@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 	sceGuFrontFace(GU_CW);
 	sceGuClear(GU_COLOR_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(1);
@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 		sceGuTexSync();
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		float curr_fps = 1.0f / curr_ms;
 

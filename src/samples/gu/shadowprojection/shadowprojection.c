@@ -160,7 +160,7 @@ int main(int argc, char* argv[])
 	sceGuEnable(GU_TEXTURE_2D);
 	sceGuEnable(GU_DITHER);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(GU_TRUE);
@@ -307,7 +307,7 @@ int main(int argc, char* argv[])
 			drawShadowCaster( &torus );
 
 			sceGuFinish();
-			sceGuSync(0,0);
+			sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 		}
 
 		// render to frame buffer
@@ -377,7 +377,7 @@ int main(int argc, char* argv[])
 			drawShadowReceiver( &grid, shadowProj );
 
 			sceGuFinish();
-			sceGuSync(0,0);
+			sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 		}
 
 		sceDisplayWaitVblankStart();

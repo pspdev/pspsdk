@@ -170,7 +170,7 @@ int main(int argc, char* argv[])
 	sceGuEnable(GU_CULL_FACE);
 	//sceGuEnable(GU_STATE_TEXTURE);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(1);
@@ -236,7 +236,7 @@ int main(int argc, char* argv[])
 		sceGumRotateXYZ(&rot);
 	}
 		sceGuFinish();
-		//sceGuSync(0,0);
+		//sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
     SpharmGenTest(rendermode);
 
@@ -257,7 +257,7 @@ int main(int argc, char* argv[])
     }
     buttonsold = pad.Buttons;
 
-    sceGuSync(0,0);
+    sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
     sceDisplayWaitVblankStart();
 		sceGuSwapBuffers();
 	}

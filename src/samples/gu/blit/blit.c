@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
 	sceGuEnable(GU_TEXTURE_2D);
 	sceGuClear(GU_COLOR_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
 	sceGuFinish();
-	sceGuSync(0,0);
+	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 	sceDisplayWaitVblankStart();
 	sceGuDisplay(1);
@@ -214,7 +214,7 @@ int main(int argc, char* argv[])
 			simpleBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0);
 
 		sceGuFinish();
-		sceGuSync(0,0);
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
 		float curr_fps = 1.0f / curr_ms;
 
