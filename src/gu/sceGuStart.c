@@ -11,9 +11,9 @@
 #include <pspkernel.h>
 #include <pspge.h>
 
-void sceGuStart(int cid, void *list)
+void sceGuStart(int ctype, void *list)
 {
-	GuContext *context = &gu_contexts[cid];
+	GuContext *context = &gu_contexts[ctype];
 	unsigned int *local_list = (unsigned int *)(((unsigned int)list) | 0x40000000);
 
 	// setup display list
@@ -25,9 +25,9 @@ void sceGuStart(int cid, void *list)
 
 	// store current context
 
-	gu_curr_context = cid;
+	gu_curr_context = ctype;
 
-	if (!cid)
+	if (ctype == GU_DIRECT)
 	{
 		ge_list_executed[0] = sceGeListEnQueue(local_list, local_list, gu_settings.ge_callback_id, 0);
 		gu_settings.signal_offset = 0;
@@ -53,12 +53,9 @@ void sceGuStart(int cid, void *list)
 		gu_init = 1;
 	}
 
-	if (!gu_curr_context)
+	if (ctype == GU_DIRECT && gu_draw_buffer.frame_width != 0)
 	{
-		if (gu_draw_buffer.frame_width)
-		{
-			sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
-			sendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
-		}
+		sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
+		sendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
 	}
 }
