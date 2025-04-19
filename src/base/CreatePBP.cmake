@@ -16,7 +16,8 @@ macro(create_pbp_file)
     ICON_PATH       # optional, absolute path to .png file, 144x82
     BACKGROUND_PATH # optional, absolute path to .png file, 480x272
     PREVIEW_PATH    # optional, absolute path to .png file, 480x272
-    MUSIC_PATH      # optional, absolute path to .at3 file   
+    MUSIC_PATH      # optional, absolute path to .at3 file
+    PSAR_PATH       # optional, absolute path to data.psar file
     VERSION         # optional, adds version information to PARAM.SFO
     OUTPUT_DIR      # optional, set the output directory for the EBOOT.PBP
     )
@@ -149,7 +150,7 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
-      "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>.prx" "NULL"
+      "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>.prx" "${ARG_PSAR_PATH}"
       COMMENT "Calling pack-pbp with PRX file for target ${ARG_TARGET}"
       )
   else()
@@ -157,7 +158,7 @@ macro(create_pbp_file)
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
       "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
-      "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>" "NULL"
+      "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>" "${ARG_PSAR_PATH}"
       COMMENT "Calling pack-pbp with ELF file for target ${ARG_TARGET}"
       )
   endif()
