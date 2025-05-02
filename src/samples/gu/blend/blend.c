@@ -45,12 +45,6 @@ struct BlendState
 #define SCR_WIDTH (480)
 #define SCR_HEIGHT (272)
 
-#define NUM_SLICES 128
-#define NUM_ROWS 128
-#define RING_SIZE 2.0f
-#define RING_RADIUS 1.0f
-#define SPRITE_SIZE 0.025f
-
 unsigned int __attribute__((aligned(16))) clut256[256];
 unsigned char __attribute__((aligned(16))) tex256[256*256];
 

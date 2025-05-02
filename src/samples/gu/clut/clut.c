@@ -38,12 +38,6 @@ int SetupCallbacks();
 #define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
 #define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2) /* zbuffer seems to be 16-bit? */
 
-#define NUM_SLICES 128
-#define NUM_ROWS 128
-#define RING_SIZE 2.0f
-#define RING_RADIUS 1.0f
-#define SPRITE_SIZE 0.025f
-
 unsigned int colors[8] = 
 {
 	0xffff0000,
