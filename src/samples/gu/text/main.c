@@ -72,7 +72,6 @@ static int fontwidthtab[128] = {
 #define SCR_HEIGHT (272)
 #define PIXEL_SIZE (4)
 #define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2)
 
 int exit_callback(int arg1, int arg2, void *common) {
 	sceKernelExitGame();

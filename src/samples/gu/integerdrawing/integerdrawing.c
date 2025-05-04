@@ -96,7 +96,6 @@ static const unsigned int __attribute__((aligned(16))) texture[256] = {
 #define SCR_HEIGHT (272)
 #define PIXEL_SIZE (4) /* change this if you change to another screenmode */
 #define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2) /* zbuffer seems to be 16-bit? */
 
 typedef struct {
 	float s, t;

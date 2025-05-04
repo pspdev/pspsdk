@@ -44,7 +44,6 @@ static unsigned int __attribute__((aligned(16))) list[262144];
 #define SCR_HEIGHT	(272)
 #define PIXEL_SIZE	(4)
 #define FRAME_SIZE	(BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE	(BUF_WIDTH SCR_HEIGHT * 2)
 
 #define NUM_INPUT_FIELDS	(3)
 #define TEXT_LENGTH			(128)

@@ -123,7 +123,6 @@ struct Vertex __attribute__((aligned(16))) vertices[12*3] =
 #define SCR_HEIGHT (272)
 #define PIXEL_SIZE (4)
 #define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2)
 
 static void setupGu()
 {
