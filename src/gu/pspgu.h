@@ -499,10 +499,10 @@ void* sceGuGetMemory(int size);
   *
   * The previous context-type is stored so that it can be restored at sceGuFinish().
   *
-  * @param cid - Context Type
+  * @param ctype - Context Type
   * @param list - Pointer to display-list (16 byte aligned)
 **/
-void sceGuStart(int cid, void* list);
+void sceGuStart(int ctype, void* list);
 
 /**
   * Finish current display list and go back to the parent context
