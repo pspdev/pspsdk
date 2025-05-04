@@ -13,7 +13,7 @@ void sceGuSignal(int signal, int argument)
 	sendCommandi(SIGNAL, ((signal & 0xff) << 16) | (argument & 0xffff));
 	sendCommandi(END, 0);
 
-	if (signal == 3)
+	if (GU_SIGNAL_PAUSE == 3)
 	{
 		sendCommandi(FINISH, 0);
 		sendCommandi(END, 0);

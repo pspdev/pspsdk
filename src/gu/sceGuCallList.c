@@ -12,7 +12,7 @@ void sceGuCallList(const void *list)
 {
 	unsigned int list_addr = (unsigned int)list;
 
-	if (gu_call_mode == 1)
+	if (gu_call_mode == GU_CALL_SIGNAL)
 	{
 		sendCommandi(SIGNAL, (list_addr >> 16) | 0x110000);
 		sendCommandi(END, list_addr & 0xffff);
@@ -21,6 +21,6 @@ void sceGuCallList(const void *list)
 	else
 	{
 		sendCommandi(BASE, (list_addr >> 8) & 0xf0000);
-		sendCommandiStall(CALL, list_addr & 0xffffff);
+		sendCommandiStall(CALL, list_addr);
 	}
 }

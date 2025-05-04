@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-void sceGuMorphWeight(int index,float weight)
+void sceGuMorphWeight(int index, float weight)
 {
-	sendCommandf(44 + index,weight);
+	sendCommandf(MORPH_WEIGHT0 + index, weight);
 }

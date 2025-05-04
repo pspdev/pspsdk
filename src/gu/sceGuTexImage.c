@@ -18,7 +18,7 @@ void sceGuTexImage(int mipmap, int width, int height, int tbw, const void *tbp)
 	GECommand texAddr = (GECommand)(TEX_ADDR0 + mipmap);
 	GECommand texBufWidth = (GECommand)(TEX_BUF_WIDTH0 + mipmap);
 	GECommand texSize = (GECommand)(TEX_SIZE0 + mipmap);
-	sendCommandi(texAddr, ((unsigned int)tbp) & 0xffffff);
+	sendCommandi(texAddr, ((unsigned int)tbp));
 	sendCommandi(texBufWidth, ((((unsigned int)tbp) >> 8) & 0x0f0000) | tbw);
 	sendCommandi(texSize, (getExp(height) << 8) | (getExp(width)));
 	sceGuTexFlush();

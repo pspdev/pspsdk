@@ -10,5 +10,5 @@
 
 void sceGuTexEnvColor(unsigned int color)
 {
-	sendCommandi(TEX_ENV_COLOR, color & 0xffffff);
+	sendCommandi(TEX_ENV_COLOR, color);
 }

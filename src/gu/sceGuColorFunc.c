@@ -11,6 +11,6 @@
 void sceGuColorFunc(int func, unsigned int color, unsigned int mask)
 {
 	sendCommandi(COLOR_TEST, func & 0x03);
-	sendCommandi(COLOR_REF, color & 0xffffff);
+	sendCommandi(COLOR_REF, color);
 	sendCommandi(COLOR_TESTMASK, mask);
 }

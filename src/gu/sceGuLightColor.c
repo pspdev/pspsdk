@@ -14,20 +14,20 @@ void sceGuLightColor(int light, int component, unsigned int color)
 
 	switch (component)
 	{
-		case GU_AMBIENT: sendCommandi(settings->ambient, color & 0xffffff); break;
-		case GU_DIFFUSE: sendCommandi(settings->diffuse, color & 0xffffff); break;
+		case GU_AMBIENT: sendCommandi(settings->ambient, color); break;
+		case GU_DIFFUSE: sendCommandi(settings->diffuse, color); break;
 		case GU_AMBIENT_AND_DIFFUSE:
 		{
-			sendCommandi(settings->ambient, color & 0xffffff); break;
-			sendCommandi(settings->diffuse, color & 0xffffff); break;
+			sendCommandi(settings->ambient, color); break;
+			sendCommandi(settings->diffuse, color); break;
 		}
 		break;
 		
-		case GU_SPECULAR: sendCommandi(settings->specular, color & 0xffffff); break;
+		case GU_SPECULAR: sendCommandi(settings->specular, color); break;
 		case GU_DIFFUSE_AND_SPECULAR:
 		{
-			sendCommandi(settings->diffuse, color & 0xffffff); break;
-			sendCommandi(settings->specular, color & 0xffffff); break;
+			sendCommandi(settings->diffuse, color); break;
+			sendCommandi(settings->specular, color); break;
 		}
 		break;
 	}

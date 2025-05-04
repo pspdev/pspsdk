@@ -15,7 +15,7 @@ void sceGuSetMatrix(int type, const ScePspFMatrix4 *matrix)
 
 	switch (type)
 	{
-	case 0:
+	case GU_PROJECTION:
 	{
 		sendCommandf(PROJ_MATRIX_NUMBER, 0);
 
@@ -25,7 +25,7 @@ void sceGuSetMatrix(int type, const ScePspFMatrix4 *matrix)
 	}
 	break;
 
-	case 1:
+	case GU_VIEW:
 	{
 		sendCommandf(VIEW_MATRIX_NUMBER, 0);
 
@@ -38,7 +38,7 @@ void sceGuSetMatrix(int type, const ScePspFMatrix4 *matrix)
 	}
 	break;
 
-	case 2:
+	case GU_MODEL:
 	{
 		sendCommandf(WORLD_MATRIX_NUMBER, 0);
 
@@ -51,7 +51,7 @@ void sceGuSetMatrix(int type, const ScePspFMatrix4 *matrix)
 	}
 	break;
 
-	case 3:
+	case GU_TEXTURE:
 	{
 		sendCommandf(TGEN_MATRIX_NUMBER, 0);
 

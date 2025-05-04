@@ -19,7 +19,7 @@ void resetValues()
 	gu_object_stack_depth = 0;
 
 	gu_display_on = 0;
-	gu_call_mode = 0;
+	gu_call_mode = GU_CALL_NORMAL;
 
 	gu_draw_buffer.pixel_size = 1;
 	gu_draw_buffer.frame_width = 0;

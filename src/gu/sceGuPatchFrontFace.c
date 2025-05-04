@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-void sceGuPatchFrontFace(unsigned int a0)
+void sceGuPatchFrontFace(unsigned int mode)
 {
-	sendCommandi(PATCH_FACING, a0);
+	sendCommandi(PATCH_FACING, mode);
 }

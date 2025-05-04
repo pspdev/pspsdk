@@ -16,13 +16,13 @@ void sceGuDrawSpline(int vertex_type, int ucount, int vcount, int uedge, int ved
   if (indices)
   {
     sendCommandi(BASE, (((unsigned int)indices) >> 8) & 0xf0000);
-    sendCommandi(IADDR, ((unsigned int)indices) & 0xffffff);
+    sendCommandi(IADDR, (unsigned int)indices);
   }
 
   if (vertices)
   {
     sendCommandi(BASE, (((unsigned int)vertices) >> 8) & 0xf0000);
-    sendCommandi(VADDR, ((unsigned int)vertices) & 0xffffff);
+    sendCommandi(VADDR, (unsigned int)vertices);
   }
 
   sendCommandi(SPLINE, (vedge << 18) | (uedge << 16) | (vcount << 8) | ucount);

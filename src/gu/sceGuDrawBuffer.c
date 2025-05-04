@@ -21,8 +21,8 @@ void sceGuDrawBuffer(int psm, void *fbp, int frame_width)
 		gu_draw_buffer.depth_width = frame_width;
 
 	sendCommandi(FRAMEBUF_PIX_FORMAT, psm);
-	sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
+	sendCommandi(FRAME_BUF_PTR, (unsigned int)gu_draw_buffer.frame_buffer);
 	sendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
-	sendCommandi(Z_BUF_PTR, ((unsigned int)gu_draw_buffer.depth_buffer) & 0xffffff);
+	sendCommandi(Z_BUF_PTR, (unsigned int)gu_draw_buffer.depth_buffer);
 	sendCommandi(Z_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.depth_buffer) & 0xff000000) >> 8) | gu_draw_buffer.depth_width);
 }
