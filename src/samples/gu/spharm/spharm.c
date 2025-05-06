@@ -375,8 +375,6 @@ extern unsigned char logo3_start[];
 unsigned char *logo2_temp;
 unsigned char *logo3_temp;
 
-static int rendertype;
-
 ScePspFVector3 columns[4] = { 
       { 0.707f, 0.707f, 0.0f },   // cos(a), sin(a), tx 
       { -0.707f, 0.707f, 0.0f },  // -sin(a), cos(a), ty 
