@@ -35,8 +35,6 @@ extern unsigned char env0_start[];
 #define SCR_WIDTH (480)
 #define SCR_HEIGHT (272)
 #define PIXEL_SIZE (4) /* change this if you change to another screenmode */
-#define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2) /* zbuffer seems to be 16-bit? */
 
 #define TORUS_SLICES 48 // numc
 #define TORUS_ROWS 48 // numt

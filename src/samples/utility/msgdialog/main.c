@@ -121,7 +121,6 @@ struct Vertex __attribute__((aligned(16))) vertices[12*3] =
 #define SCR_HEIGHT (272)
 #define PIXEL_SIZE (4) /* change this if you change to another screenmode */
 #define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2) /* zbuffer seems to be 16-bit? */
 
 static void SetupGu()
 {
@@ -129,8 +128,8 @@ static void SetupGu()
 
     sceGuStart(GU_DIRECT,list);
     sceGuDrawBuffer(GU_PSM_8888,(void*)0,BUF_WIDTH);
-    sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,(void*)0x88000,BUF_WIDTH);
-    sceGuDepthBuffer((void*)0x110000,BUF_WIDTH);
+    sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,(void*)FRAME_SIZE,BUF_WIDTH);
+    sceGuDepthBuffer((void*)(FRAME_SIZE*2),BUF_WIDTH);
     sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
     sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
     sceGuDepthRange(0xc350,0x2710);

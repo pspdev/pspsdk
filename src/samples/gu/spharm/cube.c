@@ -120,7 +120,6 @@ extern unsigned char logo_start[];
 #define SCR_HEIGHT (272)
 #define PIXEL_SIZE (4) /* change this if you change to another screenmode */
 #define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2) /* zbuffer seems to be 16-bit? */
 
 unsigned char *logo_temp2;
 
@@ -154,8 +153,8 @@ int main(int argc, char* argv[])
 	// setup
 	sceGuStart(GU_DIRECT,list);
 	sceGuDrawBuffer(GU_PSM_8888,(void*)0,BUF_WIDTH);
-	sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,(void*)0x88000,BUF_WIDTH);
-	sceGuDepthBuffer((void*)0x110000,BUF_WIDTH);
+	sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,(void*)FRAME_SIZE,BUF_WIDTH);
+	sceGuDepthBuffer((void*)(FRAME_SIZE*2),BUF_WIDTH);
 	sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
 	sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
 	sceGuDepthRange(0xc350,0x2710);//0xc350=50000  0x2710=10000
