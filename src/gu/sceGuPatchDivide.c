@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-void sceGuPatchDivide(unsigned int a0, unsigned int a1)
+void sceGuPatchDivide(unsigned int ulevel, unsigned int vlevel)
 {
-	sendCommandi(PATCH_DIVISION, (a1 << 8) | a0);
+	sendCommandi(PATCH_DIVISION, (vlevel << 8) | ulevel);
 }

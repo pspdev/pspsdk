@@ -55,7 +55,7 @@ void sceGuStart(int ctype, void *list)
 
 	if (ctype == GU_DIRECT && gu_draw_buffer.frame_width != 0)
 	{
-		sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer) & 0xffffff);
+		sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer));
 		sendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
 	}
 }

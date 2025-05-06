@@ -8,8 +8,8 @@
 
 #include "guInternal.h"
 
-void sceGuAlphaFunc(int a0, int a1, int a2)
+void sceGuAlphaFunc(int func, int value, int mask)
 {
-	int arg = a0 | ((a1 & 0xff) << 8) | ((a2 & 0xff) << 16);
+	int arg = func | ((value & 0xff) << 8) | ((mask & 0xff) << 16);
 	sendCommandi(ALPHA_TEST, arg);
 }

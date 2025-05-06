@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-void sceGuColorMaterial(int a0)
+void sceGuColorMaterial(int components)
 {
-	sendCommandi(MATERIAL_COLOR, a0);
+	sendCommandi(MATERIAL_COLOR, components);
 }

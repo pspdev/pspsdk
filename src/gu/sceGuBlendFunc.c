@@ -11,6 +11,6 @@
 void sceGuBlendFunc(int op, int src, int dest, unsigned int srcfix, unsigned int destfix)
 {
 	sendCommandi(BLEND_MODE, src | (dest << 4) | (op << 8));
-	sendCommandi(BLEND_FIXED_A, srcfix & 0xffffff);
-	sendCommandi(BLEND_FIXED_B, destfix & 0xffffff);
+	sendCommandi(BLEND_FIXED_A, srcfix);
+	sendCommandi(BLEND_FIXED_B, destfix);
 }

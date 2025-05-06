@@ -6,10 +6,10 @@
  * Copyright (c) 2005 Jesper Svennevid
  */
 
-#include "guInternal.h"
+#include "pspge.h"
 
-void sceGuBreak(int a0)
+int sceGuBreak(int mode)
 {
-	// FIXME
-	//sceGeBreak(a0,0x527a68);
+	PspGeBreakParam bParam;
+	return sceGeBreak(mode, &bParam);
 }

@@ -15,7 +15,7 @@ void sceGuFog(float near, float far, unsigned int color)
 	if (distance)
 		distance = 1.0f / distance;
 
-	sendCommandi(FOG_COLOR, color & 0xffffff);
+	sendCommandi(FOG_COLOR, color);
 	sendCommandf(FOG1, far);
 	sendCommandf(FOG2, distance);
 }

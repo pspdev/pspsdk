@@ -6,10 +6,9 @@
  * Copyright (c) 2005 Jesper Svennevid
  */
 
-#include "guInternal.h"
+#include "pspge.h"
 
-void sceGuContinue(void)
+int sceGuContinue(void)
 {
-	// FIXME
-	//sceGeContinue();
+	return sceGeContinue();
 }

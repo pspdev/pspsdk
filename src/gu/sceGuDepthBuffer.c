@@ -15,6 +15,6 @@ void sceGuDepthBuffer(void *zbp, int zbw)
 	if (!gu_draw_buffer.depth_width || (gu_draw_buffer.depth_width != zbw))
 		gu_draw_buffer.depth_width = zbw;
 
-	sendCommandi(Z_BUF_PTR, ((unsigned int)zbp) & 0xffffff);
+	sendCommandi(Z_BUF_PTR, ((unsigned int)zbp));
 	sendCommandi(Z_BUF_WIDTH, ((((unsigned int)zbp) & 0xff000000) >> 8) | zbw);
 }

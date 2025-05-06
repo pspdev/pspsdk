@@ -16,13 +16,13 @@ void sceGuDrawArray(int prim, int vtype, int count, const void *indices, const v
   if (indices)
   {
     sendCommandi(BASE, (((unsigned int)indices) >> 8) & 0xf0000);
-    sendCommandi(IADDR, ((unsigned int)indices) & 0xffffff);
+    sendCommandi(IADDR, ((unsigned int)indices));
   }
 
   if (vertices)
   {
     sendCommandi(BASE, (((unsigned int)vertices) >> 8) & 0xf0000);
-    sendCommandi(VADDR, ((unsigned int)vertices) & 0xffffff);
+    sendCommandi(VADDR, ((unsigned int)vertices));
   }
 
   sendCommandiStall(PRIM, (prim << 16) | count);

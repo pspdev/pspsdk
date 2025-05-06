@@ -59,6 +59,7 @@ extern "C" {
 #define GU_FACE_NORMAL_REVERSE	(19)
 #define GU_PATCH_FACE		(20)
 #define GU_FRAGMENT_2X		(21)
+#define GU_MAX_STATUS		(22)
 
 /* Matrix modes */
 #define GU_PROJECTION		(0)
@@ -285,6 +286,15 @@ extern "C" {
 #define GU_SYNC_WHAT_STALL (3)
 #define GU_SYNC_WHAT_CANCEL (4)
 
+/* Call mode */
+#define GU_CALL_NORMAL (0)
+#define GU_CALL_SIGNAL (1)
+
+/* Signal models */
+#define GU_SIGNAL_WAIT (1)
+#define GU_SIGNAL_NOWAIT (2)
+#define GU_SIGNAL_PAUSE (3)
+
 /* Signals */
 #define GU_CALLBACK_SIGNAL	(1)
 #define GU_CALLBACK_FINISH	(4)
@@ -292,6 +302,10 @@ extern "C" {
 /* Signal behavior */
 #define GU_BEHAVIOR_SUSPEND (1)
 #define GU_BEHAVIOR_CONTINUE (2)
+
+/* Break mode */
+#define GU_BREAK_PAUSE (0)
+#define GU_BREAK_CANCEL (1)
 
 /* Color Macros, maps 8 bit unsigned channels into one 32-bit value */
 #define GU_ABGR(a,b,g,r)	(((a) << 24)|((b) << 16)|((g) << 8)|(r))
@@ -429,8 +443,22 @@ void sceGuInit(void);
 **/
 void sceGuTerm(void);
 
-void sceGuBreak(int a0);
-void sceGuContinue(void);
+/**
+  * Break the display list
+  *
+  * @param mode - Mode to break the display list. Valid modes are:
+  *   - GU_BREAK_PAUSE - Pause the display list
+  *   - GU_BREAK_CANCEL - Cancel drawing queue
+  * @return 0 for success, < 0 for failure
+**/
+int sceGuBreak(int mode);
+
+/**
+  * Continue the display list
+  *
+  * @return 0 for success, < 0 for failure
+**/
+int sceGuContinue(void);
 
 /**
   * Setup signal handler
@@ -962,7 +990,18 @@ void sceGuColorMaterial(int components);
 **/
 void sceGuAlphaFunc(int func, int value, int mask);
 
+/**
+  * Set the ambient light color
+  *
+  * @param color - The light color to set
+**/
 void sceGuAmbient(unsigned int color);
+
+/**
+  * Set the ambient color
+  *
+  * @param color - The color to set
+**/
 void sceGuAmbientColor(unsigned int color);
 
 /**
@@ -1244,10 +1283,10 @@ void sceGuTexLevelMode(unsigned int mode, float bias);
   *   - GU_ENVIRONMENT_MAP
   *
   * @param mode - Which mode to use
-  * @param a1 - Unknown
-  * @param a2 - Unknown
+  * @param lu - Light U
+  * @param lv - Light V
 **/
-void sceGuTexMapMode(int mode, unsigned int a1, unsigned int a2);
+void sceGuTexMapMode(int mode, unsigned int lu, unsigned int lv);
 
 /**
   * Set texture-mode parameters
@@ -1262,10 +1301,10 @@ void sceGuTexMapMode(int mode, unsigned int a1, unsigned int a2);
   *
   * @param tpsm - Which texture format to use
   * @param maxmips - Number of mipmaps to use (0-8)
-  * @param a2 - Unknown, set to 0
+  * @param mc - Multiclut on/off (0/1)
   * @param swizzle - GU_TRUE(1) to swizzle texture-reads
 **/
-void sceGuTexMode(int tpsm, int maxmips, int a2, int swizzle);
+void sceGuTexMode(int tpsm, int maxmips, int mc, int swizzle);
 
 /**
   * Set texture offset
@@ -1345,7 +1384,7 @@ void sceGuClutLoad(int num_blocks, const void* cbp);
   * @param cpsm - Which pixel format to use for the palette
   * @param shift - Shifts color index by that many bits to the right
   * @param mask - Masks the color index with this bitmask after the shift (0-0xFF)
-  * @param a3 - Unknown, set to 0
+  * @param csa - Read-out start location (16-palette units)
 **/
 void sceGuClutMode(unsigned int cpsm, unsigned int shift, unsigned int mask, unsigned int a3);
 
@@ -1410,7 +1449,12 @@ void sceGuDrawBezier(int vtype, int ucount, int vcount, const void* indices, con
 **/
 void sceGuPatchDivide(unsigned int ulevel, unsigned int vlevel);
 
-void sceGuPatchFrontFace(unsigned int a0);
+/**
+  * Set front face for patches (beziers and splines)
+  *
+  * @param mode - Desired front face mode (GU_CW | GU_CCW)
+**/
+void sceGuPatchFrontFace(unsigned int mode);
 
 /**
   * Set primitive for patches (beziers and splines)
@@ -1465,7 +1509,17 @@ void sceGuBoneMatrix(unsigned int index, const ScePspFMatrix4* matrix);
 **/
 void sceGuMorphWeight(int index, float weight);
 
-void sceGuDrawArrayN(int primitive_type, int vertex_type, int count, int a3, const void* indices, const void* vertices);
+/**
+  * Draw an array of primitives
+  *
+  * @param primitive_type - Type of primitive to draw
+  * @param vertex_type - Type of vertex to draw
+  * @param vcount - Number of vertices to draw
+  * @param primcount - Number of primitives to draw
+  * @param indices - Pointer to index buffer
+  * @param vertices - Pointer to vertex buffer
+**/
+void sceGuDrawArrayN(int primitive_type, int vertex_type, int vcount, int primcount, const void* indices, const void* vertices);
 
 /**
   * Set how the display should be set

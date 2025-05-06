@@ -10,10 +10,10 @@
 
 void sceGuCopyImage(int psm, int sx, int sy, int width, int height, int srcw, void *src, int dx, int dy, int destw, void *dest)
 {
-	sendCommandi(TRANSFER_SRC, ((unsigned int)src) & 0xffffff);
+	sendCommandi(TRANSFER_SRC, ((unsigned int)src));
 	sendCommandi(TRANSFER_SRC_W, ((((unsigned int)src) & 0xff000000) >> 8) | srcw);
 	sendCommandi(TRANSFER_SRC_OFFSET, (sy << 10) | sx);
-	sendCommandi(TRANSFER_DST, ((unsigned int)dest) & 0xffffff);
+	sendCommandi(TRANSFER_DST, ((unsigned int)dest));
 	sendCommandi(TRANSFER_DST_W, ((((unsigned int)dest) & 0xff000000) >> 8) | destw);
 	sendCommandi(TRANSFER_DST_OFFSET, (dy << 10) | dx);
 	sendCommandi(TRANSFER_SIZE, ((height - 1) << 10) | (width - 1));

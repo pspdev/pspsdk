@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-void sceGuDrawArrayN(int primitive_type, int vertex_type, int count, int a3, const void *indices, const void *vertices)
+void sceGuDrawArrayN(int primitive_type, int vertex_type, int vcount, int primcount, const void *indices, const void *vertices)
 {
 	if (vertex_type)
 		sendCommandi(VERTEX_TYPE, vertex_type);
@@ -16,21 +16,21 @@ void sceGuDrawArrayN(int primitive_type, int vertex_type, int count, int a3, con
 	if (indices)
 	{
 		sendCommandi(BASE, (((unsigned int)indices) >> 8) & 0xf0000);
-		sendCommandi(IADDR, ((unsigned int)indices) & 0xffffff);
+		sendCommandi(IADDR, (unsigned int)indices);
 	}
 
 	if (vertices)
 	{
 		sendCommandi(BASE, (((unsigned int)vertices) >> 8) & 0xf0000);
-		sendCommandi(VADDR, ((unsigned int)vertices) & 0xffffff);
+		sendCommandi(VADDR, (unsigned int)vertices);
 	}
 
-	if (a3 > 0)
+	if (primcount > 0)
 	{
-		// TODO: not sure about this loop, might be off. review
 		int i;
-		for (i = a3 - 1; i > 0; --i)
-			sendCommandi(PRIM, (primitive_type << 16) | count);
-		sendCommandiStall(PRIM, (primitive_type << 16) | count);
+		for (i = 0; i < primcount; i++)
+			sendCommandi(PRIM, (primitive_type << 16) | vcount);
+
+		sendCommandiStall(PRIM, (primitive_type << 16) | vcount);
 	}
 }

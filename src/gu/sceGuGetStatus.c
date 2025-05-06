@@ -10,7 +10,7 @@
 
 int sceGuGetStatus(int state)
 {
-	if (state < 22)
+	if (state < GU_MAX_STATUS)
 		return (gu_states >> state) & 1;
 	return 0;
 }
