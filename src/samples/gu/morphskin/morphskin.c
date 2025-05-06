@@ -268,12 +268,10 @@ void genSkinnedMonsterCylinder( unsigned slices, unsigned rows, float length, fl
 			struct MorphVertex* curr = &dstMorphVertices[i+j*rows];
 			float s = i + 0.5f;
 			float t = j;
-			float cs,ct,ss,st;
+			float ct,st;
 			float d0, d1, combinedDeform;
 
-			cs = cosf(s * (2*GU_PI)/slices);
 			ct = cosf(t * (2*GU_PI)/rows);
-			ss = sinf(s * (2*GU_PI)/slices);
 			st = sinf(t * (2*GU_PI)/rows);
 
 			curr->v[0].nx = 0;
