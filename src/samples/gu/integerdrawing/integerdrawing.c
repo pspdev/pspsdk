@@ -223,7 +223,6 @@ int main(int argc, char* argv[]) {
 	pspDebugScreenInit();
 
 	unsigned int old = 0;
-	unsigned int flags = PSP_CTRL_CIRCLE | PSP_CTRL_CROSS;
 
 	int tex = 1;
 
