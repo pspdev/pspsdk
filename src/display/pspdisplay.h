@@ -146,6 +146,70 @@ int sceDisplayIsForeground(void);
  */
 int sceDisplayIsVblank(void);
 
+/**
+ * Get current display brightness
+ *
+ * @param level - Pointer to int to receive the current brightness level (0-100)
+ * @param unk1 - Pointer to int, receives unknown, it's 1 or 0
+ *
+ * @return 0 on success
+ */
+int sceDisplayGetBrightness(int *level, int *unk1);
+
+/**
+ * Get resume mode
+ *
+ * @warning This function can crash your app or worst(unexpected forced turn off your PSP)
+ *
+ * @param resume_mode - Pointer to int to receive the current resume mode
+ *
+ * @return ???
+ */
+int sceDisplayGetResumeMode(int *resume_mode);
+
+/**
+ * Get the time remaining until the next vertical blank
+ *
+ * @note start with sceDisplayWaitVblankStart() to take effect
+ *
+ * @return time remaining(in microsecond? or millisecond?)
+ *
+ * @return < 0 on error
+ */
+int sceDisplayGetVblankRest(void);
+
+/**
+ * Test whether VSYNC is active
+ */
+int sceDisplayIsVsync(void);
+
+/**
+ * Wait for vertical blank start after specified number of vertical periods
+ *
+ * @param vblank_count - Number of vertical periods before waiting for vertical blank start
+ *
+ * @return 0 on success
+ */
+int sceDisplayWaitVblankStartMulti(unsigned int vblank_count);
+
+/**
+ * Wait for vertical blank start with callback after specified number of vertical periods
+ *
+ * @param vblank_count - Number of vertical periods before waiting for vertical blank start
+ *
+ * @return 0 on success
+ */
+int sceDisplayWaitVblankStartMultiCB(unsigned int vblank_count);
+
+/**
+ * Adjust the accumulated HSYNC count
+ *
+ * @param hcount - Set accumulated HSYNC count
+ *
+ * @return 0 on success
+ */
+int sceDisplayAdjustAccumulatedHcount(int hcount);
+
 #ifdef __cplusplus
 }
 #endif
