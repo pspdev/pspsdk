@@ -116,7 +116,7 @@ extern GuLightSettings light_settings[4];
 
 void callbackSig(int id, void *arg);
 void callbackFin(int id, void *arg);
-void resetValues();
+void _sceGuResetGlobalVariables();
 
 typedef enum GECommand
 {

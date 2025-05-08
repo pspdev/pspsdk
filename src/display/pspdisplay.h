@@ -31,12 +31,15 @@ enum PspDisplayPixelFormats {
 };
 
 enum PspDisplaySetBufSync {
-	/** Buffer change effective immediately */
-	PSP_DISPLAY_SETBUF_IMMEDIATE = 0,
-	/** Buffer change effective next frame */
-	PSP_DISPLAY_SETBUF_NEXTFRAME = 1
+	/** Buffer change effective next hsync */
+	PSP_DISPLAY_SETBUF_NEXTHSYNC = 0,
+	/** Buffer change effective next vsync */
+	PSP_DISPLAY_SETBUF_NEXTVSYNC = 1
 };
 
+/** Values for retro compatibility */
+#define PSP_DISPLAY_SETBUF_IMMEDIATE PSP_DISPLAY_SETBUF_NEXTHSYNC
+#define PSP_DISPLAY_SETBUF_NEXTFRAME PSP_DISPLAY_SETBUF_NEXTVSYNC
 
 enum PspDisplayErrorCodes
 {

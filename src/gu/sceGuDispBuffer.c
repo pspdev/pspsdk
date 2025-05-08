@@ -30,5 +30,5 @@ void sceGuDispBuffer(int width, int height, void *dispbp, int dispbw)
 	sceDisplaySetMode(0, gu_draw_buffer.width, gu_draw_buffer.height);
 
 	if (gu_display_on)
-		sceDisplaySetFrameBuf((void *)(((unsigned int)ge_edram_address) + ((unsigned int)gu_draw_buffer.disp_buffer)), dispbw, gu_draw_buffer.pixel_size, PSP_DISPLAY_SETBUF_NEXTFRAME);
+		sceDisplaySetFrameBuf((void *)(((unsigned int)ge_edram_address) + ((unsigned int)gu_draw_buffer.disp_buffer)), dispbw, gu_draw_buffer.pixel_size, PSP_DISPLAY_SETBUF_NEXTVSYNC);
 }

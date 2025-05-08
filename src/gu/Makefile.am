@@ -57,6 +57,7 @@ libpspgu_a_SOURCES = \
 	sceGuEnable.c \
 	sceGuEndObject.c \
 	sceGuFinish.c \
+	sceGuFinishId.c \
 	sceGuFog.c \
 	sceGuFrontFace.c \
 	sceGuGetAllStatus.c \

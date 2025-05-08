@@ -433,8 +433,10 @@ void sceGuFog(float near, float far, unsigned int color);
   * Initalize the GU system
   *
   * This function MUST be called as the first function, otherwise state is undetermined.
+  *
+  * @return 0 for success, < 0 for failure
 **/
-void sceGuInit(void);
+int sceGuInit(void);
 
 /**
   * Shutdown the GU system
@@ -1525,8 +1527,8 @@ void sceGuDrawArrayN(int primitive_type, int vertex_type, int vcount, int primco
   * Set how the display should be set
   *
   * Available behaviours are:
-  *   - PSP_DISPLAY_SETBUF_IMMEDIATE - Display is swapped immediately
-  *   - PSP_DISPLAY_SETBUF_NEXTFRAME - Display is swapped on the next frame
+  *   - PSP_DISPLAY_SETBUF_NEXTHSYNC - Display is swapped on the next hsync
+  *   - PSP_DISPLAY_SETBUF_NEXTVSYNC - Display is swapped on the next vsync
   *
   * Do remember that this swaps the pointers internally, regardless of setting, so be careful to wait until the next
   * vertical blank or use another buffering algorithm (see guSwapBuffersCallback()).

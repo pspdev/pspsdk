@@ -10,5 +10,5 @@
 
 void sceGuColor(unsigned int color)
 {
-	sceGuMaterial(7,color);
+	sceGuMaterial(GU_AMBIENT | GU_DIFFUSE | GU_SPECULAR, color);
 }

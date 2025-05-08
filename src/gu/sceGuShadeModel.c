@@ -10,5 +10,5 @@
 
 void sceGuShadeModel(int mode)
 {
-	sendCommandi(SHADE_MODE, mode ? 1 : 0);
+	sendCommandi(SHADE_MODE, mode);
 }
