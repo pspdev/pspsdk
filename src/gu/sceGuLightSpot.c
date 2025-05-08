@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-void sceGuLightSpot(int light, const ScePspFVector3* direction, float exponent, float cutoff)
+void sceGuLightSpot(int light, const ScePspFVector3 *direction, float exponent, float cutoff)
 {
 	GuLightSettings* settings = &light_settings[light];
 

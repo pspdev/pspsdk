@@ -12,7 +12,7 @@
 #include <pspge.h>
 #include <pspuser.h>
 
-void sceGuStart(int ctype, void *list)
+int sceGuStart(int ctype, void *list)
 {
 	int intr;
 	GuContext *context = &gu_contexts[ctype];
@@ -34,7 +34,13 @@ void sceGuStart(int ctype, void *list)
 
 	if (ctype == GU_DIRECT)
 	{
-		ge_list_executed[0] = sceGeListEnQueue(local_list, local_list, gu_settings.ge_callback_id, NULL);
+		int res;
+		res = sceGeListEnQueue(local_list, local_list, gu_settings.ge_callback_id, NULL);
+		if (res < 0)
+		{
+			return res;
+		}
+		ge_list_executed[0] = res;
 		gu_settings.signal_offset = 0;
 	}
 
@@ -63,4 +69,6 @@ void sceGuStart(int ctype, void *list)
 		sendCommandi(FRAME_BUF_PTR, ((unsigned int)gu_draw_buffer.frame_buffer));
 		sendCommandi(FRAME_BUF_WIDTH, ((((unsigned int)gu_draw_buffer.frame_buffer) & 0xff000000) >> 8) | gu_draw_buffer.frame_width);
 	}
+
+	return 0;
 }

@@ -96,7 +96,6 @@ typedef struct
 	unsigned char cutoff;	 // Light cutoff
 } GuLightSettings;
 
-extern unsigned int gu_current_frame;
 extern GuContext gu_contexts[3];
 extern int ge_list_executed[2];
 extern void *ge_edram_address;

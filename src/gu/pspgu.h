@@ -115,6 +115,31 @@ extern "C" {
 #define GU_TRANSFORM_BITS	GU_TRANSFORM_SHIFT(1)
 /* Vertex Declarations End */
 
+/* display ON/OFF switch */
+#define GU_DISPLAY_OFF		0
+#define GU_DISPLAY_ON		1
+
+/* screen size */
+#define GU_SCR_WIDTH       480
+#define GU_SCR_HEIGHT      272
+#define GU_SCR_ASPECT      ((float)GU_SCR_WIDTH / (float)GU_SCR_HEIGHT)
+#define GU_SCR_OFFSETX     ((4096 - GU_SCR_WIDTH) / 2)
+#define GU_SCR_OFFSETY     ((4096 - GU_SCR_HEIGHT) / 2)
+
+/* Frame buffer */
+#define GU_VRAM_TOP        0x00000000
+#define GU_VRAM_WIDTH      512
+/* 16bit mode */
+#define GU_VRAM_BUFSIZE    (GU_VRAM_WIDTH*GU_SCR_HEIGHT*2)
+#define GU_VRAM_BP_0       (void *)(GU_VRAM_TOP)
+#define GU_VRAM_BP_1       (void *)(GU_VRAM_TOP+GU_VRAM_BUFSIZE)
+#define GU_VRAM_BP_2       (void *)(GU_VRAM_TOP+(GU_VRAM_BUFSIZE*2))
+/* 32bit mode */
+#define GU_VRAM_BUFSIZE32  (GU_VRAM_WIDTH*GU_SCR_HEIGHT*4)
+#define GU_VRAM_BP32_0     (void *)(GU_VRAM_TOP)
+#define GU_VRAM_BP32_1     (void *)(GU_VRAM_TOP+GU_VRAM_BUFSIZE32)
+#define GU_VRAM_BP32_2     (void *)(GU_VRAM_TOP+(GU_VRAM_BUFSIZE32*2))
+
 /* Pixel Formats */
 #define GU_PSM_5650		(0) /* Display, Texture, Palette */
 #define GU_PSM_5551		(1) /* Display, Texture, Palette */
@@ -378,8 +403,8 @@ void sceGuDrawBufferList(int psm, void* fbp, int fbw);
   * Turn display on or off
   *
   * Available states are:
-  *   - GU_TRUE (1) - Turns display on
-  *   - GU_FALSE (0) - Turns display off
+  *   - GU_DISPLAY_ON (1) - Turns display on
+  *   - GU_DISPLAY_OFF (0) - Turns display off
   *
   * @param state - Turn display on or off
   * @return State of the display prior to this call
@@ -536,8 +561,9 @@ void* sceGuGetMemory(int size);
   *
   * @param ctype - Context Type
   * @param list - Pointer to display-list (16 byte aligned)
+  * @return 0 for success, < 0 for failure
 **/
-void sceGuStart(int ctype, void* list);
+int sceGuStart(int ctype, void* list);
 
 /**
   * Finish current display list and go back to the parent context

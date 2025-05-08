@@ -41,6 +41,15 @@ enum PspDisplaySetBufSync {
 #define PSP_DISPLAY_SETBUF_IMMEDIATE PSP_DISPLAY_SETBUF_NEXTHSYNC
 #define PSP_DISPLAY_SETBUF_NEXTFRAME PSP_DISPLAY_SETBUF_NEXTVSYNC
 
+enum PspDisplayMode
+{
+	/** LCD MAX 480x272 at 59.94005995 Hz */
+	PSP_DISPLAY_MODE_LCD = 0,
+	/** VESA VGA MAX 640x480 at 59.94047618Hz */
+	PSP_DISPLAY_MODE_VESA1A = 0x1A,
+	/** PSEUDO VGA MAX 640x480 at 59.94005995Hz*/
+	PSP_DISPLAY_MODE_PSEUDO_VGA = 0x60
+};
 enum PspDisplayErrorCodes
 {
    SCE_DISPLAY_ERROR_OK    = 0,
@@ -54,13 +63,17 @@ enum PspDisplayErrorCodes
  *
  * @par Example1:
  * @code
+ * int mode = PSP_DISPLAY_MODE_LCD;
+ * int width = 480;
+ * int height = 272;
+ * sceDisplaySetMode(mode, width, height);
  * @endcode
  *
- * @param mode - Display mode, normally 0.
+ * @param mode - One of ::PspDisplayMode
  * @param width - Width of screen in pixels.
  * @param height - Height of screen in pixels.
  *
- * @return ???
+ * @return when error, a negative value is returned.
  */
 int sceDisplaySetMode(int mode, int width, int height);
 

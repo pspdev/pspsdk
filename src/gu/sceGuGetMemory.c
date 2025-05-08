@@ -11,7 +11,7 @@
 #include <pspkernel.h>
 #include <pspge.h>
 
-void* sceGuGetMemory(int size)
+void *sceGuGetMemory(int size)
 {
 	// some kind of 4-byte alignment?
 	size += 3;

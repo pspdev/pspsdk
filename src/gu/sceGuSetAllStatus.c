@@ -13,7 +13,7 @@ void sceGuSetAllStatus(int status)
 	unsigned int i;
 	for (i = 0; i < GU_MAX_STATUS; ++i)
 	{
-		if ((status >> i)&1)
+		if ((status >> i) & 1)
 			sceGuEnable(i);
 		else
 			sceGuDisable(i);

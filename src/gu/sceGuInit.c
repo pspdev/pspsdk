@@ -18,8 +18,7 @@
 // Concrete value
 #define CV(command, value) (uint32_t)(command << 24 | value)
 
-static unsigned int __attribute__((aligned(16))) ge_init_list[] =
-	{
+static unsigned int __attribute__((aligned(16))) ge_init_list[] = {
 	ZV(NOP),
 	ZV(VADDR),
 	ZV(IADDR),

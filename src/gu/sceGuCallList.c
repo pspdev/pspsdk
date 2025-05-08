@@ -25,7 +25,8 @@ int sceGuCallList(const void *list)
 	}
 
 	res = _sceGuUpdateStallAddr();
-	if (res < 0) {
+	if (res < 0)
+	{
 		return res;
 	}
 	return 0;

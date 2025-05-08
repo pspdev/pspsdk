@@ -8,7 +8,6 @@
 
 #include "guInternal.h"
 
-unsigned int gu_current_frame;
 GuContext gu_contexts[3];
 int ge_list_executed[2];
 void* ge_edram_address;
