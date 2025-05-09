@@ -283,7 +283,7 @@ int sceGuInit(void)
 	gu_settings.ge_callback_id = res;
 
 	// initialize graphics hardware
-	res = sceGeListEnQueue((void *)((unsigned int)ge_init_list & 0x1fffffff), 0, gu_settings.ge_callback_id, 0);
+	res = sceGeListEnQueue((void *)((unsigned int)ge_init_list & 0x1fffffff), NULL, gu_settings.ge_callback_id, NULL);
 	if (res < 0)
 	{
 		sceKernelDeleteEventFlag(gu_settings.kernel_event_flag);
