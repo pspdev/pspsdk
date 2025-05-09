@@ -235,46 +235,70 @@ static unsigned int __attribute__((aligned(16))) ge_init_list[] =
 	ZV(END),
 };
 
-void callbackFin(int id, void* arg)
+void callbackFin(int id, void *arg)
 {
-	GuSettings* settings = (GuSettings*)arg;
+	GuSettings *settings = (GuSettings *)arg;
 	if (settings->fin)
 		settings->fin(id & 0xffff);
 }
 
-void callbackSig(int id, void* arg)
+void callbackSig(int id, void *arg)
 {
-	GuSettings* settings = (GuSettings*)arg;
+	GuSettings *settings = (GuSettings *)arg;
 
 	settings->signal_history[(settings->signal_offset++) & 15] = id & 0xffff;
 
 	if (settings->sig)
 		settings->sig(id & 0xffff);
 
-	sceKernelSetEventFlag(settings->kernel_event_flag,1);
+	sceKernelSetEventFlag(settings->kernel_event_flag, 1);
 }
 
-void sceGuInit(void)
+int sceGuInit(void)
 {
+	int res;
 	PspGeCallbackData callback;
+
+	ge_edram_address = sceGeEdramGetAddr();
+	_sceGuResetGlobalVariables();
+
+	res = sceKernelCreateEventFlag("SceGuSignal", PSP_EVENT_WAITMULTIPLE, 3, 0);
+	if (res < 0)
+	{
+		return res;
+	}
+	gu_settings.kernel_event_flag = res;
+
 	callback.signal_func = callbackSig;
 	callback.signal_arg = &gu_settings;
 	callback.finish_func = callbackFin;
 	callback.finish_arg = &gu_settings;
-	gu_settings.ge_callback_id = sceGeSetCallback(&callback);
-
-	gu_settings.swapBuffersCallback = 0;
-	gu_settings.swapBuffersBehaviour = PSP_DISPLAY_SETBUF_IMMEDIATE;
-
-	ge_edram_address = sceGeEdramGetAddr();
+	res = sceGeSetCallback(&callback);
+	if (res < 0)
+	{
+		sceKernelDeleteEventFlag(gu_settings.kernel_event_flag);
+		gu_settings.kernel_event_flag = -1;
+		return res;
+	}
+	gu_settings.ge_callback_id = res;
 
 	// initialize graphics hardware
-	ge_list_executed[0] = sceGeListEnQueue((void *)((unsigned int)ge_init_list & 0x1fffffff), 0, gu_settings.ge_callback_id, 0);
-
-	resetValues();
-
-	gu_settings.kernel_event_flag = sceKernelCreateEventFlag("SceGuSignal", 512, 3, 0);
-
+	res = sceGeListEnQueue((void *)((unsigned int)ge_init_list & 0x1fffffff), NULL, gu_settings.ge_callback_id, NULL);
+	if (res < 0)
+	{
+		sceKernelDeleteEventFlag(gu_settings.kernel_event_flag);
+		sceGeUnsetCallback(gu_settings.ge_callback_id);
+		gu_settings.ge_callback_id = -1;
+		gu_settings.kernel_event_flag = -1;
+		return res;
+	}
+	ge_list_executed[0] = res;
 	// wait for init to complete
 	sceGeListSync(ge_list_executed[0], 0);
+	sceGeDrawSync(0);
+
+	gu_settings.swapBuffersCallback = NULL;
+	gu_settings.swapBuffersBehaviour = PSP_DISPLAY_SETBUF_NEXTHSYNC;
+
+	return 0;
 }

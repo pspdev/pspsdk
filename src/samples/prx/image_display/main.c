@@ -129,8 +129,8 @@ int main_thread(SceSize args, void *argp){
 		
 		
 		// get vram
-		int ret = sceDisplayGetFrameBuf((void*)&vram32, &bufferwidth, &pixelformat, PSP_DISPLAY_SETBUF_IMMEDIATE); 
-		// works with both PSP_DISPLAY_SETBUF_NEXTFRAME and PSP_DISPLAY_SETBUF_IMMEDIATE
+		int ret = sceDisplayGetFrameBuf((void*)&vram32, &bufferwidth, &pixelformat, PSP_DISPLAY_SETBUF_NEXTHSYNC); 
+		// works with both PSP_DISPLAY_SETBUF_NEXTVSYNC and PSP_DISPLAY_SETBUF_NEXTHSYNC
 		
 		// check if return value from sceDisplayGetFrameBuf is valid
 		// check if vram32 is not NULL

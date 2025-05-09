@@ -89,6 +89,6 @@ void sceGuEnable(int state)
 	break;
 	}
 
-	if (state < 22)
+	if (state < GU_MAX_STATUS)
 		gu_states |= (1 << state);
 }

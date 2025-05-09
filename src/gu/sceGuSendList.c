@@ -13,15 +13,18 @@
 
 int sceGuSendList(int mode, const void *list, PspGeContext *context)
 {
-	gu_settings.signal_offset = 0;
-
-	// TODO: figure out this structure
 	PspGeListArgs args;
-	args.size = 8; // Size of structure?
-	args.context = context;
+	int list_id;
+	int callback;
 
-	int list_id = 0;
-	int callback = gu_settings.ge_callback_id;
+	args.size = sizeof(PspGeListArgs);
+	args.context = context;
+	args.numStacks = 0;
+	args.stacks = NULL;
+
+	callback = gu_settings.ge_callback_id;
+	gu_settings.signal_offset = 0;
+	list_id = -1;
 
 	switch (mode)
 	{

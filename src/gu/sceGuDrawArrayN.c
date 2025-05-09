@@ -30,7 +30,7 @@ void sceGuDrawArrayN(int primitive_type, int vertex_type, int vcount, int primco
 		int i;
 		for (i = 0; i < primcount; i++)
 			sendCommandi(PRIM, (primitive_type << 16) | vcount);
-
-		sendCommandiStall(PRIM, (primitive_type << 16) | vcount);
 	}
+
+	_sceGuUpdateStallAddr();
 }

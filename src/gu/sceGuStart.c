@@ -10,11 +10,15 @@
 
 #include <pspkernel.h>
 #include <pspge.h>
+#include <pspuser.h>
 
 void sceGuStart(int ctype, void *list)
 {
+	int intr;
 	GuContext *context = &gu_contexts[ctype];
 	unsigned int *local_list = (unsigned int *)(((unsigned int)list) | 0x40000000);
+
+	intr = sceKernelCpuSuspendIntr();
 
 	// setup display list
 
@@ -26,10 +30,11 @@ void sceGuStart(int ctype, void *list)
 	// store current context
 
 	gu_curr_context = ctype;
+	sceKernelCpuResumeIntr(intr);
 
 	if (ctype == GU_DIRECT)
 	{
-		ge_list_executed[0] = sceGeListEnQueue(local_list, local_list, gu_settings.ge_callback_id, 0);
+		ge_list_executed[0] = sceGeListEnQueue(local_list, local_list, gu_settings.ge_callback_id, NULL);
 		gu_settings.signal_offset = 0;
 	}
 

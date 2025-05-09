@@ -25,5 +25,6 @@ void sceGuDrawArray(int prim, int vtype, int count, const void *indices, const v
     sendCommandi(VADDR, ((unsigned int)vertices));
   }
 
-  sendCommandiStall(PRIM, (prim << 16) | count);
+  sendCommandi(PRIM, (prim << 16) | count);
+  _sceGuUpdateStallAddr();
 }

@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-void resetValues()
+void _sceGuResetGlobalVariables()
 {
 	unsigned int i;
 
@@ -18,7 +18,7 @@ void resetValues()
 	gu_current_frame = 0;
 	gu_object_stack_depth = 0;
 
-	gu_display_on = 0;
+	gu_display_on = GU_FALSE;
 	gu_call_mode = GU_CALL_NORMAL;
 
 	gu_draw_buffer.pixel_size = 1;

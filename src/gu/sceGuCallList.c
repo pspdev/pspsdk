@@ -8,19 +8,25 @@
 
 #include "guInternal.h"
 
-void sceGuCallList(const void *list)
+int sceGuCallList(const void *list)
 {
+	int res;
 	unsigned int list_addr = (unsigned int)list;
 
 	if (gu_call_mode == GU_CALL_SIGNAL)
 	{
 		sendCommandi(SIGNAL, (list_addr >> 16) | 0x110000);
 		sendCommandi(END, list_addr & 0xffff);
-		sendCommandiStall(NOP, 0);
 	}
 	else
 	{
 		sendCommandi(BASE, (list_addr >> 8) & 0xf0000);
-		sendCommandiStall(CALL, list_addr);
+		sendCommandi(CALL, list_addr);
 	}
+
+	res = _sceGuUpdateStallAddr();
+	if (res < 0) {
+		return res;
+	}
+	return 0;
 }

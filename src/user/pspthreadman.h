@@ -690,6 +690,8 @@ typedef struct SceKernelEventFlagOptParam SceKernelEventFlagOptParam;
 /** Event flag creation attributes */
 enum PspEventFlagAttributes
 {
+	/** Allow the event flag to be waited upon by a single thread */
+	PSP_EVENT_WAITSINGLE = 0x00,
 	/** Allow the event flag to be waited upon by multiple threads */
 	PSP_EVENT_WAITMULTIPLE = 0x200
 };

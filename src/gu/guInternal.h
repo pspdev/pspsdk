@@ -116,7 +116,7 @@ extern GuLightSettings light_settings[4];
 
 void callbackSig(int id, void *arg);
 void callbackFin(int id, void *arg);
-void resetValues();
+void _sceGuResetGlobalVariables();
 
 typedef enum GECommand
 {
@@ -645,12 +645,18 @@ static inline void sendCommandf(GECommand cmd, float argument)
 	sendCommandi(cmd, t.i >> 8);
 }
 
-static inline void sendCommandiStall(GECommand cmd, int argument)
-{
-	sendCommandi(cmd, argument);
-
-	if (!gu_object_stack_depth && !gu_curr_context)
-		sceGeListUpdateStallAddr(ge_list_executed[0], gu_list->current);
+static inline int _sceGuUpdateStallAddr(void) {
+	if (gu_curr_context == GU_DIRECT) {
+		// Just if there are no objects in the stack (no guBeginObject)
+		if (!gu_object_stack_depth) {
+			int res;
+			res = sceGeListUpdateStallAddr(ge_list_executed[0], gu_list->current);
+			if (res < 0) {
+				return res;
+			}
+		}
+	} 
+	return 0;
 }
 
 #endif
