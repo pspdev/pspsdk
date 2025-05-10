@@ -75,8 +75,21 @@ int main(void)
 
 		sceCtrlReadBufferPositive(&pad, 1);
 
-		pspDebugScreenPrintf("Analog X = %3d ", pad.Lx);
-		pspDebugScreenPrintf("Analog Y = %3d \n", pad.Ly);
+		// 10 May 2025
+		// ---
+		// Depending on the configuration of the device the
+		// sample is being ran on, it may support a second
+		// analog stick. Known instances of this are:
+		// 1. On a PSP GO system with a connected DualShock 3
+		// 2. On a PS VITA system
+		// 3. On the PPSSPP emulator if bound in configuration settings
+		// 4. Through hardware or software modification (see https://github.com/operation-ditto)
+		// Due to these instances we should also report the second
+		// stick to the screen.
+		pspDebugScreenPrintf("L Analog X = %3d \n", pad.Lx);
+		pspDebugScreenPrintf("L Analog Y = %3d \n", pad.Ly);
+		pspDebugScreenPrintf("R Analog X = %3d \n", pad.Rx);
+		pspDebugScreenPrintf("R Analog Y = %3d \n", pad.Ry);
 
 		if (pad.Buttons != 0){
 			if (pad.Buttons & PSP_CTRL_SQUARE){

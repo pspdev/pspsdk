@@ -134,8 +134,27 @@ typedef struct SceCtrlData {
 	unsigned char 	Lx;
 	/** Y-axis value of the Analog Stick.*/
 	unsigned char 	Ly;
-	/** Reserved. */
-	unsigned char 	Rsrv[6];
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+	union {
+		struct {
+#endif // DOXYGEN_SHOULD_SKIP_THIS
+			/** X-axis value of the right Analog Stick, valid when using DualShock 3 on PSP GO, 
+			 * 	a PS VITA system, through hardware/software hacking, or system emulation. */
+			unsigned char Rx;
+			/** Y-axis value of the right Analog Stick, valid when using DualShock 3 on PSP GO, 
+			 * 	a PS VITA system, through hardware/software hacking, or system emulation. */
+			unsigned char Ry;
+			/** Reserved bytes unused by the firmware. */
+			unsigned char Reserved[4];
+		};
+		/** 
+		 * @private
+		 * Reserved bytes. This is deprecated with the implementation of Rx and Ry and only here for backwards compatibility. 
+		 */
+		unsigned char Rsrv[6];
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+	};
+#endif // DOXYGEN_SHOULD_SKIP_THIS
 } SceCtrlData;
 
 /** 
