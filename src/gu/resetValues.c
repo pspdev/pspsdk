@@ -15,20 +15,19 @@ void _sceGuResetGlobalVariables()
 	gu_init = 0;
 
 	gu_states = 0;
-	gu_current_frame = 0;
 	gu_object_stack_depth = 0;
 
-	gu_display_on = GU_FALSE;
+	gu_display_on = GU_DISPLAY_OFF;
 	gu_call_mode = GU_CALL_NORMAL;
 
-	gu_draw_buffer.pixel_size = 1;
-	gu_draw_buffer.frame_width = 0;
+	gu_draw_buffer.pixel_size = GU_PSM_5551;
+	gu_draw_buffer.frame_width = GU_SCR_WIDTH;
 	gu_draw_buffer.frame_buffer = 0;
 	gu_draw_buffer.disp_buffer = 0;
 	gu_draw_buffer.depth_buffer = 0;
 	gu_draw_buffer.depth_width = 0;
-	gu_draw_buffer.width = 480;
-	gu_draw_buffer.height = 272;
+	gu_draw_buffer.width = GU_SCR_WIDTH;
+	gu_draw_buffer.height = GU_SCR_HEIGHT;
 
 	for (i = 0; i < 3; ++i)
 	{
@@ -58,6 +57,6 @@ void _sceGuResetGlobalVariables()
 		context->texture_mode = 0;
 	}
 
-	gu_settings.sig = 0;
-	gu_settings.fin = 0;
+	gu_settings.sig = NULL;
+	gu_settings.fin = NULL;
 }

@@ -144,7 +144,7 @@ void pspDebugScreenInitEx(void *vram_base, int mode, int setup)
    g_vram_mode = mode;
    if(setup)
    {
-	   sceDisplaySetMode(0, PSP_SCREEN_WIDTH, PSP_SCREEN_HEIGHT);
+	   sceDisplaySetMode(PSP_DISPLAY_MODE_LCD, PSP_SCREEN_WIDTH, PSP_SCREEN_HEIGHT);
 	   sceDisplaySetFrameBuf((void *) g_vram_base, PSP_LINE_SIZE, mode, 1);
    }
    clear_screen(bg_col);

@@ -11,12 +11,6 @@
 #include <pspkernel.h>
 #include <pspdisplay.h>
 
-static inline void drawRegion(int x, int y, int width, int height)
-{
-	sendCommandi(REGION1, (y << 10) | x);
-	sendCommandi(REGION2, (((y + height) - 1) << 10) | ((x + width) - 1));
-}
-
 void sceGuDispBuffer(int width, int height, void *dispbp, int dispbw)
 {
 	gu_draw_buffer.width = width;
@@ -26,9 +20,8 @@ void sceGuDispBuffer(int width, int height, void *dispbp, int dispbw)
 	if (!gu_draw_buffer.frame_width || (gu_draw_buffer.frame_width != dispbw))
 		gu_draw_buffer.frame_width = dispbw;
 
-	drawRegion(0, 0, gu_draw_buffer.width, gu_draw_buffer.height);
-	sceDisplaySetMode(0, gu_draw_buffer.width, gu_draw_buffer.height);
+	sceDisplaySetMode(PSP_DISPLAY_MODE_LCD, gu_draw_buffer.width, gu_draw_buffer.height);
 
-	if (gu_display_on)
+	if (gu_display_on == GU_DISPLAY_ON)
 		sceDisplaySetFrameBuf((void *)(((unsigned int)ge_edram_address) + ((unsigned int)gu_draw_buffer.disp_buffer)), dispbw, gu_draw_buffer.pixel_size, PSP_DISPLAY_SETBUF_NEXTVSYNC);
 }
