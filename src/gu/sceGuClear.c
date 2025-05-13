@@ -21,16 +21,16 @@ void sceGuClear(int flags)
 
 	switch (gu_draw_buffer.pixel_size)
 	{
-	case 0:
+	case GU_PSM_5650:
 		filter = context->clear_color & 0xffffff;
 		break;
-	case 1:
+	case GU_PSM_5551:
 		filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 31);
 		break;
-	case 2:
+	case GU_PSM_4444:
 		filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 28);
 		break;
-	case 3:
+	case GU_PSM_8888:
 		filter = (context->clear_color & 0xffffff) | (context->clear_stencil << 24);
 		break;
 	default:
