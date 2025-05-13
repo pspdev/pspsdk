@@ -19,7 +19,12 @@ void sceGuScissor(int x, int y, int w, int h)
 
 	if (context->scissor_enable)
 	{
-		sendCommandi(SCISSOR1, (context->scissor_start[1] << 10) | context->scissor_start[0]);
-		sendCommandi(SCISSOR2, (context->scissor_end[1] << 10) | context->scissor_end[0]);
+		int orig = (context->scissor_start[1] << 10) | context->scissor_start[0];
+		int end = (context->scissor_end[1] << 10) | context->scissor_end[0];
+
+		sendCommandi(SCISSOR1, orig);
+		sendCommandi(SCISSOR2, end);
+		sendCommandi(REGION1, orig);
+		sendCommandi(REGION2, end);
 	}
 }

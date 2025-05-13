@@ -21,9 +21,14 @@ void sceGuDisable(int state)
 	case GU_SCISSOR_TEST:
 	{
 		GuContext *context = &gu_contexts[gu_curr_context];
+		int orig = 0;
+		int end = ((gu_draw_buffer.height - 1) << 10) | (gu_draw_buffer.width - 1);
+		
 		context->scissor_enable = 0;
-		sendCommandi(SCISSOR1, 0);
-		sendCommandi(SCISSOR2, ((gu_draw_buffer.height - 1) << 10) | (gu_draw_buffer.width - 1));
+		sendCommandi(SCISSOR1, orig);
+		sendCommandi(SCISSOR2, end);
+		sendCommandi(REGION1, orig);
+		sendCommandi(REGION2, end);
 	}
 	break;
 	case GU_STENCIL_TEST:
