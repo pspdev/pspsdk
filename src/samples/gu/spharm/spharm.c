@@ -635,7 +635,7 @@ void SpharmGenTest(int rendermode)
       //objtype = 6; // make sure we end up back in same spot
             } break;
     default:  // none found, so move to next one, and trigger re-gen
-      objtype == 0;
+      objtype = 0;
       inited = 0;
       break;
     }
