@@ -131,7 +131,6 @@ int main(int argc, char* argv[])
   SceCtrlData pad;
   unsigned int buttonsold = 0;
   int rendermode = 0;
-	int i = 0;
 	int val = 0;
 
   _DisableFPUExceptions();
@@ -180,8 +179,6 @@ int main(int argc, char* argv[])
 
 	while (!done)
 	{
-		unsigned int x,y;
-
 		sceGuStart(GU_DIRECT,list);
 
 		sceGuClearColor(0);
