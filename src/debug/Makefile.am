@@ -24,6 +24,7 @@ libpspdebuginclude_HEADERS =	\
 lib_LIBRARIES = libpspdebug.a libpspgdb.a libpspgdb_user.a libpspgdb_kernel.a libpspdebugkb.a
 
 libpspdebug_a_SOURCES =		\
+	bitmap.c \
 	callstack.c		\
 	callstackget.S		\
 	font.c			\
@@ -33,6 +34,7 @@ libpspdebug_a_SOURCES =		\
 	kprintf.c	\
 	stacktrace.c	\
 	profiler.c \
+	screenshot.c \
 	stdio.c		\
 	sio.c
 

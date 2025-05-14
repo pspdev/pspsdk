@@ -433,6 +433,16 @@ void pspDebugSioEnableKprintf(void);
  */
 void pspDebugSioDisableKprintf(void);
 
+/**
+ * Save a screenshot to a file
+ *
+ * @param filename - The filename to save the screenshot for the current frame buffer displayed on the screen. 
+ * The filename will be saved with a BMP extension.
+ *
+ * @return 0 on success, -1 on error
+ */
+int pspScreenshotSave(const char *filename);
+
 /**@}*/
 
 #ifdef __cplusplus
