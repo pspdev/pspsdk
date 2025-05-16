@@ -1,5 +1,5 @@
 TARGET = MIPMAPPING
-OBJS = mipmapping.o mip0.o mip1.o mip2.o
+OBJS = mipmapping.o mip0.o mip1.o mip2.o ../common/callbacks.o
 
 INCDIR =
 CFLAGS = -Wall -O2 
