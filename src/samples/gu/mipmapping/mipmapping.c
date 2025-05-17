@@ -18,6 +18,7 @@
 #include <pspgu.h>
 #include <pspgum.h>
 
+#include "../common/callbacks.h"
 
 PSP_MODULE_INFO("MIP Mapping Sample", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);
@@ -34,7 +35,8 @@ struct Vertex{
 };
 
 //A plane
-struct Vertex __attribute__((aligned(16))) vertices[2*3] =
+#define VERTICES_COUNT (2*3)
+struct Vertex __attribute__((aligned(16))) vertices[VERTICES_COUNT] =
 {
 	{0, 0, -1, 1, 0}, // 0
 	{1, 0,  1, 1, 0}, // 4
@@ -52,27 +54,25 @@ struct Vertex __attribute__((aligned(16))) vertices[2*3] =
 
 int main(int argc, char* argv[])
 {
+	setupCallbacks();
+
 	// setup GU
 	void* fbp0 = (void*)(4 * 480 * 272);
 	void* fbp1 = (void*)(4 * 480 * 272);
-	void* zbp = (void*)(2 * 480 * 272);
 
 	sceGuInit();
 	sceGuStart(GU_DIRECT,list);
 	sceGuDrawBuffer(GU_PSM_8888,fbp0,BUF_WIDTH);
 	sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,fbp1,BUF_WIDTH);
-	sceGuDepthBuffer(zbp,BUF_WIDTH);
 	sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
 	sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
 	sceGuDepthRange(65535,0);
 	sceGuScissor(0,0,SCR_WIDTH,SCR_HEIGHT);
 	sceGuEnable(GU_SCISSOR_TEST);
 	sceGuDepthFunc(GU_GEQUAL);
-	sceGuEnable(GU_DEPTH_TEST);
 	sceGuShadeModel(GU_SMOOTH);
 	sceGuDisable(GU_CULL_FACE);
 	sceGuEnable(GU_TEXTURE_2D);
-	//sceGuEnable(GU_CLIP_PLANES);
 	sceGuFinish();
 	sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
@@ -82,14 +82,13 @@ int main(int argc, char* argv[])
 	// run sample
 	float pos_z = -2.5;
 	int zoom = -1;
-	while(1){
+	while(running()){
 		sceGuStart(GU_DIRECT,list);
 
 		// clear screen
 
 		sceGuClearColor(0xff554433);
-		sceGuClearDepth(0);
-		sceGuClear(GU_COLOR_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
+		sceGuClear(GU_COLOR_BUFFER_BIT);
 
 		// setup matrices for cube
 		//Projection
@@ -133,7 +132,7 @@ int main(int argc, char* argv[])
 		
 		sceGuColor(0xffffffff);
 		sceGuAmbientColor(0xffffffff);
-		sceGumDrawArray(GU_TRIANGLES,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D,2*3,0,vertices);
+		sceGumDrawArray(GU_TRIANGLES,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D,VERTICES_COUNT,0,vertices);
 
 		sceGuFinish();
 		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
