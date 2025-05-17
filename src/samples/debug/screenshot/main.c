@@ -3,11 +3,9 @@
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
- * main.c - Basic sample to demonstrate the kprintf handler.
+ * main.c - Basic sample to demonstrate how to take a screenshot.
  *
- * Copyright (c) 2005 Marcus R. Brown <mrbrown@ocgnet.org>
- * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
- * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
+ * Copyright (c) 2025 Francisco Javier Trujillo Mata
  *
  */
 
