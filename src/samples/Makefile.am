@@ -32,6 +32,7 @@ SAMPLES = \
 	gu/ortho \
 	gu/reflection \
 	gu/rendertarget \
+	gu/scissor \
 	gu/shadowprojection \
 	gu/signals \
 	gu/skinning \
