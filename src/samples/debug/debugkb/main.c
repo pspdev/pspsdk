@@ -30,7 +30,7 @@ PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER | THREAD_ATTR_VFPU);
 #define setBackColor pspDebugScreenSetBackColor
 
 /* Exit callback */
-int exit_callback()
+int exit_callback(int count, int arg, void *argp)
 {
   sceKernelExitGame();
 
