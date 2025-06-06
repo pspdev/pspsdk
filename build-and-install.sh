@@ -19,7 +19,7 @@ make clean
 make -j $(getconf _NPROCESSORS_ONLN)
 
 ## Install pspsdk
-make install
+make install -j $(getconf _NPROCESSORS_ONLN)
 
 ## gcc needs to include libcglue libpthreadglue libpspprof libpsputility libpsprtc libpspnet_inet libpspnet_resolver libpspsdk libpspmodinfo libpspuser libpspkernel
 ## from pspsdk to be able to build executables, because they are part of the standard libraries

@@ -31,7 +31,7 @@ jobs:
 
     - name: Compile Examples
       run: |
-        cd src/samples && make -f Makefile.samples
+        cd src/samples && make -f Makefile.samples -j $(getconf _NPROCESSORS_ONLN)
     
     - name: Compress Samples folder folder
       run: |
