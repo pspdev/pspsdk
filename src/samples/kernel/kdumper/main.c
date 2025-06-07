@@ -171,7 +171,7 @@ void dump_cop0_regs(void)
 	printf("Cop0 regs\n");
 	for(i = 0; i < 32; i+=4)
 	{
-		printf("$%02d: %08X, $%02d: %08X, $%02d: %08X $%02d: %08X\n", 
+		printf("$%02d: %08lX, $%02d: %08lX, $%02d: %08lX $%02d: %08lX\n", 
 				i, regs[i], i+1, regs[i+1], i+2, regs[i+2], i+3, regs[i+3]);
 	}
 }

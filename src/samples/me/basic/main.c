@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 		pspDebugScreenSetXY(0, 0);
 		pspDebugScreenPrintf("ME Basic Example, press Home to exit\n");
 		sceKernelDcacheWritebackInvalidateAll();
-		pspDebugScreenPrintf("ME Counter: %08x\n", *count);
+		pspDebugScreenPrintf("ME Counter: %08lx\n", *count);
 		sceCtrlReadBufferPositive(&ctl, 1);
 		if(ctl.Buttons & PSP_CTRL_HOME)
 		{

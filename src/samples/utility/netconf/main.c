@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
     		//clear netData
     		data.asUint = 0xBADF00D;
     		memset(&data.asString[4], 0, 124);
-	    	printf("param %03d: ret(0x%08X) uint(%d) string(%s)\n", i, sceUtilityGetNetParam(netConfIndex, i, &data), data.asUint, data.asString);
+	    	printf("param %03d: ret(0x%08X) uint(%ld) string(%s)\n", i, sceUtilityGetNetParam(netConfIndex, i, &data), data.asUint, data.asString);
     	}
     	printf("\nPress X to show details for next net configuration.\n");
     	sceDisplayWaitVblankStart();
