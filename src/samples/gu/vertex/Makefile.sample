@@ -2,7 +2,7 @@ TARGET = vertex
 OBJS = vertex.o ../common/callbacks.o ../common/menu.o
 
 INCDIR =
-CFLAGS = -Wall
+CFLAGS = -Wall -ffast-math
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 

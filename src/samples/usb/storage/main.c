@@ -155,19 +155,19 @@ int main(void)
     //setup USB drivers
     retVal = sceUsbStart(PSP_USBBUS_DRIVERNAME, 0, 0);
     if (retVal != 0) {
-	printf("Error starting USB Bus driver (0x%08X)\n", retVal);
+	printf("Error starting USB Bus driver (0x%08lX)\n", retVal);
 	sceKernelSleepThread();
     }
     retVal = sceUsbStart(PSP_USBSTOR_DRIVERNAME, 0, 0);
     if (retVal != 0) {
-	printf("Error starting USB Mass Storage driver (0x%08X)\n",
+	printf("Error starting USB Mass Storage driver (0x%08lX)\n",
 	       retVal);
 	sceKernelSleepThread();
     }
     retVal = sceUsbstorBootSetCapacity(0x800000);
     if (retVal != 0) {
 	printf
-	    ("Error setting capacity with USB Mass Storage driver (0x%08X)\n",
+	    ("Error setting capacity with USB Mass Storage driver (0x%08lX)\n",
 	     retVal);
 	sceKernelSleepThread();
     }

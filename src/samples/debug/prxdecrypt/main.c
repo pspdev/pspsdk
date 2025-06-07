@@ -104,7 +104,7 @@ int extract_file(const char* name, const char* dstname)
 
 			if(size >= 0)
 			{
-				printf("Extracted file - size %d\n", size);
+				printf("Extracted file - size %ld\n", size);
 				fd = sceIoOpen(dstname, PSP_O_WRONLY | PSP_O_CREAT | PSP_O_TRUNC, 0777);
 				if(fd >= 0)
 				{

@@ -213,7 +213,7 @@ char nameMultiple[][20] =	// End list with ""
  ""
 };
 
-char key[] = "QTAK319JQKJ952HA";	// Key to encrypt or decrypt savedata
+static const char key[] = "QTAK319JQKJ952H";	// Key to encrypt or decrypt savedata
 
 void initSavedata(SceUtilitySavedataParam * savedata, int mode)
 {
@@ -232,7 +232,7 @@ void initSavedata(SceUtilitySavedataParam * savedata, int mode)
 	savedata->focus = PSP_UTILITY_SAVEDATA_FOCUS_LATEST; // Set initial focus to the newest file (for loading)
 
 #if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 200
-	strncpy(savedata->key, key, 16);
+	strncpy(savedata->key, key, sizeof(savedata->key));
 #endif
 
 	strcpy(savedata->gameName, "DEMO11111");	// First part of the save name, game identifier name

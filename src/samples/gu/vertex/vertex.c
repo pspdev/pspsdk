@@ -131,7 +131,7 @@ void generateVertexBuffer(int vertexFormat, void* vertices, int batchSize)
 		memset(current,0,vertexSize);
 
 		// TODO: render something nice
-/*
+
 		float x = cosf((i * batchScale) * (GU_PI*2));
 		float y = sinf((i * batchScale) * (GU_PI*2));
 
@@ -180,7 +180,7 @@ void generateVertexBuffer(int vertexFormat, void* vertices, int batchSize)
 			}
 			break;
 		}		
-*/
+
 		current = current + vertexSize;
 	}
 }
@@ -253,7 +253,7 @@ int main(int argc, char* argv[])
 
 	// run sample
 
-	int val = 0;
+	int frame = 0;
 	SceCtrlData oldPad;
 	memset(&oldPad,0,sizeof(SceCtrlData));
 
@@ -598,7 +598,7 @@ int main(int argc, char* argv[])
 
 		pspDebugScreenSetOffset((int)fbp0);
 		pspDebugScreenSetXY(0,0);
-		pspDebugScreenPrintf("Mask: 0x%08x, Size: %u", vertexMask, vertexSize,val);
+		pspDebugScreenPrintf("Mask: 0x%08x, Size: %u, frame: %d", vertexMask, vertexSize, frame);
 		if (avgVertexSpeed)
 			pspDebugScreenPrintf(", %.2f million vertices / sec.",avgVertexSpeed);
 		else
@@ -613,7 +613,7 @@ int main(int argc, char* argv[])
 		fbp1 = fbp0;
 		fbp0 = sceGuSwapBuffers();
 
-		val++;
+		frame++;
 	}
 
 	sceGuTerm();

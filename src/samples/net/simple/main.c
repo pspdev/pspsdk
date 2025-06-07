@@ -246,6 +246,8 @@ int net_thread(SceSize args, void *argp)
 			start_server(info.ip);
 		}
 	} while (0);
+
+	return 0;
 }
 /* Simple thread */
 int main(int argc, char **argv)

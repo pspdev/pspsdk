@@ -87,8 +87,8 @@ int main(void)
 	SceUID modid;
 	SceModule *mod;
 	int i;
-	int ret;
 	int fd;
+	int ret = -1;
 
 	pspDebugScreenInit();
 
@@ -126,5 +126,5 @@ int main(void)
 	/* Let's bug out */
 	sceKernelExitDeleteThread(0);
 
-	return 0;
+	return ret >= 0 ? 0 : ret;
 }

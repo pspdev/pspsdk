@@ -26,7 +26,8 @@ PSP_MODULE_INFO("SaveEncrypt", 0, 1, 1);
 
 #define printf pspDebugScreenPrintf
 
-#if 0
+#define USE_OLD_FORMAT 0
+#if USE_OLD_FORMAT
   /* Old format save with no key, supported by 1.0+ firmware */
   const char *plaintext = "ms0:/PLAIN.BIN";
   const char *encrypted = "ms0:/PSP/SAVEDATA/DATA111110000/DATA.BIN";
@@ -71,12 +72,16 @@ int main(int argc, char *argv[])
 
 	printf(" Will encrypt: %s\n", plaintext);
 	printf("    Using key:");
-	if(gamekey) {
-		for (i = 0; i < 0x10; i++)
-			printf(" %02x", gamekey[i]);
-	} else {
+#if USE_OLD_FORMAT
+	{
 		printf(" none");
 	}
+#else
+	{
+		for (i = 0; i < 0x10; i++)
+			printf(" %02x", gamekey[i]);
+	}
+#endif	
 	printf("\n\n");
 	printf("  Output file: %s\n", encrypted);
 	printf("Update hashes: %s\n\n", paramsfo);
