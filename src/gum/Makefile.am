@@ -17,11 +17,13 @@ lib_LIBRARIES = libpspgum.a libpspgum_vfpu.a
 
 noinst_HEADERS = gumInternal.h
 
-PSPGUM_SHARED_OBJS =  gumLoadMatrix.o gumOrtho.o gumPerspective.o \
+PSPGUM_SHARED_OBJS =  gumLoadMatrix.o gumOrtho.o gumPerspective.o gumLoadQuaternion.o \
                       gumLookAt.o gumRotateXYZ.o gumRotateZYX.o gumFullInverse.o \
                       gumCrossProduct.o gumDotProduct.o gumNormalize.o \
+		      gumLoadAxisAngle.o gumMultQuaternion.o gumNormalizeQuaternion.o \
+		      gumRotateVector.o gumRotateMatrix.o \
                       sceGumDrawArray.o sceGumDrawArrayN.o sceGumDrawBezier.o sceGumDrawSpline.o \
-                      sceGumRotateXYZ.o sceGumRotateZYX.o
+                      sceGumRotateXYZ.o sceGumRotateZYX.o sceGumRotate.o 
 
 PSPGUM_FPU_OBJS =     sceGumLoadIdentity.o sceGumLoadMatrix.o sceGumMatrixMode.o \
                       sceGumMultMatrix.o sceGumOrtho.o sceGumPerspective.o sceGumPopMatrix.o \

@@ -121,6 +121,13 @@ void sceGumRotateXYZ(const ScePspFVector3* v);
 void sceGumRotateZYX(const ScePspFVector3* v);
 
 /**
+  * Apply rotation represented by quaternion q
+  *
+  * @param q - Pointer to quaternion
+**/
+void sceGumRotate(const ScePspFQuaternion* q);
+
+/**
   * Scale matrix
   *
   * @note The matrix loses its orthonogal status after executing this function.
@@ -198,6 +205,7 @@ void gumInit(void);
 **/
 void gumLoadIdentity(ScePspFMatrix4* m);
 
+void gumLoadQuaternion(ScePspFMatrix4* r, const ScePspFQuaternion* q);
 void gumLoadMatrix(ScePspFMatrix4* r, const ScePspFMatrix4* a);
 void gumLookAt(ScePspFMatrix4* m, ScePspFVector3* eye, ScePspFVector3* center, ScePspFVector3* up);
 void gumMultMatrix(ScePspFMatrix4* result, const ScePspFMatrix4* a, const ScePspFMatrix4* b);
@@ -208,6 +216,7 @@ void gumRotateXYZ(ScePspFMatrix4* m, const ScePspFVector3* v);
 void gumRotateY(ScePspFMatrix4* m, float angle);
 void gumRotateZ(ScePspFMatrix4* m, float angle);
 void gumRotateZYX(ScePspFMatrix4* m, const ScePspFVector3* v);
+void gumRotateMatrix(ScePspFMatrix4* m, const ScePspFQuaternion* q);
 void gumScale(ScePspFMatrix4* m, const ScePspFVector3* v);
 void gumTranslate(ScePspFMatrix4* m, const ScePspFVector3* v);
 void gumFullInverse(ScePspFMatrix4* r, const ScePspFMatrix4* a);
@@ -228,6 +237,12 @@ void gumFastInverse(ScePspFMatrix4* r, const ScePspFMatrix4* a);
 void gumCrossProduct(ScePspFVector3* r, const ScePspFVector3* a, const ScePspFVector3* b);
 float gumDotProduct(const ScePspFVector3* a, const ScePspFVector3* b);
 void gumNormalize(ScePspFVector3* v);
+void gumRotateVector(ScePspFVector3* r, const ScePspFQuaternion* q, const ScePspFVector3* v);
+
+// quaternion functions
+void gumNormalizeQuaternion(ScePspFQuaternion* q);
+void gumLoadAxisAngle(ScePspFQuaternion* r, ScePspFVector3* axis, float t);
+void gumMultQuaternion(ScePspFQuaternion* result, const ScePspFQuaternion* a, const ScePspFQuaternion* b);
 
 #if defined(__cplusplus)
 }
