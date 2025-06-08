@@ -65,37 +65,6 @@ typedef struct
 	int height;
 } GuDrawBuffer;
 
-typedef struct
-{
-	/* row 0 */
-
-	unsigned char enable; // Light enable
-	unsigned char type;	  // Light type
-	unsigned char xpos;	  // X position
-	unsigned char ypos;	  // Y position
-
-	/* row 1 */
-
-	unsigned char zpos; // Z position
-	unsigned char xdir; // X direction
-	unsigned char ydir; // Y direction
-	unsigned char zdir; // Z direction
-
-	/* row 2 */
-
-	unsigned char ambient;	// Ambient color
-	unsigned char diffuse;	// Diffuse color
-	unsigned char specular; // Specular color
-	unsigned char constant; // Constant attenuation
-
-	/* row 3 */
-
-	unsigned char linear;	 // Linear attenuation
-	unsigned char quadratic; // Quadratic attenuation
-	unsigned char exponent;	 // Light exponent
-	unsigned char cutoff;	 // Light cutoff
-} GuLightSettings;
-
 extern GuContext gu_contexts[3];
 extern int ge_list_executed[2];
 extern void *ge_edram_address;
@@ -110,8 +79,6 @@ extern GuDrawBuffer gu_draw_buffer;
 
 extern unsigned int *gu_object_stack[];
 extern int gu_object_stack_depth;
-
-extern GuLightSettings light_settings[4];
 
 void callbackSig(int id, void *arg);
 void callbackFin(int id, void *arg);

@@ -10,25 +10,27 @@
 
 void sceGuLightColor(int light, int component, unsigned int color)
 {
-	GuLightSettings* settings = &light_settings[light];
+
+	int offset = light * 3;
 
 	switch (component)
 	{
-		case GU_AMBIENT: sendCommandi(settings->ambient, color); break;
-		case GU_DIFFUSE: sendCommandi(settings->diffuse, color); break;
+		case GU_AMBIENT: 
+			sendCommandi(LIGHT0_AMBIENT + offset, color); 
+			break;
+		case GU_DIFFUSE: 
+			sendCommandi(LIGHT0_DIFFUSE + offset, color); 
+			break;
+		case GU_SPECULAR: 
+			sendCommandi(LIGHT0_SPECULAR + offset, color); 
+			break;
 		case GU_AMBIENT_AND_DIFFUSE:
-		{
-			sendCommandi(settings->ambient, color); break;
-			sendCommandi(settings->diffuse, color); break;
-		}
-		break;
-		
-		case GU_SPECULAR: sendCommandi(settings->specular, color); break;
+			sendCommandi(LIGHT0_AMBIENT + offset, color); 
+			sendCommandi(LIGHT0_DIFFUSE + offset, color); 
+			break;
 		case GU_DIFFUSE_AND_SPECULAR:
-		{
-			sendCommandi(settings->diffuse, color); break;
-			sendCommandi(settings->specular, color); break;
-		}
-		break;
+			sendCommandi(LIGHT0_DIFFUSE + offset, color); 
+			sendCommandi(LIGHT0_SPECULAR + offset, color); 
+			break;
 	}
 }
