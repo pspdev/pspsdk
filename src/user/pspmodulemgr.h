@@ -114,7 +114,9 @@ SceUID sceKernelLoadModuleBufferUsbWlan(SceSize bufsize, void *buf, int flags, S
   * @param status - Returns the status of the start.
   * @param option - Pointer to an optional ::SceKernelSMOption structure.
   *
-  * @return ??? on success, otherwise one of ::PspKernelErrorCodes.
+  * @return modID (modID > 0) UID of the module that was started and made resident,
+  *  0 on success for modules that don't need to be made resident, 
+  *  otherwise one of ::PspKernelErrorCodes.
   */
 int sceKernelStartModule(SceUID modid, SceSize argsize, void *argp, int *status, SceKernelSMOption *option);
 

@@ -78,7 +78,6 @@ const char *caps[8] = {
 void print_apsum(struct ScanData *pData)
 {
 	char name[33];
-	int  loop;
 	strncpy(name, pData->name, 32);
 	name[32] = 0;
 	printf("RSSI:%02d  ", pData->rssi);

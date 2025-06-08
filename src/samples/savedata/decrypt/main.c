@@ -27,7 +27,8 @@ PSP_MODULE_INFO("SaveDecrypt", 0, 1, 1);
 #define printf pspDebugScreenPrintf
 
 const char *decrypted = "ms0:/PLAIN.BIN";
-#if 0
+#define USE_OLD_FORMAT 0
+#if USE_OLD_FORMAT
   /* Old format save with no key, supported by 1.0+ firmware */
   const char *encrypted = "ms0:/PSP/SAVEDATA/DATA111110000/DATA.BIN";
   const unsigned char *gamekey = NULL;
@@ -66,12 +67,16 @@ int main(int argc, char *argv[])
 
 	printf("Will decrypt: %s\n", encrypted);
 	printf("   Using key:");
-	if(gamekey) {
-		for (i = 0; i < 0x10; i++)
-			printf(" %02x", gamekey[i]);
-	} else {
+#if USE_OLD_FORMAT
+	{
 		printf(" none");
 	}
+#else
+	{
+		for (i = 0; i < 0x10; i++)
+			printf(" %02x", gamekey[i]);
+	}
+#endif	
 	printf("\n\n");
 	printf(" Output file: %s\n\n", decrypted);
 	printf("Press X to continue, or O to quit.\n\n");
