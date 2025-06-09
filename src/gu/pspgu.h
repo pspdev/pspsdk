@@ -779,8 +779,10 @@ void sceGuBeginObject(int vtype, int count, const void* indices, const void* ver
 
 /**
   * End conditional rendering of object
+  *
+  * @return 0 for success, < 0 for failure
 **/
-void sceGuEndObject(void);
+int sceGuEndObject(void);
 
 /**
   * Enable or disable GE state

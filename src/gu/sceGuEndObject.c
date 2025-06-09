@@ -8,16 +8,30 @@
 
 #include "guInternal.h"
 
-void sceGuEndObject(void)
+#define ERROR_NOT_FOUND 0x80000025
+
+int sceGuEndObject(void)
 {
-	// rewrite commands from sceGuBeginObject()
+	int res;
+
+	gu_object_stack_depth--;
+	if (gu_object_stack_depth < 0) {
+		return -ERROR_NOT_FOUND;
+	}
 
 	unsigned int *current = gu_list->current;
-	gu_list->current = gu_object_stack[gu_object_stack_depth - 1];
+	gu_list->current = gu_object_stack[gu_object_stack_depth];
 
 	sendCommandi(BASE, (((unsigned int)current) >> 8) & 0xf0000);
 	sendCommandi(BJUMP, (unsigned int)current);
 	gu_list->current = current;
 
-	gu_object_stack_depth--;
+	if (gu_curr_context == GU_DIRECT) {
+		res = _sceGuUpdateStallAddr();
+		if (res < 0) {
+			return res;
+		}
+	}
+
+	return gu_object_stack_depth;
 }
