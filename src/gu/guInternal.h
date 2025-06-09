@@ -82,7 +82,6 @@ extern int gu_object_stack_depth;
 
 void callbackSig(int id, void *arg);
 void callbackFin(int id, void *arg);
-void _sceGuResetGlobalVariables();
 
 typedef enum GECommand
 {
