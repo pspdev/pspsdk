@@ -8,17 +8,27 @@
 
 #include "guInternal.h"
 
+#define LTYPE_POWERED_DIFFUSE (2)
+#define LTYPE_DIFFUSE_AND_SPECULAR (1)
+#define LTYPE_DIFFUSE (0)
+
 void sceGuLight(int light, int type, int components, const ScePspFVector3 *position)
 {
-	GuLightSettings* settings = &light_settings[light];
+	int offset = light * 3;
+	int ltype;
 
-	sendCommandf(settings->xpos,position->x);
-	sendCommandf(settings->ypos,position->y);
-	sendCommandf(settings->zpos,position->z);
+	if (components == GU_POWERED_DIFFUSE) {
+		ltype = LTYPE_POWERED_DIFFUSE;
+	} else if (components == GU_DIFFUSE_AND_SPECULAR) {
+		ltype = LTYPE_DIFFUSE_AND_SPECULAR;
+	} else {
+		ltype = LTYPE_DIFFUSE;
+	}
 
-	int kind = 2;
-	if (components != 8)
-		kind = (components^6) < 1 ? 1 : 0;
-
-	sendCommandi(settings->type,((type & 0x03) << 8)|kind);
+	// Light position
+	sendCommandf(LIGHT0_X + offset, position->x);
+	sendCommandf(LIGHT0_Y + offset, position->y);
+	sendCommandf(LIGHT0_Z + offset, position->z);
+	// Light type and components
+	sendCommandi(LIGHT_TYPE0 + light, ((type & GU_AMBIENT_AND_DIFFUSE) << 8) | ltype);
 }

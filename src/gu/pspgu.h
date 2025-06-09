@@ -273,7 +273,7 @@ extern "C" {
 #define GU_SPECULAR		(4)
 #define GU_AMBIENT_AND_DIFFUSE	(GU_AMBIENT|GU_DIFFUSE)
 #define GU_DIFFUSE_AND_SPECULAR	(GU_DIFFUSE|GU_SPECULAR)
-#define GU_UNKNOWN_LIGHT_COMPONENT (8)
+#define GU_POWERED_DIFFUSE (8)
 
 /* Light modes */
 #define GU_SINGLE_COLOR		(0)
@@ -863,7 +863,7 @@ void sceGuDisable(int state);
   * Available light components are:
   *   - GU_AMBIENT_AND_DIFFUSE
   *   - GU_DIFFUSE_AND_SPECULAR
-  *   - GU_UNKNOWN_LIGHT_COMPONENT
+  *   - GU_POWERED_DIFFUSE
   *
   * @param light - Light index
   * @param type - Light type
@@ -1420,7 +1420,7 @@ void sceGuClutLoad(int num_blocks, const void* cbp);
   * @param mask - Masks the color index with this bitmask after the shift (0-0xFF)
   * @param csa - Read-out start location (16-palette units)
 **/
-void sceGuClutMode(unsigned int cpsm, unsigned int shift, unsigned int mask, unsigned int a3);
+void sceGuClutMode(unsigned int cpsm, unsigned int shift, unsigned int mask, unsigned int csa);
 
 /**
   * Set virtual coordinate offset

@@ -9,13 +9,12 @@
 #include "guInternal.h"
 
 void sceGuLightSpot(int light, const ScePspFVector3 *direction, float exponent, float cutoff)
-{
-	GuLightSettings* settings = &light_settings[light];
+{	
+	int offset = light * 3;
+	sendCommandf(LIGHT0_EXPONENT_ATTEN + light, exponent);
+	sendCommandf(LIGHT0_CUTOFF_ATTEN + light, cutoff);
 
-	sendCommandf(settings->exponent,exponent);
-	sendCommandf(settings->cutoff,cutoff);
-
-	sendCommandf(settings->xdir,direction->x);
-	sendCommandf(settings->ydir,direction->y);
-	sendCommandf(settings->zdir,direction->z);
+	sendCommandf(LIGHT0_DIRECTION_X + offset, direction->x);
+	sendCommandf(LIGHT0_DIRECTION_Y + offset, direction->y);
+	sendCommandf(LIGHT0_DIRECTION_Z + offset, direction->z);
 }
