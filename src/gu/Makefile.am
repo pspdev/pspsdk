@@ -18,7 +18,6 @@ noinst_HEADERS = guInternal.h
 
 libpspgu_a_SOURCES = \
 	guInternal.c \
-	resetValues.c \
 	sceGuAlphaFunc.c \
 	sceGuAmbient.c \
 	sceGuAmbientColor.c \
