@@ -131,6 +131,44 @@ void gumLoadMatrix(ScePspFMatrix4* r, const ScePspFMatrix4* a)
 }
 #endif
 
+#ifdef F_gumLoadQuaternion
+void gumLoadQuaternion(ScePspFMatrix4 *m, const ScePspFQuaternion* q)
+{
+        m->x.x = 1 - 2 * (q->y * q->y + q->z * q->z);
+        m->y.x = 2 * (q->x * q->y - q->w * q->z);
+        m->z.x = 2 * (q->x * q->z + q->w * q->y);
+        m->w.x = 0;
+
+        m->x.y = 2 * (q->x * q->y + q->w * q->z);
+        m->y.y = 1 - 2 * (q->x * q->x + q->z * q->z);
+        m->z.y = 2 * (q->y * q->z - q->w * q->x);
+        m->w.y = 0;
+
+        m->x.z = 2 * (q->x * q->z - q->w * q->y);
+        m->y.z = 2 * (q->y * q->z + q->w * q->x);
+        m->z.z = 1 - 2 * (q->x * q->x + q->y * q->y);
+        m->w.z = 0;
+
+        m->x.w = 0;
+        m->y.w = 0;
+        m->z.w = 0;
+        m->w.w = 1;
+}
+#endif
+
+#ifdef F_gumLoadAxisAngle
+void gumLoadAxisAngle(ScePspFQuaternion* q, ScePspFVector3* axis, float theta)
+{
+        gumNormalize(axis);
+        float sin_t = sinf(theta / 2);
+        float cos_t = cosf(theta / 2);
+        q->x = axis->x * sin_t;
+        q->y = axis->y * sin_t;
+        q->z = axis->z * sin_t;
+        q->w = cos_t;
+}
+#endif
+
 #ifdef F_gumLookAt
 void gumLookAt(ScePspFMatrix4* m, ScePspFVector3* eye, ScePspFVector3* center, ScePspFVector3* up)
 {
@@ -188,6 +226,36 @@ void gumMultMatrix(ScePspFMatrix4* result, const ScePspFMatrix4* a, const ScePsp
         }
 
 	memcpy(result,&t,sizeof(ScePspFMatrix4));
+}
+#endif
+
+#ifdef F_gumMultQuaternion
+void gumMultQuaternion(ScePspFQuaternion* result, const ScePspFQuaternion* a, const ScePspFQuaternion* b)
+{
+        ScePspFVector3 cp;
+	ScePspFQuaternion res;
+        gumCrossProduct(&cp, (ScePspFVector3 *)a, (ScePspFVector3 *)b);
+        res.w = (a->w * b->w) - gumDotProduct((ScePspFVector3 *)a, (ScePspFVector3 *)b);
+        res.x = (a->w * b->x) + (b->w * a->x) + cp.x;
+        res.y = (a->w * b->y) + (b->w * a->y) + cp.y;
+        res.z = (a->w * b->z) + (b->w * a->z) + cp.z;
+        gumNormalizeQuaternion(&res);
+	*result = res;
+}
+#endif
+
+#ifdef F_gumNormalizeQuaternion
+void gumNormalizeQuaternion(ScePspFQuaternion* q)
+{
+        float l = sqrtf((q->w * q->w) + (q->x * q->x) + (q->y * q->y) + (q->z * q->z));
+	if (l > GUM_EPSILON)
+	{
+		float il = 1 / l;
+		q->w *= il;
+		q->x *= il;
+		q->y *= il;
+		q->z *= il;
+	}
 }
 #endif
 
@@ -315,6 +383,38 @@ void gumRotateZYX(ScePspFMatrix4* m, const ScePspFVector3* v)
 	gumRotateZ(m,v->z);
 	gumRotateY(m,v->y);
 	gumRotateX(m,v->x);
+}
+#endif
+
+#ifdef F_gumRotateMatrix
+void gumRotateMatrix(ScePspFMatrix4* m, const ScePspFQuaternion* q)
+{
+	ScePspFMatrix4 rot_m;
+	gumLoadQuaternion(&rot_m, q);
+	gumMultMatrix(m, m, &rot_m);
+}
+#endif
+
+#ifdef F_gumRotateVector
+void gumRotateVector(ScePspFVector3* r, const ScePspFQuaternion* q, const ScePspFVector3* v)
+{
+        ScePspFQuaternion conjugate = {
+            -q->x,
+            -q->y,
+            -q->z,
+            q->w,
+        };
+        ScePspFQuaternion vector = {
+            v->x,
+            v->y,
+            v->z,
+            0,
+        };
+        gumMultQuaternion(&vector, &vector, &conjugate);
+        gumMultQuaternion(&vector, q, &vector);
+        r->x = vector.x;
+        r->y = vector.y;
+        r->z = vector.z;
 }
 #endif
 
@@ -531,6 +631,14 @@ void sceGumRotateZYX(const ScePspFVector3* v)
 	sceGumRotateZ(v->z);
 	sceGumRotateY(v->y);
 	sceGumRotateX(v->x);
+}
+#endif
+
+#ifdef F_sceGumRotate
+void sceGumRotate(const ScePspFQuaternion* q)
+{
+	gumRotateMatrix(gum_current_matrix, q);
+	gum_current_matrix_update = 1;
 }
 #endif
 
