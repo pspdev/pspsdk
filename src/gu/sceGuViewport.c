@@ -10,8 +10,14 @@
 
 void sceGuViewport(int cx, int cy, int width, int height)
 {
-	sendCommandf(VIEWPORT_X_SCALE, (float)(width >> 1));
-	sendCommandf(VIEWPORT_Y_SCALE, (float)((-height) >> 1));
-	sendCommandf(VIEWPORT_X_CENTER, (float)cx);
-	sendCommandf(VIEWPORT_Y_CENTER, (float)cy);
+	float sx, sy, tx, ty;
+  	sx = (float)(width)  *  0.5f;
+	sy = (float)(height) * -0.5f;
+	tx = (float)cx;
+	ty = (float)cy;
+	
+	sendCommandf(VIEWPORT_X_SCALE, sx);
+	sendCommandf(VIEWPORT_Y_SCALE, sy);
+	sendCommandf(VIEWPORT_X_CENTER, tx);
+	sendCommandf(VIEWPORT_Y_CENTER, ty);
 }
