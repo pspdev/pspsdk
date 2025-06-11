@@ -26,4 +26,5 @@ void sceGuDrawBezier(int vertex_type, int ucount, int vcount, const void *indice
   }
 
   sendCommandi(BEZIER, (vcount << 8) | ucount);
+  _sceGuUpdateStallAddr();
 }

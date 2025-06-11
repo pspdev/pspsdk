@@ -26,4 +26,5 @@ void sceGuDrawSpline(int vertex_type, int ucount, int vcount, int uedge, int ved
   }
 
   sendCommandi(SPLINE, (vedge << 18) | (uedge << 16) | (vcount << 8) | ucount);
+  _sceGuUpdateStallAddr();
 }
