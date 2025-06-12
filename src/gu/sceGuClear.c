@@ -46,7 +46,7 @@ void sceGuClear(int flags)
 		vertices = (struct Vertex *)sceGuGetMemory(2 * sizeof(struct Vertex));
 		count = 2;
 
-		vertices[0].color = 0;
+		vertices[0].color = filter;
 		vertices[0].x = 0;
 		vertices[0].y = 0;
 		vertices[0].z = context->clear_depth;
@@ -59,8 +59,10 @@ void sceGuClear(int flags)
 	else
 	{
 		struct Vertex *curr;
-		unsigned int i;
-		count = ((gu_draw_buffer.width + 63) / 64) * 2;
+		unsigned int i, blockWidth;
+		// Use blockWidth of 32 for 8888, 64 for other formats
+		blockWidth = gu_draw_buffer.pixel_size == GU_PSM_8888 ? 32 : 64;
+		count = ((gu_draw_buffer.width + blockWidth - 1) / blockWidth) * 2;
 		vertices = (struct Vertex *)sceGuGetMemory(count * sizeof(struct Vertex));
 		curr = vertices;
 
@@ -72,7 +74,7 @@ void sceGuClear(int flags)
 			k = (i & 1);
 
 			curr->color = filter;
-			curr->x = (j + k) * 64;
+			curr->x = (j + k) * blockWidth;
 			curr->y = k * gu_draw_buffer.height;
 			curr->z = context->clear_depth;
 		}
