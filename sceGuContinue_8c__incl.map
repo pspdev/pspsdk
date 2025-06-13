@@ -1,0 +1,9 @@
+<map id="gu/sceGuContinue.c" name="gu/sceGuContinue.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,144,31"/>
+<area shape="rect" id="Node000002" href="$pspge_8h.html" title=" " alt="" coords="41,79,108,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,31,77,63,72,63,72,31"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="33,153,116,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,105,77,137,72,137,72,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="43,226,106,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="77,179,77,211,72,211,72,179"/>
+</map>
