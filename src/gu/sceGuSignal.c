@@ -8,12 +8,12 @@
 
 #include "guInternal.h"
 
-void sceGuSignal(int signal, int argument)
+void sceGuSignal(int mode, int id)
 {
-	sendCommandi(SIGNAL, ((signal & 0xff) << 16) | (argument & 0xffff));
+	sendCommandi(SIGNAL, ((mode & 0xff) << 16) | (id & 0xffff));
 	sendCommandi(END, 0);
 
-	if (signal == GU_SIGNAL_PAUSE)
+	if (mode == GU_SIGNAL_PAUSE)
 	{
 		sendCommandi(FINISH, 0);
 		sendCommandi(END, 0);

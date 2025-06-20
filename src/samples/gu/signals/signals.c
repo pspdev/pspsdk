@@ -214,10 +214,8 @@ int main(int argc, char* argv[])
 	// init GU and set callbacks
 	sceGuInit();
 
-	// 0x01 - user callback
-	// 0x04 - 'rendering finished' callback
-	sceGuSetCallback(1, &mySignalHandler);
-	sceGuSetCallback(4, &myFinishHandler);
+	sceGuSetCallback(GU_CALLBACK_SIGNAL, &mySignalHandler);
+	sceGuSetCallback(GU_CALLBACK_FINISH, &myFinishHandler);
 
 	// setup GU
 	sceGuStart(GU_DIRECT,list);
@@ -246,7 +244,7 @@ int main(int argc, char* argv[])
 	// run sample
 
 #ifdef USING_SIGNALS
-	sceGuCallMode(1);
+	sceGuCallMode(GU_CALL_SIGNAL);
 #endif
 
 	// generate callable command-list with texture setup
@@ -439,8 +437,7 @@ void render_billboards(unsigned int i)
 
 #ifdef USING_SIGNALS
 	// send a signal when rendering was completed
-	// signals 0x01..0x03 - seems to be available for custom usage
-	sceGuSignal( 1, nextI );
+	sceGuSignal(GU_SIGNAL_WAIT, nextI);
 
 	// HACK: keeps CPU waiting until all jobs were submitted for GPU
 	if (nextI == g_context.iterationCount)
