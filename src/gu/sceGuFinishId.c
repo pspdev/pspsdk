@@ -33,7 +33,7 @@ int sceGuFinishId(unsigned int id)
 	case GU_CALL:
 		if (gu_call_mode == GU_CALL_SIGNAL)
 		{
-			sendCommandi(SIGNAL, 0x120000);
+			sendCommandi(SIGNAL, 0x12 << 16);
 			sendCommandi(END, 0);
 		}
 		else

@@ -193,7 +193,7 @@ int main(int argc, char* argv[]) {
 				sceGuBeginObject(GU_VERTEX_32BITF, 8, 0, bbox);
 			}
 
-			sceGuSignal(1, GU_BEHAVIOR_SUSPEND);
+			sceGuSignal(GU_SIGNAL_WAIT, i);
 
 			sceGumPushMatrix();
 			sceGumRotateX(time * 0.5324f);
