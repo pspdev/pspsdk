@@ -56,7 +56,7 @@ $(TARGET).elf: $(OBJS)
 endif
 
 %.prx: %.elf
-	$(STRIP) --strip-unneeded --keep-section=.rodata.sce* --keep-section=.sceStub.text --keep-section=.lib.ent* --keep-section=.lib.stub* --keep-section=.symtab --keep-section=.strtab --keep-section=.dynsym --keep-section=.dynstr --keep-section=.hash --keep-section=.dynamic --keep-section=.got --keep-section=.plt --keep-section=.rel* $< -o $(TARGET)_stripped.elf
+	$(STRIP) --strip-unneeded --keep-section=.rodata.sce* --keep-section=.sceStub.text --keep-section=.lib.ent* --keep-section=.lib.stub* --keep-section=.symtab --keep-section=.strtab --keep-section=.dynsym --keep-section=.dynstr --keep-section=.hash --keep-section=.dynamic --keep-section=.got --keep-section=.plt --keep-section=.rel* --remove-section=.debug* --remove-section=.comment --remove-section=.gnu.attributes --remove-section=.MIPS.abiflags $< -o $(TARGET)_stripped.elf
 	psp-prxgen $(TARGET)_stripped.elf $@
 	-rm -f $(TARGET)_stripped.elf
 
