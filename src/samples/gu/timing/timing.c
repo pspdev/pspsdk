@@ -236,43 +236,43 @@ int main(int argc, char** argv) {
 
 		switch(mode) {
 			case 0 :
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 1);
+				sceGuSignal(GU_SIGNAL_WAIT, 1);
 				sceGumDrawArray(GU_TRIANGLES, GU_VERTEX_32BITF, TORUS_SEGMENTS * TORUS_SLICES * 6, 0, triangleTorus);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 2);
+				sceGuSignal(GU_SIGNAL_WAIT, 2);
 				break;
 
 			case 1 :
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 1);
+				sceGuSignal(GU_SIGNAL_WAIT, 1);
 				sceGumDrawArrayN(GU_TRIANGLE_STRIP, GU_VERTEX_32BITF, TORUS_SLICES*2+2, TORUS_SEGMENTS, 0, tristripTorus);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 2);
+				sceGuSignal(GU_SIGNAL_WAIT, 2);
 				break;
 
 			case 2 :
 				sceGuPatchDivide(1, 1);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 1);
+				sceGuSignal(GU_SIGNAL_WAIT, 1);
 				sceGumDrawSpline(GU_VERTEX_32BITF, TORUS_SEGMENTS + 3, TORUS_SLICES + 3, GU_FILL_FILL, GU_FILL_FILL, 0, splineTorus);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 2);
+				sceGuSignal(GU_SIGNAL_WAIT, 2);
 				break;
 
 			case 3 :
 				sceGuPatchDivide(2, 2);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 1);
+				sceGuSignal(GU_SIGNAL_WAIT, 1);
 				sceGumDrawSpline(GU_VERTEX_32BITF, TORUS_SEGMENTS + 3, TORUS_SLICES + 3, GU_FILL_FILL, GU_FILL_FILL, 0, splineTorus);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 2);
+				sceGuSignal(GU_SIGNAL_WAIT, 2);
 				break;
 
 			case 4 :
 				sceGuPatchDivide(4, 4);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 1);
+				sceGuSignal(GU_SIGNAL_WAIT, 1);
 				sceGumDrawSpline(GU_VERTEX_32BITF, TORUS_SEGMENTS + 3, TORUS_SLICES + 3, GU_FILL_FILL, GU_FILL_FILL, 0, splineTorus);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 2);
+				sceGuSignal(GU_SIGNAL_WAIT, 2);
 				break;
 
 			default :
 				sceGuPatchDivide(8, 8);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 1);
+				sceGuSignal(GU_SIGNAL_WAIT, 1);
 				sceGumDrawSpline(GU_VERTEX_32BITF, TORUS_SEGMENTS + 3, TORUS_SLICES + 3, GU_FILL_FILL, GU_FILL_FILL, 0, splineTorus);
-				sceGuSignal(GU_BEHAVIOR_SUSPEND, 2);
+				sceGuSignal(GU_SIGNAL_WAIT, 2);
 				break;
 		}
 		sceGuFinish();

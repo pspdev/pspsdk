@@ -324,7 +324,7 @@ extern "C" {
 #define GU_CALLBACK_SIGNAL	(1)
 #define GU_CALLBACK_FINISH	(4)
 
-/* Signal behavior */
+/* Signal behavior (deprecated) */
 #define GU_BEHAVIOR_SUSPEND (1)
 #define GU_BEHAVIOR_CONTINUE (2)
 
@@ -503,19 +503,15 @@ void* sceGuSetCallback(int signal, void (*callback)(int));
 /**
   * Trigger signal to call code from the command stream
   * 
-  * Available signals are:
+  * Available signal interrupt modes are:
   *   - GU_SIGNAL_WAIT - Wait for callback to finish
   *   - GU_SIGNAL_NOWAIT - Do not wait for callback to finish
   *   - GU_SIGNAL_PAUSE - Pause execution until callback is finished
   *
-  * Available behaviors are:
-  *   - GU_BEHAVIOR_SUSPEND - Stops display list execution until callback function finished
-  *   - GU_BEHAVIOR_CONTINUE - Do not stop display list execution during callback
-  *
-  * @param signal - Signal to trigger
-  * @param behavior - Behavior type
+  * @param mode - Signal interrupt mode
+  * @param id - Signal id
 **/
-void sceGuSignal(int signal, int behavior);
+void sceGuSignal(int mode, int id);
 
 /**
   * Send raw float-command to the GE
@@ -604,7 +600,7 @@ int sceGuCallList(const void* list);
 /**
   * Set wether to use stack-based calls or signals to handle execution of called lists.
   *
-  * @param mode - GU_TRUE(1) to enable signals, GU_FALSE(0) to disable signals and use
+  * @param mode - GU_CALL_SIGNAL(1) to enable signals, GU_CALL_NORMAL(0) to disable signals and use
   * normal calls instead.
 **/
 void sceGuCallMode(int mode);

@@ -15,7 +15,7 @@ int sceGuCallList(const void *list)
 
 	if (gu_call_mode == GU_CALL_SIGNAL)
 	{
-		sendCommandi(SIGNAL, (list_addr >> 16) | 0x110000);
+		sendCommandi(SIGNAL, (0x11 << 16) | (list_addr >> 16));
 		sendCommandi(END, list_addr & 0xffff);
 	}
 	else
