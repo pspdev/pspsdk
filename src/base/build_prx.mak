@@ -18,6 +18,7 @@ CC       = psp-gcc
 CXX      = psp-g++
 AS       = psp-gcc
 LD       = psp-gcc
+STRIP    = psp-strip
 FIXUP    = psp-fixup-imports
 
 # Add PSPSDK includes and libraries.
@@ -55,7 +56,9 @@ $(TARGET).elf: $(OBJS)
 endif
 
 %.prx: %.elf
-	psp-prxgen $< $@
+	$(STRIP) --strip-unneeded --keep-section=.rodata.sce* --keep-section=.sceStub.text --keep-section=.lib.ent* --keep-section=.lib.stub* --keep-section=.symtab --keep-section=.strtab --keep-section=.dynsym --keep-section=.dynstr --keep-section=.hash --keep-section=.dynamic --keep-section=.got --keep-section=.plt --keep-section=.rel* $< -o $(TARGET)_stripped.elf
+	psp-prxgen $(TARGET)_stripped.elf $@
+	-rm -f $(TARGET)_stripped.elf
 
 %.c: %.exp
 	psp-build-exports -b $< > $@
