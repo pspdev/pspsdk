@@ -14,6 +14,7 @@ macro(create_pbp_file)
     TARGET          # defined by an add_executable call before calling create_pbp_file
     TITLE           # optional, string, target's name in PSP menu
     ICON_PATH       # optional, absolute path to .png file, 144x82
+    ANIM_PATH       # optional, absolute path to .pmf file
     BACKGROUND_PATH # optional, absolute path to .png file, 480x272
     PREVIEW_PATH    # optional, absolute path to .png file, 480x272
     MUSIC_PATH      # optional, absolute path to .at3 file
@@ -149,7 +150,7 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "${ARG_ANIM_PATH}" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>.prx" "${ARG_PSAR_PATH}"
       COMMENT "Calling pack-pbp with PRX file for target ${ARG_TARGET}"
       )
@@ -157,7 +158,7 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "NULL" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "${ARG_ANIM_PATH}" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>" "${ARG_PSAR_PATH}"
       COMMENT "Calling pack-pbp with ELF file for target ${ARG_TARGET}"
       )
