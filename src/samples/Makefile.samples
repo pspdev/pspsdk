@@ -18,6 +18,7 @@ SAMPLES = \
 	gu/clut \
 	gu/copy \
 	gu/cube \
+	gu/doublelist \
 	gu/envmap \
 	gu/integerdrawing \
 	gu/lights \
@@ -40,6 +41,7 @@ SAMPLES = \
 	gu/text \
 	gu/timing \
 	gu/vertex \
+	gu/vsync30FPS \
 	gu/zbufferfog \
 	ir/sircs \
 	ir/irda \
