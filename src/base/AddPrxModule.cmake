@@ -23,6 +23,7 @@ function(add_prx_module name)
           OUTPUT ${GENERATED_C_FILE}
           COMMAND psp-build-exports -b ${FILE} > ${GENERATED_C_FILE}
           DEPENDS ${FILE}
+          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
           COMMENT "Generating ${EXP_FILE_NAME}.c from ${EXP_FILE_NAME}.exp for target ${name}"
       )
 
