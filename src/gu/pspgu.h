@@ -249,15 +249,21 @@ extern "C" {
 #define GU_ABS			(5)
 
 /* Blending Factor */
-#define GU_SRC_COLOR		(0)
-#define GU_ONE_MINUS_SRC_COLOR	(1)
-#define GU_SRC_ALPHA		(2)
-#define GU_ONE_MINUS_SRC_ALPHA	(3)
-#define GU_DST_COLOR		(0)
-#define GU_ONE_MINUS_DST_COLOR	(1)
-#define GU_DST_ALPHA		(4)
-#define GU_ONE_MINUS_DST_ALPHA	(5)
-#define GU_FIX			(10)
+#define GU_OTHER_COLOR                (0)
+#define GU_ONE_MINUS_OTHER_COLOR      (1)
+#define GU_SRC_ALPHA                  (2)
+#define GU_ONE_MINUS_SRC_ALPHA        (3)
+#define GU_DST_ALPHA                  (4)
+#define GU_ONE_MINUS_DST_ALPHA        (5)
+#define GU_DOUBLE_SRC_ALPHA           (6)
+#define GU_ONE_MINUS_DOUBLE_SRC_ALPHA (7)
+#define GU_DOUBLE_DST_ALPHA           (8)
+#define GU_ONE_MINUS_DOUBLE_DST_ALPHA (9)
+#define GU_FIX                        (10) /* Note: behavior of 11-15 blend factors is identical to GU_FIX */
+#define GU_SRC_COLOR           (0) /* Deprecated */
+#define GU_ONE_MINUS_SRC_COLOR (1) /* Deprecated */
+#define GU_DST_COLOR           (0) /* Deprecated */
+#define GU_ONE_MINUS_DST_COLOR (1) /* Deprecated */
 
 /* Stencil Operations */
 #define GU_KEEP			(0)
@@ -1054,15 +1060,17 @@ void sceGuAmbientColor(unsigned int color);
   *   - GU_ABS - |Cs-Cd|
   *
   * Available blending-functions are:
-  *   - GU_SRC_COLOR
-  *   - GU_ONE_MINUS_SRC_COLOR
-  *   - GU_SRC_ALPHA
-  *   - GU_ONE_MINUS_SRC_ALPHA
-  *   - GU_DST_ALPHA
-  *   - GU_ONE_MINUS_DST_ALPHA
-  *   - GU_DST_COLOR
-  *   - GU_ONE_MINUS_DST_COLOR
-  *   - GU_FIX
+  *   - GU_OTHER_COLOR - dstColor if used for source operand; srcColor if used for destination operand
+  *   - GU_ONE_MINUS_OTHER_COLOR - 1-dstColor if used for source operand; 1-srcColor if used for destination operand
+  *   - GU_SRC_ALPHA - srcAlpha
+  *   - GU_ONE_MINUS_SRC_ALPHA - 1-srcAlpha
+  *   - GU_DST_ALPHA - dstAlpha
+  *   - GU_ONE_MINUS_DST_ALPHA - 1-dstAlpha
+  *   - GU_DOUBLE_SRC_ALPHA - 2*srcAlpha
+  *   - GU_ONE_MINUS_DOUBLE_SRC_ALPHA - 1-2*srcAlpha
+  *   - GU_DOUBLE_DST_ALPHA - 2*dstAlpha
+  *   - GU_ONE_MINUS_DOUBLE_DST_ALPHA - 1-2*dstAlpha
+  *   - GU_FIX - srcFix if used for source operand; dstFix if used for destination operand
   *
   * @param op - Blending Operation
   * @param src - Blending function for source operand
