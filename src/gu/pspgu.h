@@ -1460,7 +1460,7 @@ void sceGuScissor(int x, int y, int w, int h);
   * @param width - Width of viewport
   * @param height - Height of viewport
 **/
-void sceGuViewport(int cx, int cy, int width, int height);
+void sceGuViewport(float cx, float cy, float width, float height);
 
 /**
   * Draw bezier surface

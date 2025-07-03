@@ -8,16 +8,14 @@
 
 #include "guInternal.h"
 
-void sceGuViewport(int cx, int cy, int width, int height)
+void sceGuViewport(float cx, float cy, float width, float height)
 {
-	float sx, sy, tx, ty;
-  	sx = (float)(width)  *  0.5f;
-	sy = (float)(height) * -0.5f;
-	tx = (float)cx;
-	ty = (float)cy;
+	float sx, sy;
+  	sx = width  *  0.5f;
+	sy = height * -0.5f;
 	
 	sendCommandf(VIEWPORT_X_SCALE, sx);
 	sendCommandf(VIEWPORT_Y_SCALE, sy);
-	sendCommandf(VIEWPORT_X_CENTER, tx);
-	sendCommandf(VIEWPORT_Y_CENTER, ty);
+	sendCommandf(VIEWPORT_X_CENTER, cx);
+	sendCommandf(VIEWPORT_Y_CENTER, cy);
 }
