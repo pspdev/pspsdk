@@ -955,9 +955,16 @@ void sceGuClearDepth(unsigned int depth);
 void sceGuClearStencil(unsigned int stencil);
 
 /**
-  * Set mask for which bits of the pixels to write
+  * Set mask for ignoring writes to specific color channels
   *
-  * @param mask - Which bits to filter against writes
+  * @param mask - Which color channels to filter against writes 
+  * 
+  * @note This function doesn't support filtering individual bits, only entire color channels
+  * 
+  * @par Example: Do not write to blue channel
+  * @code
+  * sceGuPixelMask(0xff0000);
+  * @endcode
   *
 **/
 void sceGuPixelMask(unsigned int mask);
