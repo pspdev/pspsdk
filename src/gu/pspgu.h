@@ -507,7 +507,9 @@ void* sceGuSetCallback(int signal, void (*callback)(int));
   *   - GU_SIGNAL_WAIT - Wait for callback to finish
   *   - GU_SIGNAL_NOWAIT - Do not wait for callback to finish
   *   - GU_SIGNAL_PAUSE - Pause execution until callback is finished
-  *
+  * 
+  * @note Additional signal interrupt modes can be found here: https://github.com/uofw/uofw/blob/master/include/ge_user.h
+  * 
   * @param mode - Signal interrupt mode
   * @param id - Signal id
 **/
