@@ -1412,11 +1412,13 @@ void sceGuClutLoad(int num_blocks, const void* cbp);
   *   - GU_PSM_5551
   *   - GU_PSM_4444
   *   - GU_PSM_8888
+  * 
+  * @note Final color index is computed by GE in the following way: `((pixelValue >> shift) & mask) | (csa << 4)`
   *
   * @param cpsm - Which pixel format to use for the palette
   * @param shift - Shifts color index by that many bits to the right
   * @param mask - Masks the color index with this bitmask after the shift (0-0xFF)
-  * @param csa - Read-out start location (16-palette units)
+  * @param csa - This value is shifted to the left by 4 bits and bitwise ORed with color index after applying mask
 **/
 void sceGuClutMode(unsigned int cpsm, unsigned int shift, unsigned int mask, unsigned int csa);
 
