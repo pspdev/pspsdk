@@ -1,0 +1,9 @@
+<map id="kernel/pspintrman_kernel.h" name="kernel/pspintrman_kernel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,182,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="34,79,153,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,31,96,63,91,63,91,31"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="52,153,135,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,105,96,137,91,137,91,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="62,226,125,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="96,179,96,211,91,211,91,179"/>
+</map>
