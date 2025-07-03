@@ -1161,6 +1161,9 @@ void sceGuFrontFace(int order);
   *   - GU_SET
   *
   * This operation only has effect if GU_COLOR_LOGIC_OP is enabled.
+  * 
+  * @note Unlike OpenGL, GE allows to enable both blending and color logic operations at the same time,
+  * in which case color blending will be computed as usual but stored in framebuffer using specified logical operation
   *
   * @param op - Operation to execute
 **/
