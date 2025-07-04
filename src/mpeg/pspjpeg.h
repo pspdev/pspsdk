@@ -72,7 +72,7 @@ int sceJpegDecodeMJpeg(u8 *jpegbuf,	SceSize size, void *rgba, u32 dhtMode);
  *
  * @return (width * 65536) + height on success, < 0 on error 
 */
-int sceJpegDecodeMJpegYCbCr(u8 *jpegAddr, SceSize jpegSize, u8 *yCbCr, SceSize yCbCrSize, u32 dhtMode);
+int sceJpegDecodeMJpegYCbCr(u8 *jpegbuf, SceSize jpegSize, u8 *yCbCr, SceSize yCbCrSize, u32 dhtMode);
 
 /**
  * Converts a frame from YCbCr to ABGR
@@ -86,6 +86,18 @@ int sceJpegDecodeMJpegYCbCr(u8 *jpegAddr, SceSize jpegSize, u8 *yCbCr, SceSize y
  * @return 0 on success, < 0 on error
 */
 int sceJpegCsc(u8 *imageAddr, u8 *yCbCrAddr, int widthHeight, int bufferWidth, int colourInfo);
+
+/**
+ * Reads information from mjpeg frame
+ *
+ * @param jpegbuf - the buffer with the mjpeg frame
+ * @param size - size of the mjpeg frame
+ * @param colourInfoAddr - address where the mjpeg chroma information will be stored
+ * @param dhtMode - Unknown, pass 0
+ *
+ * @return 0 on success, < 0 on error
+*/
+int sceJpegGetOutputInfo(u8* jpegbuf, SceSize size, int* colourInfoAddr, int dhtMode);
 
 #ifdef __cplusplus
 }
