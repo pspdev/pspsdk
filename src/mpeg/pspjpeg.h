@@ -66,12 +66,13 @@ int sceJpegDecodeMJpeg(u8 *jpegbuf,	SceSize size, void *rgba, u32 dhtMode);
  *
  * @param jpegbuf - the buffer with the mjpeg frame
  * @param size - size of the buffer pointed by jpegbuf
- * @param rgba - buffer where the decoded data in YCbCr format will be stored.
+ * @param yCbCr - buffer where the decoded data in YCbCr format will be stored.
+ * @param yCbCrSize - size of the buffer pointed by yCbCr
  * @param dhtMode - Unknown, pass 0
  *
  * @return (width * 65536) + height on success, < 0 on error 
 */
-int sceJpegDecodeMJpegYCbCr(u8 *jpegbuf, SceSize size, void *yCbCr, u32 dhtMode);
+int sceJpegDecodeMJpegYCbCr(u8 *jpegAddr, SceSize jpegSize, u8 *yCbCr, SceSize yCbCrSize, u32 dhtMode);
 
 /**
  * Converts a frame from YCbCr to ABGR
