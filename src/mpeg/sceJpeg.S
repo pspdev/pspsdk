@@ -24,7 +24,7 @@
 	IMPORT_FUNC	"sceJpeg",0x64B6F978,sceJpeg_64B6F978
 #endif
 #ifdef F_sceJpeg_0007
-	IMPORT_FUNC	"sceJpeg",0x67F0ED84,sceJpeg_67F0ED84
+	IMPORT_FUNC	"sceJpeg",0x67F0ED84,sceJpegCsc
 #endif
 #ifdef F_sceJpeg_0008
 	IMPORT_FUNC	"sceJpeg",0x7D2F3D7F,sceJpegFinishMJpeg
