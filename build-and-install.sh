@@ -45,8 +45,11 @@ mkdir -p $PSPDEV/share/licenses/PrxEncrypter
 cp tools/PrxEncrypter/LICENSE $PSPDEV/share/licenses/PrxEncrypter
 
 ## Store build information
-BUILD_FILE="${PSPDEV}/build.txt"
-if [[ -f "${BUILD_FILE}" ]]; then
-  sed -i'' '/^pspsdk /d' "${BUILD_FILE}"
+if [ -d .git ]; then
+  BUILD_FILE="${PSPDEV}/build.txt"
+  if [[ -f "${BUILD_FILE}" ]]; then
+    sed -i'' '/^pspsdk /d' "${BUILD_FILE}"
+  fi
+  git log -1 --format="pspsdk %H %cs %s" >> "${BUILD_FILE}"
 fi
-git log -1 --format="pspsdk %H %cs %s" >> "${BUILD_FILE}"
+
