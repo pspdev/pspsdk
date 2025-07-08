@@ -27,7 +27,7 @@ void sceGuEnable(int state)
 		context->scissor_enable = 1;
 		sendCommandi(SCISSOR1, orig);
 		sendCommandi(SCISSOR2, end);
-		sendCommandi(REGION1, orig);
+		sendCommandi(REGION1, 0);
 		sendCommandi(REGION2, end);
 	}
 	break;
