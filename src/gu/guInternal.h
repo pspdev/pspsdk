@@ -11,6 +11,11 @@
 
 #include "pspgu.h"
 
+#ifdef GU_DEBUG
+#include <assert.h>
+#include <stdio.h>
+#endif
+
 typedef void (*GuCallback)(int);
 
 typedef struct

@@ -12,10 +12,11 @@ CFLAGS =  @PSPSDK_CFLAGS@
 libpspguincludedir = @PSPSDK_INCLUDEDIR@
 libpspguinclude_HEADERS = pspgu.h
 
-lib_LIBRARIES = libpspgu.a
+lib_LIBRARIES = libpspgu.a libpspgud.a
 
 noinst_HEADERS = guInternal.h
 
+# Regular library (no debug assertions)
 libpspgu_a_SOURCES = \
 	guInternal.c \
 	sceGuAlphaFunc.c \
@@ -111,4 +112,8 @@ libpspgu_a_SOURCES = \
 	sceGuTexWrap.c \
 	sceGuViewport.c \
 	vram.c
+
+# Debug library (with debug assertions)
+libpspgud_a_SOURCES = $(libpspgu_a_SOURCES)
+libpspgud_a_CFLAGS = $(CFLAGS) -DGU_DEBUG
 
