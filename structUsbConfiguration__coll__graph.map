@@ -1,0 +1,12 @@
+<map id="UsbConfiguration" name="UsbConfiguration">
+<area shape="rect" id="Node000001" title="USB driver configuration." alt="" coords="146,183,266,208"/>
+<area shape="rect" id="Node000002" href="$structConfigDescriptor.html" title="USB configuration descriptor." alt="" coords="5,94,122,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,129,118,156,167,180,165,184,115,161,82,133"/>
+<area shape="rect" id="Node000003" href="$structUsbInterfaces.html" title="USB driver interfaces structure." alt="" coords="218,94,322,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="255,134,217,184,213,181,250,130"/>
+<area shape="rect" id="Node000004" href="$structInterfaceDescriptor.html" title="USB Interface descriptor." alt="" coords="126,5,257,31"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="188,46,184,81,185,119,193,153,204,181,199,183,188,155,180,120,178,81,183,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="214,41,261,92,257,95,210,44"/>
+<area shape="rect" id="Node000005" href="$structEndpointDescriptor.html" title="USB endpoint descriptor." alt="" coords="346,94,477,120"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="370,129,236,185,234,180,368,124"/>
+</map>

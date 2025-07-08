@@ -1,0 +1,56 @@
+var group__LoadCore =
+[
+    [ "SceModule", "structSceModule.html", [
+      [ "attribute", "structSceModule.html#a11771d6e5ab7f82142c439ee0c0583a9", null ],
+      [ "bss_size", "structSceModule.html#a815002802070789fa39f3e4ff623f199", null ],
+      [ "data_size", "structSceModule.html#a366858eee90c033e666cd86488702104", null ],
+      [ "ent_size", "structSceModule.html#a3da795096f85b4d5896ba523831909e9", null ],
+      [ "ent_top", "structSceModule.html#ae527c8a8f61890ad71ea7a83aa8de89d", null ],
+      [ "entry_addr", "structSceModule.html#a7c06dc8a89cfa4220736257e046c6914", null ],
+      [ "gp_value", "structSceModule.html#ab870b2e165b065ee85dcfa1ae38c6479", null ],
+      [ "modid", "structSceModule.html#a17821d6c5a096534ca4ee6676ea3a020", null ],
+      [ "modname", "structSceModule.html#a33222c63cb59a7ec5cae7b75cdd09847", null ],
+      [ "next", "structSceModule.html#ac9534c5c2dab77002030f27a70dd6a19", null ],
+      [ "nsegment", "structSceModule.html#ac4344083893694d6a4114ea68f86a602", null ],
+      [ "segmentaddr", "structSceModule.html#a2c48b6e5ba37e05247e686142192b13c", null ],
+      [ "segmentsize", "structSceModule.html#ae50a804371118edd0b79e9d9e75ff70a", null ],
+      [ "stub_size", "structSceModule.html#a9290f3a674d49c57e1074e019cf13823", null ],
+      [ "stub_top", "structSceModule.html#a54218334d911d3abe7c19838020b019a", null ],
+      [ "terminal", "structSceModule.html#a1415e3961f8bfb5b61dff5f1f41b0338", null ],
+      [ "text_addr", "structSceModule.html#aeace195f86505da4d24937acc8e9bbf0", null ],
+      [ "text_size", "structSceModule.html#a2d8cfac72766dc9164a96ce35566c3ea", null ],
+      [ "unknown1", "structSceModule.html#a07cc3b5444b231a63c3a1b26ae02a97a", null ],
+      [ "unknown2", "structSceModule.html#aa5c599f40cfdf0f34a92e3750dbcb7c3", null ],
+      [ "unknown3", "structSceModule.html#ad4417723ed31739e332a8146d10c0f80", null ],
+      [ "unknown4", "structSceModule.html#a0c6f8555d6c006b181f1fa8c86a9c143", null ],
+      [ "version", "structSceModule.html#aaf9547ff4af46b76e8418267088a3494", null ]
+    ] ],
+    [ "SceLibraryEntryTable", "structSceLibraryEntryTable.html", [
+      [ "attribute", "structSceLibraryEntryTable.html#a4644ba458b911e0ce3e46c2b6183a03f", null ],
+      [ "entrytable", "structSceLibraryEntryTable.html#a4e1ab65178e1ca1cbf34d78a8e65a94b", null ],
+      [ "len", "structSceLibraryEntryTable.html#ad0c085685c1b91d318cc4e2c50890058", null ],
+      [ "libname", "structSceLibraryEntryTable.html#af81a46c9f940187a8a6fd69c1626d12c", null ],
+      [ "stubcount", "structSceLibraryEntryTable.html#a7f52c51ab7441c56b12fa0f54849147a", null ],
+      [ "version", "structSceLibraryEntryTable.html#acdfb28cf9141bfa7bdbfb7ccf14a5e6d", null ],
+      [ "vstubcount", "structSceLibraryEntryTable.html#a721ef365aed1b7a713ef17e1ba07733a", null ]
+    ] ],
+    [ "SceLibraryStubTable", "structSceLibraryStubTable.html", [
+      [ "attribute", "structSceLibraryStubTable.html#a25a4a2a5c33ff4d7c0a0041a3e889912", null ],
+      [ "len", "structSceLibraryStubTable.html#a58f8da51d9059cb56d5ca2af967c7e65", null ],
+      [ "libname", "structSceLibraryStubTable.html#a0ddc32494aae0a592083279df1879f6a", null ],
+      [ "nidtable", "structSceLibraryStubTable.html#a6e962e67b4c8e1cc75fecf06b9b260fb", null ],
+      [ "stubcount", "structSceLibraryStubTable.html#a195940bb34de82931b3924c833870d15", null ],
+      [ "stubtable", "structSceLibraryStubTable.html#a85a5d6eb85604a01b80e1718abcd61c7", null ],
+      [ "version", "structSceLibraryStubTable.html#a0532735ba962b4ffe9c98521e4fae7a8", null ],
+      [ "vstubcount", "structSceLibraryStubTable.html#a9c925cea359c50a8a71ec30925db25f0", null ],
+      [ "vstubtable", "structSceLibraryStubTable.html#a208dd13f46b86a43c43589380e48c578", null ]
+    ] ],
+    [ "SceLibraryEntryTable", "group__LoadCore.html#ga1cd0c7661749c70e8103f6e1fd2a7e73", null ],
+    [ "SceLibraryStubTable", "group__LoadCore.html#gaf9459823a9eb0456a369c9dff1893aa9", null ],
+    [ "SceModule", "group__LoadCore.html#ga806bc64aec4542b8124be1bdabeb3171", null ],
+    [ "sceKernelFindModuleByAddress", "group__LoadCore.html#ga5cd3a44f2e4ade6d49ffddbef414bed3", null ],
+    [ "sceKernelFindModuleByName", "group__LoadCore.html#ga5b7f3d14a3b9653811ccec276b1bba80", null ],
+    [ "sceKernelFindModuleByUID", "group__LoadCore.html#ga75bd3cbcf93fc15519de13a535fbe369", null ],
+    [ "sceKernelIcacheClearAll", "group__LoadCore.html#ga25e2eacbf67f0a0132bf6550b5e31f2f", null ],
+    [ "sceKernelModuleCount", "group__LoadCore.html#ga6c99306da8f1654ac6b3181cb0639a81", null ]
+];
