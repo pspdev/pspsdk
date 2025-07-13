@@ -10,6 +10,12 @@
 
 void sceGuColorFunc(int func, unsigned int color, unsigned int mask)
 {
+#ifdef GU_DEBUG
+	printf("sceGuColorFunc(%d, 0x%08X, 0x%08X);\n", func, color, mask);
+	assert(gu_init && "GU not initialized");
+	assert(func >= GU_NEVER && func <= GU_NOTEQUAL && "Invalid color function");
+#endif
+
 	sendCommandi(COLOR_TEST, func & 0x03);
 	sendCommandi(COLOR_REF, color);
 	sendCommandi(COLOR_TESTMASK, mask);

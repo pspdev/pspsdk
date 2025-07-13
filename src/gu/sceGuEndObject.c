@@ -12,6 +12,12 @@
 
 int sceGuEndObject(void)
 {
+#ifdef GU_DEBUG
+	printf("sceGuEndObject();\n");
+	assert(gu_init && "GU not initialized");
+	assert(gu_object_stack_depth > 0 && "Object stack underflow");
+#endif
+
 	int res;
 
 	gu_object_stack_depth--;

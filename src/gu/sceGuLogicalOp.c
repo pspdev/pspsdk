@@ -10,5 +10,11 @@
 
 void sceGuLogicalOp(int op)
 {
+#ifdef GU_DEBUG
+	printf("sceGuLogicalOp(%d);\n", op);
+	assert(gu_init && "GU not initialized");
+	assert(op >= GU_CLEAR && op <= GU_SET && "Invalid logical operation");
+#endif
+
 	sendCommandi(LOGIC_OP, op & 0x0f);
 }

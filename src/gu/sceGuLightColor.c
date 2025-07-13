@@ -10,6 +10,12 @@
 
 void sceGuLightColor(int light, int component, unsigned int color)
 {
+#ifdef GU_DEBUG
+	printf("sceGuLightColor(%d, %d, 0x%08X);\n", light, component, color);
+	assert(gu_init && "GU not initialized");
+	assert(light >= 0 && light <= 3 && "Invalid light index");
+	assert(component >= GU_AMBIENT && component <= GU_DIFFUSE_AND_SPECULAR && "Invalid light component");
+#endif
 
 	int offset = light * 3;
 

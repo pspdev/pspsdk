@@ -10,5 +10,10 @@
 
 void sceGuTexFlush(void)
 {
+#ifdef GU_DEBUG
+	printf("sceGuTexFlush();\n");
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandi(TEX_FLUSH, 0);
 }

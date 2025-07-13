@@ -10,5 +10,10 @@
 
 void sceGuSpecular(float power) // specular power
 {
+#ifdef GU_DEBUG
+	printf("sceGuSpecular(%f);\n", power);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandf(MATERIAL_SPECULAR_COEF, power);
 }

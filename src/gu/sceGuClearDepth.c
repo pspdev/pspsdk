@@ -10,6 +10,12 @@
 
 void sceGuClearDepth(unsigned int depth)
 {
+#ifdef GU_DEBUG
+	printf("sceGuClearDepth(%u);\n", depth);
+	assert(gu_init && "GU not initialized");
+	assert(depth <= 65535 && "Invalid depth value");
+#endif
+
 	GuContext* context = &gu_contexts[gu_curr_context];
 	context->clear_depth = depth;
 }

@@ -10,5 +10,9 @@
 
 void sceGuColor(unsigned int color)
 {
+#ifdef GU_DEBUG
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sceGuMaterial(GU_AMBIENT | GU_DIFFUSE | GU_SPECULAR, color);
 }

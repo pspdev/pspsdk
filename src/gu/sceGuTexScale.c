@@ -10,6 +10,11 @@
 
 void sceGuTexScale(float u, float v)
 {
+#ifdef GU_DEBUG
+	printf("sceGuTexScale(%f, %f);\n", u, v);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandf(TEX_SCALE_U, u);
 	sendCommandf(TEX_SCALE_V, v);
 }

@@ -308,15 +308,27 @@ void callbackSig(int id, void *arg)
 
 int sceGuInit(void)
 {
+#ifdef GU_DEBUG
+	printf("sceGuInit();\n");
+	assert(!gu_init && "GU already initialized");
+#endif
+
 	int res;
 	PspGeCallbackData callback;
 
 	ge_edram_address = sceGeEdramGetAddr();
+#ifdef GU_DEBUG
+	assert(ge_edram_address != NULL && "Failed to get EDRAM address");
+#endif
+
 	sceGuResetGlobalVariables();
 
 	res = sceKernelCreateEventFlag("SceGuSignal", PSP_EVENT_WAITMULTIPLE, 3, 0);
 	if (res < 0)
 	{
+#ifdef GU_DEBUG
+		printf("Failed to create event flag: %d\n", res);
+#endif
 		return res;
 	}
 	gu_settings.kernel_event_flag = res;
@@ -328,6 +340,9 @@ int sceGuInit(void)
 	res = sceGeSetCallback(&callback);
 	if (res < 0)
 	{
+#ifdef GU_DEBUG
+		printf("Failed to set GE callback: %d\n", res);
+#endif
 		sceKernelDeleteEventFlag(gu_settings.kernel_event_flag);
 		gu_settings.kernel_event_flag = -1;
 		return res;
@@ -338,6 +353,9 @@ int sceGuInit(void)
 	res = sceGeListEnQueue((void *)((unsigned int)ge_init_list & 0x1fffffff), NULL, gu_settings.ge_callback_id, NULL);
 	if (res < 0)
 	{
+#ifdef GU_DEBUG
+		printf("Failed to enqueue GE list: %d\n", res);
+#endif
 		sceKernelDeleteEventFlag(gu_settings.kernel_event_flag);
 		sceGeUnsetCallback(gu_settings.ge_callback_id);
 		gu_settings.ge_callback_id = -1;
@@ -352,5 +370,6 @@ int sceGuInit(void)
 	gu_settings.swapBuffersCallback = NULL;
 	gu_settings.swapBuffersBehaviour = PSP_DISPLAY_SETBUF_NEXTHSYNC;
 
+	gu_init = 1;
 	return 0;
 }

@@ -14,6 +14,14 @@
 
 void sceGuLight(int light, int type, int components, const ScePspFVector3 *position)
 {
+#ifdef GU_DEBUG
+	printf("sceGuLight(%d, %d, %d, %p);\n", light, type, components, position);
+	assert(gu_init && "GU not initialized");
+	assert(light >= 0 && light <= 3 && "Invalid light index");
+	assert(type >= GU_DIRECTIONAL && type <= GU_SPOTLIGHT && "Invalid light type");
+	assert(components >= GU_AMBIENT && components <= GU_DIFFUSE_AND_SPECULAR && "Invalid light components");
+#endif
+
 	int offset = light * 3;
 	int ltype;
 

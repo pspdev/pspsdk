@@ -10,6 +10,11 @@
 
 void sceGuDepthOffset(unsigned int offset)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDepthOffset(%08X);\n", offset);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	GuContext* context = &gu_contexts[gu_curr_context];
 	context->depth_offset = offset;
 

@@ -10,6 +10,12 @@
 
 void sceGuPatchPrim(int prim)
 {
+#ifdef GU_DEBUG
+	printf("sceGuPatchPrim(%d);\n", prim);
+	assert(gu_init && "GU not initialized");
+	assert((prim == GU_POINTS || prim == GU_LINE_STRIP || prim == GU_TRIANGLE_STRIP) && "Invalid patch primitive");
+#endif
+
 	switch (prim)
 	{
 	case GU_POINTS:

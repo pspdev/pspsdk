@@ -10,6 +10,11 @@
 
 void sceGuSetAllStatus(int status)
 {
+#ifdef GU_DEBUG
+	printf("sceGuSetAllStatus(%d);\n", status);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	unsigned int i;
 	for (i = 0; i < GU_MAX_STATUS; ++i)
 	{

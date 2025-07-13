@@ -13,6 +13,12 @@
 
 int sceGuDisplay(int state)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDisplay(%d);\n", state);
+	assert(gu_init && "GU not initialized");
+	assert((state == GU_TRUE || state == GU_FALSE) && "Invalid display state");
+#endif
+
 	if (state == GU_TRUE)
 		sceDisplaySetFrameBuf((void *)((unsigned int)ge_edram_address + (unsigned int)gu_draw_buffer.disp_buffer), gu_draw_buffer.frame_width, gu_draw_buffer.pixel_size, PSP_DISPLAY_SETBUF_NEXTVSYNC);
 	else

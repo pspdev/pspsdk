@@ -10,5 +10,10 @@
 
 void sceGuTexSlope(float slope)
 {
+#ifdef GU_DEBUG
+	printf("sceGuTexSlope(%f);\n", slope);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandf(TEX_LOD_SLOPE, slope);
 }

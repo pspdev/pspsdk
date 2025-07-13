@@ -10,5 +10,11 @@
 
 void sceGuShadeModel(int mode)
 {
+#ifdef GU_DEBUG
+	printf("sceGuShadeModel(%d);\n", mode);
+	assert(gu_init && "GU not initialized");
+	assert((mode == GU_FLAT || mode == GU_SMOOTH) && "Invalid shade model");
+#endif
+
 	sendCommandi(SHADE_MODE, mode);
 }

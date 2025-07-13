@@ -10,6 +10,11 @@
 
 void sceGuPixelMask(unsigned int mask)
 {
+#ifdef GU_DEBUG
+	printf("sceGuPixelMask(%08X);\n", mask);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandi(MASK_COLOR, mask);
 	sendCommandi(MASK_ALPHA, mask >> 24);
 }

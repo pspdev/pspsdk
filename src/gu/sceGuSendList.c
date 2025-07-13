@@ -13,6 +13,12 @@
 
 int sceGuSendList(int mode, const void *list, PspGeContext *context)
 {
+#ifdef GU_DEBUG
+	printf("sceGuSendList(%d, %p, %p);\n", mode, list, context);
+	assert(gu_init && "GU not initialized");
+	assert((mode == GU_HEAD || mode == GU_TAIL) && "Invalid list mode");
+#endif
+
 	PspGeListArgs args;
 	int list_id;
 	int callback;

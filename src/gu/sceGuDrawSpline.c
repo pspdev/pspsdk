@@ -10,6 +10,15 @@
 
 void sceGuDrawSpline(int vertex_type, int ucount, int vcount, int uedge, int vedge, const void *indices, const void *vertices)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDrawSpline(%d, %d, %d, %d, %d, %p, %p);\n", vertex_type, ucount, vcount, uedge, vedge, indices, vertices);
+	assert(gu_init && "GU not initialized");
+	assert(ucount >= 4 && ucount <= 255 && "Invalid U count - must be between 4 and 255");
+	assert(vcount >= 4 && vcount <= 255 && "Invalid V count - must be between 4 and 255");
+	assert(uedge >= 0 && uedge <= 3 && "Invalid U edge");
+	assert(vedge >= 0 && vedge <= 3 && "Invalid V edge");
+#endif
+
   if (vertex_type)
     sendCommandi(VERTEX_TYPE, vertex_type);
 

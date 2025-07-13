@@ -10,6 +10,12 @@
 
 void *sceGuSetCallback(int signal, GuCallback callback)
 {
+#ifdef GU_DEBUG
+	printf("sceGuSetCallback(%d, %p);\n", signal, callback);
+	assert(gu_init && "GU not initialized");
+	assert((signal == GU_CALLBACK_SIGNAL || signal == GU_CALLBACK_FINISH) && "Invalid signal");
+#endif
+
 	GuCallback old_callback = NULL;
 
 	switch (signal)

@@ -10,5 +10,11 @@
 
 void sceGuDepthMask(int mask)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDepthMask(%d);\n", mask);
+	assert(gu_init && "GU not initialized");
+	assert((mask == 0 || mask == 1) && "Invalid depth mask");
+#endif
+
 	sendCommandi(Z_MASK, mask);
 }

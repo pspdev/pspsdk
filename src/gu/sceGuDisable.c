@@ -10,6 +10,12 @@
 
 void sceGuDisable(int state)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDisable(%d);\n", state);
+	assert(gu_init && "GU not initialized");
+	assert(state >= 0 && state < GU_MAX_STATUS && "Invalid state");
+#endif
+
 	switch (state)
 	{
 	case GU_ALPHA_TEST:

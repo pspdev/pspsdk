@@ -12,6 +12,11 @@
 
 int sceGuFinishId(unsigned int id)
 {
+#ifdef GU_DEBUG
+	printf("sceGuFinishId(%08X);\n", id);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	int ret;
 	int intr;
 
