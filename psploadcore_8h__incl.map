@@ -1,0 +1,9 @@
+<map id="kernel/psploadcore.h" name="kernel/psploadcore.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,146,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="16,79,135,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,31,78,63,73,63,73,31"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="34,153,117,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="78,105,78,137,73,137,73,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="44,226,107,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="78,179,78,211,73,211,73,179"/>
+</map>
