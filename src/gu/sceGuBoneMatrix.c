@@ -10,6 +10,12 @@
 
 void sceGuBoneMatrix(unsigned int index, const ScePspFMatrix4 *matrix)
 {
+#ifdef GU_DEBUG
+	printf("sceGuBoneMatrix(%d, %p);\n", index, matrix);
+	assert(gu_init && "GU not initialized");
+	assert(index < 8 && "Invalid bone matrix index");
+#endif
+
 	unsigned int offset = ((index << 1) + index) << 2; // 3*4 matrix
 	unsigned int i, j;
 	const float *fmatrix = (const float *)matrix;

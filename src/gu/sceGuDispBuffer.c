@@ -13,6 +13,13 @@
 
 void sceGuDispBuffer(int width, int height, void *dispbp, int dispbw)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDispBuffer(%d, %d, %p, %d);\n", width, height, dispbp, dispbw);
+	assert(gu_init && "GU not initialized");
+	assert(((unsigned int)dispbp & 0x1F) == 0 && "Display buffer pointer must be 32-byte aligned");
+	assert(dispbw >= 64 && dispbw <= 1024 && (dispbw & 0x3F) == 0 && "Display buffer width must be multiple of 64");
+#endif
+
 	gu_draw_buffer.width = width;
 	gu_draw_buffer.height = height;
 	gu_draw_buffer.disp_buffer = dispbp;

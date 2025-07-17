@@ -10,5 +10,11 @@
 
 void sceGuLightMode(int mode)
 {
+#ifdef GU_DEBUG
+	printf("sceGuLightMode(%d);\n", mode);
+	assert(gu_init && "GU not initialized");
+	assert(mode >= GU_SINGLE_COLOR && mode <= GU_SEPARATE_SPECULAR_COLOR && "Invalid light mode");
+#endif
+
 	sendCommandi(LIGHT_MODE, mode);
 }

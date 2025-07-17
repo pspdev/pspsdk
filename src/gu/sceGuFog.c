@@ -10,6 +10,14 @@
 
 void sceGuFog(float near, float far, unsigned int color)
 {
+#ifdef GU_DEBUG
+	printf("sceGuFog(%f, %f, %08X);\n", near, far, color);
+	assert(gu_init && "GU not initialized");
+	assert(near >= 0.0f && "Invalid fog near value");
+	assert(far > near && "Fog far must be greater than near");
+	assert(far <= 65535.0f && "Fog far value too large");
+#endif
+
 	float distance = far - near;
 
 	if (distance)

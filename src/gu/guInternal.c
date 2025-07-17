@@ -19,5 +19,5 @@ int gu_display_on;
 int gu_call_mode;
 int gu_states;
 GuDrawBuffer gu_draw_buffer;
-unsigned int* gu_object_stack[32];
+unsigned int* gu_object_stack[GU_OBJECT_STACK_SIZE];
 int gu_object_stack_depth;

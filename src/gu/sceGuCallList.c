@@ -10,6 +10,11 @@
 
 int sceGuCallList(const void *list)
 {
+#ifdef GU_DEBUG
+	printf("sceGuCallList(%p);\n", list);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	int res;
 	unsigned int list_addr = (unsigned int)list;
 

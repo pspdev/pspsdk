@@ -10,6 +10,15 @@
 
 void sceGuViewport(int cx, int cy, int width, int height)
 {
+#ifdef GU_DEBUG
+	printf("sceGuViewport(%d, %d, %d, %d);\n", cx, cy, width, height);
+	assert(gu_init && "GU not initialized");
+	assert(width > 0 && height > 0 && "Invalid viewport dimensions");
+	assert(width <= 4096 && height <= 4096 && "Viewport dimensions too large");
+	assert(cx >= 0 && cx <= 4095 && "Invalid viewport X coordinate");
+	assert(cy >= 0 && cy <= 4095 && "Invalid viewport Y coordinate");
+#endif
+
 	float sx, sy, tx, ty;
   	sx = (float)(width)  *  0.5f;
 	sy = (float)(height) * -0.5f;

@@ -10,5 +10,10 @@
 
 void sceGuTexSync()
 {
+#ifdef GU_DEBUG
+	printf("sceGuTexSync();\n");
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandi(TEX_SYNC, 0);
 }

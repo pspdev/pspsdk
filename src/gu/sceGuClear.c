@@ -10,6 +10,13 @@
 
 void sceGuClear(int flags)
 {
+#ifdef GU_DEBUG
+	printf("sceGuClear(%d);\n", flags);
+	assert(gu_init && "GU not initialized");
+	assert(flags >= 0 && "Invalid clear flags");
+	assert((flags & ~(GU_COLOR_BUFFER_BIT | GU_STENCIL_BUFFER_BIT | GU_DEPTH_BUFFER_BIT | GU_FAST_CLEAR_BIT)) == 0 && "Invalid clear flags");
+#endif
+
 	GuContext *context = &gu_contexts[gu_curr_context];
 	unsigned int filter;
 	struct Vertex

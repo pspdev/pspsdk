@@ -10,6 +10,13 @@
 
 void sceGuDrawBezier(int vertex_type, int ucount, int vcount, const void *indices, const void *vertices)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDrawBezier(%d, %d, %d, %p, %p);\n", vertex_type, ucount, vcount, indices, vertices);
+	assert(gu_init && "GU not initialized");
+	assert(ucount > 1 && ucount <= 255 && (ucount % 3) == 1 && "Invalid U count, must be 3*N+1");
+	assert(vcount > 1 && vcount <= 255 && (vcount % 3) == 1 && "Invalid V count, must be 3*N+1");
+#endif
+
   if (vertex_type)
     sendCommandi(VERTEX_TYPE, vertex_type);
 

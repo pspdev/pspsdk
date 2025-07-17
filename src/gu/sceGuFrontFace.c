@@ -10,5 +10,11 @@
 
 void sceGuFrontFace(int order)
 {
+#ifdef GU_DEBUG
+	printf("sceGuFrontFace(%d);\n", order);
+	assert(gu_init && "GU not initialized");
+	assert((order == GU_CW || order == GU_CCW) && "Invalid front face order");
+#endif
+
 	sendCommandi(CULL, order ? 0 : 1);
 }

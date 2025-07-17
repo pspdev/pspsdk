@@ -13,6 +13,11 @@
 
 void *sceGuSwapBuffers(void)
 {
+#ifdef GU_DEBUG
+	printf("sceGuSwapBuffers();\n");
+	assert(gu_init && "GU not initialized");
+#endif
+
 	if (gu_settings.swapBuffersCallback)
 	{
 		gu_settings.swapBuffersCallback(&gu_draw_buffer.disp_buffer, &gu_draw_buffer.frame_buffer);

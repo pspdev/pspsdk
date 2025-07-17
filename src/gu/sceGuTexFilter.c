@@ -10,5 +10,13 @@
 
 void sceGuTexFilter(int min, int mag)
 {
-	sendCommandi(TEX_FILTER, (mag << 8) | min);
+#ifdef GU_DEBUG
+	printf("sceGuTexFilter(%d, %d);\n", min, mag);
+	assert(gu_init && "GU not initialized");
+	assert(min >= GU_NEAREST && min <= GU_LINEAR_MIPMAP_LINEAR && "Invalid minification filter");
+	assert(mag >= GU_NEAREST && mag <= GU_LINEAR && "Invalid magnification filter");
+#endif
+
+	int arg = min | (mag << 8);
+	sendCommandi(TEX_FILTER, arg);
 }

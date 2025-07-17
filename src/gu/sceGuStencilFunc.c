@@ -10,5 +10,14 @@
 
 void sceGuStencilFunc(int func, int ref, int mask)
 {
-	sendCommandi(STENCIL_TEST, func | ((ref & 0xff) << 8) | ((mask & 0xff) << 16));
+#ifdef GU_DEBUG
+	printf("sceGuStencilFunc(%d, %d, %d);\n", func, ref, mask);
+	assert(gu_init && "GU not initialized");
+	assert(func >= GU_NEVER && func <= GU_GEQUAL && "Invalid stencil function");
+	assert(ref >= 0 && ref <= 255 && "Invalid stencil reference");
+	assert(mask >= 0 && mask <= 255 && "Invalid stencil mask");
+#endif
+
+	int arg = func | ((ref & 0xff) << 8) | ((mask & 0xff) << 16);
+	sendCommandi(STENCIL_TEST, arg);
 }

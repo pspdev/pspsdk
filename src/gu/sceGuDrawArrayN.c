@@ -10,6 +10,14 @@
 
 void sceGuDrawArrayN(int primitive_type, int vertex_type, int vcount, int primcount, const void *indices, const void *vertices)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDrawArrayN(%d, %d, %d, %d, %p, %p);\n", primitive_type, vertex_type, vcount, primcount, indices, vertices);
+	assert(gu_init && "GU not initialized");
+	assert(vcount > 0 && vcount <= 65535 && "Invalid vertex count");
+	assert(primcount > 0 && primcount <= 65535 && "Invalid primitive count");
+	assert(primitive_type >= GU_POINTS && primitive_type <= GU_TRIANGLE_FAN && "Invalid primitive type");
+#endif
+
 	if (vertex_type)
 		sendCommandi(VERTEX_TYPE, vertex_type);
 

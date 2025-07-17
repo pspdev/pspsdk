@@ -10,6 +10,14 @@
 
 void sceGuScissor(int x, int y, int w, int h)
 {
+#ifdef GU_DEBUG
+	printf("sceGuScissor(%d, %d, %d, %d);\n", x, y, w, h);
+	assert(gu_init && "GU not initialized");
+	assert(w > 0 && h > 0 && "Invalid scissor dimensions");
+	assert(x >= 0 && y >= 0 && "Invalid scissor position");
+	assert(x + w <= 480 && y + h <= 272 && "Scissor region too large");
+#endif
+
 	GuContext *context = &gu_contexts[gu_curr_context];
 
 	context->scissor_start[0] = x;

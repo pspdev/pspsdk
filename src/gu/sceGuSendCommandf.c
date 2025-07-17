@@ -10,5 +10,9 @@
 
 void sceGuSendCommandf(int cmd, float argument)
 {
+#ifdef GU_DEBUG
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandf(cmd,argument);
 }

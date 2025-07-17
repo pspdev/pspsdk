@@ -10,5 +10,13 @@
 
 void sceGuTexWrap(int u, int v)
 {
-	sendCommandi(TEX_WRAP, (v << 8) | (u));
+#ifdef GU_DEBUG
+	printf("sceGuTexWrap(%d, %d);\n", u, v);
+	assert(gu_init && "GU not initialized");
+	assert((u == GU_CLAMP || u == GU_REPEAT) && "Invalid U wrap mode");
+	assert((v == GU_CLAMP || v == GU_REPEAT) && "Invalid V wrap mode");
+#endif
+
+	int arg = u | (v << 8);
+	sendCommandi(TEX_WRAP, arg);
 }

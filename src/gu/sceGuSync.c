@@ -13,6 +13,13 @@
 
 int sceGuSync(int mode, int what)
 {
+#ifdef GU_DEBUG
+	printf("sceGuSync(%d, %d);\n", mode, what);
+	assert(gu_init && "GU not initialized");
+	assert((mode == GU_SYNC_FINISH || mode == GU_SYNC_LIST || mode == GU_SYNC_SEND || mode == GU_SYNC_SIGNAL || mode == GU_SYNC_DONE) && "Invalid sync mode");
+	assert((what == GU_SYNC_WAIT || what == GU_SYNC_NOWAIT) && "Invalid sync what");	
+#endif
+
 	switch (mode)
 	{
 	case GU_SYNC_FINISH:

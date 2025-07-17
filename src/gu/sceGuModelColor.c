@@ -10,6 +10,11 @@
 
 void sceGuModelColor(unsigned int emissive, unsigned int ambient, unsigned int diffuse, unsigned int specular)
 {
+#ifdef GU_DEBUG
+	printf("sceGuModelColor(%08X, %08X, %08X, %08X);\n", emissive, ambient, diffuse, specular);
+	assert(gu_init && "GU not initialized");
+#endif
+
 	sendCommandi(MATERIAL_EMISSIVE, emissive);
 	sendCommandi(MATERIAL_DIFFUSE, diffuse);
 	sendCommandi(AMBIENT_COLOR, ambient);

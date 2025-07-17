@@ -10,6 +10,13 @@
 
 void sceGuMaterial(int mode, int color)
 {
+#ifdef GU_DEBUG
+	printf("sceGuMaterial(%d, %08X);\n", mode, color);
+	assert(gu_init && "GU not initialized");
+	assert(mode >= 0 && "Invalid material mode");
+	assert((mode & ~(GU_AMBIENT | GU_DIFFUSE | GU_SPECULAR)) == 0 && "Invalid material mode flags");
+#endif
+
 	if (mode & GU_AMBIENT) {
 		sendCommandi(AMBIENT_COLOR, color);
 		sendCommandi(AMBIENT_ALPHA, color >> 24);

@@ -14,6 +14,12 @@
 
 int sceGuStart(int ctype, void *list)
 {
+#ifdef GU_DEBUG
+	printf("sceGuStart(%d, %p);\n", ctype, list);
+	assert(gu_init && "GU not initialized");
+	assert((ctype == GU_DIRECT || ctype == GU_CALL || ctype == GU_SEND) && "Invalid context type");
+#endif
+
 	int intr;
 	GuContext *context = &gu_contexts[ctype];
 	unsigned int *local_list = (unsigned int *)(((unsigned int)list) | 0x40000000);

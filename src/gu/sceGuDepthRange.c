@@ -10,6 +10,13 @@
 
 void sceGuDepthRange(int near, int far)
 {
+#ifdef GU_DEBUG
+	printf("sceGuDepthRange(%d, %d);\n", near, far);
+	assert(gu_init && "GU not initialized");
+	assert(near >= 0 && near <= 65535 && "Invalid near plane");
+	assert(far >= 0 && far <= 65535 && "Invalid far plane");
+#endif
+
         GuContext *context = &gu_contexts[gu_curr_context];
 
         unsigned int max = (unsigned int)near + (unsigned int)far;

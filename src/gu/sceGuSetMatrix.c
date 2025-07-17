@@ -10,6 +10,12 @@
 
 void sceGuSetMatrix(int type, const ScePspFMatrix4 *matrix)
 {
+#ifdef GU_DEBUG
+	printf("sceGuSetMatrix(%d, %p);\n", type, matrix);
+	assert(gu_init && "GU not initialized");
+	assert(type >= GU_PROJECTION && type <= GU_TEXTURE && "Invalid matrix type");
+#endif
+
 	unsigned int i, j;
 	const float *fmatrix = (const float *)matrix;
 

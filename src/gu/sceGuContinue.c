@@ -6,9 +6,13 @@
  * Copyright (c) 2005 Jesper Svennevid
  */
 
-#include "pspge.h"
+#include "guInternal.h"
 
 int sceGuContinue(void)
 {
+#ifdef GU_DEBUG
+	printf("sceGuContinue();\n");
+	assert(gu_init && "GU not initialized");
+#endif
 	return sceGeContinue();
 }
