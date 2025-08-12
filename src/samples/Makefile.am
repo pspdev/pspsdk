@@ -31,6 +31,7 @@ SAMPLES = \
 	gu/morph \
 	gu/morphskin \
 	gu/ortho \
+	gu/pixelmask \
 	gu/reflection \
 	gu/rendertarget \
 	gu/scissor \
