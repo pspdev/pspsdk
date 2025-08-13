@@ -22,4 +22,6 @@ void sceGuTerm(void)
 
 	sceKernelDeleteEventFlag(gu_settings.kernel_event_flag);
 	sceGeUnsetCallback(gu_settings.ge_callback_id);
+
+	gu_init = 0;
 }
