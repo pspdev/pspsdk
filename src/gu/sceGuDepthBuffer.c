@@ -13,7 +13,7 @@ void sceGuDepthBuffer(void *zbp, int zbw)
 #ifdef GU_DEBUG
 	printf("sceGuDepthBuffer(%p, %d);\n", zbp, zbw);
 	assert(gu_init && "GU not initialized");
-	assert((zbw & 0x1FFF) == 0 && "Depth buffer pointer must be 8192-byte aligned");
+	assert(((unsigned int)zbp & 0x1FFF) == 0 && "Depth buffer pointer must be 8192-byte aligned");
 	assert(zbw > 64 && zbw <= 1024 && (zbw & 0x3F) == 0 && "Invalid depth buffer width, must be multiple of 64");
 #endif
 
