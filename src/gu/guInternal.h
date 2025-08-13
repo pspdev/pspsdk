@@ -79,6 +79,7 @@ extern GuSettings gu_settings;
 extern GuDisplayList *gu_list;
 extern int gu_curr_context;
 extern int gu_init;
+extern int gu_first_start;
 extern int gu_display_on;
 extern int gu_call_mode;
 extern int gu_states;

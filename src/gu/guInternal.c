@@ -15,6 +15,7 @@ GuSettings gu_settings;
 GuDisplayList* gu_list;
 int gu_curr_context;
 int gu_init;
+int gu_first_start;
 int gu_display_on;
 int gu_call_mode;
 int gu_states;

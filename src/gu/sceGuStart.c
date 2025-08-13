@@ -50,7 +50,7 @@ int sceGuStart(int ctype, void *list)
 		gu_settings.signal_offset = 0;
 	}
 
-	if (!gu_init)
+	if (gu_first_start)
 	{
 		static int dither_matrix[16] =
 			{
@@ -67,7 +67,7 @@ int sceGuStart(int ctype, void *list)
 		sceGuSpecular(1.0f);
 		sceGuTexScale(1.0f, 1.0f);
 
-		gu_init = 1;
+		gu_first_start = 0;
 	}
 
 	if (ctype == GU_DIRECT && gu_draw_buffer.frame_width != 0)

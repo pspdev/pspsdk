@@ -239,6 +239,7 @@ static void sceGuResetGlobalVariables(void)
 	unsigned int i;
 
 	gu_init = 0;
+	gu_first_start = 0;
 
 	gu_states = 0;
 	gu_object_stack_depth = 0;
@@ -371,5 +372,6 @@ int sceGuInit(void)
 	gu_settings.swapBuffersBehaviour = PSP_DISPLAY_SETBUF_NEXTHSYNC;
 
 	gu_init = 1;
+	gu_first_start = 1;
 	return 0;
 }
