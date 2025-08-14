@@ -1,0 +1,13 @@
+<map id="gu/vram.c" name="gu/vram.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="34,5,112,31"/>
+<area shape="rect" id="Node000002" href="$pspge_8h.html" title=" " alt="" coords="5,153,72,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,32,48,138,42,137,68,31"/>
+<area shape="rect" id="Node000005" href="$pspgu_8h.html" title=" " alt="" coords="76,79,142,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="81,30,99,64,94,66,77,32"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="32,226,115,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="47,177,63,211,58,213,42,180"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="42,300,105,326"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="76,252,76,284,70,284,70,252"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="99,107,63,143,59,140,96,103"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="109,106,82,212,77,211,104,104"/>
+</map>
