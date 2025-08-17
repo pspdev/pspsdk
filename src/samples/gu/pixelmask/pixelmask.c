@@ -38,13 +38,15 @@ typedef struct PixelMaskMode
 } PixelMaskMode;
 
 #define TEXTURE_FORMAT GU_PSM_8888
+#define DRAW_FORMAT GU_PSM_5650
 // In mask 0xAABBGGRR: 1-bits prevent writes to that bit, 0-bits allow writes.
+// If you have a pixel format using less than 8 bits per channel, you need to mask the higher bits.
 // Keep AA=0x00 so alpha writes remain enabled for all modes in this sample.
 static const PixelMaskMode modes[] = {
     {"Mask 0x00000000: All channels writable", 0x00000000},
-    {"Mask 0x0000FFFF: Only Blue (+Alpha) writable", 0x0000FFFF},  // R=0xFF, G=0xFF, B=0x00, A=0x00
-    {"Mask 0x00FF00FF: Only Green (+Alpha) writable", 0x00FF00FF}, // R=0xFF, G=0x00, B=0xFF, A=0x00
-    {"Mask 0x00FFFF00: Only Red (+Alpha) writable", 0x00FFFF00},   // R=0x00, G=0xFF, B=0xFF, A=0x00
+    {"Mask 0x0000FCF8: Only Blue (+Alpha) writable", 0x0000FCF8},
+    {"Mask 0x00F800F8: Only Green (+Alpha) writable", 0x00F800F8},
+    {"Mask 0x00F8FC00: Only Red (+Alpha) writable", 0x00F8FC00}, 
 };
 
 // GU_PSM_8888, 8x8. Where the 2 first columns are red and the 2 last columns are green.
@@ -88,20 +90,20 @@ int main(int argc, char *argv[])
 {
     int mode_index = 0;
     int frame_counter = 0;
-    int drawFormat = GU_PSM_5650;
 
-    pspDebugScreenInit();
     setupCallbacks();
 
     // Setup GU
 
-    void *fbp0 = guGetStaticVramBuffer(BUF_WIDTH, SCR_HEIGHT, drawFormat);
-    void *fbp1 = guGetStaticVramBuffer(BUF_WIDTH, SCR_HEIGHT, drawFormat);
+    void *fbp0 = guGetStaticVramBuffer(BUF_WIDTH, SCR_HEIGHT, DRAW_FORMAT);
+    void *fbp1 = guGetStaticVramBuffer(BUF_WIDTH, SCR_HEIGHT, DRAW_FORMAT);
+
+    pspDebugScreenInitEx(fbp0, DRAW_FORMAT, 1);
 
     sceGuInit();
 
     sceGuStart(GU_DIRECT, list);
-    sceGuDrawBuffer(drawFormat, fbp0, BUF_WIDTH);
+    sceGuDrawBuffer(DRAW_FORMAT, fbp0, BUF_WIDTH);
     sceGuDispBuffer(SCR_WIDTH, SCR_HEIGHT, fbp1, BUF_WIDTH);
     sceGuOffset(2048 - (SCR_WIDTH / 2), 2048 - (SCR_HEIGHT / 2));
     sceGuViewport(2048, 2048, SCR_WIDTH, SCR_HEIGHT);
@@ -122,8 +124,6 @@ int main(int argc, char *argv[])
     sceGuDisplay(GU_TRUE);
 
     sceKernelDcacheWritebackAll();
-
-    pspDebugScreenInitEx(fbp0, drawFormat, 1);
 
     while (running())
     {

@@ -964,6 +964,13 @@ void sceGuClearStencil(unsigned int stencil);
   * Set mask for which bits of the pixels to write
   *
   * @param mask - Which bits to filter against writes
+  * @note The representation of the mask is in the format 0xAABBGGRR: 1-bits prevent writes to that bit, 0-bits allow writes.
+  * @note If you have a draw format using less than 8 bits per channel, you need to mask the higher bits as less significant bits aren't used.
+  * @example With a draw format of GU_PSM_5650:
+  * sceGuPixelMask(0x00000000); // All channels writable
+  * sceGuPixelMask(0x0000FCF8); // Only Blue (+Alpha) writable
+  * sceGuPixelMask(0x00F800F8); // Only Green (+Alpha) writable
+  * sceGuPixelMask(0x00F8FC00); // Only Red (+Alpha) writable
   *
 **/
 void sceGuPixelMask(unsigned int mask);
