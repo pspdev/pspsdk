@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['_5f_5fcwd_0',['__cwd',['../cwd_8c.html#a12df48ea2692db90afab9e68931f7384',1,'__cwd:&#160;cwd.c'],['../glue_8c.html#a12df48ea2692db90afab9e68931f7384',1,'__cwd:&#160;glue.c']]],
+  ['_5f_5fdescriptor_5fdata_5fpool_1',['__descriptor_data_pool',['../fdman_8c.html#ab1d38c1801613d437d0719b1466fefb8',1,'fdman.c']]],
+  ['_5f_5fdescriptormap_2',['__descriptormap',['../fdman_8c.html#ac3ead6e33c35af178423a9eec6930b02',1,'__descriptormap:&#160;fdman.c'],['../fdman_8h.html#ac3ead6e33c35af178423a9eec6930b02',1,'__descriptormap:&#160;fdman.h']]],
+  ['_5f_5fdummy_5fpasswd_3',['__dummy_passwd',['../glue_8c.html#a137a381780e7d9488e098ead16971ece',1,'glue.c']]],
+  ['_5f_5ffdman_5fmutex_4',['__fdman_mutex',['../fdman_8c.html#ae720f13df1a420de95eb0790bfbf7173',1,'__fdman_mutex:&#160;fdman.c'],['../mutexman_8c.html#ae720f13df1a420de95eb0790bfbf7173',1,'__fdman_mutex:&#160;mutexman.c']]],
+  ['_5f_5fglobaltls_5',['__globalTls',['../osal_8c.html#a6801415607c6b1a0efb4a2612670235b',1,'__globalTls:&#160;osal.c'],['../tls-helper_8c.html#a6801415607c6b1a0efb4a2612670235b',1,'__globalTls:&#160;tls-helper.c']]],
+  ['_5f_5fglobaltlslock_6',['__globalTlsLock',['../tls-helper_8c.html#a7cdc10fca4d7941d1ebfbfe26ff1b78b',1,'tls-helper.c']]],
+  ['_5f_5fkeysused_7',['__keysUsed',['../tls-helper_8c.html#a862004e7bd2f3cb5141a4c2677dcfe51',1,'tls-helper.c']]],
+  ['_5f_5flibrary_5fexports_8',['__library_exports',['../prxexports_8c.html#a29d1aec16cbd598587dd9c0a552facb1',1,'prxexports.c']]],
+  ['_5f_5fmaxtlsvalues_9',['__maxTlsValues',['../tls-helper_8c.html#afa63cb4c1a02f001ef5f13479ab885ae',1,'tls-helper.c']]],
+  ['_5f_5fpacked_5f_5f_10',['__packed__',['../group__Sony.html#gaeb4728f265ea53f9e7581ef33ef8884b',1,'pspsircs.h']]],
+  ['_5f_5fpsp_5fheap_5fblockid_11',['__psp_heap_blockid',['../glue_8c.html#aeb4ddb98db2d50b5e936e69c9f9445bf',1,'glue.c']]],
+  ['_5f_5fsbrk_5fmutex_12',['__sbrk_mutex',['../glue_8c.html#af1db4e880d2e336f17e083c235ad438e',1,'__sbrk_mutex:&#160;glue.c'],['../mutexman_8c.html#af1db4e880d2e336f17e083c235ad438e',1,'__sbrk_mutex:&#160;mutexman.c']]],
+  ['_5f_5fss_5falign_13',['__ss_align',['../structsockaddr__storage.html#aa2bd5712b9d3aca5f4c2fa6ead06961c',1,'sockaddr_storage']]],
+  ['_5f_5fss_5fpad1_14',['__ss_pad1',['../structsockaddr__storage.html#aeb919aec22e70dc9091137777be0714b',1,'sockaddr_storage']]],
+  ['_5f_5fss_5fpad2_15',['__ss_pad2',['../structsockaddr__storage.html#a1cda5949a1b2bf888ad681f68cc7cb64',1,'sockaddr_storage']]],
+  ['_5f_5fthreaddatakey_16',['__threadDataKey',['../osal_8c.html#af53c416b58f213a4fed8a51767ff4664',1,'osal.c']]],
+  ['_5fetext_17',['_etext',['../callstack_8c.html#a6cd4d4d9099d265a7adc20700bc806aa',1,'_etext:&#160;callstack.c'],['../stacktrace_8c.html#a5ab6b5017accd262a998cbb2ed9a32ef',1,'_etext:&#160;stacktrace.c'],['../prof_8c.html#ac0dc0da71a585612fa9799a073967617',1,'_etext:&#160;prof.c']]],
+  ['_5fftext_18',['_ftext',['../callstack_8c.html#a29312aa87c929c43072b4186bc651919',1,'_ftext:&#160;callstack.c'],['../stacktrace_8c.html#afaee42f2395da0f681d5c358d4ffac33',1,'_ftext:&#160;stacktrace.c'],['../prof_8c.html#a3553f1a4bd75b9c5096c14035d604c66',1,'_ftext:&#160;prof.c']]],
+  ['_5fgp_19',['_gp',['../pspmoduleinfo_8h.html#a1f629201dc9ea82fadc9180deb2a6f01',1,'pspmoduleinfo.h']]],
+  ['_5fpspdebugexceptregs_20',['_pspDebugExceptRegs',['../exception_8c.html#af2bd0537bf07d649e868193e4d4a6718',1,'exception.c']]],
+  ['_5fpspdebugresumepatch_21',['_pspDebugResumePatch',['../gdb-stub_8c.html#a3c5991666b12f788b3363c98cf3b6079',1,'gdb-stub.c']]]
+];
