@@ -1350,7 +1350,7 @@ void sceGuTexMapMode(int mode, unsigned int lu, unsigned int lv);
   *   - GU_PSM_T8 - Indexed, 8-bit
   *
   * @param tpsm - Which texture format to use
-  * @param maxmips - Number of mipmaps to use (0-8)
+  * @param maxmips - Index of the maximum mip level to use (NOT THE NUMBER OF MIPS). Range is 0-7.
   * @param mc - Multiclut on/off (0/1)
   * @param swizzle - GU_TRUE(1) to swizzle texture-reads
 **/
