@@ -37,4 +37,5 @@ SUBDIRS = \
 	video \
 	vsh \
 	wlan \
+	kermit \
 	samples
