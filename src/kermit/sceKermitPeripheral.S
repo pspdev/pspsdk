@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceKermitPeripheral_0000
-	IMPORT_START	"sceKermitPeripheral",0x40010000
+	IMPORT_START	"sceKermitPeripheral",0x40090000
 #endif
 #ifdef F_sceKermitPeripheral_0001
 	IMPORT_FUNC	"sceKermitPeripheral",0x4A26B7C8,sceKermitPeripheral_4A26B7C8

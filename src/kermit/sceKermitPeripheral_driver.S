@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceKermitPeripheral_driver_0000
-	IMPORT_START "sceKermitPeripheral_driver",0x00010000
+	IMPORT_START "sceKermitPeripheral_driver",0x00090000
 #endif
 #ifdef F_sceKermitPeripheral_driver_0001
 	IMPORT_FUNC	"sceKermitPeripheral_driver",0x0648E1A3,sceKermitPeripheral_driver_0648E1A3
