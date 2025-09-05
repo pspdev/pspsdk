@@ -218,7 +218,7 @@ int sceKermit_driver_4F75AA05(KermitPacket *packet, u32 cmd_mode, u32 cmd, u32 a
     buffer_size:        the size of the input data, else the size of the output buffer.
     io_mode:            KERMIT_INPUT_MODE for data input. KERMIT_OUTPUT_MODE for expecting output data.
 */
-void sceKermitMemory_driver_AAF047AC(KermitPacket *packet, u32 argc, u8 *buffer, u32 buffer_size, u32 io_mode);
+void sceKermitMemorySetArgument(KermitPacket *packet, u32 argc, u8 *buffer, u32 buffer_size, u32 io_mode);
 
 /*
     Send data to vita host.
@@ -237,5 +237,28 @@ void sceKermitMemory_driver_80E1240A(u8 *data, u32 len);
 void sceKermitMemory_driver_90B662D0(u8 *data, u32 data_size);
 
 
+/*
+  Register handler for a kermit virtual interrupt.
+
+  interrupt:             ID of the virtual interrupt.
+  handler:               function pointer.
+
+  returns 0 on success, else < 0 on error.
+*/
+int sceKermitRegisterVirtualIntrHandler(u32 interrupt, void* handler);
+
+/*
+  Send a request to kermit.
+
+  request:                pointer to SceKermitRequest data structure.
+  mode:                   ID of the request mode (see enum KermitModes).
+  cmd:                    request command ID.
+  argc:                   unknown, pass 0.
+  callback:               callback mode, pass KERMIT_CALLBACK_DISABLE (0).
+  response:               pointer to return value.
+
+  returns 0 on success, else < 0 on error.
+*/
+int sceKermitSendRequest(SceKermitRequest* request, u32 mode, u32 cmd, int argc, u32 callback, u64* response);
 
 #endif /* __KERMIT_H__ */
