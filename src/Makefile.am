@@ -11,6 +11,7 @@ SUBDIRS = \
 	gu \
 	gum \
 	hprm \
+	kermit \
 	kernel \
 	libcglue \
 	libpthreadglue \
@@ -37,5 +38,4 @@ SUBDIRS = \
 	video \
 	vsh \
 	wlan \
-	kermit \
 	samples
