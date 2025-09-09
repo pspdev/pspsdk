@@ -26,10 +26,6 @@ extern "C" {
 /** @addtogroup LoadCore Interface to the LoadCoreForKernel library. */
 /**@{*/
 
-#ifndef __THREADMAN_H__
-typedef int (*SceKernelThreadEntry)(SceSize args, void *argp);
-#endif
-
 
 /** Reboot preparation functions */
 typedef s32 (*SceKernelRebootBeforeForKernel)(void *arg1, s32 arg2, s32 arg3, s32 arg4);

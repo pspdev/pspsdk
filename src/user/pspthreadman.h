@@ -46,7 +46,7 @@ enum PspThreadAttributes
 {
 	/** Enable VFPU access for the thread. */
 	PSP_THREAD_ATTR_VFPU = 0x00004000,
-	/** Start the thread in user mode (done automatically 
+	/** Start the thread in user mode (done automatically
 	  if the thread creating it is in user mode). */
 	PSP_THREAD_ATTR_USER = 0x80000000,
 	/** Thread is part of the USB/WLAN API. */
@@ -67,8 +67,6 @@ enum PspThreadAttributes
 
 
 /* Threads. */
-
-typedef int (*SceKernelThreadEntry)(SceSize args, void *argp);
 
 /** Additional options used when creating threads. */
 typedef struct SceKernelThreadOptParam {
@@ -193,7 +191,7 @@ int sceKernelStartThread(SceUID thid, SceSize arglen, void *argp);
  */
 int sceKernelExitThread(int status);
 
-/** 
+/**
   * Exit a thread and delete itself.
   *
   * @param status - Exit status
@@ -228,7 +226,7 @@ int sceKernelSuspendDispatchThread(void);
 /**
  * Resume the dispatch thread
  *
- * @param state - The state of the dispatch thread 
+ * @param state - The state of the dispatch thread
  * (from ::sceKernelSuspendDispatchThread)
  *
  * @return 0 on success, < 0 on error
@@ -289,7 +287,7 @@ int sceKernelSuspendThread(SceUID thid);
  */
 int sceKernelResumeThread(SceUID thid);
 
-/** 
+/**
   * Wait until a thread has ended.
   *
   * @param thid - Id of the thread to wait for.
@@ -299,7 +297,7 @@ int sceKernelResumeThread(SceUID thid);
   */
 int sceKernelWaitThreadEnd(SceUID thid, SceUInt *timeout);
 
-/** 
+/**
   * Wait until a thread has ended and handle callbacks if necessary.
   *
   * @param thid - Id of the thread to wait for.
@@ -364,7 +362,7 @@ int sceKernelChangeCurrentThreadAttr(int unknown, SceUInt attr);
 
 /**
   * Change the threads current priority.
-  * 
+  *
   * @param thid - The ID of the thread (from sceKernelCreateThread or sceKernelGetThreadId)
   * @param priority - The new priority (the lower the number the higher the priority)
   *
@@ -383,7 +381,7 @@ int sceKernelChangeThreadPriority(SceUID thid, int priority);
  * Rotate thread ready queue at a set priority
  *
  * @param priority - The priority of the queue
- * 
+ *
  * @return 0 on success, < 0 on error.
  */
 int sceKernelRotateThreadReadyQueue(int priority);
@@ -397,7 +395,7 @@ int sceKernelRotateThreadReadyQueue(int priority);
  */
 int sceKernelReleaseWaitThread(SceUID thid);
 
-/** 
+/**
   * Get the current thread Id
   *
   * @return The thread id of the calling thread.
@@ -437,9 +435,9 @@ int sceKernelCheckThreadStack(void);
  */
 int sceKernelGetThreadStackFreeSize(SceUID thid);
 
-/** 
+/**
   * Get the status information for the specified thread.
-  * 
+  *
   * @param thid - Id of the thread to get status
   * @param info - Pointer to the info structure to receive the data.
   * Note: The structures size field should be set to
@@ -451,7 +449,7 @@ int sceKernelGetThreadStackFreeSize(SceUID thid);
   * status.size = sizeof(SceKernelThreadInfo);
   * if(sceKernelReferThreadStatus(thid, &status) == 0)
   * { Do something... }
-  * @endcode 
+  * @endcode
   * @return 0 if successful, otherwise the error code.
   */
 int sceKernelReferThreadStatus(SceUID thid, SceKernelThreadInfo *info);
@@ -506,7 +504,7 @@ typedef struct SceKernelSemaInfo {
  *
  * @param name - Specifies the name of the sema
  * @param attr - Sema attribute flags (normally set to 0)
- * @param initVal - Sema initial value 
+ * @param initVal - Sema initial value
  * @param maxVal - Sema maximum value
  * @param option - Sema options (normally set to 0)
  * @return A semaphore id
@@ -707,7 +705,7 @@ enum PspEventFlagWaitTypes
 	PSP_EVENT_WAITCLEAR = 0x20
 };
 
-/** 
+/**
   * Create an event flag.
   *
   * @param name - The name of the event flag.
@@ -724,7 +722,7 @@ enum PspEventFlagWaitTypes
   */
 SceUID sceKernelCreateEventFlag(const char *name, int attr, int bits, SceKernelEventFlagOptParam *opt);
 
-/** 
+/**
   * Set an event flag bit pattern.
   *
   * @param evid - The event id returned by sceKernelCreateEventFlag.
@@ -744,7 +742,7 @@ int sceKernelSetEventFlag(SceUID evid, u32 bits);
  */
 int sceKernelClearEventFlag(SceUID evid, u32 bits);
 
-/** 
+/**
   * Poll an event flag for a given bit pattern.
   *
   * @param evid - The event id returned by sceKernelCreateEventFlag.
@@ -755,7 +753,7 @@ int sceKernelClearEventFlag(SceUID evid, u32 bits);
   */
 int sceKernelPollEventFlag(int evid, u32 bits, u32 wait, u32 *outBits);
 
-/** 
+/**
   * Wait for an event flag for a given bit pattern.
   *
   * @param evid - The event id returned by sceKernelCreateEventFlag.
@@ -767,7 +765,7 @@ int sceKernelPollEventFlag(int evid, u32 bits, u32 wait, u32 *outBits);
   */
 int sceKernelWaitEventFlag(int evid, u32 bits, u32 wait, u32 *outBits, SceUInt *timeout);
 
-/** 
+/**
   * Wait for an event flag for a given bit pattern with callback.
   *
   * @param evid - The event id returned by sceKernelCreateEventFlag.
@@ -779,7 +777,7 @@ int sceKernelWaitEventFlag(int evid, u32 bits, u32 wait, u32 *outBits, SceUInt *
   */
 int sceKernelWaitEventFlagCB(int evid, u32 bits, u32 wait, u32 *outBits, SceUInt *timeout);
 
-/** 
+/**
   * Delete an event flag
   *
   * @param evid - The event id returned by sceKernelCreateEventFlag.
@@ -788,9 +786,9 @@ int sceKernelWaitEventFlagCB(int evid, u32 bits, u32 wait, u32 *outBits, SceUInt
   */
 int sceKernelDeleteEventFlag(int evid);
 
-/** 
+/**
   * Get the status of an event flag.
-  * 
+  *
   * @param event - The UID of the event.
   * @param status - A pointer to a ::SceKernelEventFlagInfo structure.
   *
@@ -878,7 +876,7 @@ int sceKernelDeleteMbx(SceUID mbxid);
  *
  * @param mbxid - The mbx id returned from sceKernelCreateMbx
  * @param message - A message to be forwarded to the receiver.
- * 					The start of the message should be the 
+ * 					The start of the message should be the
  * 					::SceKernelMsgPacket structure, the rest
  *
  * @return < 0 On error.
@@ -984,7 +982,7 @@ typedef struct SceKernelAlarmInfo {
 	void *		common;
 } SceKernelAlarmInfo;
 
-/** 
+/**
  * Set an alarm.
  * @param clock - The number of micro seconds till the alarm occurrs.
  * @param handler - Pointer to a ::SceKernelAlarmHandler
@@ -996,11 +994,11 @@ SceUID sceKernelSetAlarm(SceUInt clock, SceKernelAlarmHandler handler, void *com
 
 /**
  * Set an alarm using a ::SceKernelSysClock structure for the time
- * 
+ *
  * @param clock - Pointer to a ::SceKernelSysClock structure
  * @param handler - Pointer to a ::SceKernelAlarmHandler
  * @param common - Common pointer for the alarm handler.
- * 
+ *
  * @return A UID representing the created alarm, < 0 on error.
  */
 SceUID sceKernelSetSysClockAlarm(SceKernelSysClock *clock, SceKernelAlarmHandler handler, void *common);
@@ -1142,7 +1140,7 @@ enum SceKernelIdListType
 };
 
 /**
-  * Get a list of UIDs from threadman. Allows you to enumerate 
+  * Get a list of UIDs from threadman. Allows you to enumerate
   * resources such as threads or semaphores.
   *
   * @param type - The type of resource to list, one of ::SceKernelIdListType.
@@ -1305,7 +1303,7 @@ typedef struct SceKernelMppInfo {
 	int 	numSendWaitThreads;
 	int 	numReceiveWaitThreads;
 } SceKernelMppInfo;
- 
+
 /**
  * Get the status of a Message Pipe
  *
@@ -1369,7 +1367,7 @@ int sceKernelAllocateVpl(SceUID uid, unsigned int size, void **data, unsigned in
 int sceKernelAllocateVplCB(SceUID uid, unsigned int size, void **data, unsigned int *timeout);
 
 /**
- * Try to allocate from the pool 
+ * Try to allocate from the pool
  *
  * @param uid - The UID of the pool
  * @param size - The size to allocate
@@ -1471,7 +1469,7 @@ int sceKernelAllocateFpl(SceUID uid, void **data, unsigned int *timeout);
 int sceKernelAllocateFplCB(SceUID uid, void **data, unsigned int *timeout);
 
 /**
- * Try to allocate from the pool 
+ * Try to allocate from the pool
  *
  * @param uid - The UID of the pool
  * @param data - Receives the address of the allocated data
@@ -1527,7 +1525,7 @@ int sceKernelReferFplStatus(SceUID uid, SceKernelFplInfo *info);
 void _sceKernelReturnFromTimerHandler(void);
 
 /**
- * Return from a callback (used as a syscall for the return 
+ * Return from a callback (used as a syscall for the return
  * of the callback function)
  */
 void _sceKernelReturnFromCallback(void);
@@ -1544,7 +1542,7 @@ int sceKernelUSec2SysClock(unsigned int usec, SceKernelSysClock *clock);
 
 /**
  * Convert a number of microseconds to a wide time
- * 
+ *
  * @param usec - Number of microseconds.
  *
  * @return The time
@@ -1762,7 +1760,7 @@ void _sceKernelExitThread(void);
  * Get the type of a threadman uid
  *
  * @param uid - The uid to get the type from
- * 
+ *
  * @return The type, < 0 on error
  */
 enum SceKernelIdListType sceKernelGetThreadmanIdType(SceUID uid);
