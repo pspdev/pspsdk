@@ -30,7 +30,7 @@
 	IMPORT_FUNC	"sceDisplay",0xB4F378FA,sceDisplayIsForeground
 #endif
 #ifdef F_sceDisplay_0009
-	IMPORT_FUNC	"sceDisplay",0x31C4BAA8,sceDisplay_31C4BAA8
+	IMPORT_FUNC	"sceDisplay",0x31C4BAA8,sceDisplayGetBrightness
 #endif
 #ifdef F_sceDisplay_0010
 	IMPORT_FUNC	"sceDisplay",0x9C6EAAD7,sceDisplayGetVcount
@@ -55,4 +55,22 @@
 #endif
 #ifdef F_sceDisplay_0017
 	IMPORT_FUNC	"sceDisplay",0x210EAB3A,sceDisplayGetAccumulatedHcount
+#endif
+#ifdef F_sceDisplay_0018
+	IMPORT_FUNC	"sceDisplay",0xBF79F646,sceDisplayGetResumeMode
+#endif
+#ifdef F_sceDisplay_0019
+	IMPORT_FUNC	"sceDisplay",0x69B53541,sceDisplayGetVblankRest
+#endif
+#ifdef F_sceDisplay_0020
+	IMPORT_FUNC	"sceDisplay",0x210EAB3A,sceDisplayIsVsync
+#endif
+#ifdef F_sceDisplay_0021
+	IMPORT_FUNC	"sceDisplay",0x21038913,sceDisplayWaitVblankStartMulti
+#endif
+#ifdef F_sceDisplay_0022
+	IMPORT_FUNC	"sceDisplay",0x77ED8B3A,sceDisplayWaitVblankStartMultiCB
+#endif
+#ifdef F_sceDisplay_0023
+	IMPORT_FUNC	"sceDisplay",0xA83EF139,sceDisplayAdjustAccumulatedHcount
 #endif
