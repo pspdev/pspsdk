@@ -107,6 +107,7 @@ AC_CONFIG_FILES([Makefile
                  src/gu/Makefile
                  src/gum/Makefile
                  src/hprm/Makefile
+                 src/kermit/Makefile
                  src/kernel/Makefile
                  src/libcglue/Makefile
                  src/libpthreadglue/Makefile

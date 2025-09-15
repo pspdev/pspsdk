@@ -1,0 +1,61 @@
+	.set noreorder
+
+#include "pspimport.s"
+
+#ifdef F_sceKermitPeripheral_driver_0000
+	IMPORT_START "sceKermitPeripheral_driver",0x00090000
+#endif
+#ifdef F_sceKermitPeripheral_driver_0001
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x0648E1A3,sceKermitPeripheral_driver_0648E1A3
+#endif
+#ifdef F_sceKermitPeripheral_driver_0002
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x15F5C107,sceKermitPeripheral_driver_15F5C107
+#endif
+#ifdef F_sceKermitPeripheral_driver_0003
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x1617E966,sceKermitPeripheral_driver_1617E966
+#endif
+#ifdef F_sceKermitPeripheral_driver_0004
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x20638B97,sceKermitPeripheral_driver_20638B97
+#endif
+#ifdef F_sceKermitPeripheral_driver_0005
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x4A26B7C8,sceKermitPeripheral_driver_4A26B7C8
+#endif
+#ifdef F_sceKermitPeripheral_driver_0006
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x55D690DD,sceKermitPeripheral_driver_55D690DD
+#endif
+#ifdef F_sceKermitPeripheral_driver_0007
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x61BEA1D2,sceKermitPeripheral_driver_61BEA1D2
+#endif
+#ifdef F_sceKermitPeripheral_driver_0008
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x65D98A21,sceKermitPeripheral_driver_65D98A21
+#endif
+#ifdef F_sceKermitPeripheral_driver_0009
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x675DB2C1,sceKermitPeripheral_driver_675DB2C1
+#endif
+#ifdef F_sceKermitPeripheral_driver_0010
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x6D6AA215,sceKermitPeripheral_driver_6D6AA215
+#endif
+#ifdef F_sceKermitPeripheral_driver_0011
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x76BE2E28,sceKermitPeripheral_driver_76BE2E28
+#endif
+#ifdef F_sceKermitPeripheral_driver_0012
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x8C7903E7,sceKermitPeripheral_driver_8C7903E7
+#endif
+#ifdef F_sceKermitPeripheral_driver_0013
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0x9EF7501D,sceKermitPeripheral_driver_9EF7501D
+#endif
+#ifdef F_sceKermitPeripheral_driver_0014
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0xAB29C68B,sceKermitPeripheral_driver_AB29C68B
+#endif
+#ifdef F_sceKermitPeripheral_driver_0015
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0xB778DB22,sceKermitPeripheral_driver_B778DB22
+#endif
+#ifdef F_sceKermitPeripheral_driver_0016
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0xB93A88E2,sceKermitPeripheral_driver_B93A88E2
+#endif
+#ifdef F_sceKermitPeripheral_driver_0017
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0xC6F8B4E1,sceKermitPeripheral_driver_C6F8B4E1
+#endif
+#ifdef F_sceKermitPeripheral_driver_0018
+	IMPORT_FUNC	"sceKermitPeripheral_driver",0xD0A69002,sceKermitPeripheral_driver_D0A69002
+#endif

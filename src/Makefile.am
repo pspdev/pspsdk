@@ -11,6 +11,7 @@ SUBDIRS = \
 	gu \
 	gum \
 	hprm \
+	kermit \
 	kernel \
 	libcglue \
 	libpthreadglue \
