@@ -427,6 +427,9 @@ typedef struct ScePspDateTime {
 	unsigned int 	microsecond;
 } ScePspDateTime;
 
+/* Thread entry function type. */
+typedef int (*SceKernelThreadEntry)(SceSize args, void *argp);
+
 #ifdef __cplusplus
 }
 #endif
