@@ -16,7 +16,7 @@ function(add_prx_module name)
       get_filename_component(EXP_FILE_NAME ${FILE} NAME_WE)
 
       # Define the output .c file path
-      set(GENERATED_C_FILE ${CMAKE_BINARY_DIR}/${EXP_FILE_NAME}.c)
+      set(GENERATED_C_FILE ${CMAKE_CURRENT_BINARY_DIR}/${EXP_FILE_NAME}.c)
 
       # Add a custom command for each .exp file to generate a .c file
       add_custom_command(
