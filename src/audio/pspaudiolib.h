@@ -41,7 +41,9 @@ void pspAudioEndPre();
 void pspAudioEnd();
 
 void pspAudioSetVolume(int channel, int left, int right);
+void pspAudioGetVolume(int channel, int *left, int *right);
 void pspAudioSetChannelCallback(int channel, pspAudioCallback_t callback, void *pdata);
+void pspAudioGetChannelCallback(int channel, pspAudioCallback_t *callback, void **pdata);
 int  pspAudioOutBlocking(unsigned int channel, unsigned int vol1, unsigned int vol2, void *buf);
 
 #ifdef __cplusplus
