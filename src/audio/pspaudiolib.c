@@ -30,12 +30,25 @@ void pspAudioSetVolume(int channel, int left, int right)
   AudioStatus[channel].volumeleft  = left;
 }
 
+void pspAudioGetVolume(int channel, int *left, int *right)
+{
+  *right = AudioStatus[channel].volumeright;
+  *left = AudioStatus[channel].volumeleft;
+}
+
 void pspAudioSetChannelCallback(int channel, pspAudioCallback_t callback, void *pdata)
 {
 	volatile psp_audio_channelinfo *pci = &AudioStatus[channel];
 	pci->callback=0;
 	pci->pdata=pdata;
 	pci->callback=callback;
+}
+
+void pspAudioGetChannelCallback(int channel, pspAudioCallback_t *callback, void **pdata)
+{
+	volatile psp_audio_channelinfo *pci = &AudioStatus[channel];
+	*pdata = pci->pdata;
+	*callback = pci->callback;
 }
 
 int pspAudioOutBlocking(unsigned int channel, unsigned int vol1, unsigned int vol2, void *buf)
