@@ -21,6 +21,7 @@ macro(create_pbp_file)
     PSAR_PATH       # optional, absolute path to data.psar file
     VERSION         # optional, adds version information to PARAM.SFO
     OUTPUT_DIR      # optional, set the output directory for the EBOOT.PBP
+    MEMSIZE         # optional, set to 1 by default for allowing access to all available memory. Can be set to 2 for better Vita compatibility, but limited memory access
     )
   set(options
     BUILD_PRX # optional, generates and uses PRX file instead of ELF in EBOOT.PBP
@@ -139,10 +140,13 @@ macro(create_pbp_file)
       )
   endif()
   
+  if (NOT ${ARG_MEMSIZE})
+    set(ARG_MEMSIZE "1")
+  endif()
   add_custom_command(
     TARGET ${ARG_TARGET}
     POST_BUILD COMMAND
-    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=1" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${ARG_OUTPUT_DIR}/PARAM.SFO"
+    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=${ARG_MEMSIZE}" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${ARG_OUTPUT_DIR}/PARAM.SFO"
     COMMENT "Calling mksfoex for target ${ARG_TARGET}"
     )
 
