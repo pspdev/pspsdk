@@ -38,13 +38,16 @@ int sceNandReadPagesRawAll(u32 ppn, void* buf, void* spare, u32 count);
 /*
 // sceNandWritePages
 // sceNandReadAccess
-// sceNandWriteAccess
-// sceNandEraseBlock
-// sceNandReadExtraOnly
 // sceNandCalcEcc
 // sceNandVerifyEcc
 // sceNandCollectEcc
 */
+
+int sceNandEraseBlock(u32 ppn);
+
+int sceNandWriteAccess(u32 ppn, void *buf, void *spare, int, unsigned int);
+
+int sceNandReadExtraOnly(u32 ppn, void *buf, int);
 
 int sceNandGetPageSize(void);
 
