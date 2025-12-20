@@ -33,6 +33,8 @@ int sceNandReadId(void *buf, SceSize size);
 
 int sceNandReadPages(u32 ppn, void *buf, void *buf2, u32 count);
 
+int sceNandReadPagesRawAll(u32 ppn, void* buf, void* spare, u32 count);
+
 /*
 // sceNandWritePages
 // sceNandReadAccess
@@ -52,15 +54,17 @@ int sceNandGetTotalBlocks(void);
 
 /*
 // sceNandWriteBlock
-// sceNandWriteBlockWithVerify
 */
+
+int sceNandWriteBlockWithVerify(u32 ppn, void *buf, void *spare);
 
 int sceNandReadBlockWithRetry(u32 ppn, void *buf, void *buf2);
 
 /*
 // sceNandVerifyBlockWithRetry
-// sceNandEraseBlockWithRetry
 */
+
+int sceNandEraseBlockWithRetry(u32 ppn);
 
 int sceNandIsBadBlock(u32 ppn);
 
