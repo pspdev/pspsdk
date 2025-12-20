@@ -50,6 +50,14 @@ int sceIdStorageIsReadOnly(void);
 /** sceIdStorageFlush() - Finalizes a write */
 int sceIdStorageFlush(void);
 
+int sceIdStorageCreateLeaf(unsigned int leafid);
+
+int sceIdStorageCreateAtomicLeaves(u16 *leaves, int n);
+
+int sceIdStorageFormat();
+
+int sceIdStorageUnformat();
+
 /**@}*/
 
 #ifdef __cplusplus
