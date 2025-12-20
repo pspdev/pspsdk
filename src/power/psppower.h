@@ -292,6 +292,15 @@ int scePowerRequestStandby(void);
  */
 int scePowerRequestSuspend(void);
 
+/**
+ * Request the PSP to do a cold reboot.
+ *
+ * @param exitcode pass 0
+ *
+ * @return 0 always
+ */
+int scePowerRequestColdReset(int exitcode);
+
 
 #ifdef __cplusplus
 }
