@@ -73,6 +73,10 @@ int sceSysregMeBusClockDisable(void);
  */
 int sceSysregGetTachyonVersion(void);
 
+int sceSysregKirkBusClockEnable(void);
+
+int sceSysregAtaBusClockEnable(void);
+
 /**@}*/
 
 #ifdef __cplusplus
