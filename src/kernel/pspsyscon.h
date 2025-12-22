@@ -91,6 +91,8 @@ int sceSysconGetPolestarVersion(int* version);
  */
 int sceSysconGetTimeStamp(s8 *timeStamp);
 
+int sceSysconReceiveSetParam(int n, u8 *buf);
+
 /**@}*/
 
 #ifdef __cplusplus

@@ -48,7 +48,7 @@
 	IMPORT_FUNC	"sceIdStorage_driver",0x2C97AB36,sceIdStorageDeleteLeaf
 #endif
 #ifdef F_sceIdStorage_driver_0015
-	IMPORT_FUNC	"sceIdStorage_driver",0x99ACCB71,sceIdStorage_driver_99ACCB71
+	IMPORT_FUNC	"sceIdStorage_driver",0x99ACCB71,sceIdStorageCreateAtomicLeaves
 #endif
 #ifdef F_sceIdStorage_driver_0016
 	IMPORT_FUNC	"sceIdStorage_driver",0x37833CB8,sceIdStorage_driver_37833CB8

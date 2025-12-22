@@ -122,3 +122,6 @@
 #ifdef F_sceNand_driver_0039
 	IMPORT_FUNC	"sceNand_driver",0x9B2AC433,sceNandTestBlock
 #endif
+#ifdef F_sceNand_driver_0040
+	IMPORT_FUNC	"sceNand_driver",0xC478C1DE,sceNandReadPagesRawAll
+#endif
