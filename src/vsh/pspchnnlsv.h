@@ -15,12 +15,8 @@
 /* The descriptions are mostly speculation. */
 
 /** @defgroup Chnnlsv Chnnlsv Library
-  * Library imports for the vsh chnnlsv library.
-  */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+ * Library imports for the vsh chnnlsv library.
+ */
 
 #include <psptypes.h>
 
@@ -29,18 +25,35 @@ extern "C" {
 
 typedef struct _pspChnnlsvContext1 {
 	/** Cipher mode */
-	int	mode;
-
+	int mode;
 	/** Context data */
-	char	buffer1[0x10];
-	char    buffer2[0x10];
-	int	unknown;
-} pspChnnlsvContext1;
+	u8 data[16];
+	/** Context key */
+	u8 key[16];
+	/** Data size */
+	u32 size;
+} SceSdContext1;
 
 typedef struct _pspChnnlsvContext2 {
-	/** Context data */
-	char    unknown[0x100];
-} pspChnnlsvContext2;
+	/** Cipher mode */
+	u32 mode;
+	u32 unk4;
+	u8 data[16];
+} SceSdContext2;
+
+// Backwards compat
+typedef SceSdContext1 pspChnnlsvContext1;
+typedef SceSdContext2 pspChnnlsvContext2;
+#define sceChnnlsv_E7833020 sceSdSetIndex
+#define sceChnnlsv_F21A1FCA sceSdRemoveValue
+#define sceChnnlsv_C4C494F8 sceSdGetLastIndex
+#define sceChnnlsv_ABFDFC8B sceSdCreateList
+#define sceChnnlsv_850A7FA1 sceSdSetMember
+#define sceChnnlsv_21BE78B4 sceSdCleanList
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
 
 /**
  * Initialize context
@@ -49,8 +62,8 @@ typedef struct _pspChnnlsvContext2 {
  * @param mode - Cipher mode
  * @return < 0 on error
  */
-int sceChnnlsv_E7833020(pspChnnlsvContext1 *ctx, int mode);
-	
+int sceSdSetIndex(SceSdContext1 *ctx, int mode);
+
 /**
  * Process data
  *
@@ -59,7 +72,7 @@ int sceChnnlsv_E7833020(pspChnnlsvContext1 *ctx, int mode);
  * @param len - Length (aligned to 0x10)
  * @return < 0 on error
  */
-int sceChnnlsv_F21A1FCA(pspChnnlsvContext1 *ctx, unsigned char *data, int len);
+int sceSdRemoveValue(SceSdContext1 *ctx, unsigned char *data, int len);
 
 /**
  * Finalize hash
@@ -69,8 +82,7 @@ int sceChnnlsv_F21A1FCA(pspChnnlsvContext1 *ctx, unsigned char *data, int len);
  * @param cryptkey - Crypt key or NULL.
  * @return < 0 on error
  */
-int sceChnnlsv_C4C494F8(pspChnnlsvContext1 *ctx, 
-			unsigned char *hash, unsigned char *cryptkey);
+int sceSdGetLastIndex(SceSdContext1 *ctx, unsigned char *hash, unsigned char *cryptkey);
 
 /**
  * Prepare a key, and set up integrity check
@@ -82,8 +94,7 @@ int sceChnnlsv_C4C494F8(pspChnnlsvContext1 *ctx,
  * @param cipherkey - Key in
  * @return < 0 on error
  */
-int sceChnnlsv_ABFDFC8B(pspChnnlsvContext2 *ctx, int mode1, int mode2,
-			unsigned char *hashkey, unsigned char *cipherkey);
+int sceSdCreateList(SceSdContext2 *ctx, int mode1, int mode2, unsigned char *hashkey, unsigned char *cipherkey);
 
 /**
  * Process data for integrity check
@@ -93,7 +104,7 @@ int sceChnnlsv_ABFDFC8B(pspChnnlsvContext2 *ctx, int mode1, int mode2,
  * @param len - Length (aligned to 0x10)
  * @return < 0 on error
  */
-int sceChnnlsv_850A7FA1(pspChnnlsvContext2 *ctx, unsigned char *data, int len);
+int sceSdSetMember(SceSdContext2 *ctx, unsigned char *data, int len);
 
 /**
  * Check integrity
@@ -101,13 +112,12 @@ int sceChnnlsv_850A7FA1(pspChnnlsvContext2 *ctx, unsigned char *data, int len);
  * @param ctx - Context
  * @return < 0 on error
  */
-int sceChnnlsv_21BE78B4(pspChnnlsvContext2 *ctx);
+int sceSdCleanList(SceSdContext2 *ctx);
 
 /**@}*/
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
-#endif
-
+#endif /* __PSPCHNNLSV_H__ */
