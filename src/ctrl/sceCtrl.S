@@ -36,10 +36,10 @@
 	IMPORT_FUNC	"sceCtrl",0x0B588501,sceCtrlReadLatch
 #endif
 #ifdef F_sceCtrl_0011
-	IMPORT_FUNC	"sceCtrl",0x348D99D4,sceCtrl_348D99D4
+	IMPORT_FUNC	"sceCtrl",0x348D99D4,sceCtrlSetSuspendingExtraSamples
 #endif
 #ifdef F_sceCtrl_0012
-	IMPORT_FUNC	"sceCtrl",0xAF5960F3,sceCtrl_AF5960F3
+	IMPORT_FUNC	"sceCtrl",0xAF5960F3,sceCtrlGetSuspendingExtraSamples
 #endif
 #ifdef F_sceCtrl_0013
 	IMPORT_FUNC	"sceCtrl",0xA68FD260,sceCtrlClearRapidFire
