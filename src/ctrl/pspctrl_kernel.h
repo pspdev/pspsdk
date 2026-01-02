@@ -14,52 +14,81 @@
 #ifndef __CTRL_KERNEL_H__
 #define __CTRL_KERNEL_H__
 
+#include <psptypes.h>
+
+/** The callback function used by ::sceCtrlSetSpecialButtonCallback(). */
+typedef void (*SceKernelButtonCallbackFunction)(u32 cur_buttons, u32 last_buttons, void *opt);
+
+/** Button mask settings. */
+typedef enum SceCtrlButtonMaskMode {
+    /** No mask for the specified buttons. Button input is normally recognized. */
+    SCE_CTRL_MASK_NO_MASK = 0,
+    /**
+     * The specified buttons are ignored, that means even if these buttons are pressed by the user
+     * they won't be shown as pressed internally.
+	 *
+	 * You can only block user buttons for applications running in User Mode.
+     */
+    SCE_CTRL_MASK_IGNORE_BUTTONS = 1,
+    /**
+     * The specified buttons show up as being pressed, even if the user does not press them.
+     *
+	 * You can only turn ON user buttons for applications running in User Mode.
+     */
+    SCE_CTRL_MASK_APPLY_BUTTONS = 2,
+} SceCtrlButtonMaskMode;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /**
- * Set the controller button masks
+ * Sets a button mask mode for one or more buttons.
  *
- * @param mask - The bits to setup
- * @param type - The type of operation (0 clear, 1 set mask, 2 set button)
+ * You can only mask user mode buttons in user applications. Masking of kernel
+ * mode buttons is ignored as well as buttons used in kernel mode applications.
  *
- * @par Example:
+ * @param buttons The button value for which the button mask mode will be applied for. One or more buttons of `SceCtrlButtons`.
+ * @param mask_mode Specifies the type of the button mask. One of `SceCtrlButtonMaskMode`.
+ *
+ * @return The previous button mask type for the given buttons. One of `SceCtrlButtonMaskMode`.
+ *
+ * @example Example:
  * @code
- * sceCtrl_driver_7CA723DC(0xFFFF, 1);  // Mask lower 16bits
- * sceCtrl_driver_7CA723DC(0x10000, 2); // Always return HOME key
+ * sceCtrlSetButtonIntercept(0xFFFF, 1);  // Mask lower 16bits
+ * sceCtrlSetButtonIntercept(0x10000, 2); // Always return HOME key
  * // Do something
- * sceCtrl_driver_7CA723DC(0x10000, 0); // Unset HOME key
- * sceCtrl_driver_7CA723DC(0xFFFF, 0);  // Unset mask
+ * sceCtrlSetButtonIntercept(0x10000, 0); // Unset HOME key
+ * sceCtrlSetButtonIntercept(0xFFFF, 0);  // Unset mask
  * @endcode
  */
-void sceCtrl_driver_7CA723DC(unsigned int mask, unsigned type);
+u32 sceCtrlSetButtonIntercept(u32 buttons, u32 mask_mode);
 
 /**
- * Get button mask mode
+ * Get button mask mode.
  *
- * @param mask - The bitmask to check
+ * @param buttons The buttons to check for. One or more buttons of `SceCtrlButtons`.
  *
- * @return 0 no setting, 1 set in button mask, 2 set in button set
+ * @return The button mask mode for the given buttons. One of `SceCtrlButtonMaskMode`.
  */
-int sceCtrl_driver_5E77BC8A(unsigned int mask);
+u32 sceCtrlGetButtonIntercept(u32 buttons);
 
 /**
- * Setup a controller callback
+ * Registers a button callback.
  *
- * @param no - The number of the callback (0-3)
- * @param mask - The bits to check for
- * @param cb - The callback function (int curr_but, int last_but, void *arg)
- * @param arg - User defined argument passed
+ * @param slot The slot used to register the callback. Between 0 - 3.
+ * @param button_mask Bitwise OR'ed button values which will be checked for being pressed. One or more buttons of `SceCtrlButtons`.
+ * @param callback A pointer to the callback function handling the button callbacks.
+ * @param opt Optional user argument. Passed to the callback function as its third argument.
  *
- * @return 0 on success, < 0 on error
+ * @return 0 on success, < 0 on error.
  */
-int sceCtrl_driver_5C56C779(int no, unsigned int mask, void (*cb)(int, int, void*), void *arg);
+int sceCtrlSetSpecialButtonCallback(u32 slot, u32 button_mask, SceKernelButtonCallbackFunction callback, void *opt);
 
 /* Just define some random names for the functions to make them easier to use */
-#define sceCtrlSetButtonMasks sceCtrl_driver_7CA723DC
-#define sceCtrlGetButtonMask sceCtrl_driver_5E77BC8A
-#define sceCtrlRegisterButtonCallback sceCtrl_driver_5C56C779
+#define sceCtrlSetButtonMasks sceCtrlSetButtonIntercept
+#define sceCtrlGetButtonMask sceCtrlGetButtonIntercept
+#define sceCtrlRegisterButtonCallback sceCtrlSetSpecialButtonCallback
 
 
 #ifdef __cplusplus
