@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 // Build List
-// sceCtrl_driver_0000.o sceCtrl_driver_0001.o sceCtrl_driver_0002.o sceCtrl_driver_0003.o sceCtrl_driver_0004.o sceCtrl_driver_0005.o sceCtrl_driver_0006.o sceCtrl_driver_0007.o sceCtrl_driver_0008.o sceCtrl_driver_0009.o sceCtrl_driver_0010.o sceCtrl_driver_0011.o sceCtrl_driver_0012.o sceCtrl_driver_0013.o sceCtrl_driver_0014.o sceCtrl_driver_0015.o sceCtrl_driver_0016.o sceCtrl_driver_0017.o sceCtrl_driver_0018.o sceCtrl_driver_0019.o sceCtrl_driver_0020.o sceCtrl_driver_0021.o sceCtrl_driver_0022.o sceCtrl_driver_0023.o 
+// sceCtrl_driver_0000.o sceCtrl_driver_0001.o sceCtrl_driver_0002.o sceCtrl_driver_0003.o sceCtrl_driver_0004.o sceCtrl_driver_0005.o sceCtrl_driver_0006.o sceCtrl_driver_0007.o sceCtrl_driver_0008.o sceCtrl_driver_0009.o sceCtrl_driver_0010.o sceCtrl_driver_0011.o sceCtrl_driver_0012.o sceCtrl_driver_0013.o sceCtrl_driver_0014.o sceCtrl_driver_0015.o sceCtrl_driver_0016.o sceCtrl_driver_0017.o sceCtrl_driver_0018.o sceCtrl_driver_0019.o sceCtrl_driver_0020.o sceCtrl_driver_0021.o sceCtrl_driver_0022.o sceCtrl_driver_0023.o
 
 #ifdef F_sceCtrl_driver_0000
 	IMPORT_START	"sceCtrl_driver",0x00010000
@@ -57,10 +57,10 @@
 	IMPORT_FUNC	"sceCtrl_driver",0xB7CEAED4,sceCtrlGetIdleCancelKey
 #endif
 #ifdef F_sceCtrl_driver_0017
-	IMPORT_FUNC	"sceCtrl_driver",0x348D99D4,sceCtrl_driver_348D99D4
+	IMPORT_FUNC	"sceCtrl_driver",0x348D99D4,sceCtrlSetSuspendingExtraSamples
 #endif
 #ifdef F_sceCtrl_driver_0018
-	IMPORT_FUNC	"sceCtrl_driver",0xAF5960F3,sceCtrl_driver_AF5960F3
+	IMPORT_FUNC	"sceCtrl_driver",0xAF5960F3,sceCtrlGetSuspendingExtraSamples
 #endif
 #ifdef F_sceCtrl_driver_0019
 	IMPORT_FUNC	"sceCtrl_driver",0xA68FD260,sceCtrlClearRapidFire
@@ -69,13 +69,13 @@
 	IMPORT_FUNC	"sceCtrl_driver",0x6841BE1A,sceCtrlSetRapidFire
 #endif
 #ifdef F_sceCtrl_driver_0021
-	IMPORT_FUNC	"sceCtrl_driver",0x7CA723DC,sceCtrl_driver_7CA723DC
+	IMPORT_FUNC	"sceCtrl_driver",0x7CA723DC,sceCtrlSetButtonIntercept
 #endif
 #ifdef F_sceCtrl_driver_0022
-	IMPORT_FUNC	"sceCtrl_driver",0x5E77BC8A,sceCtrl_driver_5E77BC8A
+	IMPORT_FUNC	"sceCtrl_driver",0x5E77BC8A,sceCtrlGetButtonIntercept
 #endif
 #ifdef F_sceCtrl_driver_0023
-	IMPORT_FUNC	"sceCtrl_driver",0x5C56C779,sceCtrl_driver_5C56C779
+	IMPORT_FUNC	"sceCtrl_driver",0x5C56C779,sceCtrlSetSpecialButtonCallback
 #endif
 #ifdef F_sceCtrl_driver_0024
 	IMPORT_FUNC	"sceCtrl_driver",0xA7144800,sceCtrlSetIdleCancelThreshold
