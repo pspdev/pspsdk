@@ -49,10 +49,14 @@ ifeq ($(PSP_LARGE_MEMORY),1)
 $(warning "PSP_LARGE_MEMORY" flag is not necessary targeting firmware versions above 3.90)
 else ifeq ($(PSP_LARGE_MEMORY),0)
 EXPAND_MEMORY = 0
+else ifeq ($(PSP_LARGE_MEMORY),2)
+EXPAND_MEMORY = 2
 endif # PSP_LARGE_MEMORY
 else
 ifeq ($(PSP_LARGE_MEMORY),1)
 EXPAND_MEMORY = 1
+else ifeq ($(PSP_LARGE_MEMORY),2)
+EXPAND_MEMORY = 2
 endif # PSP_LARGE_MEMORY
 endif # PSP_FW_VERSION
 
@@ -68,7 +72,7 @@ EXTRA_CLEAN += $(TARGET).elf
 ifdef PRX_EXPORTS
 EXPORT_OBJ=$(patsubst %.exp,%.o,$(PRX_EXPORTS))
 EXTRA_CLEAN += $(EXPORT_OBJ)
-else 
+else
 EXPORT_OBJ=$(PSPSDK)/lib/prxexports.o
 endif
 else
@@ -169,7 +173,7 @@ $(TARGET_LIB): $(OBJS)
 	$(AR) cru $@ $(OBJS)
 	$(RANLIB) $@
 
-$(PSP_EBOOT_SFO): 
+$(PSP_EBOOT_SFO):
 	$(MKSFO) $(SFOFLAGS) '$(PSP_EBOOT_TITLE)' $@
 
 ifeq ($(BUILD_PRX),1)
@@ -195,7 +199,7 @@ endif
 %.c: %.exp
 	psp-build-exports -b $< > $@
 
-clean: 
+clean:
 	-rm -f $(FINAL_TARGET) $(EXTRA_CLEAN) $(OBJS) $(PSP_EBOOT_SFO) $(PSP_EBOOT) $(EXTRA_TARGETS)
 
 rebuild: clean all
