@@ -127,7 +127,7 @@ int sceAudioOutput(int channel, int vol, void *buf);
   *
   * @param buf - Pointer to the PCM data to output.
   *
-  * @return 0 on success, an error if less than 0.
+  * @return number of queued samples on success, an error if less than 0.
   */
 int sceAudioOutputBlocking(int channel, int vol, void *buf);
 
@@ -157,7 +157,7 @@ int sceAudioOutputPanned(int channel, int leftvol, int rightvol, void *buf);
   *
   * @param buf - Pointer to the PCM data to output.
   *
-  * @return 0 on success, an error if less than 0.
+  * @return number of queued samples on success, an error if less than 0.
   */
 int sceAudioOutputPannedBlocking(int channel, int leftvol, int rightvol, void *buf);
 
@@ -285,7 +285,7 @@ int sceAudioSRCChRelease(void);
   *
   * @param buf - Pointer to the PCM data to output.
   *
-  * @return 0 on success, an error if less than 0.
+  * @return number of queued samples on success, an error if less than 0.
   */
 int sceAudioSRCOutputBlocking(int vol, void *buf);
 
