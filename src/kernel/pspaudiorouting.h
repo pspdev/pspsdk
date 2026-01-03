@@ -11,6 +11,10 @@
 #ifndef __PSPAUDIOROUTING_H__
 #define __PSPAUDIOROUTING_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 /**
  * Set routing mode.
  *
@@ -41,5 +45,9 @@ int sceAudioRoutingGetVolumeMode();
  */
 int sceAudioRoutingSetVolumeMode(int vol_mode);
 
-#endif
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif /* __PSPAUDIOROUTING_H__ */
 
