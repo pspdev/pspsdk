@@ -122,8 +122,6 @@ int sceKernelApplicationType();
 
 #define sceKernelInitKeyConfig sceKernelApplicationType
 
-#if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 660
-
 /**
  * Retrieve Init's internal control block. This control block manages execution details of an
  * executable, like its API type, its boot medium and its application type.
@@ -132,7 +130,6 @@ int sceKernelApplicationType();
  */
 SceInit *sceKernelQueryInitCB(void);
 
-#endif /* defined(_PSP_FW_VERSION) && _PSP_FW_VERSION >= 660 */
 
 #endif /* __PSPINIT_H__ */
 
