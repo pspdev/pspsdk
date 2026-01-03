@@ -48,13 +48,13 @@
 	IMPORT_FUNC	"SysclibForKernel",0x8AF6B8F8,SysclibForKernel_8AF6B8F8
 #endif
 #ifdef F_SysclibForKernel_0015
-	IMPORT_FUNC	"SysclibForKernel",0xDF17F4A2,SysclibForKernel_DF17F4A2
+	IMPORT_FUNC	"SysclibForKernel",0xDF17F4A2,__udivmoddi4
 #endif
 #ifdef F_SysclibForKernel_0016
-	IMPORT_FUNC	"SysclibForKernel",0x7DEE14DE,SysclibForKernel_7DEE14DE
+	IMPORT_FUNC	"SysclibForKernel",0x7DEE14DE,__udivdi3
 #endif
 #ifdef F_SysclibForKernel_0017
-	IMPORT_FUNC	"SysclibForKernel",0x5E8E5F42,SysclibForKernel_5E8E5F42
+	IMPORT_FUNC	"SysclibForKernel",0x5E8E5F42,__umoddi3
 #endif
 #ifdef F_SysclibForKernel_0018
 	IMPORT_FUNC	"SysclibForKernel",0xC0AB8932,strcmp
@@ -130,4 +130,7 @@
 #endif
 #ifdef F_SysclibForKernel_0042
 	IMPORT_FUNC	"SysclibForKernel",0x1493EBD9,wmemset
+#endif
+#ifdef F_SysclibForKernel_0043
+	IMPORT_FUNC	"SysclibForKernel",0xC2145E80,snprintf
 #endif
