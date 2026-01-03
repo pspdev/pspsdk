@@ -27,5 +27,19 @@ int sceAudioRoutingSetMode( int mode );
 */
 int sceAudioRoutingGetMode();
 
+/** Get the current routing volume mode.
+ *
+ * @return The current routing volume mode.
+ */
+int sceAudioRoutingGetVolumeMode();
+
+/** Set the routing volume mode.
+ *
+ * @param vol_mode The routing volume to set (`0` or `1`).
+ *
+ * @return `0` on success, `< 0` on error.
+ */
+int sceAudioRoutingSetVolumeMode(int vol_mode);
+
 #endif
 
