@@ -63,11 +63,9 @@ int sceKernelBootFrom();
 /**
  * Get the key configuration in which the system has booted.
  *
- * @return the key configuration code, one of PSPKeyConfig values 
+ * @return the key configuration code, one of `PSPKeyConfig` values
 */
-int InitForKernel_7233B5BC();
+int sceKernelApplicationType();
 
-#define sceKernelInitKeyConfig InitForKernel_7233B5BC
-
-#endif
+#define sceKernelInitKeyConfig sceKernelApplicationType
 
