@@ -35,4 +35,14 @@ typedef int SceMode;
 typedef SceInt64 SceOff;
 typedef SceInt64 SceIores;
 
+/**
+ * This structure represents a boot callback belonging to a module.
+ */
+typedef struct SceBootCallback {
+	/** The boot callback function. */
+	void *boot_callback_func;
+	/** Global pointer value of the module. */
+	u32 gp;
+} SceBootCallback;
+
 #endif /* PSPKERNELTYPES_H */
