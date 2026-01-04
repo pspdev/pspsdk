@@ -12,7 +12,7 @@
 	IMPORT_FUNC	"SysTimerForKernel",0xC105CF38,sceSTimerFree
 #endif
 #ifdef F_SysTimerForKernel_0003
-	IMPORT_FUNC	"SysTimerForKernel",0xB53534B4,SysTimerForKernel_B53534B4
+	IMPORT_FUNC	"SysTimerForKernel",0xB53534B4,sceSTimerSetPrscl
 #endif
 #ifdef F_SysTimerForKernel_0004
 	IMPORT_FUNC	"SysTimerForKernel",0x975D8E84,sceSTimerSetHandler
@@ -30,5 +30,5 @@
 	IMPORT_FUNC	"SysTimerForKernel",0x228EDAE4,sceSTimerGetCount
 #endif
 #ifdef F_SysTimerForKernel_0009
-	IMPORT_FUNC	"SysTimerForKernel",0x53231A15,SysTimerForKernel_53231A15
+	IMPORT_FUNC	"SysTimerForKernel",0x53231A15,sceSTimerSetTMCY
 #endif
