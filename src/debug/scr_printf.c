@@ -12,7 +12,6 @@
  */
 #include <stdio.h>
 #include <psptypes.h>
-#include <pspkernel.h>
 #include <pspdisplay.h>
 #include <pspsysclib.h>
 #include <pspge.h>

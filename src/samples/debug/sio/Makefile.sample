@@ -6,6 +6,7 @@ CFLAGS = -O2 -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
+LIBS = -lpspkernel
 LIBDIR =
 LDFLAGS = 
 

@@ -8,7 +8,7 @@
 
 #include "guInternal.h"
 
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspge.h>
 #include <pspdisplay.h>
 

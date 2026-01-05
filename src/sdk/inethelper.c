@@ -10,7 +10,6 @@
  *
  */
 
-#include <pspkernel.h>
 #include <pspsdk.h>
 #include <pspnet.h>
 #include <pspnet_inet.h>

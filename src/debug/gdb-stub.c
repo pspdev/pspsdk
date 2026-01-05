@@ -12,7 +12,8 @@
 /* Note: there is the odd small bit which comes from the gdb stubs/linux mips stub */
 /* As far as I am aware they didn't have an explicit license on them so... */
 
-#include <pspkernel.h>
+#include <pspiofilemgr.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <string.h>
 #include <signal.h>

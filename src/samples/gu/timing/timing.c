@@ -8,7 +8,7 @@
  * Copyright (c) 2007 McZonk
  */
 
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <pspdebug.h>
 #include <stdlib.h>

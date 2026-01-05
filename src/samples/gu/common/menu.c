@@ -8,7 +8,6 @@
 
 #include "menu.h"
 
-#include <pspkernel.h>
 #include <pspdisplay.h>
 #include <pspdebug.h>
 #include <pspctrl.h>

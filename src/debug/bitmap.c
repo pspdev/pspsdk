@@ -9,7 +9,7 @@
  *
  */
 
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <stdio.h>
 #include <stdint.h>

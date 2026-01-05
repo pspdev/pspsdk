@@ -8,7 +8,7 @@
  * Copyright (c) 2006 Iaroslav Gaponenko <adrahil@gmail.com>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <stdio.h>
 #include <pspmscm.h>
  

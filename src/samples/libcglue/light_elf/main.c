@@ -11,10 +11,9 @@
 #include <stdio.h>
 
 // Specific psp headers
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspdisplay.h>
-#include <pspkernel.h>
 #include <pspmoduleinfo.h>
 #include <sys/socket.h>
 #include <errno.h>
