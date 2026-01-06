@@ -47,8 +47,10 @@ struct rawarc
 struct gmonparam 
 {
         int state;
-        unsigned int lowpc;
-        unsigned int highpc;
+        unsigned int lowpc;         /* runtime text start (for range checks) */
+        unsigned int highpc;        /* runtime text end (for range checks) */
+        unsigned int lowpc_link;    /* link-time text start (for output) */
+        unsigned int highpc_link;   /* link-time text end (for output) */
         unsigned int textsize;
         unsigned int hashfraction;
 
@@ -101,8 +103,21 @@ static void initialize()
 
         memset(&gp, '\0', sizeof(gp));
         gp.state = GMON_PROF_ON;
+
+        /* For PRX modules, the code is relocated at load time.
+           &_ftext and &_etext give us runtime (relocated) addresses.
+           Link-time addresses start at 0 for PSP executables.
+
+           Runtime:   &_ftext = relocated_base, &_etext = relocated_base + text_size
+           Link-time: _ftext = 0, _etext = text_size
+
+           So: lowpc_link = 0
+               highpc_link = &_etext - &_ftext (which equals text_size)
+        */
         gp.lowpc = (unsigned int)&_ftext;
         gp.highpc = (unsigned int)&_etext;
+        gp.lowpc_link = 0;
+        gp.highpc_link = (unsigned int)&_etext - (unsigned int)&_ftext;
         gp.textsize = gp.highpc - gp.lowpc;
         gp.hashfraction = HISTFRACTION;
 
@@ -197,8 +212,10 @@ void gprof_stop(const char* filename, int should_dump)
 
         if (should_dump) {
                 fp = fopen(filename, "wb");
-                hdr.lpc = gp.lowpc;
-                hdr.hpc = gp.highpc;
+
+                /* Header uses link-time addresses so psp-gprof can match ELF symbols */
+                hdr.lpc = gp.lowpc_link;
+                hdr.hpc = gp.highpc_link;
                 hdr.ncnt = sizeof(hdr) + (sizeof(unsigned int) * gp.nsamples);
                 hdr.version = GMONVERSION;
                 hdr.profrate = SAMPLE_FREQ;
@@ -208,6 +225,7 @@ void gprof_stop(const char* filename, int should_dump)
                 fwrite(&hdr, 1, sizeof(hdr), fp);
                 fwrite(gp.samples, gp.nsamples, sizeof(unsigned int), fp);
 
+                /* Arcs already store link-time addresses (converted in __mcount) */
                 for (i=0; i<gp.narcs; i++)
                 {
                         if (gp.arcs[i].count > 0)
@@ -260,14 +278,16 @@ void __mcount(unsigned int frompc, unsigned int selfpc)
                 return;
         }
 
-        frompc = frompc & 0x0FFFFFFF;
-        selfpc = selfpc & 0x0FFFFFFF;
+        /* Mask upper bits and convert to link-time addresses.
+           Link-time addresses = runtime addresses - gp.lowpc (since lowpc_link = 0) */
+        frompc = (frompc & 0x0FFFFFFF) - gp.lowpc;
+        selfpc = (selfpc & 0x0FFFFFFF) - gp.lowpc;
 
-        /* call might come from stack */
-        if (frompc >= gp.lowpc && frompc <= gp.highpc)
+        /* Check if within text section (using link-time range) */
+        if (frompc <= gp.highpc_link)
         {
                 gp.pc = selfpc;
-                e = (frompc - gp.lowpc) / gp.hashfraction;
+                e = frompc / gp.hashfraction;
                 arc = gp.arcs + e;
                 arc->frompc = frompc;
                 arc->selfpc = selfpc;
@@ -280,14 +300,14 @@ void __mcount(unsigned int frompc, unsigned int selfpc)
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 static SceUInt timer_handler(SceUID uid, SceKernelSysClock *requested, SceKernelSysClock *actual, void *common)
 {
-        unsigned int frompc = gp.pc;
+        unsigned int frompc = gp.pc;  /* Already in link-time address */
 
         if (gp.state == GMON_PROF_ON)
         {
-                /* call might come from stack */
-                if (frompc >= gp.lowpc && frompc <= gp.highpc)
+                /* Check if within text section (using link-time range) */
+                if (frompc <= gp.highpc_link)
                 {
-                        int e = (frompc - gp.lowpc) / gp.hashfraction;
+                        int e = frompc / gp.hashfraction;
                         gp.samples[e]++;
                 }
         }
