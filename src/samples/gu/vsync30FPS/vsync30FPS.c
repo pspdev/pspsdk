@@ -18,7 +18,7 @@
  * Copyright (c) 2025, Francisco Javier Trujillo Mata <fjtrujy@gmail.com>
  */
 
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <pspdebug.h>
 #include <stdlib.h>

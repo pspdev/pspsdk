@@ -10,7 +10,7 @@
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <stdio.h>
 
 /* Define the module info section */

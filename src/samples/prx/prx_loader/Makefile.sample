@@ -9,7 +9,7 @@ ASFLAGS = $(CFLAGS)
 LIBDIR =
 LDFLAGS = 
 
-LIBS = 
+LIBS = -lpspkernel
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Sample PRX Loader

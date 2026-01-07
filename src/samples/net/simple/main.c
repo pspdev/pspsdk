@@ -11,7 +11,7 @@
  */
 #include <arpa/inet.h>
 #include <errno.h>
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspnet_apctl.h>
 #include <pspsdk.h>
 #include <psputility.h>

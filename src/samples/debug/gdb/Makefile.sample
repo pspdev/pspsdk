@@ -6,7 +6,7 @@ CFLAGS = -O0 -Wall -ggdb
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
-LIBS = -lpspgdb -lpspgdb_user
+LIBS = -lpspgdb -lpspgdb_user -lpspkernel
 LIBDIR =
 LDFLAGS =
 

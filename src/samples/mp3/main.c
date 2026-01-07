@@ -8,7 +8,7 @@
  * Copyright (c) 2008 Alexander Berl <raphael@fx-world.org>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspctrl.h>
 #include <pspdisplay.h>

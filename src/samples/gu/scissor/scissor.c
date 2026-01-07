@@ -8,7 +8,7 @@
  * Scissor sample - Demonstrates scissor functionality with a scanning effect
  */
 
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <pspdebug.h>
 #include <pspgu.h>

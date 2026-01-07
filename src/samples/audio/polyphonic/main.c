@@ -8,7 +8,7 @@
  * Copyright (c) 2005 Frank Buss <fb@frank-buss.de> (aka Shine)
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspaudiolib.h>
 #include <psptypes.h>
