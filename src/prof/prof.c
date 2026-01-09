@@ -81,6 +81,9 @@ static int initialized = 0;
 extern int _ftext;
 extern int _etext;
 
+/// relocation offset: runtime_address - link_address (for PRX)
+static unsigned int reloc_offset;
+
 /* forward declarations */
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void __gprof_cleanup(void);
@@ -104,20 +107,41 @@ static void initialize()
         memset(&gp, '\0', sizeof(gp));
         gp.state = GMON_PROF_ON;
 
-        /* For PRX modules, the code is relocated at load time.
-           &_ftext and &_etext give us runtime (relocated) addresses.
-           Link-time addresses start at 0 for PSP executables.
+        /* Detect PRX vs PBP and calculate relocation offset.
 
-           Runtime:   &_ftext = relocated_base, &_etext = relocated_base + text_size
-           Link-time: _ftext = 0, _etext = text_size
+           For PRX (relocatable modules):
+           - Linked at address 0
+           - Relocated at load time to a PAGE-ALIGNED address (e.g., 0x08804000)
+           - reloc_offset = runtime_ftext - 0 = runtime_ftext
+           - link_addr = runtime_addr - reloc_offset
 
-           So: lowpc_link = 0
-               highpc_link = &_etext - &_ftext (which equals text_size)
+           For PBP (standard executables):
+           - Linked at address X (typically 0x0880403c, NOT page-aligned)
+           - Loaded at same address (no relocation)
+           - reloc_offset = 0
+           - link_addr = runtime_addr
+
+           Detection heuristic: PRX modules are loaded at page-aligned addresses
+           (lower 12 bits = 0), while PBP executables have specific link addresses
+           that typically aren't page-aligned.
         */
         gp.lowpc = (unsigned int)&_ftext;
         gp.highpc = (unsigned int)&_etext;
-        gp.lowpc_link = 0;
-        gp.highpc_link = (unsigned int)&_etext - (unsigned int)&_ftext;
+
+        unsigned int runtime_base = (unsigned int)&_ftext & 0x0FFFFFFF;
+
+        /* Check if _ftext is page-aligned (4KB pages = 0x1000) */
+        if ((runtime_base & 0xFFF) == 0) {
+                /* PRX: code was relocated from 0 to runtime_base */
+                reloc_offset = runtime_base;
+                gp.lowpc_link = 0;
+                gp.highpc_link = gp.highpc - gp.lowpc;
+        } else {
+                /* PBP: no relocation, addresses match ELF */
+                reloc_offset = 0;
+                gp.lowpc_link = runtime_base;
+                gp.highpc_link = (unsigned int)&_etext & 0x0FFFFFFF;
+        }
         gp.textsize = gp.highpc - gp.lowpc;
         gp.hashfraction = HISTFRACTION;
 
@@ -278,16 +302,17 @@ void __mcount(unsigned int frompc, unsigned int selfpc)
                 return;
         }
 
-        /* Mask upper bits and convert to link-time addresses.
-           Link-time addresses = runtime addresses - gp.lowpc (since lowpc_link = 0) */
-        frompc = (frompc & 0x0FFFFFFF) - gp.lowpc;
-        selfpc = (selfpc & 0x0FFFFFFF) - gp.lowpc;
+        /* Mask upper bits to normalize cached/uncached addresses,
+           then subtract relocation offset to get link-time addresses. */
+        frompc = (frompc & 0x0FFFFFFF) - reloc_offset;
+        selfpc = (selfpc & 0x0FFFFFFF) - reloc_offset;
 
-        /* Check if within text section (using link-time range) */
-        if (frompc <= gp.highpc_link)
+        /* Check if within text section (using link-time addresses) */
+        if (frompc >= gp.lowpc_link && frompc < gp.highpc_link)
         {
                 gp.pc = selfpc;
-                e = frompc / gp.hashfraction;
+                /* Arc index is based on offset within text section */
+                e = (frompc - gp.lowpc_link) / gp.hashfraction;
                 arc = gp.arcs + e;
                 arc->frompc = frompc;
                 arc->selfpc = selfpc;
@@ -300,14 +325,15 @@ void __mcount(unsigned int frompc, unsigned int selfpc)
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 static SceUInt timer_handler(SceUID uid, SceKernelSysClock *requested, SceKernelSysClock *actual, void *common)
 {
-        unsigned int frompc = gp.pc;  /* Already in link-time address */
+        unsigned int pc = gp.pc;  /* Already converted to link-time address by __mcount */
 
         if (gp.state == GMON_PROF_ON)
         {
-                /* Check if within text section (using link-time range) */
-                if (frompc <= gp.highpc_link)
+                /* Check if within text section (using link-time addresses) */
+                if (pc >= gp.lowpc_link && pc < gp.highpc_link)
                 {
-                        int e = frompc / gp.hashfraction;
+                        /* Sample index is based on offset within text section */
+                        int e = (pc - gp.lowpc_link) / gp.hashfraction;
                         gp.samples[e]++;
                 }
         }
