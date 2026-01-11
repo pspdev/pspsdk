@@ -26,6 +26,7 @@ extern "C" {
 /** @addtogroup LoadCore Interface to the LoadCoreForKernel library. */
 /**@{*/
 
+#define SCE_KERNEL_MAX_MODULE_SEGMENT (4)
 
 /** Reboot preparation functions */
 typedef s32 (*SceKernelRebootBeforeForKernel)(void *arg1, s32 arg2, s32 arg3, s32 arg4);
@@ -195,6 +196,17 @@ typedef struct SceModule {
 	u32 	compute_text_segment_checksum;
 } SceModule;
 
+typedef struct {
+	char *name;
+	void *buf;
+	int size;
+	int unk_12;
+	int attr;
+	int unk_20;
+	int argSize;
+	int argPartId;
+} SceLoadCoreBootModuleInfo;
+
 /** Defines a library and its exported functions and variables.  Use the len
     member to determine the real size of the table (size = len * 4). */
 typedef struct SceLibraryEntryTable {
@@ -238,6 +250,107 @@ typedef struct SceLibraryStubTable {
 	void *				vstubtable;
 } SceLibraryStubTable;
 
+typedef struct SceLoadCoreExecFileInfo {
+	/** Unknown. */
+	u32 unk0;
+	/** The mode attribute of the executable file. One of ::SceExecFileModeAttr. */
+	u32 mode_attr; //4
+	/** The API type. */
+	u32 api_type; //8
+	/** Unknown. */
+	u32 unk12;
+	/** The size of the executable, including the ~PSP header. */
+	SceSize exec_size; //16
+	/** The maximum size needed for the decompression. */
+	SceSize max_alloc_size; //20
+	/** The memory ID of the decompression buffer. */
+	SceUID decompression_mem_id; //24
+	/** Pointer to the compressed module data. */
+	void *file_base; //28
+	/** Indicates the ELF type of the executable. One of ::SceExecFileElfType. */
+	u32 elf_type; //32
+	/** The start address of the TEXT segment of the executable in memory. */
+	void *top_addr; //36
+	/**
+	 * The entry address of the module. It is the offset from the start of the TEXT segment to the
+	 * program's entry point.
+	 */
+	u32 entry_addr; //40
+	/** Unknown. */
+	u32 unk44;
+	/**
+	 * The size of the largest module segment. Should normally be "textSize", but technically can
+	 * be any other segment.
+	 */
+	SceSize largest_seg_size; //48
+	/** The size of the TEXT segment. */
+	SceSize text_size; //52
+	/** The size of the DATA segment. */
+	SceSize data_size; //56
+	/** The size of the BSS segment. */
+	SceSize bss_size; //60
+	/** The memory partition of the executable. */
+	u32 partition_id; //64
+	/**
+	 * Indicates whether the executable is a kernel module or not. Set to 1 for kernel module,
+	 * 0 for user module.
+	 */
+	u32 is_kernel_mod; //68
+	/**
+	 * Indicates whether the executable is decrypted or not. Set to 1 if it is successfully decrypted,
+	 * 0 for encrypted.
+	 */
+	u32 is_decrypted; //72
+	/** The offset from the start address of the TEXT segment to the SceModuleInfo section. */
+	u32 module_info_offset; //76
+	/** The pointer to the module's SceModuleInfo section. */
+	SceModuleInfo *module_info; //80
+	/** Indicates whether the module is compressed or not. Set to 1 if it is compressed, otherwise 0.*/
+	u32 is_compressed; //84
+	/** The module's attributes. One or more of ::SceModuleAttribute and ::SceModulePrivilegeLevel. */
+	u16 mod_info_attribute; //88
+	/** The attributes of the executable file. One of ::SceExecFileAttr. */
+	u16 exec_attribute; //90
+	/** The size of the decompressed module, including its headers. */
+	SceSize dec_size; //92
+	/** Indicates whether the module is decompressed or not. Set to 1 for decompressed, otherwise 0. */
+	u32 is_decompressed; //96
+	/**
+	 * Indicates whether the module was signChecked or not. Set to 1 for signChecked, otherwise 0.
+	 * A signed module has a "mangled" executable header, in other words, the "~PSP" signature can't
+	 * be seen.
+	 */
+	u32 is_sign_checked; //100
+	/** Unknown. */
+	u32 unk104;
+	/** The size of the GZIP compression overlap. */
+	SceSize overlap_size; //108
+	/** Pointer to the first resident library entry table of the module. */
+	void *exports_info; //112
+	/** The size of all resident library entry tables of the module. */
+	SceSize exports_size; //116
+	/** Pointer to the first stub library entry table of the module. */
+	void *imports_info; //120
+	/** The size of all stub library entry tables of the module. */
+	SceSize imports_size; //124
+	/** Pointer to the string table section. */
+	void *strtab_offset; //128
+	/** The number of segments in the executable. */
+	u8 num_segments; //132
+	/** Reserved. */
+	u8 padding[3]; //133
+	/** An array containing the start address of each segment. */
+	u32 segment_addr[SCE_KERNEL_MAX_MODULE_SEGMENT]; //136
+	/** An array containing the size of each segment. */
+	u32 segment_size[SCE_KERNEL_MAX_MODULE_SEGMENT]; //152
+	/** The ID of the ELF memory block containing the TEXT, DATA and BSS segment. */
+	SceUID mem_block_id; //168
+	/** An array containing the alignment information of each segment. */
+	u32 segment_align[SCE_KERNEL_MAX_MODULE_SEGMENT]; //172
+	/** The largest value of the segment_align array. */
+	u32 max_seg_align; //188
+} SceLoadCoreExecFileInfo;
+
 
 /**
  * Find a module by it's name.
@@ -277,6 +390,44 @@ int sceKernelModuleCount(void);
  * Invalidate the CPU's instruction cache.
  */
 void sceKernelIcacheClearAll(void);
+
+/**
+ * Check an executable file. This contains scanning its ELF header and ~PSP header (if it has one)
+ * and filling the execInfo structure with basic information, like the ELF type, segment information,
+ * the size of the executable. The file is also uncompressed, if it was compressed before.
+ *
+ * @param buf Pointer to the file's contents.
+ * @param execInfo Pointer to the executionInfo belonging to that executable.
+ *
+ * @return 0 on success.
+ */
+int sceKernelCheckExecFile(void *buf, SceLoadCoreExecFileInfo *execInfo);
+
+/**
+ * Probe an executable file. This contains calculating the sizes for the three segments TEXT, DATA
+ * and BSS, filling the execInfo structure with information about the location and sizes of the
+ * resident/stub library entry tables.
+ *
+ * Furthermore, it is checked whether the executable has valid API type or not.
+ *
+ * @param buf Pointer to the file's contents.
+ * @param execInfo Pointer to the executionInfo belonging to that executable.
+ *
+ * @return 0 on success.
+ */
+int sceKernelProbeExecutableObject(void *buf, SceLoadCoreExecFileInfo *execInfo);
+
+/**
+ * Receive a list of UIDs of loaded modules.
+ *
+ * @param mod_id_list Pointer to a SceUID array which will receive the UIDs of the loaded modules.
+ * @param size Size of mod_id_list. Specifies the number of entries that can be stored into mod_id_list.
+ * @param mod_count A pointer which will receive the total number of loaded modules.
+ * @param user_mods_only Set to 1 to only receive UIDs from user mode modules. Set to 0 to receive UIDs from all loaded modules.
+ *
+ * @return 0 on success.
+ */
+int sceKernelGetModuleIdListForKernel(SceUID *mod_id_list, u32 size, u32 *mod_count, u32 user_mods_only);
 
 /**@}*/
 
