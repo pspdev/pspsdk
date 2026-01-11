@@ -10,8 +10,8 @@
  * TODO: Contribute this header to PSPSDK
  */
 
-#ifndef AM_CTRL_H
-#define AM_CTRL_H
+#ifndef _PSP_AM_CTRL_H
+#define _PSP_AM_CTRL_H
 
 #include <psptypes.h>
 
