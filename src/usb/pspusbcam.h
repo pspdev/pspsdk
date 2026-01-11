@@ -584,6 +584,8 @@ int sceUsbCamGetAutoImageReverseState(void);
 */
 int sceUsbCamGetLensDirection(void);
 
+int sceUsbCamSetupMic(void *param, void *workarea, int wasize);
+
 #ifdef __cplusplus
 }
 #endif
