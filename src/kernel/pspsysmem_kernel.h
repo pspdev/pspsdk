@@ -64,18 +64,19 @@ typedef struct SceGameInfo {
 } SceGameInfo;
 
 /** Structure of a UID control block */
-struct SceUidControlBlock {
-    struct SceUidControlBlock *parent;
-    struct SceUidControlBlock *nextChild;
-    struct SceUidControlBlock *type;   //(0x8)
+struct _uidControlBlock {
+    struct _uidControlBlock *parent;
+    struct _uidControlBlock *nextChild;
+    struct _uidControlBlock *type;   //(0x8)
     u32 UID;					//(0xC)
     char *name;					//(0x10)
 	unsigned char unk;
 	unsigned char size;			// Size in words
     short attribute;
-    struct SceUidControlBlock *nextEntry;
+    struct _uidControlBlock *nextEntry;
 } __attribute__((packed));
-typedef struct SceUidControlBlock SceUidControlBlock;
+typedef struct _uidControlBlock SceUidControlBlock;
+typedef struct _uidControlBlock uidControlBlock; // for compat reasons
 
 /**
  * Query the parition information
