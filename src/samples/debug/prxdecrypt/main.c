@@ -81,7 +81,7 @@ int extract_file(const char* name, const char* dstname)
 			u32 size;
 			char *output;
 
-			memset(check, 0, sizeof(check));
+			memset(&check, 0, sizeof(check));
 			sceKernelCheckExecFile(g_data, &check);
 			/* Get size of data block */
 			size = check.dec_size;
