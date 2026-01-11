@@ -430,6 +430,9 @@ int sceKernelProbeExecutableObject(void *buf, SceLoadCoreExecFileInfo *execInfo)
  */
 int sceKernelGetModuleIdListForKernel(SceUID *mod_id_list, u32 size, u32 *mod_count, u32 user_mods_only);
 
+
+int sceKernelCheckPspConfig(void *buf, int size, int flag);
+
 /**@}*/
 
 #ifdef __cplusplus
