@@ -77,16 +77,12 @@ int pspSdkInstallNoDeviceCheckPatch(void)
 #define LOAD_EXEC_PLAIN_CHECK 0x4000B000 /* mfc0 *, $22 */
 #define LOAD_EXEC_PLAIN_PATCH 0x34000001 /* li   *, 1 */
 
-
-extern u32 sceKernelProbeExecutableObject;
-extern u32 sceKernelCheckPspConfig;
-
 int pspSdkInstallNoPlainModuleCheckPatch(void)
 {
     u32 *addr;
     int i;
 
-    addr = (u32*) (0x80000000 | ((sceKernelProbeExecutableObject & 0x03FFFFFF) << 2));
+    addr = (u32*) (0x80000000 | (((u32)sceKernelProbeExecutableObject & 0x03FFFFFF) << 2));
     //printf("sceKernelProbeExecutableObject %p\n", addr);
     for(i = 0; i < 100; i++)
     {
@@ -97,7 +93,7 @@ int pspSdkInstallNoPlainModuleCheckPatch(void)
         }
     }
 
-    addr = (u32*) (0x80000000 | ((sceKernelCheckPspConfig & 0x03FFFFFF) << 2));
+    addr = (u32*) (0x80000000 | (((u32)sceKernelCheckPspConfig & 0x03FFFFFF) << 2));
     //printf("sceCheckPspConfig %p\n", addr);
     for(i = 0; i < 100; i++)
     {

@@ -130,6 +130,8 @@ int sceKernelSetCompiledSdkVersion(int version);
  */
 int sceKernelGetCompiledSdkVersion(void);
 
+
+
 #ifdef __cplusplus
 }
 #endif

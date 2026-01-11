@@ -40,10 +40,13 @@ extern "C" {
  * @see ::SceCtrlData
  * @see ::SceCtrlLatch
  */
-enum PspCtrlButtons
-{
+enum PspCtrlButtons {
 	/** Select button. */
 	PSP_CTRL_SELECT     = 0x000001,
+	/** L3 button. */
+	PSP_CTRL_L3			= 0x000002,
+	/** R3 button. */
+	PSP_CTRL_R3			= 0x000004,
 	/** Start button. */
 	PSP_CTRL_START      = 0x000008,
 	/** Up D-Pad button. */
@@ -58,6 +61,14 @@ enum PspCtrlButtons
 	PSP_CTRL_LTRIGGER   = 0x000100,
 	/** Right trigger. */
 	PSP_CTRL_RTRIGGER   = 0x000200,
+	/** L2 button. */
+	PSP_CTRL_L2			= 0x000100,
+	/** R2 button. */
+	PSP_CTRL_R2			= 0x000200,
+	/** L1 button. */
+	PSP_CTRL_L1			= 0x000400,
+	/** R1 button. */
+	PSP_CTRL_R1			= 0x000800,
 	/** Triangle button. */
 	PSP_CTRL_TRIANGLE   = 0x001000,
 	/** Circle button. */
@@ -66,28 +77,25 @@ enum PspCtrlButtons
 	PSP_CTRL_CROSS      = 0x004000,
 	/** Square button. */
 	PSP_CTRL_SQUARE     = 0x008000,
-	/**
-	 * Kernel mode: Home button state.
-	 * User mode: Exit dialog visible.
-	 */
+	/** Home button. In user mode this bit is set if the exit dialog is visible. */
 	PSP_CTRL_HOME       = 0x010000,
 	/** Hold button. */
 	PSP_CTRL_HOLD       = 0x020000,
-	/** Music note button - kernel mode only.*/
+	/** Music Note button. */
 	PSP_CTRL_NOTE       = 0x800000,
-	/** Screen button - kernel mode only.*/
+	/** Screen button. */
 	PSP_CTRL_SCREEN     = 0x400000,
-	/** Volume up button - kernel mode only.*/
+	/** Volume up button. */
 	PSP_CTRL_VOLUP      = 0x100000,
-	/** Volume down button - kernel mode only.*/
+	/** Volume down button. */
 	PSP_CTRL_VOLDOWN    = 0x200000,
-	/** Wlan switch up - kernel mode only.*/
+	/** Wlan switch up. */
 	PSP_CTRL_WLAN_UP    = 0x040000,
-	/** Remote hold position - kernel mode only.*/
+	/** Remote hold position. */
 	PSP_CTRL_REMOTE     = 0x080000,
-	/** Disc present - kernel mode only.*/
+	/** Disc present. */
 	PSP_CTRL_DISC       = 0x1000000,
-	/** Memory stick present - kernel mode only.*/
+	/** Memory stick present. */
 	PSP_CTRL_MS         = 0x2000000,
 };
 

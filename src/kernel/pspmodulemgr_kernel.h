@@ -59,6 +59,28 @@ int sceKernelModuleCount(void);
  */
 SceUID sceKernelLoadModuleBuffer(void *buf, SceSize bufsize, int flags, SceKernelLMOption *option);
 
+/**
+ * Alias for `sceKernelLoadModuleForLoadExecForUser`
+ *
+ * @attention Needs to link to `pspmodulemgr_kernel` stub.
+ */
+SceUID sceKernelLoadModuleWithApitype2(int apitype, const char *path, int flags, SceKernelLMOption *option);
+
+/**
+ * Load a module from a buffer with the Boot Init BTCNF apitype (0x051).
+ *
+ * @param bufsize - Size (in bytes) of the buffer pointed to by buf.
+ * @param buf - Pointer to a buffer containing the module to load.  The buffer must reside at an
+ *              address that is a multiple to 64 bytes.
+ * @param flags - Unused, always 0.
+ * @param option - Pointer to an optional ::SceKernelLMOption structure.
+ *
+ * @returns The UID of the loaded module on success, otherwise one of ::PspKernelErrorCodes.
+ *
+ * @attention Needs to link to `pspmodulemgr_kernel` stub.
+ */
+SceUID sceKernelLoadModuleBufferBootInitBtcnf(int bufsize, void *buf, int flags, SceKernelLMOption *option);
+
 /**@}*/
 
 #ifdef __cplusplus

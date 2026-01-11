@@ -18,7 +18,7 @@
 	IMPORT_FUNC	"InitForKernel",0x33D30F49,InitForKernel_33D30F49
 #endif
 #ifdef F_InitForKernel_0005
-	IMPORT_FUNC	"InitForKernel",0x7233B5BC,InitForKernel_7233B5BC
+	IMPORT_FUNC_WITH_ALIAS	"InitForKernel",0x7233B5BC,sceKernelApplicationType,sceKernelInitKeyConfig
 #endif
 #ifdef F_InitForKernel_0006
 	IMPORT_FUNC	"InitForKernel",0x7A2333AD,sceKernelInitApitype
