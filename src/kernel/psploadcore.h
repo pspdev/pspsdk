@@ -15,6 +15,7 @@
 #define PSPLOADCORE_H
 
 #include <pspkerneltypes.h>
+#include <pspmoduleinfo.h>
 
 /** @defgroup LoadCore Interface to the LoadCoreForKernel library.
  */
