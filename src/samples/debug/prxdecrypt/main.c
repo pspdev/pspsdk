@@ -82,16 +82,16 @@ int extract_file(const char* name, const char* dstname)
 			char *output;
 
 			memset(check, 0, sizeof(check));
-			sceKernelCheckExecFile(g_data, check);
+			sceKernelCheckExecFile(g_data, &check);
 			/* Get size of data block */
-			size = check->dec_size;
+			size = check.dec_size;
 
 			/* Check if we managed to decrypt the file */
-			if(check->mod_info_attribute & 1)
+			if(check.mod_info_attribute & 1)
 			{
 				/* Set decrypt buffer pointer */
-				check->top_addr = g_decrypt_buf;
-				sceKernelCheckExecFile(g_data, check);
+				check.top_addr = g_decrypt_buf;
+				sceKernelCheckExecFile(g_data, &check);
 				output = g_decrypt_buf;
 			}
 			else
