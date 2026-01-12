@@ -1,4 +1,4 @@
-TARGET = gprofbasic
+TARGET = gprofbasic_cpp
 OBJS = main.o
 
 INCDIR =
@@ -8,12 +8,13 @@ ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS = -pg -g
+LIBS = -lstdc++
 
 BUILD_PRX = 1
 PSP_FW_VERSION = 600
 
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = GProf Basic Example
+PSP_EBOOT_TITLE = GProf Basic C++ Example
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
