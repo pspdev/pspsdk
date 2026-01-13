@@ -30,6 +30,7 @@ typedef enum PSPBootFrom {
     /** The executable was booted via Flash 3.*/
     PSP_BOOT_FLASH3    = 0x80,
 } PSPBootFrom;
+typedef PSPBootFrom SceBootMediumType;
 
 /**
  * API types of an executable.
@@ -169,6 +170,7 @@ typedef enum PSPKeyConfig {
     /** The application is a PSP application (i.e. Skype). */
     PSP_INIT_KEYCONFIG_APP		= 0x400,
 } PSPKeyConfig;
+typedef PSPKeyConfig SceApplicationType;
 
 /**
  * This structure represents a boot callback belonging to a module.
