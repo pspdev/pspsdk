@@ -8,7 +8,7 @@
  * Copyright (c) 2006 James F
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspreg.h>
 #include <pspctrl.h>

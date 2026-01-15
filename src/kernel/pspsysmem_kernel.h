@@ -39,6 +39,45 @@ typedef struct _PspSysmemPartitionInfo
 	unsigned int attr;
 } PspSysmemPartitionInfo;
 
+typedef struct SceGameInfo {
+	u32 size; // 0
+	u32 flags; // 4
+	char umd_data_string[16]; // 8
+	char expect_umd_data[16]; // 24
+	char qtgp2[8]; // 40
+	char qtgp3[16]; // 48
+	u32 allow_replace_umd; // 64
+	char title_id[16]; // 68
+	u32 parental_level; // 84
+	char vsh_version[8]; // 88
+	u32 umd_cache_on; // 96
+	u32 compiled_sdk_version; // 100
+	u32 compiler_version; // 104
+	u32 dnas; // 108
+	u32 utility_location; // 112
+	char vsh_bootfilename[64]; // 116
+	char gamedata_id[16]; // 180
+	char app_ver[8]; // 196
+	char subscription_validity[8]; // 204
+	int bootable; // 212
+	int opnssmp_ver; // 216
+} SceGameInfo;
+
+/** Structure of a UID control block */
+struct _uidControlBlock {
+    struct _uidControlBlock *parent;
+    struct _uidControlBlock *nextChild;
+    struct _uidControlBlock *type;   //(0x8)
+    u32 UID;					//(0xC)
+    char *name;					//(0x10)
+	unsigned char unk;
+	unsigned char size;			// Size in words
+    short attribute;
+    struct _uidControlBlock *nextEntry;
+} __attribute__((packed));
+typedef struct _uidControlBlock SceUidControlBlock;
+typedef struct _uidControlBlock uidControlBlock; // for compat reasons
+
 /**
  * Query the parition information
  *
@@ -143,20 +182,6 @@ int sceKernelDeleteHeap(SceUID heapid);
 */
 SceSize sceKernelHeapTotalFreeSize(SceUID heapid);
 
-/** Structure of a UID control block */
-struct _uidControlBlock {
-    struct _uidControlBlock *parent;
-    struct _uidControlBlock *nextChild;
-    struct _uidControlBlock *type;   //(0x8)
-    u32 UID;					//(0xC)
-    char *name;					//(0x10)
-	unsigned char unk;
-	unsigned char size;			// Size in words
-    short attribute;
-    struct _uidControlBlock *nextEntry;
-} __attribute__((packed));
-typedef struct _uidControlBlock uidControlBlock;
-
 /**
  * Get a UID control block
  *
@@ -165,7 +190,7 @@ typedef struct _uidControlBlock uidControlBlock;
  *
  * @return 0 on success
  */
-int sceKernelGetUIDcontrolBlock(SceUID uid, uidControlBlock** block);
+int sceKernelGetSceUidControlBlock(SceUID uid, SceUidControlBlock** block);
 
 /**
  * Get a UID control block on a particular type
@@ -176,14 +201,14 @@ int sceKernelGetUIDcontrolBlock(SceUID uid, uidControlBlock** block);
  *
  * @return 0 on success
  */
-int sceKernelGetUIDcontrolBlockWithType(SceUID uid, uidControlBlock* type, uidControlBlock** block);
+int sceKernelGetSceUidControlBlockWithType(SceUID uid, SceUidControlBlock* type, SceUidControlBlock** block);
 
 /**
  * Get the root of the UID tree (1.5+ only)
  *
  * @return Pointer to the UID tree root
  */
-uidControlBlock* SysMemForKernel_536AD5E1(void);
+SceUidControlBlock* SysMemForKernel_536AD5E1(void);
 
 /**
  * Delete a UID
@@ -215,6 +240,36 @@ int sceKernelSetCompiledSdkVersion(int version);
  * @return Version number, or 0 if unset.
  */
 int sceKernelGetCompiledSdkVersion(void);
+
+/**
+ * Gets the information of the game. (2.00+ ?)
+ *
+ * @returns Pointer to the game information on success. NULL otherwise.
+ *
+ * @attention Needs to link to `pspsysmem_kernel` stub.
+ */
+SceGameInfo *sceKernelGetGameInfo();
+
+/**
+ * Gets the current status of the system.
+ *
+ * @returns The status of the system.
+ *
+ * @attention Needs to link to `pspsysmem_kernel` stub.
+ */
+int sceKernelGetSystemStatus();
+
+/**
+ * Get a UID control block
+ *
+ * @param uid - The UID to find
+ * @param block - Pointer to hold the pointer to the block
+ *
+ * @return 0 on success
+ *
+ * @attention Needs to link to `pspsysmem_kernel` stub.
+ */
+int sceKernelGetUIDcontrolBlock(SceUID uid, SceUidControlBlock** block);
 
 #ifdef __cplusplus
 }

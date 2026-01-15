@@ -8,7 +8,7 @@
  * Copyright (c) 2005 James Forshaw <tyranid@gmail.com>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <stdio.h>
 
 PSP_MODULE_INFO("TESTPRX", 0x1000, 1, 1);

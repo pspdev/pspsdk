@@ -10,7 +10,7 @@
  * Some small parts (c) 2005 PSPPet
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspsdk.h>
 #include <stdio.h>

@@ -11,7 +11,7 @@
  * Copyright (c) 2005 Jim Paris <jim@jtan.com>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspctrl.h>
 #include <pspdebug.h>
 #include <pspdisplay.h>

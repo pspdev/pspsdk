@@ -6,7 +6,7 @@
  * PixelMask sample - Demonstrates sceGuPixelMask channel write-masking
  */
 
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <pspdebug.h>
 #include <stdlib.h>

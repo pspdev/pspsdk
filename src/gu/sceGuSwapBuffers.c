@@ -8,7 +8,6 @@
 
 #include "guInternal.h"
 
-#include <pspkernel.h>
 #include <pspdisplay.h>
 
 void *sceGuSwapBuffers(void)

@@ -8,7 +8,6 @@
 
 #include "guInternal.h"
 
-#include <pspkernel.h>
 #include <pspge.h>
 
 int sceGuSendList(int mode, const void *list, PspGeContext *context)

@@ -10,7 +10,6 @@
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
  */
-#include <pspkernel.h>
 #include <pspdebug.h>
 
 #define PROFILER_REG_BASE 0xBC400000

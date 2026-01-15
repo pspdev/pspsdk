@@ -12,7 +12,7 @@
  * Copyright (c) 2005 Donour Sizemore <donour@uchicago.edu>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspctrl.h>
 #include <stdlib.h>

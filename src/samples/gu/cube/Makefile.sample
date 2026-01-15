@@ -8,7 +8,7 @@ ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lpspgum -lpspgu
+LIBS = -lpspgum -lpspgu
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Cube Sample

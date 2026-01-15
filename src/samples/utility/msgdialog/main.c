@@ -9,7 +9,7 @@
  *			 (c) 2008 InsertWittyName <tias_dp@hotmail.com>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <stdio.h>
 #include <string.h>

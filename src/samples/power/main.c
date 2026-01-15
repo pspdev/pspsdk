@@ -8,7 +8,7 @@
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspctrl.h>
 #include <pspdisplay.h>

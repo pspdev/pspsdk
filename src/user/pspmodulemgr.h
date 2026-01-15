@@ -80,6 +80,13 @@ SceUID sceKernelLoadModule(const char *path, int flags, SceKernelLMOption *optio
 SceUID sceKernelLoadModuleMs(const char *path, int flags, SceKernelLMOption *option);
 
 /**
+ * Alias for `sceKernelLoadModuleForLoadExecVSHMs2`
+ *
+ * @attention Needs to link to `pspmodulemgr_kernel` stub.
+ */
+SceUID sceKernelLoadModuleMs2(int apitype, const char *path, int flags, SceKernelLMOption *option);
+
+/**
  * Load a module from the given file UID.
  *
  * @param fid - The module's file UID.

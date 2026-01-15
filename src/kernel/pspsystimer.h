@@ -77,11 +77,31 @@ void sceSTimerGetCount(SceSysTimerId timer, int* count);
  */
 void sceSTimerSetHandler(SceSysTimerId timer, int cycle, int (*handler)(void), int unk1);
 
-/* Unknown functions. */
+/**
+ * Unknown purpose.
+ *
+ * Probably something to set the cycle of an active timer.
+ *
+ * @param timer The ID of the timer.
+ * @param unk1 Unknown. Should not be less than `0` and greater `4194304`.
+ *
+ * @return `0` on success.
+ */
 //probably something to set the cycle of an active timer.
-void SysTimerForKernel_53231A15(SceSysTimerId timer, int unk1);
-//more complex. computes some ratio (unk2/unk1) and saves both parameters into the hardware registers. Might be some sort of scaling factor?
-void SysTimerForKernel_B53534B4(SceSysTimerId timer, int unk1, int unk2);
+void sceSTimerSetTMCY(SceSysTimerId timer, int unk1);
+
+/**
+ * Set the prescale of a hardware timer. It can be only set on timers which are in the "not in use" state.
+ *
+ * The input signal is divided into the resulting ratio. The ratio has to be less than 1/11.
+ *
+ * @param timer The ID of the timer to set the prescale.
+ * @param numerator The numerator of the prescale. Must not be `0`.
+ * @param denominator The denominator of the prescale. Must not be `0`.
+ *
+ * @return `0` on success.
+ */
+void sceSTimerSetPrscl(SceSysTimerId timer, int unk1, int unk2);
 
 
 

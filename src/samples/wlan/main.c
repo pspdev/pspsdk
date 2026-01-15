@@ -8,13 +8,12 @@
  * Copyright (c) 2005 John Kelley <ps2dev@kelley.ca>
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdebug.h>
 #include <pspdisplay.h>
 #include <psptypes.h>
 #include <stdio.h>
 #include <string.h>
-//#include <pspmoduleinfo.h>
 #include <pspwlan.h>
 
 /* Define the module info section */

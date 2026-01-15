@@ -60,9 +60,6 @@ int SetupCallbacks(void)
 	return thid;
 }
 
-/* ptr is a pointer to the file to decrypt, check is undocumented, look at decrypt_file to see how to use */
-int sceKernelCheckExecFile(void *ptr, void *check);
-
 char g_data[0x400000] __attribute__((aligned(64)));
 char g_decrypt_buf[0x400000] __attribute__((aligned(64)));
 
@@ -80,21 +77,21 @@ int extract_file(const char* name, const char* dstname)
 		sceIoClose(fd);
 		if(bytes_read > 0)
 		{
-			u8 check[0x100];
+			SceLoadCoreExecFileInfo check;
 			u32 size;
 			char *output;
 
-			memset(check, 0, sizeof(check));
-			sceKernelCheckExecFile(g_data, check);
+			memset(&check, 0, sizeof(check));
+			sceKernelCheckExecFile(g_data, &check);
 			/* Get size of data block */
-			size = *(unsigned int *) (check+0x5C);
+			size = check.dec_size;
 
 			/* Check if we managed to decrypt the file */
-			if(*(unsigned short *)(check+0x5a) & 1)
+			if(check.mod_info_attribute & 1)
 			{
 				/* Set decrypt buffer pointer */
-				*(unsigned int*)(check+0x24) = (unsigned int) g_decrypt_buf;
-				sceKernelCheckExecFile(g_data, check);
+				check.top_addr = g_decrypt_buf;
+				sceKernelCheckExecFile(g_data, &check);
 				output = g_decrypt_buf;
 			}
 			else

@@ -10,7 +10,7 @@
  * Based on work by Shine
  *
  */
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <stdio.h>
 #include <string.h>

@@ -10,6 +10,8 @@
  */
 
 #include <pspkernel.h>
+#include <pspuser.h>
+#include <pspkdebug.h>
 #include <pspdebug.h>
 #include <pspsyscon.h>
 

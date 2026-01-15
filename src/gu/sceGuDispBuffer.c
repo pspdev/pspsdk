@@ -8,7 +8,6 @@
 
 #include "guInternal.h"
 
-#include <pspkernel.h>
 #include <pspdisplay.h>
 
 void sceGuDispBuffer(int width, int height, void *dispbp, int dispbw)

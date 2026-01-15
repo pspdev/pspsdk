@@ -8,7 +8,7 @@
 //
 // Note that this code is highly unoptimized, but might be useful to learn from or so.
 //
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspdisplay.h>
 #include <pspdebug.h>
 #include <pspge.h>

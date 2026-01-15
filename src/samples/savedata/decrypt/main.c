@@ -10,7 +10,7 @@
  *
  */
 
-#include <pspkernel.h>
+#include <pspuser.h>
 #include <pspctrl.h>
 #include <pspdebug.h>
 #include <pspdisplay.h>
