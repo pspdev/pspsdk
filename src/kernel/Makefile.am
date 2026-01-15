@@ -72,8 +72,7 @@ libpspkernelinclude_HEADERS =	\
 	pspexception.h 		\
 	pspsysclib.h		\
 	pspimpose_driver.h	\
-	pspinit.h			\
-	pspaudiorouting.h
+	pspinit.h
 
 lib_LIBRARIES = libpspkernel.a
 
