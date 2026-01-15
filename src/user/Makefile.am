@@ -32,6 +32,8 @@ LOADEXEC_OBJS = LoadExecForUser_0000.o LoadExecForUser_0001.o LoadExecForUser_00
 
 IMPOSE_OBJS = sceImpose_0000.o sceImpose_0001.o sceImpose_0002.o sceImpose_0003.o sceImpose_0004.o sceImpose_0005.o sceImpose_0006.o sceImpose_0007.o sceImpose_0008.o sceImpose_0009.o sceImpose_0010.o sceImpose_0011.o sceImpose_0012.o sceImpose_0013.o sceImpose_0014.o sceImpose_0015.o
 
+AUDIOROUTING_OBJS = sceAudioRouting_0000.o sceAudioRouting_0001.o sceAudioRouting_0002.o sceAudioRouting_0003.o
+
 libpspuserincludedir = @PSPSDK_INCLUDEDIR@
 libpspuserinclude_HEADERS =	\
 	pspiofilemgr.h		\
@@ -81,7 +83,8 @@ $(THREADMAN_OBJS) \
 $(UTILS_OBJS) \
 $(INTERRUPT_OBJS) \
 $(LOADEXEC_OBJS) \
-$(IMPOSE_OBJS)
+$(IMPOSE_OBJS) \
+$(AUDIOROUTING_OBJS)
 
 $(IO_OBJS): IoFileMgrForUser.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
@@ -114,4 +117,7 @@ $(LOADEXEC_OBJS): LoadExecForUser.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(IMPOSE_OBJS): sceImpose.S
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+
+$(AUDIOROUTING_OBJS): sceAudioRouting.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
