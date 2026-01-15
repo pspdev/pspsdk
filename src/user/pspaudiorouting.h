@@ -29,13 +29,13 @@ int sceAudioRoutingSetMode( int mode );
  *
  * @return the current routing mode.
 */
-int sceAudioRoutingGetMode();
+int sceAudioRoutingGetMode(void);
 
 /** Get the current routing volume mode.
  *
  * @return The current routing volume mode.
  */
-int sceAudioRoutingGetVolumeMode();
+int sceAudioRoutingGetVolumeMode(void);
 
 /** Set the routing volume mode.
  *
