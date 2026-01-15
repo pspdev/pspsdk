@@ -22,9 +22,9 @@
 
 typedef struct SceIoPrivateDirent {
 	SceSize size;
-	char shortFileName[13];
+	char s_name[13];
 	char __padding__[3];
-	char longFileName[1024];
+	char l_name[1024];
 } SceIoPrivateDirent;
 
 /** Describes a single directory entry */
