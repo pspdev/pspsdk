@@ -11,6 +11,10 @@
 #ifndef __PSPAUDIOROUTING_H__
 #define __PSPAUDIOROUTING_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 /**
  * Set routing mode.
  *
@@ -25,7 +29,25 @@ int sceAudioRoutingSetMode( int mode );
  *
  * @return the current routing mode.
 */
-int sceAudioRoutingGetMode();
+int sceAudioRoutingGetMode(void);
 
-#endif
+/** Get the current routing volume mode.
+ *
+ * @return The current routing volume mode.
+ */
+int sceAudioRoutingGetVolumeMode(void);
+
+/** Set the routing volume mode.
+ *
+ * @param vol_mode The routing volume to set (`0` or `1`).
+ *
+ * @return `0` on success, `< 0` on error.
+ */
+int sceAudioRoutingSetVolumeMode(int vol_mode);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif /* __PSPAUDIOROUTING_H__ */
 

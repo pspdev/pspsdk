@@ -73,8 +73,7 @@ libpspkernelinclude_HEADERS =	\
 	pspsysclib.h		\
 	pspimpose_driver.h	\
 	pspinit.h		\
-	pspamctrl.h             \
-	pspaudiorouting.h
+	pspamctrl.h
 
 lib_LIBRARIES = libpspkernel.a
 
