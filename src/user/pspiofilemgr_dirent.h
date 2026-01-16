@@ -20,22 +20,22 @@
 
 #include <pspiofilemgr_stat.h>
 
-typedef struct SceIoPrivateDirent {
+typedef struct SceIoFatDirentPrivate {
 	SceSize size;
 	char s_name[13];
 	char __padding__[3];
 	char l_name[1024];
-} SceIoPrivateDirent;
+} SceIoFatDirentPrivate;
 
 /** Describes a single directory entry */
 typedef struct SceIoDirent {
 	/** File status. */
-	SceIoStat 	     d_stat;
+	SceIoStat 	                 d_stat;
 	/** File name. */
-	char 		     d_name[256];
+	char 		                 d_name[256];
 	/** Device-specific data. */
-	SceIoPrivateDirent*  d_private;
-	int 		     dummy;
+	SceIoFatDirentPrivate*       d_private;
+	int 		                 dummy;
 } SceIoDirent;
 
 #endif /* PSPIOFILEMGR_DIRENT_H */
