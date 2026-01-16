@@ -27,7 +27,7 @@ extern "C" {
 /**@{*/
 
 /** Structure for LoadExecVSH* functions */
-struct SceKernelLoadExecVSHParam {
+typedef struct SceKernelLoadExecVSHParam {
 /** Size of the structure in bytes */
     SceSize     size;
 /** Size of the arguments string */
@@ -46,7 +46,7 @@ struct SceKernelLoadExecVSHParam {
     u32 unk4;
 /** unknown flag default value = 0x10000 */
     u32 unk5;
-}; 
+} SceKernelLoadExecVSHParam;
 
 #if defined(_PSP_FW_VERSION) && _PSP_FW_VERSION < 200
 /**
