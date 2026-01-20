@@ -72,6 +72,15 @@ int sceKernelDisableIntr(int intno);
  */
 int sceKernelIsIntrContext(void);
 
+/**
+ * Query system call number of `function`.
+ * 
+ * @param[in] function A function pointer of the function to get the syscall number.
+ *
+ * @return System call number if `>= 0`, `< 0` on error.
+ */
+int sceKernelQuerySystemCall(void *function);
+
 #ifdef __cplusplus
 }
 #endif
