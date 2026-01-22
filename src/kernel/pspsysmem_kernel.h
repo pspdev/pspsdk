@@ -31,13 +31,13 @@
 extern "C" {
 #endif
 
-typedef struct _PspPspSysMemPartitionInfo
+typedef struct _PspSysMemPartitionInfo
 {
 	SceSize size;
 	unsigned int startaddr;
 	unsigned int memsize;
 	unsigned int attr;
-} PspPspSysMemPartitionInfo;
+} PspSysMemPartitionInfo;
 
 typedef struct SceGameInfo {
 	u32 size; // 0
