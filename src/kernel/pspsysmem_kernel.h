@@ -31,13 +31,13 @@
 extern "C" {
 #endif
 
-typedef struct _PspSysmemPartitionInfo
+typedef struct _PspPspSysMemPartitionInfo
 {
 	SceSize size;
 	unsigned int startaddr;
 	unsigned int memsize;
 	unsigned int attr;
-} PspSysmemPartitionInfo;
+} PspPspSysMemPartitionInfo;
 
 typedef struct SceGameInfo {
 	u32 size; // 0
@@ -78,28 +78,48 @@ struct _uidControlBlock {
 typedef struct _uidControlBlock SceUidControlBlock;
 typedef struct _uidControlBlock uidControlBlock; // for compat reasons
 
-typedef struct PspPartitionData {
+typedef struct {
+    u32 addr;
+    u32 size;
+} SceSysmemPartInfo;
+
+typedef struct {
+    u32 memSize;
+    u32 unk4;
+    u32 unk8;
+    SceSysmemPartInfo other1; // 12
+    SceSysmemPartInfo other2; // 20
+    SceSysmemPartInfo vshell; // 28
+    SceSysmemPartInfo scUser; // 36
+    SceSysmemPartInfo meUser; // 44
+    SceSysmemPartInfo extSc2Kernel; // 52
+    SceSysmemPartInfo extScKernel; // 60
+    SceSysmemPartInfo extMeKernel; // 68
+    SceSysmemPartInfo extVshell; // 76
+} SceSysmemPartTable;
+
+typedef struct PspPspPartitionData {
     u32 unk[5];
     u32 size;
-} PspPartitionData;
+} PspPspPartitionData;
 
-typedef struct PspSysMemPartition {
-    struct PspSysMemPartition *next;
+typedef struct PspPspSysMemPartition {
+    struct PspPspSysMemPartition *next;
     u32 address;
     u32 size;
     u32 attributes;
-    PspPartitionData *data;
-} PspSysMemPartition;
+    PspPspPartitionData *data;
+} PspPspSysMemPartition;
 
 /**
  * Query the parition information
  *
  * @param pid  - The partition id
- * @param info - Pointer to the ::PspSysmemPartitionInfo structure
+ * @param info - Pointer to the ::PspPspSysMemPartitionInfo structure
  *
  * @return 0 on success.
  */
-int sceKernelQueryMemoryPartitionInfo(int pid, PspSysmemPartitionInfo *info);
+int sceKernelQueryMemoryPartitionInfo(int pid, PspPspSysMemPartitionInfo *info);
 
 /**
  * Get the total amount of free memory.
