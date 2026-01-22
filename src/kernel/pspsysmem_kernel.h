@@ -98,18 +98,18 @@ typedef struct {
     SceSysmemPartInfo extVshell; // 76
 } SceSysmemPartTable;
 
-typedef struct PspPspPartitionData {
+typedef struct PspPartitionData {
     u32 unk[5];
     u32 size;
-} PspPspPartitionData;
+} PspPartitionData;
 
-typedef struct PspPspSysMemPartition {
-    struct PspPspSysMemPartition *next;
+typedef struct PspSysMemPartition {
+    struct PspSysMemPartition *next;
     u32 address;
     u32 size;
     u32 attributes;
-    PspPspPartitionData *data;
-} PspPspSysMemPartition;
+    PspPartitionData *data;
+} PspSysMemPartition;
 
 /**
  * Query the parition information
