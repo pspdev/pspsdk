@@ -115,11 +115,11 @@ typedef struct PspSysMemPartition {
  * Query the parition information
  *
  * @param pid  - The partition id
- * @param info - Pointer to the ::PspPspSysMemPartitionInfo structure
+ * @param info - Pointer to the ::PspSysmemPartitionInfo structure
  *
  * @return 0 on success.
  */
-int sceKernelQueryMemoryPartitionInfo(int pid, PspPspSysMemPartitionInfo *info);
+int sceKernelQueryMemoryPartitionInfo(int pid, PspSysmemPartitionInfo *info);
 
 /**
  * Get the total amount of free memory.
