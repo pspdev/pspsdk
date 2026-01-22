@@ -70,13 +70,26 @@ struct _uidControlBlock {
     struct _uidControlBlock *type;   //(0x8)
     u32 UID;					//(0xC)
     char *name;					//(0x10)
-	unsigned char unk;
-	unsigned char size;			// Size in words
+    unsigned char unk;
+    unsigned char size;			// Size in words
     short attribute;
     struct _uidControlBlock *nextEntry;
 } __attribute__((packed));
 typedef struct _uidControlBlock SceUidControlBlock;
 typedef struct _uidControlBlock uidControlBlock; // for compat reasons
+
+typedef struct PspPartitionData {
+    u32 unk[5];
+    u32 size;
+} PspPartitionData;
+
+typedef struct PspSysMemPartition {
+    struct PspSysMemPartition *next;
+    u32 address;
+    u32 size;
+    u32 attributes;
+    PspPartitionData *data;
+} PspSysMemPartition;
 
 /**
  * Query the parition information
