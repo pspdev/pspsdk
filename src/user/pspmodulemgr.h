@@ -35,6 +35,8 @@ extern "C" {
 #define PSP_MEMORY_PARTITION_KERNEL 1
 #define PSP_MEMORY_PARTITION_USER 2
 
+#define SCE_SECURE_INSTALL_ID_LEN (16)
+
 typedef struct SceKernelLMOption {
 	SceSize 		size;
 	SceUID 			mpidtext;
