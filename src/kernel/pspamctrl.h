@@ -15,11 +15,6 @@
 
 #include <psptypes.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
-
-
 typedef struct SceMacKey {
 	int type;
 	u8 key[16];
@@ -55,7 +50,9 @@ enum SceCipherKeyMode {
 	CIPHER_KEY_MODE_DECRYPT = 2,
 };
 
-#ifdef __KERNEL__
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
 
 int sceDrmBBMacInit(SceMacKey *mac_key, int type);
 int sceDrmBBMacUpdate(SceMacKey *mac_key, u8 *buf, int size);
@@ -67,8 +64,6 @@ int sceDrmBBCipherInit(SceCipherKey *cipher_key, int type, int mode, u8 *header_
 int sceDrmBBCipherUpdate(SceCipherKey *cipher_key, u8 *buf, int size);
 int sceAmctrl_driver_E04ADD4C(SceCipherKey *cipher_key, u8 *buf, int size);
 int sceDrmBBCipherFinal(SceCipherKey *cipher_key);
-
-#endif // __KERNEL__
 
 #ifdef __cplusplus
 }
