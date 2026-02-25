@@ -12,6 +12,7 @@ macro(create_pbp_file)
 
   set(oneValueArgs
     TARGET          # defined by an add_executable call before calling create_pbp_file
+    SFO_PATH        # optional, absolute path to pre-built PARAM.SFO
     TITLE           # optional, string, target's name in PSP menu
     ICON_PATH       # optional, absolute path to .png file, 144x82
     ANIM_PATH       # optional, absolute path to .pmf file
@@ -32,6 +33,11 @@ macro(create_pbp_file)
   # set mksfoex parameter if VERSION was not defined
   if (NOT DEFINED ARG_VERSION)
     set(ARG_VERSION "")
+  endif()
+
+  # set ARG_SFO_PATH if not defined
+  if (NOT DEFINED ARG_SFO_PATH)
+    set(ARG_SFO_PATH "")
   endif()
 
   # set output directory to where the target is build if not set
@@ -143,18 +149,24 @@ macro(create_pbp_file)
   if (NOT ${ARG_MEMSIZE})
     set(ARG_MEMSIZE "1")
   endif()
-  add_custom_command(
-    TARGET ${ARG_TARGET}
-    POST_BUILD COMMAND
-    "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=${ARG_MEMSIZE}" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${ARG_OUTPUT_DIR}/PARAM.SFO"
-    COMMENT "Calling mksfoex for target ${ARG_TARGET}"
-    )
+
+  if(NOT ARG_SFO_PATH)
+    add_custom_command(
+      TARGET ${ARG_TARGET}
+      POST_BUILD COMMAND
+      "${PSPDEV}/bin/mksfoex" "-d" "MEMSIZE=${ARG_MEMSIZE}" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${ARG_OUTPUT_DIR}/PARAM.SFO"
+      COMMENT "Calling mksfoex for target ${ARG_TARGET}"
+      )
+    set(SFO_PATH "${ARG_OUTPUT_DIR}/PARAM.SFO")
+  else()
+    set(SFO_PATH "${ARG_SFO_PATH}")
+  endif()
 
   if(${ARG_BUILD_PRX})
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "${ARG_ANIM_PATH}" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${SFO_PATH}" "${ARG_ICON_PATH}" "${ARG_ANIM_PATH}" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>.prx" "${ARG_PSAR_PATH}"
       COMMENT "Calling pack-pbp with PRX file for target ${ARG_TARGET}"
       )
@@ -162,18 +174,20 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${ARG_OUTPUT_DIR}/PARAM.SFO" "${ARG_ICON_PATH}" "${ARG_ANIM_PATH}" "${ARG_PREVIEW_PATH}"
+      "${PSPDEV}/bin/pack-pbp" "${ARG_OUTPUT_DIR}/EBOOT.PBP" "${SFO_PATH}" "${ARG_ICON_PATH}" "${ARG_ANIM_PATH}" "${ARG_PREVIEW_PATH}"
       "${ARG_BACKGROUND_PATH}" "${ARG_MUSIC_PATH}" "$<TARGET_FILE:${ARG_TARGET}>" "${ARG_PSAR_PATH}"
       COMMENT "Calling pack-pbp with ELF file for target ${ARG_TARGET}"
       )
   endif()
 
-  add_custom_command(
-    TARGET ${ARG_TARGET} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E remove
-    ${ARG_OUTPUT_DIR}/PARAM.SFO
-    COMMENT "Cleaning up PARAM.SFO for target ${ARG_TARGET}"
-  )
+  if(NOT ARG_SFO_PATH)
+    add_custom_command(
+      TARGET ${ARG_TARGET} POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E remove
+      ${ARG_OUTPUT_DIR}/PARAM.SFO
+      COMMENT "Cleaning up PARAM.SFO for target ${ARG_TARGET}"
+    )
+  endif()
 
   add_custom_command(
     TARGET ${ARG_TARGET}
