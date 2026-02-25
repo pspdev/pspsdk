@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['library_0',['Library',['../group__Chnnlsv.html',1,'Chnnlsv Library'],['../group__Ctrl.html',1,'Controller Kernel Library'],['../group__Debug.html',1,'Debug Utility Library'],['../group__FileIO.html',1,'File IO Library'],['../group__GU.html',1,'Graphics Utility Library'],['../group__Sony.html',1,'Integrated Remote Control System Library'],['../group__ModuleMgrKern.html',1,'Kernel Module Manager Library'],['../group__LoadExec.html',1,'LoadExec Library'],['../group__ModuleMgr.html',1,'Module Manager Library'],['../group__PSPSDK.html',1,'PSPSDK Utility Library'],['../group__Reg.html',1,'Registry Kernel Library'],['../group__Stdio.html',1,'Stdio Library'],['../group__ThreadMan.html',1,'Thread Manager Library'],['../group__UMD.html',1,'UMD Kernel Library'],['../group__Audio.html',1,'User Audio Library'],['../group__Utils.html',1,'Utils Library']]],
+  ['library_1',['library',['../group__Kdebug.html',1,'Interface to the KDebugForKernel library.'],['../group__LoadCore.html',1,'Interface to the LoadCoreForKernel library.'],['../group__LoadExecKernel.html',1,'Interface to the LoadExecForKernel library.'],['../group__IdStorage.html',1,'Interface to the sceIdStorage_driver library.'],['../group__Syscon.html',1,'Interface to the sceSyscon_driver library.'],['../group__Sysreg.html',1,'Interface to the sceSysreg_driver library.']]],
+  ['loadcoreforkernel_20library_2',['Interface to the LoadCoreForKernel library.',['../group__LoadCore.html',1,'']]],
+  ['loadexec_20library_3',['LoadExec Library',['../group__LoadExec.html',1,'']]],
+  ['loadexecforkernel_20library_4',['Interface to the LoadExecForKernel library.',['../group__LoadExecKernel.html',1,'']]]
+];

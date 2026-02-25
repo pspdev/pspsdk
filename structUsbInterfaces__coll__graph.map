@@ -1,0 +1,5 @@
+<map id="UsbInterfaces" name="UsbInterfaces">
+<area shape="rect" id="Node000001" title="USB driver interfaces structure." alt="" coords="19,94,123,120"/>
+<area shape="rect" id="Node000002" href="$structInterfaceDescriptor.html" title="USB Interface descriptor." alt="" coords="5,5,137,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,47,74,94,68,94,68,47"/>
+</map>

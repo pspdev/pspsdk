@@ -1,0 +1,17 @@
+<map id="kernel/pspkernel.h" name="kernel/pspkernel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="470,5,596,31"/>
+<area shape="rect" id="Node000002" href="$exception_8c.html" title=" " alt="" coords="5,79,131,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="455,34,143,82,132,83,131,78,142,76,454,29"/>
+<area shape="rect" id="Node000003" href="$gdb-kernellib_8c.html" title=" " alt="" coords="155,79,298,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="467,38,279,81,278,76,465,32"/>
+<area shape="rect" id="Node000004" href="$gdb-userlib_8c.html" title=" " alt="" coords="323,79,456,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="497,41,415,81,413,76,494,36"/>
+<area shape="rect" id="Node000005" href="$kprintf_8c.html" title=" " alt="" coords="480,79,586,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="536,46,536,79,531,79,531,46"/>
+<area shape="rect" id="Node000006" href="$sio_8c.html" title=" " alt="" coords="611,79,698,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="568,37,635,76,633,81,566,42"/>
+<area shape="rect" id="Node000007" href="$stdio_8c.html" title=" " alt="" coords="723,79,821,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="589,33,732,76,731,81,588,38"/>
+<area shape="rect" id="Node000008" href="$fixup_8c.html" title=" " alt="" coords="846,79,928,105"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="611,32,834,76,846,79,845,84,833,82,610,37"/>
+</map>

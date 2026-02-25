@@ -1,0 +1,23 @@
+<map id="libcglue/lock.c" name="libcglue/lock.c">
+<area shape="rect" id="Node000001" title="The lock API functions required by newlib." alt="" coords="115,5,219,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,65,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,34,72,74,69,69,143,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="89,79,152,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,33,139,67,134,64,157,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="175,79,255,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="177,30,201,64,196,67,173,33"/>
+<area shape="rect" id="Node000005" href="$pspthreadman_8h.html" title=" " alt="" coords="278,79,392,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="197,29,293,70,291,75,194,34"/>
+<area shape="rect" id="Node000006" href="$psptypes_8h.html" title=" " alt="" coords="293,226,377,252"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="314,107,288,127,267,154,264,171,271,187,285,202,301,216,298,220,281,206,267,190,259,172,262,152,284,123,311,103"/>
+<area shape="rect" id="Node000008" href="$pspkerneltypes_8h.html" title=" " alt="" coords="276,153,394,178"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="338,105,338,137,332,137,332,105"/>
+<area shape="rect" id="Node000009" href="$pspdebug_8h.html" title=" " alt="" coords="418,153,505,178"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="358,103,428,142,426,147,355,108"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="303,300,367,326"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="338,252,338,284,332,284,332,252"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="338,179,338,211,332,211,332,179"/>
+<area shape="poly" id="edge10_Node000009_Node000006" title=" " alt="" coords="441,181,371,221,368,216,439,177"/>
+<area shape="rect" id="Node000010" href="$pspmoduleinfo_8h.html" title=" " alt="" coords="404,226,519,252"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="464,179,464,211,459,211,459,179"/>
+</map>

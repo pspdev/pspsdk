@@ -1,0 +1,13 @@
+<map id="UsbData" name="UsbData">
+<area shape="rect" id="Node000001" title="Padded data structure, padding is required otherwise the USB hardware crashes." alt="" coords="250,104,322,130"/>
+<area shape="rect" id="Node000002" href="$structUsbData_1_1Config.html" title=" " alt="" coords="16,5,131,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,30,187,43,227,61,254,81,275,102,271,106,251,85,224,66,185,48,145,35"/>
+<area shape="rect" id="Node000003" href="$structUsbData_1_1ConfDesc.html" title=" " alt="" coords="6,55,141,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,79,226,94,250,101,248,107,225,99,156,84"/>
+<area shape="rect" id="Node000004" href="$structUsbData_1_1Interfaces.html" title=" " alt="" coords="5,104,142,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="157,114,249,114,249,120,157,120"/>
+<area shape="rect" id="Node000005" href="$structUsbData_1_1InterDesc.html" title=" " alt="" coords="6,153,141,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="155,150,225,135,249,127,250,132,226,140,156,155"/>
+<area shape="rect" id="Node000006" href="$structUsbData_1_1Endp.html" title=" " alt="" coords="20,203,127,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="142,200,184,187,224,168,251,149,271,128,275,132,254,153,227,173,185,192,143,205"/>
+</map>

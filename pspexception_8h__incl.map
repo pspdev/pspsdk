@@ -1,0 +1,9 @@
+<map id="kernel/pspexception.h" name="kernel/pspexception.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,152,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="19,79,138,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,31,81,63,76,63,76,31"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="37,153,120,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,105,81,137,76,137,76,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="47,226,110,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="81,179,81,211,76,211,76,179"/>
+</map>
