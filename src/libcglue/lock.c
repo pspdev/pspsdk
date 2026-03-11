@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/lock.h>
+#include <reent.h>
 #include <pspthreadman.h>
 
 // Structure representing the lock
@@ -164,6 +165,15 @@ extern struct __lock __lock___arc4random_mutex;
 
 void __locks_init()
 {
+    /* Clear newlib's stdio init marker so `__sinit` will reinitialize
+     * FILE structures and their associated locks the next time stdio
+     * is used for this reentrancy structure.
+     *
+     * Setting `_REENT_CLEANUP(_REENT)` to NULL forces newlib to treat
+     * stdio as uninitialized, ensuring locks are created deterministically.
+     */
+    _REENT_CLEANUP(_REENT) = NULL;
+
     _LOCK_T lock_malloc = &__lock___malloc_recursive_mutex;
     _LOCK_T lock_atexit = &__lock___atexit_recursive_mutex;
     _LOCK_T lock_quick_exit = &__lock___at_quick_exit_mutex;
