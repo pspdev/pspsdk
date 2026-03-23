@@ -249,13 +249,17 @@ void pspDebugKbInit(char* str) {
 	  pspDebugKbShift(&shifted);
 	  pspDebugKbDrawKey(row, col, 1);
 	  break;
-	case 1: // Space
-	  if (strlen(str) < PSP_DEBUG_KB_MAXLEN) {
-	    char out[PSP_DEBUG_KB_MAXLEN + 2];
-	    snprintf(out, sizeof(out), "%s ", str);
-	    pspDebugKbDrawString(out);
+	// Using the curly braces so we have an anonymous code block so we can declare a stack variable
+	case 1: { // Space
+	  size_t len = strlen(str);
+	  if (len < PSP_DEBUG_KB_MAXLEN-1) {
+	    // Add the character to the still-in-bounds string
+	    str[len] = ' ';
+	    str[len+1] = '\0';
+	    pspDebugKbDrawString(str);
 	  }
 	  break;
+	}
 	case 2: // Back
 	  if (strlen(str) > 0) {
 	    str[strlen(str)-1] = '\0';
@@ -272,10 +276,14 @@ void pspDebugKbInit(char* str) {
 	  return;
 	};
       } else {
-	if (strlen(str) < PSP_DEBUG_KB_MAXLEN) {
-	  char out[PSP_DEBUG_KB_MAXLEN + 2];
-	  snprintf(out, sizeof(out), "%s%c", str, charTable[row][col]);
-	  pspDebugKbDrawString(out);
+	size_t len = strlen(str);
+	// Leave room for null terminator
+	if (len < PSP_DEBUG_KB_MAXLEN-1) {
+	  // Add the character to the still-in-bounds string
+	  str[len] = charTable[row][col];
+	  str[len+1] = '\0';
+	  // Display the string
+	  pspDebugKbDrawString(str);
 	}
       }
     }
