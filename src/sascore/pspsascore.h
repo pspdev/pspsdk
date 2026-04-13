@@ -143,7 +143,6 @@ typedef struct {
     u8 pad[3616];
 } SceSasCore;
 
-
 /**
  * @brief Initializes a SceSasCore instance.
  *
@@ -553,7 +552,8 @@ int __sceSasSetPause(SceSasCore* core, u32 voicebit, int pause);
  *
  * @param voice - The target voice index
  *
- * @param freq - How often the wave will randomly alternate? Must be a number from 0 to 64.
+ * @param freq - How often the wave will randomly alternate? Must be a number from 0 to
+ *               ::PSP_SAS_NOISE_FREQ_MAX.
  *
  * @return 0 on success, an error code if less than 0.
  */
