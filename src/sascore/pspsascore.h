@@ -55,7 +55,7 @@ enum PspSasErrorCodes {
     PSP_SAS_ERROR_ALRDYINIT      = 0x80420101,
 };
 
-enum SceSasEffectTypes {
+enum PspSasEffectTypes {
     PSP_SAS_EFFECT_TYPE_OFF    = -1,
     PSP_SAS_EFFECT_TYPE_ROOM   = 0,
     PSP_SAS_EFFECT_TYPE_SMALL  = 1,
@@ -126,12 +126,12 @@ enum PspSasADSRFlags {
 
 #define PSP_SAS_ADSR_EVERYTHING (PSP_SAS_ADSR_ATTACK | PSP_SAS_ADSR_DECAY | PSP_SAS_ADSR_SUSTAIN | PSP_SAS_ADSR_RELEASE)
 
-typedef enum SceSasOutputModes {
+typedef enum PspSasOutputModes {
     /** Interleaved stereo output (L/R), with dry + send already mixed together. */
 	PSP_SAS_OUTPUTMODE_STEREO = 0,
     /** 4 separate output buffers: L, R, Send-L, Send-R (each planar, not interleaved). */
 	PSP_SAS_OUTPUTMODE_MULTICHANNEL = 1,
-} SceSasOutputModes;
+} PspSasOutputModes;
 
 /**
  * @brief Contains all data related to a sceSasCore state.
@@ -159,20 +159,20 @@ typedef struct {
  * @param maxvoices - The maximum number of voices SceSasCore will process. It must be a number between 1 and
  *                    ::PSP_SAS_VOICES_MAX.
  *
- * @param outputmode - The output mode to use. One of ::SceSasOutputModes.
+ * @param outputmode - The output mode to use. One of ::PspSasOutputModes.
  *
  * @param samplerate - Must be ::PSP_SAS_SAMPLE_RATE (44100). Any other value will result in an error.
  *
  * @return 0 on success, an error code if less than 0.
  */
-int __sceSasInit(SceSasCore* core, int grainsize, int maxvoices, SceSasOutputModes outputmode, int samplerate);
+int __sceSasInit(SceSasCore* core, int grainsize, int maxvoices, PspSasOutputModes outputmode, int samplerate);
 
 /**
  * @brief Gets the current output mode from the SceSasCore instance.
  *
  * @param core - Pointer to a valid sceSas instance.
  *
- * @return One of ::SceSasOutputModes on success, an error code if less than 0.
+ * @return One of ::PspSasOutputModes on success, an error code if less than 0.
  */
 int __sceSasGetOutputmode(SceSasCore* core);
 
@@ -181,18 +181,18 @@ int __sceSasGetOutputmode(SceSasCore* core);
  *
  * @param core - Pointer to a valid sceSas instance.
  *
- * @param outputmode - The output mode to use. One of ::SceSasOutputModes.
+ * @param outputmode - The output mode to use. One of ::PspSasOutputModes.
  *
  * @return 0 on success, an error code if less than 0.
  */
-int __sceSasSetOutputmode(SceSasCore* core, SceSasOutputModes outputmode);
+int __sceSasSetOutputmode(SceSasCore* core, PspSasOutputModes outputmode);
 
 /**
  * @brief Sets the reverb effect of the SceSasCore instance.
  *
  * @param core - Pointer to a valid sceSas instance.
  *
- * @param type - The reverb effect to use. One of ::SceSasEffectTypes.
+ * @param type - The reverb effect to use. One of ::PspSasEffectTypes.
  *
  * @return 0 on success, an error code if less than 0.
  */
@@ -469,7 +469,7 @@ int __sceSasSetVolume(SceSasCore* core, int voice, int leftvol, int rightvol, in
  * @param core - Pointer to a valid sceSas instance.
  *
  * @param dst - A destination buffer of N bytes, where `N == (grainSize * 4 * sizeof(int16_t))`.
- *              The data layout gets decided from the current output mode, which is one of ::SceSasOutputModes.
+ *              The data layout gets decided from the current output mode, which is one of ::PspSasOutputModes.
  *
  * @return 0 on success, an error code if less than 0.
  */
@@ -483,7 +483,7 @@ int __sceSasCore(SceSasCore* core, void* dst);
  * @param core - Pointer to a valid sceSas instance.
  *
  * @param dst - A destination buffer of N bytes, where `N == (grainSize * 4 * sizeof(int16_t))`.
- *              The data layout gets decided from the current output mode, which is one of ::SceSasOutputModes.
+ *              The data layout gets decided from the current output mode, which is one of ::PspSasOutputModes.
  *
  * @param leftvol - A number between 0 and ::PSP_SAS_VOLUME_MAX.
  *
