@@ -134,12 +134,11 @@ typedef enum SceSasOutputModes {
 } SceSasOutputModes;
 
 /**
- * @brief A sceSasCore state.
+ * @brief Contains all data related to a sceSasCore state.
  *
  * Developers are not meant to interact with this structure directly. Always prefer
  * to use the public functions over reading/writing values from here.
  */
-
 typedef struct {
     u8 pad[3616];
 } SceSasCore;
