@@ -583,8 +583,8 @@ int __sceSasSetTriangularWave(SceSasCore* core, int voice, int unk);
  *
  * @param voice - The target voice index
  *
- * @param duty - Square duty cycle in percentage (e.g. a value of 50 means a symmetrical
- *               50% duty cycle). Must be a value from 0 to 100.
+ * @param duty - The percentage of the square's duty cycle (e.g. a value of 50 means
+ *               a symmetrical 50% duty cycle). Must be a number from 0 to 100.
  *
  * @return 0 on success, an error code if less than 0.
  */
