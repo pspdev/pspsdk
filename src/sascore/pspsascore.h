@@ -606,7 +606,7 @@ int __sceSasSetVoiceATRAC3(SceSasCore* core, int voice, void* atrac3ctx);
 int __sceSasConcatenateATRAC3(SceSasCore* core, int voice, void* data, int size);
 int __sceSasUnsetATRAC3(SceSasCore* core, int voice);
 
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }
