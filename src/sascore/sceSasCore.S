@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceSasCore_0000
-	IMPORT_START	"sceSasCore",0x00090011
+	IMPORT_START	"sceSasCore",0x40090011
 #endif
 #ifdef F___sceSasInit_0001
 	IMPORT_FUNC	"sceSasCore",0x42778A9F,__sceSasInit
