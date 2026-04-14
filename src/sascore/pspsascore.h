@@ -16,6 +16,14 @@
 extern "C" {
 #endif
 
+/** @defgroup SAS SAS Core Audio Library
+  * This module contains the imports for sceSasCore, the PSP's audio software mixer.
+  **/
+
+/** @addtogroup SAS */
+
+/**@{*/
+
 #include <psptypes.h>
 
 /**
@@ -597,6 +605,8 @@ int __sceSasSetSteepWave(SceSasCore* core, int voice, int duty);
 int __sceSasSetVoiceATRAC3(SceSasCore* core, int voice, void* atrac3ctx);
 int __sceSasConcatenateATRAC3(SceSasCore* core, int voice, void* data, int size);
 int __sceSasUnsetATRAC3(SceSasCore* core, int voice);
+
+/*@}*/
 
 #ifdef __cplusplus
 }
