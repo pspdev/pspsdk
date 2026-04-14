@@ -287,11 +287,11 @@ u32 __sceSasGetEndFlag(SceSasCore* core);
  *
  * @param size - The size in bytes of the VAG file.
  *
- * @param loopcount - Tells how many times the voice should loop. Pass 0 to disable looping.
+ * @param loop - Whether this voice should loop or not. Must be 0 or 1.
  *
  * @return 0 on success, an error code if less than 0.
  */
-int __sceSasSetVoice(SceSasCore* core, int voice, void* vag, int size, int loopcount);
+int __sceSasSetVoice(SceSasCore* core, int voice, void* vag, int size, int loop);
 
 /**
  * @brief Sets PCM data for the given sceSas voice
