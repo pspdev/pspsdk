@@ -287,7 +287,9 @@ u32 __sceSasGetEndFlag(SceSasCore* core);
  *
  * @param size - The size in bytes of the VAG file.
  *
- * @param loop - Whether this voice should loop or not. Must be 0 or 1.
+ * @param loop - Whether this voice should loop or not. The VAG file itself has to
+ *               contain the end loop flag in its data in order for looping to work.
+ *               Must be 0 or 1.
  *
  * @return 0 on success, an error code if less than 0.
  */
