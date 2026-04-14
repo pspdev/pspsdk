@@ -34,40 +34,6 @@ extern "C" {
  */
 #define PSP_SAS_GET_FLAG_AT(flags, voice) (((flags) & (PSP_SAS_GET_VOICE_BIT(voice))) != 0)
 
-/** Error codes used as return values by sceSasCore. */
-enum PspSasErrorCodes {
-    PSP_SAS_ERROR_ADDRESS        = 0x80420005,
-    PSP_SAS_ERROR_VOICE_INDEX    = 0x80420010,
-    PSP_SAS_ERROR_NOISE_CLOCK    = 0x80420011,
-    PSP_SAS_ERROR_PITCH_VAL      = 0x80420012,
-    PSP_SAS_ERROR_ADSR_MODE      = 0x80420013,
-    PSP_SAS_ERROR_ADPCM_SIZE     = 0x80420014,
-    PSP_SAS_ERROR_LOOP_MODE      = 0x80420015,
-    PSP_SAS_ERROR_INVALID_STATE  = 0x80420016,
-    PSP_SAS_ERROR_VOLUME_VAL     = 0x80420018,
-    PSP_SAS_ERROR_ADSR_VAL       = 0x80420019,
-    PSP_SAS_ERROR_FX_TYPE        = 0x80420020,
-    PSP_SAS_ERROR_FX_FEEDBACK    = 0x80420021,
-    PSP_SAS_ERROR_FX_DELAY       = 0x80420022,
-    PSP_SAS_ERROR_FX_VOLUME_VAL  = 0x80420023,
-    PSP_SAS_ERROR_BUSY           = 0x80420030,
-    PSP_SAS_ERROR_NOTINIT        = 0x80420100,
-    PSP_SAS_ERROR_ALRDYINIT      = 0x80420101,
-};
-
-enum PspSasEffectTypes {
-    PSP_SAS_EFFECT_TYPE_OFF    = -1,
-    PSP_SAS_EFFECT_TYPE_ROOM   = 0,
-    PSP_SAS_EFFECT_TYPE_SMALL  = 1,
-    PSP_SAS_EFFECT_TYPE_MEDIUM = 2,
-    PSP_SAS_EFFECT_TYPE_LARGE  = 3,
-    PSP_SAS_EFFECT_TYPE_HALL   = 4,
-    PSP_SAS_EFFECT_TYPE_SPACE  = 5,
-    PSP_SAS_EFFECT_TYPE_ECHO   = 6,
-    PSP_SAS_EFFECT_TYPE_DELAY  = 7,
-    PSP_SAS_EFFECT_TYPE_PIPE   = 8,
-};
-
 /** The recommended sceSasCore grain size that's used by most games. */
 #define PSP_SAS_GRAIN_SIZE (256)
 
@@ -95,6 +61,7 @@ enum PspSasEffectTypes {
 /** The maximum supported voice pitch */
 #define PSP_SAS_PITCH_MAX (0x4000)
 
+/** The maximum noise frequency */
 #define PSP_SAS_NOISE_FREQ_MAX (0x3F)
 
 /** Represents maximum ADSR envelope height. */
@@ -103,8 +70,28 @@ enum PspSasEffectTypes {
 /** Represents maximum ADSR envelope frequency. */
 #define PSP_SAS_ENVELOPE_FREQ_MAX (0x7FFFFFFF)
 
+typedef enum {
+    /** Interleaved stereo output (L/R), with dry + send already mixed together. */
+    PSP_SAS_OUTPUTMODE_STEREO = 0,
+    /** 4 separate output buffers: L, R, Send-L, Send-R (each planar, not interleaved). */
+    PSP_SAS_OUTPUTMODE_MULTICHANNEL = 1,
+} PspSasOutputModes;
+
+typedef enum {
+    PSP_SAS_EFFECT_TYPE_OFF    = -1,
+    PSP_SAS_EFFECT_TYPE_ROOM   = 0,
+    PSP_SAS_EFFECT_TYPE_SMALL  = 1,
+    PSP_SAS_EFFECT_TYPE_MEDIUM = 2,
+    PSP_SAS_EFFECT_TYPE_LARGE  = 3,
+    PSP_SAS_EFFECT_TYPE_HALL   = 4,
+    PSP_SAS_EFFECT_TYPE_SPACE  = 5,
+    PSP_SAS_EFFECT_TYPE_ECHO   = 6,
+    PSP_SAS_EFFECT_TYPE_DELAY  = 7,
+    PSP_SAS_EFFECT_TYPE_PIPE   = 8,
+} PspSasEffectTypes;
+
 /** ADSR envelope curve modes */
-enum PspSasADSRCurveModes {
+typedef enum {
     /** Equivalent to `height += rate` */
     PSP_SAS_ADSR_CURVE_MODE_LINEAR_INCREASE = 0,
     /** Equivalent to `height -= rate` */
@@ -114,6 +101,27 @@ enum PspSasADSRCurveModes {
     PSP_SAS_ADSR_CURVE_MODE_EXPONENT        = 4,
     /** Equivalent to `height = rate` */
     PSP_SAS_ADSR_CURVE_MODE_DIRECT          = 5,
+} PspSasADSRCurveModes;
+
+/** Error codes used as return values by sceSasCore. */
+enum PspSasErrorCodes {
+    PSP_SAS_ERROR_ADDRESS        = 0x80420005,
+    PSP_SAS_ERROR_VOICE_INDEX    = 0x80420010,
+    PSP_SAS_ERROR_NOISE_CLOCK    = 0x80420011,
+    PSP_SAS_ERROR_PITCH_VAL      = 0x80420012,
+    PSP_SAS_ERROR_ADSR_MODE      = 0x80420013,
+    PSP_SAS_ERROR_ADPCM_SIZE     = 0x80420014,
+    PSP_SAS_ERROR_LOOP_MODE      = 0x80420015,
+    PSP_SAS_ERROR_INVALID_STATE  = 0x80420016,
+    PSP_SAS_ERROR_VOLUME_VAL     = 0x80420018,
+    PSP_SAS_ERROR_ADSR_VAL       = 0x80420019,
+    PSP_SAS_ERROR_FX_TYPE        = 0x80420020,
+    PSP_SAS_ERROR_FX_FEEDBACK    = 0x80420021,
+    PSP_SAS_ERROR_FX_DELAY       = 0x80420022,
+    PSP_SAS_ERROR_FX_VOLUME_VAL  = 0x80420023,
+    PSP_SAS_ERROR_BUSY           = 0x80420030,
+    PSP_SAS_ERROR_NOTINIT        = 0x80420100,
+    PSP_SAS_ERROR_ALRDYINIT      = 0x80420101,
 };
 
 /** ADSR envelope flags */
@@ -125,13 +133,6 @@ enum PspSasADSRFlags {
 };
 
 #define PSP_SAS_ADSR_EVERYTHING (PSP_SAS_ADSR_ATTACK | PSP_SAS_ADSR_DECAY | PSP_SAS_ADSR_SUSTAIN | PSP_SAS_ADSR_RELEASE)
-
-typedef enum PspSasOutputModes {
-    /** Interleaved stereo output (L/R), with dry + send already mixed together. */
-	PSP_SAS_OUTPUTMODE_STEREO = 0,
-    /** 4 separate output buffers: L, R, Send-L, Send-R (each planar, not interleaved). */
-	PSP_SAS_OUTPUTMODE_MULTICHANNEL = 1,
-} PspSasOutputModes;
 
 /**
  * @brief Contains all data related to a sceSasCore state.
@@ -195,7 +196,7 @@ int __sceSasSetOutputmode(SceSasCore* core, PspSasOutputModes outputmode);
  *
  * @return 0 on success, an error code if less than 0.
  */
-int __sceSasRevType(SceSasCore* core, int type);
+int __sceSasRevType(SceSasCore* core, PspSasEffectTypes type);
 
 /**
  * @brief Sets the effect volume of the SceSasCore instance.
@@ -381,7 +382,7 @@ int __sceSasSetPitch(SceSasCore* core, int voice, int pitch);
  *
  * @return 0 on success, an error code if less than 0.
  */
-int __sceSasSetADSRmode(SceSasCore* core, int voice, u32 mask, int attackcurve, int decaycurve, int sustaincurve, int releasecurve);
+int __sceSasSetADSRmode(SceSasCore* core, int voice, u32 mask, PspSasADSRCurveModes attackcurve, PspSasADSRCurveModes decaycurve, PspSasADSRCurveModes sustaincurve, PspSasADSRCurveModes releasecurve);
 
 /**
  * @brief Sets the voice ADSR envelope rates for a voice.
