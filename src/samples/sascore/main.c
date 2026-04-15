@@ -295,7 +295,7 @@ int sas_audio_load_pcm(AudioClip* audio, const char* path, int sample_rate, int 
      * this example. Instead we load a headerless uncompressed
      * signed 16-bit PCM directly. */
     size_t size = sceIoLseek(fd, 0, SEEK_END);
-    uint8_t* data = (uint8_t*)malloc(size);
+    uint8_t* data = (uint8_t*)aligned_alloc(16, size);
     sceIoLseek(fd, 0, SEEK_SET);
     sceIoRead(fd, data, size);
     sceIoClose(fd);
@@ -323,7 +323,7 @@ int sas_audio_load_vag(AudioClip* audio, const char* path) {
     /* For .vag files, we only need to load the file in memory
      * because sceSas handles the decoding for us! */
     size_t size = sceIoLseek(fd, 0, SEEK_END);
-    uint8_t* data = (uint8_t*)malloc(size);
+    uint8_t* data = (uint8_t*)aligned_alloc(16, size);
     sceIoLseek(fd, 0, SEEK_SET);
     sceIoRead(fd, data, size);
     sceIoClose(fd);
