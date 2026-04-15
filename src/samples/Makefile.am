@@ -72,6 +72,7 @@ SAMPLES = \
 	power \
 	prx/prx_loader \
 	prx/testprx \
+	sascore \
 	savedata/utility \
 	savedata/decrypt \
 	savedata/encrypt \
