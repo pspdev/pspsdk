@@ -197,6 +197,8 @@ int main(void) {
     int reverb = 0;
     sas_set_reverb(reverb);
 
+    sceKernelDcacheWritebackInvalidateAll();
+
     int fanfare_voice = -1;
     int refresh_screen = 1;
     int running = 1;
