@@ -3,7 +3,7 @@
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
- * pspsas.h - Prototypes for the sceSasCore library.
+ * pspsascore.h - Prototypes for the sceSasCore library.
  *
  * Copyright (c) 2026 IsaacTCB
  *
