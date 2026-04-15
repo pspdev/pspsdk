@@ -292,9 +292,9 @@ u32 __sceSasGetEndFlag(SceSasCore* core);
  *
  * @param voice - The target voice index.
  *
- * @param vag - A stable pointer to VAG data.
+ * @param vag - A stable pointer to VAG ADPCM data.
  *
- * @param size - The size in bytes of the VAG file.
+ * @param size - The size in bytes of the VAG ADPCM data.
  *
  * @param loop - Whether this voice should loop or not. The VAG file itself has to
  *               contain the end loop flag in its data in order for looping to work.
