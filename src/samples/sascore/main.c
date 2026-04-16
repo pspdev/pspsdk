@@ -49,21 +49,18 @@ typedef struct {
 __attribute__((aligned(64))) SceSasCore core;
 __attribute__((aligned(64))) int16_t mixer[GRAIN_SIZE * 4];
 
-static int exit_callback(int arg1, int arg2, void *common);
-static int callback_thread(SceSize args, void *argp);
+static void print_error(const char* message);
 static int setup_callbacks(void);
 
 int sas_audio_load_pcm(AudioClip* pcm, const char* path, int sample_rate, int channels);
 int sas_audio_load_vag(AudioClip* pcm, const char* path);
 void sas_audio_unload(AudioClip* audio);
 
-static void print_error(const char* message);
-
 /* --------------------------- */
 /*      Wrappers for SAS       */
 /* --------------------------- */
 
-void sas_init() {
+void sas_init(void) {
     /* The following modules must be loaded in order for sceSasCore to work */
     int result = sceUtilityLoadModule(PSP_MODULE_AV_AVCODEC);
     if (result < 0) {
@@ -85,7 +82,7 @@ void sas_init() {
     }
 }
 
-void sas_audio_play_voice(int voice, AudioClip* audio) {
+void sas_audio_play_voice(int voice, AudioClip* audio, int looped) {
     if (audio->channels != 1) {
         return; /* sceSas can only mix mono voices. */
     }
@@ -96,10 +93,10 @@ void sas_audio_play_voice(int voice, AudioClip* audio) {
     int status;
     if (audio->type == SAMPLE_AUDIO_PCM) {
         const size_t samples = audio->size / sizeof(int16_t);
-        status = __sceSasSetVoicePCM(&core, voice, audio->ptr, samples, -1);
+        status = __sceSasSetVoicePCM(&core, voice, audio->ptr, samples, looped ? 0 : -1);
     } else if (audio->type == SAMPLE_AUDIO_VAG) {
         const size_t adpcm_offset = 0x30;
-        status = __sceSasSetVoice(&core, voice, audio->ptr + adpcm_offset, audio->size - adpcm_offset, 1);
+        status = __sceSasSetVoice(&core, voice, audio->ptr + adpcm_offset, audio->size - adpcm_offset, looped ? 1 : 0);
     } else {
         /* Unsupported type */
         status = -1;
@@ -233,7 +230,7 @@ int main(void) {
             /* If cross is pressed, then play the PCM sound effect. */
             if (latch.uiMake & PSP_CTRL_CROSS) {
                 int voice = sas_find_free_voice(flags);
-                sas_audio_play_voice(voice, &audio_pcm);
+                sas_audio_play_voice(voice, &audio_pcm, 0);
                 flags &= ~PSP_SAS_GET_VOICE_BIT(voice); /* Marks the bitflag as playing */
 
                 if (fanfare_voice == voice) {
@@ -245,7 +242,7 @@ int main(void) {
             if (latch.uiMake & PSP_CTRL_SQUARE) {
                 if (fanfare_voice < 0 || PSP_SAS_GET_FLAG_AT(flags, fanfare_voice)) {
                     fanfare_voice = sas_find_free_voice(flags);
-                    sas_audio_play_voice(fanfare_voice, &audio_vag);
+                    sas_audio_play_voice(fanfare_voice, &audio_vag, 1);
                     flags &= ~PSP_SAS_GET_VOICE_BIT(fanfare_voice);
 
                     refresh_screen = 1;
@@ -303,6 +300,7 @@ int sas_audio_load_pcm(AudioClip* audio, const char* path, int sample_rate, int 
     sceIoClose(fd);
 
     if (!data) {
+        audio->ptr = NULL;
         sas_audio_unload(audio);
         return 0;
     }
@@ -331,6 +329,7 @@ int sas_audio_load_vag(AudioClip* audio, const char* path) {
     sceIoClose(fd);
 
     if (!data || size <= 32) {
+        audio->ptr = data;
         sas_audio_unload(audio);
         return 0;
     }
@@ -339,6 +338,7 @@ int sas_audio_load_vag(AudioClip* audio, const char* path) {
     uint8_t* ptr = &data[0x0];
     if (!(ptr[0] == 'V' && ptr[1] == 'A' && ptr[2] == 'G' && ptr[3] == 'p')) {
         /* Magic failed, file is not a valid .vag */
+        audio->ptr = data;
         sas_audio_unload(audio);
         return 0;
     }
@@ -371,12 +371,12 @@ void sas_audio_unload(AudioClip* audio) {
 /*    PSP boilerplate stuff    */
 /* --------------------------- */
 
-static int exit_callback(int arg1, int arg2, void *common) {
+static int exit_callback(int arg1, int arg2, void* common) {
     sceKernelExitGame();
     return 0;
 }
 
-static int callback_thread(SceSize args, void *argp) {
+static int callback_thread(SceSize args, void* argp) {
     int cbid = sceKernelCreateCallback("Exit Callback", exit_callback, NULL);
     sceKernelRegisterExitCallback(cbid);
     sceKernelSleepThreadCB();
