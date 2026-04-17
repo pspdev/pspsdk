@@ -82,7 +82,7 @@ int pspSdkInstallNoPlainModuleCheckPatch(void)
     u32 *addr;
     int i;
 
-    addr = (u32*) (0x80000000 | (((u32)sceKernelProbeExecutableObject & 0x03FFFFFF) << 2));
+    addr = (u32*) (0x80000000 | ((_lw((u32)sceKernelProbeExecutableObject) & 0x03FFFFFF) << 2));
     //printf("sceKernelProbeExecutableObject %p\n", addr);
     for(i = 0; i < 100; i++)
     {
@@ -93,7 +93,7 @@ int pspSdkInstallNoPlainModuleCheckPatch(void)
         }
     }
 
-    addr = (u32*) (0x80000000 | (((u32)sceKernelCheckPspConfig & 0x03FFFFFF) << 2));
+    addr = (u32*) (0x80000000 | ((_lw((u32)sceKernelCheckPspConfig) & 0x03FFFFFF) << 2));
     //printf("sceCheckPspConfig %p\n", addr);
     for(i = 0; i < 100; i++)
     {
