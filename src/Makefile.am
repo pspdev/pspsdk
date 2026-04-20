@@ -25,6 +25,7 @@ SUBDIRS = \
 	prof \
 	registry \
 	rtc \
+	sascore \
 	sircs \
 	sdk \
 	startup \

@@ -121,6 +121,7 @@ AC_CONFIG_FILES([Makefile
                  src/prof/Makefile
                  src/registry/Makefile
                  src/rtc/Makefile
+                 src/sascore/Makefile
                  src/sircs/Makefile
                  src/sdk/Makefile
                  src/startup/Makefile
