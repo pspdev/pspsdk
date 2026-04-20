@@ -87,10 +87,7 @@ static const char illoptstring[] = "unknown option -- %s";
 /*
  * Compute the greatest common divisor of a and b.
  */
-static int
-gcd(a, b)
-	int a;
-	int b;
+static int gcd(int a, int b)
 {
 	int c;
 
