@@ -56,7 +56,7 @@ unsigned char elf_header[] = {
     0x00, 0x00, 0x00, 0x00,                         // e_entry
     0x00, 0x00, 0x00, 0x00,                         // e_phoff
     0x34, 0x00, 0x00, 0x00,                         // e_shoff
-    0x01, 0x40, 0x92, 0x20,                         // e_flags
+    0x01, 0x40, 0x92, 0x10,                         // e_flags
     0x34, 0x00,                                     // e_ehsize
     0x00, 0x00,                                     // e_phentsize
     0x00, 0x00,                                     // e_phnum
