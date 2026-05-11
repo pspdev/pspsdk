@@ -199,7 +199,6 @@ pte_osResult pte_osThreadCreate(pte_osThreadEntryPoint entryPoint,
   int pspAttr;
   void *pTls;
   SceUID threadId;
-  pte_osResult result;
   pspThreadData *pThreadData;
 
   if (threadNum++ > MAX_PSP_UID) {
@@ -215,8 +214,7 @@ pte_osResult pte_osThreadCreate(pte_osThreadEntryPoint entryPoint,
   pTls = pteTlsThreadInit();
   if (pTls == NULL) {
     PSP_DEBUG("pteTlsThreadInit: PTE_OS_NO_RESOURCES\n");
-    result = PTE_OS_NO_RESOURCES;
-    goto FAIL0;
+    return PTE_OS_NO_RESOURCES;
   }
 
   /* Allocate some memory for our per-thread control data.  We use this for:
@@ -227,10 +225,8 @@ pte_osResult pte_osThreadCreate(pte_osThreadEntryPoint entryPoint,
 
   if (pThreadData == NULL) {
     pteTlsThreadDestroy(pTls);
-
     PSP_DEBUG("malloc(pspThreadData): PTE_OS_NO_RESOURCES\n");
-    result = PTE_OS_NO_RESOURCES;
-    goto FAIL0;
+    return PTE_OS_NO_RESOURCES;
   }
 
   /* Save a pointer to our per-thread control data as a TLS value */
@@ -248,6 +244,12 @@ pte_osResult pte_osThreadCreate(pte_osThreadEntryPoint entryPoint,
                            255,        /* maximum value        */
                            0);         /* options (default)    */
 
+  if (pThreadData->cancelSem < 0) {
+    free(pThreadData);
+    pteTlsThreadDestroy(pTls);
+    PSP_DEBUG("sceKernelCreateSema(cancelSem): PTE_OS_NO_RESOURCES\n");
+    return PTE_OS_NO_RESOURCES;
+  }
 
   /* In order to emulate TLS functionality, we append the address of the TLS structure that we
    * allocated above to the thread's name.  To set or get TLS values for this thread, the user
@@ -267,24 +269,23 @@ pte_osResult pte_osThreadCreate(pte_osThreadEntryPoint entryPoint,
                                    NULL);
 
   if (threadId == (SceUID) SCE_KERNEL_ERROR_NO_MEMORY) {
+    sceKernelDeleteSema(pThreadData->cancelSem);
     free(pThreadData);
     pteTlsThreadDestroy(pTls);
-
     PSP_DEBUG("sceKernelCreateThread: PTE_OS_NO_RESOURCES\n");
-    result =  PTE_OS_NO_RESOURCES;
-  } else if (threadId < 0) {
-    free(pThreadData);
-    pteTlsThreadDestroy(pTls);
-
-    PSP_DEBUG("sceKernelCreateThread: PTE_OS_GENERAL_FAILURE\n");
-    result = PTE_OS_GENERAL_FAILURE;
-  } else {
-    *ppte_osThreadHandle = threadId;
-    result = PTE_OS_OK;
+    return PTE_OS_NO_RESOURCES;
   }
 
-FAIL0:
-  return result;
+  if (threadId < 0) {
+    sceKernelDeleteSema(pThreadData->cancelSem);
+    free(pThreadData);
+    pteTlsThreadDestroy(pTls);
+    PSP_DEBUG("sceKernelCreateThread: PTE_OS_GENERAL_FAILURE\n");
+    return PTE_OS_GENERAL_FAILURE;
+  }
+
+  *ppte_osThreadHandle = threadId;
+  return PTE_OS_OK;
 }
 #endif
 
@@ -529,6 +530,10 @@ pte_osResult pte_osMutexCreate(pte_osMutexHandle *pHandle)
                                1,          /* maximum value        */
                                0);         /* options (default)    */
 
+  if (handle < 0) {
+    return PTE_OS_NO_RESOURCES;
+  }
+
   *pHandle = handle;
   return PTE_OS_OK;
 }
@@ -600,6 +605,10 @@ pte_osResult pte_osSemaphoreCreate(int initialValue, pte_osSemaphoreHandle *pHan
                                initialValue,   /* initial value        */
                                SEM_VALUE_MAX,  /* maximum value        */
                                0);             /* options (default)    */
+
+  if (handle < 0) {
+    return PTE_OS_NO_RESOURCES;
+  }
 
   *pHandle = handle;
   return PTE_OS_OK;
