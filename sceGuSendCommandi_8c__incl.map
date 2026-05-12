@@ -1,0 +1,14 @@
+<map id="gu/sceGuSendCommandi.c" name="gu/sceGuSendCommandi.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,185,31"/>
+<area shape="rect" id="Node000002" href="$guInternal_8h.html" title=" " alt="" coords="51,79,139,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,31,98,63,92,63,92,31"/>
+<area shape="rect" id="Node000003" href="$pspgu_8h.html" title=" " alt="" coords="62,153,128,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,105,98,137,92,137,92,105"/>
+<area shape="rect" id="Node000004" href="$psptypes_8h.html" title=" " alt="" coords="53,300,137,326"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="95,179,88,227,89,256,92,284,87,285,83,257,83,226,90,178"/>
+<area shape="rect" id="Node000006" href="$pspge_8h.html" title=" " alt="" coords="98,226,164,252"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="103,177,121,211,116,214,99,180"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="63,374,127,399"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="98,326,98,358,92,358,92,326"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="127,253,110,287,105,285,123,251"/>
+</map>

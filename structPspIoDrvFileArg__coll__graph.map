@@ -1,0 +1,9 @@
+<map id="PspIoDrvFileArg" name="PspIoDrvFileArg">
+<area shape="rect" id="Node000001" title="Structure passed to the file functions of the io driver system." alt="" coords="5,271,122,297"/>
+<area shape="rect" id="Node000002" href="$structPspIoDrvArg.html" title="Structure passed to the init and exit functions of the io driver system." alt="" coords="16,183,111,208"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,224,66,271,61,271,61,224"/>
+<area shape="rect" id="Node000003" href="$structPspIoDrv.html" title=" " alt="" coords="26,94,101,120"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="66,135,66,182,61,182,61,135"/>
+<area shape="rect" id="Node000004" href="$structPspIoDrvFuncs.html" title="Structure to maintain the file driver pointers." alt="" coords="8,5,119,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="66,47,66,94,61,94,61,47"/>
+</map>
