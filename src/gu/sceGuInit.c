@@ -376,6 +376,6 @@ int sceGuInit(void)
 	return 0;
 }
 
-int sceGuGetInit() {
+int guGetInit() {
 	return gu_init;
 }

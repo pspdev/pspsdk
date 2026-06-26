@@ -483,7 +483,7 @@ void sceGuTerm(void);
   *
   * @return Whether the GU system has been initialized or not
 **/
-int sceGuGetInit();
+int guGetInit();
 
 /**
   * Break the display list
