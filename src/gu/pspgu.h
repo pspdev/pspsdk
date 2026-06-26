@@ -477,6 +477,15 @@ int sceGuInit(void);
 void sceGuTerm(void);
 
 /**
+  * Get if the GU system has been initialized
+  *
+  * Returns 1 after sceGuInit() has been called, returns 0 otherwise or after sceGuTerm() has been called.
+  *
+  * @return Whether the GU system has been initialized or not
+**/
+int guGetInit();
+
+/**
   * Break the display list
   *
   * @param mode - Mode to break the display list. Valid modes are:

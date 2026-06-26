@@ -375,3 +375,7 @@ int sceGuInit(void)
 	gu_first_start = 1;
 	return 0;
 }
+
+int guGetInit() {
+	return gu_init;
+}
