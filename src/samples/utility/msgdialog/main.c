@@ -201,7 +201,7 @@ static void ConfigureDialog(pspUtilityMsgDialogParams *dialog, size_t dialog_siz
     dialog->base.size = dialog_size;
     sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_LANGUAGE,
 				&dialog->base.language); // Prompt language
-    sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_UNKNOWN,
+    sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP,
 				&dialog->base.buttonSwap); // X/O button swap
 
     dialog->base.graphicsThread = 0x11;

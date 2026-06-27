@@ -32,12 +32,16 @@ extern "C" {
 #define PSP_SYSTEMPARAM_ID_INT_TIMEZONE		6
 #define PSP_SYSTEMPARAM_ID_INT_DAYLIGHTSAVINGS	7
 #define PSP_SYSTEMPARAM_ID_INT_LANGUAGE		8
+
 /**
- * #9 seems to be Region or maybe X/O button swap.
- * It doesn't exist on JAP v1.0
- * is 1 on NA v1.5s
- * is 0 on JAP v1.5s
- * is read-only
+ * Whether to swap X and O depends on region
+ * 0 for O as confirm
+ * 1 for X as confirm
+ */
+#define PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP	9
+
+/**
+ * Old name of PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP for legacy compatibility
  */
 #define PSP_SYSTEMPARAM_ID_INT_UNKNOWN		9
 
