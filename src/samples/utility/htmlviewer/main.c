@@ -215,7 +215,7 @@ void htmlViewerInit(char *url)
 	params.base.size = sizeof(pspUtilityHtmlViewerParam);
 	
 	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_LANGUAGE, &params.base.language);
-	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_UNKNOWN, &params.base.buttonSwap);
+	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP, &params.base.buttonSwap);
 	
 	params.base.graphicsThread = 17;
 	params.base.accessThread = 19;

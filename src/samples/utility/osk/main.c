@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 	memset(&params, 0, sizeof(params));
 	params.base.size = sizeof(params);
 	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_LANGUAGE, &params.base.language);
-	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_UNKNOWN, &params.base.buttonSwap);
+	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP, &params.base.buttonSwap);
 	params.base.graphicsThread = 17;
 	params.base.accessThread = 19;
 	params.base.fontThread = 18;

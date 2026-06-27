@@ -141,7 +141,7 @@ void printSystemParam(int id, int iVal, char *sVal) {
 					printf("%-17s: INVALID\n", "Language");
 			}
 			break;
-		case(PSP_SYSTEMPARAM_ID_INT_UNKNOWN):
+		case(PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP):
 			printf("%-17s: %d (1 on NA PSPs and 0 on JAP PSPs, v1.5+ only)\n", "Unknown:", iVal);
 			break;
 		default:
