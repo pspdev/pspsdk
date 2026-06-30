@@ -86,7 +86,7 @@ ifeq ($(USE_KERNEL_LIBS),1)
 LIBS := -nostdlib $(LIBS) -lpspdebug -lpspdisplay_driver -lpspctrl_driver -lpspmodinfo -lpspsdk -lpspkernel
 else
 LIBS := $(LIBS) -lpspdebug -lpspdisplay -lpspge -lpspctrl \
-		-lpspnet -lpspnet_apctl
+		-lpspnet -lpspnet_apctl -lpsplibgu
 endif
 
 # Define the overridable parameters for EBOOT.PBP

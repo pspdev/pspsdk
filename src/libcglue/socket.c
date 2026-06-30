@@ -19,13 +19,130 @@
 #include <arpa/inet.h>
 
 #include <psptypes.h>
+#include <pspnet.h>
 #include <pspnet_inet.h>
+#include <pspnet_apctl.h>
+
+#include <pspgu.h>
+#include <pspdisplay.h>
+#include <psputility.h>
 #include "fdman.h"
+
+#define GU_LIST_SIZE (32 * 1024)
+#define NET_BUFFER_SIZE (128 * 1024)
+#define NET_APCTL_BUFFER_SIZE (32 * 1024)
+#define SCREEN_WIDTH 480
+#define SCREEN_HEIGHT 272
+#define BUFFER_WIDTH 512
+#define BUFFER_SIZE (BUFFER_WIDTH * SCREEN_HEIGHT)
+#define PIXEL_SIZE 4
+
+int _netInit()
+{
+	int done = 0;
+	int gu_was_active = guGetInit();
+	uint32_t __attribute__((aligned(16))) list[GU_LIST_SIZE];  // Needed for sceGuStart to work
+
+	// Initialize the required networking libraries
+	sceUtilityLoadNetModule(PSP_NET_MODULE_COMMON);
+	sceUtilityLoadNetModule(PSP_NET_MODULE_INET);
+	sceNetInit(NET_BUFFER_SIZE, 42, 4096, 42, 4096);
+	sceNetInetInit();
+	sceNetApctlInit(NET_APCTL_BUFFER_SIZE, 48);
+
+	// If libgu was not yet active, temporarily activate it so the network selection dialog can work
+	if (!gu_was_active) {
+		sceGuInit();
+		sceGuStart(GU_DIRECT, list);
+		sceGuDrawBuffer(GU_PSM_8888, (void*)0, BUFFER_WIDTH);
+		sceGuDispBuffer(SCREEN_WIDTH, SCREEN_HEIGHT, (void*)(BUFFER_SIZE*PIXEL_SIZE), BUFFER_WIDTH);
+
+		//Set up viewport
+		sceGuOffset(2048 - (SCREEN_WIDTH / 2), 2048 - (SCREEN_WIDTH / 2));
+		sceGuViewport(2048, 2048, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+		sceGuDisable(GU_DEPTH_TEST);
+
+		sceGuScissor(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+		sceGuEnable(GU_SCISSOR_TEST);
+		sceGuDisable(GU_ALPHA_TEST);
+
+		sceGuFinish();
+		sceGuDisplay(GU_TRUE);
+	}
+
+	// Initialize the network selection dialog
+	pspUtilityNetconfData params;
+
+	memset(&params, 0, sizeof(params));
+	params.base.size = sizeof(params);
+	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_LANGUAGE, &params.base.language);
+	sceUtilityGetSystemParamInt(PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP, &params.base.buttonSwap);
+	params.base.graphicsThread = 17;
+	params.base.accessThread = 19;
+	params.base.fontThread = 18;
+	params.base.soundThread = 16;
+	params.action = PSP_NETCONF_ACTION_CONNECTAP;
+	memset(&params.adhocparam, 0, sizeof(params.adhocparam));
+
+	// Show the network selection dialog
+	sceUtilityNetconfInitStart(&params);
+	while(!done)
+	{
+		sceGuStart(GU_DIRECT, list);
+		sceGuClearColor(0);
+		sceGuClear(GU_COLOR_BUFFER_BIT);
+		if (sceGuGetStatus(GU_DEPTH_TEST))
+			sceGuClear(GU_DEPTH_BUFFER_BIT);
+		sceGuFinish();
+		sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
+
+		switch(sceUtilityNetconfGetStatus())
+		{
+			case PSP_UTILITY_DIALOG_VISIBLE:
+				sceUtilityNetconfUpdate(1);
+				break;
+			case PSP_UTILITY_DIALOG_FINISHED:
+				sceUtilityNetconfShutdownStart();
+				break;
+			case PSP_UTILITY_DIALOG_QUIT:
+				sceUtilityNetconfShutdownStart();
+				break;
+			case PSP_UTILITY_DIALOG_NONE:
+				done = 1;
+				break;
+			default :
+				break;
+		}
+		sceDisplayWaitVblankStart();
+		sceGuSwapBuffers();
+	}
+
+	// Clean up libgu
+	if (!gu_was_active) {
+		sceGuDisplay(GU_FALSE);
+		sceGuTerm();
+	}
+
+	// Returns 1 if connecting to the network was successful
+	return params.base.result == 0;
+	return 1;
+}
 
 #ifdef F_socket
 int	socket(int domain, int type, int protocol)
 {
 	int sock, scesock;
+	int connection_state = PSP_NET_APCTL_STATE_DISCONNECTED;
+
+	sceNetApctlGetState(&connection_state);
+	if (connection_state == PSP_NET_APCTL_STATE_DISCONNECTED) {
+		int net_connected = _netInit();
+		if (!net_connected) {
+			errno = EIO;
+			return -1;
+		}
+	}
 
 	scesock = sceNetInetSocket(domain, type, protocol);
 	if(scesock < 0)	{

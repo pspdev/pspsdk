@@ -13,7 +13,10 @@ CPPFLAGS = -I$(top_srcdir)/src/base \
 	-I$(top_srcdir)/src/net \
 	-I$(top_srcdir)/src/rtc \
 	-I$(top_srcdir)/src/user \
-	-I$(top_srcdir)/src/utility
+	-I$(top_srcdir)/src/utility \
+	-I$(top_srcdir)/src/ge \
+	-I$(top_srcdir)/src/gu \
+	-I$(top_srcdir)/src/display
 CFLAGS = @PSPSDK_CFLAGS@
 CCASFLAGS = $(CFLAGS)
 
