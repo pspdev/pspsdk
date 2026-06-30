@@ -21,6 +21,17 @@ extern "C" {
 #include <sys/socket.h>
 #include <sys/select.h>
 
+#define SCE_NET_INET_POLLIN        0x0001
+#define SCE_NET_INET_POLLPRI       0x0002
+#define SCE_NET_INET_POLLOUT       0x0004
+#define SCE_NET_INET_POLLERR       0x0008
+#define SCE_NET_INET_POLLHUP       0x0010
+#define SCE_NET_INET_POLLNVAL      0x0020
+#define	SCE_NET_INET_POLLRDNORM	   0x0040
+#define SCE_NET_INET_POLLRDBAND    0x0080
+#define	SCE_NET_INET_POLLWRBAND    0x0100
+#define	SCE_NET_INET_POLLWRNORM    SCE_NET_INET_POLLOUT
+
 /** 
  *  This struct is needed because tv_sec size is different from what newlib expect
  *  Newlib expects 64bits for seconds and PSP expects 32bits
@@ -28,6 +39,15 @@ extern "C" {
 struct SceNetInetTimeval {
     uint32_t tv_sec;
     uint32_t tv_usec;
+};
+
+struct SceNetInetPollfd {
+    /* file descriptor */
+    int fd;
+    /* requested events */
+    short events;
+    /* returned events */
+    short revents;
 };
 
 int sceNetInetInit(void);
@@ -52,6 +72,7 @@ int	sceNetInetGetpeername(int s, struct sockaddr *name, socklen_t *namelen);
 int	sceNetInetGetsockname(int s, struct sockaddr *name, socklen_t *namelen);
 ssize_t sceNetInetSendmsg(int s, const struct msghdr *msg, int flags);
 ssize_t sceNetInetRecvmsg(int s, struct msghdr *msg, int flags);
+int sceNetInetPoll(struct SceNetInetPollfd *fds, size_t nfds, int timeout);
 
 #ifdef __cplusplus
 }
