@@ -44,9 +44,10 @@ EXPAND_MEMORY = 0
 # user memory partition on PSP-1000, making MEMSIZE obsolete.
 # It is now an opt-out policy with PSP_LARGE_MEMORY=0
 ifeq ($(shell test $(PSP_FW_VERSION) -gt 390; echo $$?),0)
-EXPAND_MEMORY = 1
+EXPAND_MEMORY = 2
 ifeq ($(PSP_LARGE_MEMORY),1)
 $(warning "PSP_LARGE_MEMORY" flag is not necessary targeting firmware versions above 3.90)
+EXPAND_MEMORY = 1
 else ifeq ($(PSP_LARGE_MEMORY),0)
 EXPAND_MEMORY = 0
 else ifeq ($(PSP_LARGE_MEMORY),2)

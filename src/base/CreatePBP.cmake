@@ -163,7 +163,7 @@ macro(create_pbp_file)
   endif()
   
   if (NOT ${ARG_MEMSIZE})
-    set(ARG_MEMSIZE "1")
+    set(ARG_MEMSIZE "2")
   endif()
 
   if(PBOOT)
