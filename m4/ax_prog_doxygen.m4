@@ -266,8 +266,6 @@ m4_define([DX_loop], m4_dquote(m4_if(m4_eval(3 < m4_count($@)), 1,
           [])))dnl
 
 # Environment variables used inside doxygen.cfg:
-DX_ENV_APPEND(SRCDIR, $srcdir)
-DX_ENV_APPEND(PROJECT, $DX_PROJECT)
 DX_ENV_APPEND(VERSION, $PACKAGE_VERSION)
 
 # Doxygen itself:
@@ -277,15 +275,6 @@ DX_ARG_ABLE(doc, [generate any doxygen documentation],
             [DX_REQUIRE_PROG([DX_DOXYGEN], doxygen)
              DX_REQUIRE_PROG([DX_PERL], perl)],
             [DX_ENV_APPEND(PERL_PATH, $DX_PERL)])
-
-# Dot for graphics:
-DX_ARG_ABLE(dot, [generate graphics for doxygen documentation],
-            [DX_CHECK_DEPEND(doc, 1)],
-            [DX_CLEAR_DEPEND(doc, 1)],
-            [DX_REQUIRE_PROG([DX_DOT], dot)],
-            [DX_ENV_APPEND(HAVE_DOT, YES)
-             DX_ENV_APPEND(DOT_PATH, [`DX_DIRNAME_EXPR($DX_DOT)`])],
-            [DX_ENV_APPEND(HAVE_DOT, NO)])
 
 # Man pages generation:
 DX_ARG_ABLE(man, [generate doxygen manual pages],
@@ -353,13 +342,6 @@ DX_ARG_ABLE(pdf, [generate doxygen PDF documentation],
             [DX_REQUIRE_PROG([DX_PDFLATEX], pdflatex)
              DX_REQUIRE_PROG([DX_MAKEINDEX], makeindex)
              DX_REQUIRE_PROG([DX_EGREP], egrep)])
-
-# LaTeX generation for PS and/or PDF:
-if DX_TEST_FEATURE(ps) || DX_TEST_FEATURE(pdf); then
-    DX_ENV_APPEND(GENERATE_LATEX, YES)
-else
-    DX_ENV_APPEND(GENERATE_LATEX, NO)
-fi
 
 # Paper size for PS and/or PDF:
 AC_ARG_VAR(DOXYGEN_PAPER_SIZE,
