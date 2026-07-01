@@ -43,7 +43,7 @@ extern "C" {
 /**
  * Old name of PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP for legacy compatibility
  */
-#define PSP_SYSTEMPARAM_ID_INT_UNKNOWN		9
+#define PSP_SYSTEMPARAM_ID_INT_UNKNOWN		PSP_SYSTEMPARAM_ID_INT_BUTTON_SWAP
 
 /**
  * Return values for the SystemParam functions
