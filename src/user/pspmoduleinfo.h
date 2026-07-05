@@ -119,7 +119,7 @@ enum PspModuleInfoAttr
 	int __pipe_write(int fd, const void *buf, size_t len) { return __pipe_not_supported(); } \
 	int __pipe_nonblocking_write(int fd, const void *buf, size_t len) { return __pipe_not_supported(); }
 
-/* Disable using socket suuport from POSIX functions. */
+/* Disable using socket support from POSIX functions. */
 #define PSP_DISABLE_NEWLIB_SOCKET_SUPPORT() \
 	static int __socket_not_supported() { \
 		errno = ENOSYS; \
