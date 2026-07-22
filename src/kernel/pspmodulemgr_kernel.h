@@ -30,9 +30,9 @@ enum SceModuleMgrExecModes {
 	MODULE_EXEC_CMD_UNLOAD,
 };
 
-/** 
+/**
  * Structure used internally for many `sceModuleManager` module functions.
- * 
+ *
  * Also seems to be passed to `sceKernelStartThread` eventually by those internal functions.
  * */
 typedef struct {
@@ -81,7 +81,7 @@ typedef struct {
 	SceUID extern_mem_block_partition_id;
 	SceSize extern_mem_block_size;
 	u32 unk6;
-	void *block_gzip; 
+	void *block_gzip;
 	u32 unk7;
 	char secure_install_id[SCE_SECURE_INSTALL_ID_LEN];
 	SceUID extern_mem_block_id_user;
@@ -95,23 +95,6 @@ extern "C" {
 
 /** @addtogroup ModuleMgrKern Kernel Module Manager Library */
 /**@{*/
-
-/**
- * Gets the current module list.
- * 
- * @param readbufsize - The size of the read buffer.
- * @param readbuf     - Pointer to a buffer to store the IDs
- *
- * @return < 0 on error.
- */
-int sceKernelGetModuleList(int readbufsize, SceUID *readbuf);
-
-/**
- * Get the number of loaded modules.
- *
- * @return The number of loaded modules.
- */
-int sceKernelModuleCount(void);
 
 /**
  * Load a module from a buffer

@@ -352,6 +352,22 @@ typedef struct SceLoadCoreExecFileInfo {
 	u32 max_seg_align; //188
 } SceLoadCoreExecFileInfo;
 
+/**
+ * Gets the current module list.
+ *
+ * @param readbufsize - The size of the read buffer.
+ * @param readbuf     - Pointer to a buffer to store the IDs
+ *
+ * @return < 0 on error.
+ */
+int sceKernelGetModuleList(int readbufsize, SceUID *readbuf);
+
+/**
+ * Get the number of loaded modules.
+ *
+ * @return The number of loaded modules.
+ */
+int sceKernelModuleCount(void);
 
 /**
  * Find a module by it's name.
