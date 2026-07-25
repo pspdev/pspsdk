@@ -1235,4 +1235,4 @@ int gethostname (char *__name, size_t __len) {
 int dup(int oldfd) {
 	return fcntl(oldfd, F_DUPFD, 0);
 }
-#endif
+#endif /* F_dup */
