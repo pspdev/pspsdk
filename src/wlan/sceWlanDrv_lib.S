@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceWlanDrv_lib_0000
-	IMPORT_START	"sceWlanDrv_lib",0x40010000
+	IMPORT_START	"sceWlanDrv_lib",0x40090000
 #endif
 #ifdef F_sceWlanDrv_lib_0001
 	IMPORT_FUNC	"sceWlanDrv_lib",0x482CAE9A,sceWlanDevAttach

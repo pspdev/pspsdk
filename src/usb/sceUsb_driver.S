@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceUsb_driver_0000
-	IMPORT_START	"sceUsb_driver",0x00010000
+	IMPORT_START	"sceUsb_driver",0x00090000
 #endif
 #ifdef F_sceUsb_driver_0001
 	IMPORT_FUNC	"sceUsb_driver",0xAE5DE6AF,sceUsbStart

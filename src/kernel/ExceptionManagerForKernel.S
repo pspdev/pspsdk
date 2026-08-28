@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_ExceptionManagerForKernel_0000
-	IMPORT_START	"ExceptionManagerForKernel",0x00010000
+	IMPORT_START	"ExceptionManagerForKernel",0x00090000
 #endif
 #ifdef F_ExceptionManagerForKernel_0001
 	IMPORT_FUNC	"ExceptionManagerForKernel",0x3FB264FC,sceKernelRegisterExceptionHandler

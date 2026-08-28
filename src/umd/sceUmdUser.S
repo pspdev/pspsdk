@@ -6,7 +6,7 @@
 // sceUmdUser_0000.o sceUmdUser_0001.o sceUmdUser_0002.o sceUmdUser_0003.o sceUmdUser_0004.o sceUmdUser_0005.o sceUmdUser_0006.o sceUmdUser_0007.o sceUmdUser_0008.o sceUmdUser_0009.o sceUmdUser_0010.o sceUmdUser_0011.o sceUmdUser_0012.o sceUmdUser_0013.o sceUmdUser_0014.o 
 
 #ifdef F_sceUmdUser_0000
-	IMPORT_START	"sceUmdUser",0x40010011
+	IMPORT_START	"sceUmdUser",0x40090000
 #endif
 #ifdef F_sceUmdUser_0001
 	IMPORT_FUNC	"sceUmdUser",0x20628E6F,sceUmdGetErrorStat

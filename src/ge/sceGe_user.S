@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceGe_user_0000
-	IMPORT_START	"sceGe_user",0x40010000
+	IMPORT_START	"sceGe_user",0x40090000
 #endif
 #ifdef F_sceGe_user_0001
 	IMPORT_FUNC	"sceGe_user",0x1F6752AD,sceGeEdramGetSize

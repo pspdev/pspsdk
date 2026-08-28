@@ -6,7 +6,7 @@
 // sceVideocodec_0000.o sceVideocodec_0001.o sceVideocodec_0002.o sceVideocodec_0003.o sceVideocodec_0004.o sceVideocodec_0005.o sceVideocodec_0006.o sceVideocodec_0007.o sceVideocodec_0008.o sceVideocodec_0009.o sceVideocodec_0010.o sceVideocodec_0011.o 
 
 #ifdef F_sceVideocodec_0000
-	IMPORT_START	"sceVideocodec",0x40010011
+	IMPORT_START	"sceVideocodec",0x40090000
 #endif
 #ifdef F_sceVideocodec_0001
 	IMPORT_FUNC	"sceVideocodec",0x17099F0A,sceVideocodecInit

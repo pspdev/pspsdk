@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceUtility_netparam_internal_0000
-	IMPORT_START	"sceUtility_netparam_internal",0x40010000
+	IMPORT_START	"sceUtility_netparam_internal",0x40090000
 #endif
 #ifdef F_sceUtility_netparam_internal_0001
 	IMPORT_FUNC	"sceUtility_netparam_internal",0x072DEBF2,sceUtilityCreateNetParam

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceSysEventForKernel_0000
-	IMPORT_START	"sceSysEventForKernel",0x00010000
+	IMPORT_START	"sceSysEventForKernel",0x00090000
 #endif
 #ifdef F_sceSysEventForKernel_0001
 	IMPORT_FUNC	"sceSysEventForKernel",0xAEB300AE,sceKernelIsRegisterSysEventHandler

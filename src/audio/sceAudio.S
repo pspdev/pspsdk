@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceAudio_0000
-	IMPORT_START	"sceAudio",0x40010000
+	IMPORT_START	"sceAudio",0x40090000
 #endif
 #ifdef F_sceAudio_0001
 	IMPORT_FUNC	"sceAudio",0x8C1009B2,sceAudioOutput

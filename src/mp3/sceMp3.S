@@ -6,7 +6,7 @@
 // sceMp3_0000.o sceMp3_0001.o sceMp3_0002.o sceMp3_0003.o sceMp3_0004.o sceMp3_0005.o sceMp3_0006.o sceMp3_0007.o sceMp3_0008.o sceMp3_0009.o sceMp3_0010.o sceMp3_0011.o sceMp3_0012.o sceMp3_0013.o sceMp3_0014.o sceMp3_0015.o sceMp3_0016.o sceMp3_0017.o sceMp3_0018.o sceMp3_0019.o 
 
 #ifdef F_sceMp3_0000
-	IMPORT_START	"sceMp3",0x00090011
+	IMPORT_START	"sceMp3",0x00090000
 #endif
 #ifdef F_sceMp3_0001
 	IMPORT_FUNC	"sceMp3",0x07EC321A,sceMp3ReserveMp3Handle

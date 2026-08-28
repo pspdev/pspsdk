@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_LoadExecForUser_0000
-	IMPORT_START	"LoadExecForUser",0x40010000
+	IMPORT_START	"LoadExecForUser",0x40090000
 #endif
 #ifdef F_LoadExecForUser_0001
 	IMPORT_FUNC	"LoadExecForUser",0xBD2F1094,sceKernelLoadExec

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_ModuleMgrForUser_0000
-	IMPORT_START	"ModuleMgrForUser",0x40010000
+	IMPORT_START	"ModuleMgrForUser",0x40090000
 #endif
 #ifdef F_ModuleMgrForUser_0001
 	IMPORT_FUNC	"ModuleMgrForUser",0xB7F46618,sceKernelLoadModuleByID

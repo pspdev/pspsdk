@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceUsb_0000
-	IMPORT_START	"sceUsb",0x40010000
+	IMPORT_START	"sceUsb",0x40090000
 #endif
 #ifdef F_sceUsb_0001
 	IMPORT_FUNC	"sceUsb",0xAE5DE6AF,sceUsbStart

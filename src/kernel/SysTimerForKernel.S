@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_SysTimerForKernel_0000
-	IMPORT_START	"SysTimerForKernel",0x00010000
+	IMPORT_START	"SysTimerForKernel",0x00090000
 #endif
 #ifdef F_SysTimerForKernel_0001
 	IMPORT_FUNC	"SysTimerForKernel",0xC99073E3,sceSTimerAlloc

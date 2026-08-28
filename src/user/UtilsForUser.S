@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_UtilsForUser_0000
-	IMPORT_START	"UtilsForUser",0x40010000
+	IMPORT_START	"UtilsForUser",0x40090000
 #endif
 #ifdef F_UtilsForUser_0001
 	IMPORT_FUNC	"UtilsForUser",0xBFA98062,sceKernelDcacheInvalidateRange

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_ThreadManForUser_0000
-	IMPORT_START	"ThreadManForUser",0x40010000
+	IMPORT_START	"ThreadManForUser",0x40090000
 #endif
 #ifdef F_ThreadManForUser_0001
 	IMPORT_FUNC	"ThreadManForUser",0x6E9EA350,_sceKernelReturnFromCallback

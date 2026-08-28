@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_SysMemUserForUser_0000
-	IMPORT_START	"SysMemUserForUser",0x40000000
+	IMPORT_START	"SysMemUserForUser",0x40080000
 #endif
 #ifdef F_SysMemUserForUser_0001
 	IMPORT_FUNC	"SysMemUserForUser",0xA291F107,sceKernelMaxFreeMemSize

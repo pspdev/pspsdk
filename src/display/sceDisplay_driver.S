@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceDisplay_driver_0000
-	IMPORT_START	"sceDisplay_driver",0x00010000
+	IMPORT_START	"sceDisplay_driver",0x00090000
 #endif
 #ifdef F_sceDisplay_driver_0001
 	IMPORT_FUNC	"sceDisplay_driver",0x206276C2,sceDisplayInit
