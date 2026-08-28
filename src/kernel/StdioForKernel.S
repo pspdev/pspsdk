@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_StdioForKernel_0000
-	IMPORT_START	"StdioForKernel",0x00010000
+	IMPORT_START	"StdioForKernel",0x00090000
 #endif
 #ifdef F_StdioForKernel_0001
 	IMPORT_FUNC	"StdioForKernel",0x2CCF071A,fdprintf

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_scePaf_0000
-	IMPORT_START	"scePaf",0x00010000
+	IMPORT_START	"scePaf",0x00090000
 #endif
 #ifdef F_scePaf_0001
 	IMPORT_FUNC	"scePaf",0xC9831AFF,scePaf_C9831AFF

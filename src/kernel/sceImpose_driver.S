@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceImpose_driver_0000
-	IMPORT_START	"sceImpose_driver",0x00010011
+	IMPORT_START	"sceImpose_driver",0x00090000
 #endif
 #ifdef F_sceImpose_driver_0001
 	IMPORT_FUNC	"sceImpose_driver",0x0F341BE4,sceImposeGetHomePopup

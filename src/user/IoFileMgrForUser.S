@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_IoFileMgrForUser_0000
-	IMPORT_START	"IoFileMgrForUser",0x40010000
+	IMPORT_START	"IoFileMgrForUser",0x40090000
 #endif
 #ifdef F_IoFileMgrForUser_0001
 	IMPORT_FUNC	"IoFileMgrForUser",0x3251EA56,sceIoPollAsync

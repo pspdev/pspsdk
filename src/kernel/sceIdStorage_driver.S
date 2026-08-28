@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceIdStorage_driver_0000
-	IMPORT_START	"sceIdStorage_driver",0x00010000
+	IMPORT_START	"sceIdStorage_driver",0x00090000
 #endif
 #ifdef F_sceIdStorage_driver_0001
 	IMPORT_FUNC	"sceIdStorage_driver",0xAB129D20,sceIdStorageInit

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceSysreg_driver_0000
-	IMPORT_START	"sceSysreg_driver",0x00010000
+	IMPORT_START	"sceSysreg_driver",0x00090000
 #endif
 #ifdef F_sceSysreg_driver_0001
 	IMPORT_FUNC	"sceSysreg_driver",0x9C863542,sceSysregInit

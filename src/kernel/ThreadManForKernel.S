@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_ThreadManForKernel_0000
-	IMPORT_START	"ThreadManForKernel",0x00010000
+	IMPORT_START	"ThreadManForKernel",0x00090000
 #endif
 #ifdef F_ThreadManForKernel_0001
 	IMPORT_FUNC	"ThreadManForKernel",0x0C106E53,sceKernelRegisterThreadEventHandler

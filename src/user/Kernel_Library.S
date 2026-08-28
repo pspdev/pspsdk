@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_Kernel_Library_0000
-	IMPORT_START	"Kernel_Library",0x00010000
+	IMPORT_START	"Kernel_Library",0x00090000
 #endif
 #ifdef F_Kernel_Library_0001
 	IMPORT_FUNC	"Kernel_Library",0x092968F4,sceKernelCpuSuspendIntr

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceRtc_0000
-	IMPORT_START	"sceRtc",0x40010000
+	IMPORT_START	"sceRtc",0x40090000
 #endif
 #ifdef F_sceRtc_0001
 	IMPORT_FUNC	"sceRtc",0xC41C2853,sceRtcGetTickResolution

@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceHprm_0000
-	IMPORT_START	"sceHprm",0x40010000
+	IMPORT_START	"sceHprm",0x40090000
 #endif
 #ifdef F_sceHprm_0001
 	IMPORT_FUNC	"sceHprm",0xC7154136,sceHprmRegisterCallback

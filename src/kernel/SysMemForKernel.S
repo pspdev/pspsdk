@@ -5,7 +5,7 @@
 // Build List
 
 #ifdef F_SysMemForKernel_0000
-	IMPORT_START	"SysMemForKernel",0x00010011
+	IMPORT_START	"SysMemForKernel",0x00010000
 #endif
 #ifdef F_SysMemForKernel_0001
 	IMPORT_FUNC	"SysMemForKernel",0x1C1FBFE7,sceKernelCreateHeap

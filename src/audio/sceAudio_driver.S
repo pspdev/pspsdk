@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceAudio_driver_0000
-	IMPORT_START	"sceAudio_driver",0x00010000
+	IMPORT_START	"sceAudio_driver",0x00090000
 #endif
 
 #ifdef F_sceAudio_driver_0001

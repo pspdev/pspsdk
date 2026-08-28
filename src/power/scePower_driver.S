@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_scePower_driver_0000
-	IMPORT_START	"scePower_driver",0x00010000
+	IMPORT_START	"scePower_driver",0x00090000
 #endif
 #ifdef F_scePower_driver_0001
 	IMPORT_FUNC	"scePower_driver",0x9CE06934,scePowerInit

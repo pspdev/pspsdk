@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceCtrl_0000
-	IMPORT_START	"sceCtrl",0x40010000
+	IMPORT_START	"sceCtrl",0x40090000
 #endif
 #ifdef F_sceCtrl_0001
 	IMPORT_FUNC	"sceCtrl",0x6A2774F3,sceCtrlSetSamplingCycle

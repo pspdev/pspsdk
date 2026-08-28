@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceImpose_0000
-	IMPORT_START	"sceImpose",0x40010011
+	IMPORT_START	"sceImpose",0x40090000
 #endif
 #ifdef F_sceImpose_0001
 	IMPORT_FUNC	"sceImpose",0x0F341BE4,sceImposeGetHomePopup

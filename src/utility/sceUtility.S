@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceUtility_0000
-	IMPORT_START	"sceUtility",0x40010000
+	IMPORT_START	"sceUtility",0x40090000
 #endif
 #ifdef F_sceUtility_0001
 	IMPORT_FUNC	"sceUtility",0xC492F751,sceUtilityGameSharingInitStart

@@ -6,7 +6,7 @@
 // sceSsl_0000.o sceSsl_0001.o sceSsl_0002.o sceSsl_0003.o sceSsl_0004.o sceSsl_0005.o sceSsl_0006.o sceSsl_0007.o sceSsl_0008.o sceSsl_0009.o sceSsl_0010.o sceSsl_0011.o 
 
 #ifdef F_sceSsl_0000
-	IMPORT_START	"sceSsl",0x00090011
+	IMPORT_START	"sceSsl",0x00090000
 #endif
 #ifdef F_sceSsl_0001
 	IMPORT_FUNC	"sceSsl",0x058D21C0,sceSslGetNameEntryCount

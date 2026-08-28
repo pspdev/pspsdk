@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_InterruptManager_0000
-	IMPORT_START	"InterruptManager",0x40000000
+	IMPORT_START	"InterruptManager",0x40080000
 #endif
 #ifdef F_InterruptManager_0001
 	IMPORT_FUNC	"InterruptManager",0xCA04A2B9,sceKernelRegisterSubIntrHandler

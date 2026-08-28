@@ -3,7 +3,7 @@
 #include "pspimport.s"
 
 #ifdef F_sceHprm_driver_0000
-	IMPORT_START	"sceHprm_driver",0x00010000
+	IMPORT_START	"sceHprm_driver",0x00090000
 #endif
 #ifdef F_sceHprm_driver_0001
 	IMPORT_FUNC	"sceHprm_driver",0x1C5BC5A0,sceHprmInit
