@@ -1230,3 +1230,9 @@ int gethostname (char *__name, size_t __len) {
 	return __set_errno(EINVAL);
 }
 #endif /* F_gethostname */
+
+#ifdef F_dup
+int dup(int oldfd) {
+	return fcntl(oldfd, F_DUPFD, 0);
+}
+#endif /* F_dup */
