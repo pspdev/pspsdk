@@ -162,7 +162,14 @@ int sceUmdCancelWaitDriveStat(void);
   */
 int sceUmdGetDriveStat(void);
 
-/** 
+/**
+ * Sets the current state of the UMD drive.
+ *
+ * @param status The UMD state to set. One or more of ::pspUmdState.
+ */
+void sceUmdSetDriveStatus(int status);
+
+/**
   * Get the error code associated with a failed event
   *
   * @return < 0 on error, the error code on success
