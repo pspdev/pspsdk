@@ -1,0 +1,9 @@
+<map id="SceKernelThreadKInfo" name="SceKernelThreadKInfo">
+<area shape="rect" id="Node000001" title="Structure to hold the status information for a thread (kernel form) 1.5 form." alt="" coords="153,94,306,120"/>
+<area shape="rect" id="Node000002" href="$structSceKernelSysClock.html" title="64&#45;bit system clock type." alt="" coords="5,5,142,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,37,164,68,208,91,205,96,162,72,106,41"/>
+<area shape="rect" id="Node000003" href="$structSceThreadContext.html" title="Thread context Structues for the thread context taken from florinsasu&#39;s post on the forums." alt="" coords="165,5,294,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,47,232,94,227,94,227,47"/>
+<area shape="rect" id="Node000004" href="$structSceSCContext.html" title=" " alt="" coords="318,5,424,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="342,42,295,72,254,96,251,91,292,68,339,38"/>
+</map>
