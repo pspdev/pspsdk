@@ -95,3 +95,6 @@
 #ifdef F_LoadCoreForKernel_0030
 	IMPORT_FUNC	"LoadCoreForKernel",0xC0584F0C,sceKernelGetModuleList
 #endif
+#ifdef F_LoadCoreForKernel_0031
+	IMPORT_FUNC	"LoadCoreForKernel",0x05D915DB,sceKernelGetModuleIdListForKernel
+#endif
