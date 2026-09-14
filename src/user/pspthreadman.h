@@ -1693,8 +1693,8 @@ int sceKernelStartVTimer(SceUID uid);
  */
 int sceKernelStopVTimer(SceUID uid);
 
-typedef SceUInt (*SceKernelVTimerHandler)(SceUID uid, SceKernelSysClock *, SceKernelSysClock *, void *);
-typedef SceUInt (*SceKernelVTimerHandlerWide)(SceUID uid, SceInt64, SceInt64, void *);
+typedef SceUInt (*SceKernelVTimerHandler)(SceUID uid, SceKernelSysClock *schedule, SceKernelSysClock *current, void *common);
+typedef SceUInt (*SceKernelVTimerHandlerWide)(SceUID uid, SceInt64 schedule, SceInt64 current, void *common);
 
 /**
  * Set the timer handler
