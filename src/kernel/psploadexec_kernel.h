@@ -58,7 +58,7 @@ typedef struct SceKernelLoadExecVSHParam {
  *
  * @return < 0 on some errors. 
 */
-int sceKernelLoadExecBufferPlain(SceSize bufsize, void *buf, struct SceKernelLoadExecParam *param);
+int sceKernelLoadExecBufferPlain(SceSize bufsize, void *buf, SceKernelLoadExecParam *param);
 #endif
 
 /**
