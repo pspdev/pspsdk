@@ -346,7 +346,11 @@ extern "C" {
 /* Color Macro, maps floating point channels (0..1) into one 32-bit value */
 #define GU_COLOR(r,g,b,a)	GU_RGBA((u32)((r) * 255.0f),(u32)((g) * 255.0f),(u32)((b) * 255.0f),(u32)((a) * 255.0f))
 
-typedef void (*GuSwapBuffersCallback)(void** display,void** render);
+/** Callback for signal and finish events */
+typedef void (*GuCallback)(int id);
+
+/** Callback for the framebuffer swap */
+typedef void (*GuSwapBuffersCallback)(void** display, void** render);
 
 /** @addtogroup GU */
 /**@{*/
@@ -513,7 +517,7 @@ int sceGuContinue(void);
   * @param callback - Callback to call when signal index is triggered
   * @return The old callback handler
 **/
-void* sceGuSetCallback(int signal, void (*callback)(int));
+void* sceGuSetCallback(int signal, GuCallback callback);
 
 /**
   * Trigger signal to call code from the command stream

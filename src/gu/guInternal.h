@@ -18,8 +18,6 @@
 
 #define GU_OBJECT_STACK_SIZE 32
 
-typedef void (*GuCallback)(int);
-
 typedef struct
 {
 	GuCallback sig;
