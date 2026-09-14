@@ -37,6 +37,7 @@ AUDIOROUTING_OBJS = sceAudioRouting_0000.o sceAudioRouting_0001.o sceAudioRoutin
 libpspuserincludedir = @PSPSDK_INCLUDEDIR@
 libpspuserinclude_HEADERS =	\
 	pspaudiorouting.h		\
+	pspimpose.h		\
 	pspiofilemgr.h		\
 	pspiofilemgr_devctl.h	\
 	pspiofilemgr_dirent.h	\
