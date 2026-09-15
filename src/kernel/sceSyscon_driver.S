@@ -344,3 +344,9 @@
 #ifdef F_sceSyscon_driver_0113
 	IMPORT_FUNC	"sceSyscon_driver",0xC8D97773,sceSyscon_driver_C8D97773
 #endif
+#ifdef F_sceSyscon_driver_0114
+	IMPORT_FUNC  "sceSyscon_driver", 0x47378317, sceSysconCtrlUsbPower
+#endif
+#ifdef F_sceSyscon_driver_0115
+	IMPORT_FUNC  "sceSyscon_driver", 0xEB11E9DE, sceSysconGetUsbPowerCtrl
+#endif
