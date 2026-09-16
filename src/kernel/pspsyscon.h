@@ -99,13 +99,13 @@ int sceSysconReceiveSetParam(int n, u8 *buf);
  * @param power 1 to turn on, 0 to turn off
  * @return 0 if success, < 0 otherwise
  */
-int sceSysconCtrlUsbPower(s8 power);
+int sceSysconCtrlUsbPower(u8 power);
 
 /**
  * Gets the power status of the USB accessory port (PSP Cam, GPS, etc.).
  * @return 1 if powered on, 0 otherwise
  */
-int sceSysconGetUsbPowerCtrl(void);
+u8 sceSysconGetUsbPowerCtrl(void);
 
 
 /**@}*/
