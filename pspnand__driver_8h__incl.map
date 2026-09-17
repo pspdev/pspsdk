@@ -1,0 +1,10 @@
+<map id="nand/pspnand_driver.h" name="nand/pspnand_driver.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="37,5,188,31"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="5,79,124,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,33,83,67,79,64,102,30"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="71,153,154,178"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="121,30,130,52,138,79,137,111,128,139,123,138,132,110,133,79,125,54,116,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,103,98,138,94,141,70,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="81,226,144,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,179,115,211,110,211,110,179"/>
+</map>

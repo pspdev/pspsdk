@@ -1,0 +1,9 @@
+<map id="debug/pspdebug.h" name="debug/pspdebug.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="45,5,172,31"/>
+<area shape="rect" id="Node000002" href="$psptypes_8h.html" title=" " alt="" coords="5,79,89,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,33,69,69,65,65,96,29"/>
+<area shape="rect" id="Node000004" href="$pspmoduleinfo_8h.html" title=" " alt="" coords="113,79,229,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="121,29,152,65,148,69,117,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="15,153,79,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="50,105,50,137,44,137,44,105"/>
+</map>

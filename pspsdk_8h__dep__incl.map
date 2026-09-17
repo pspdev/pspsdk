@@ -1,0 +1,21 @@
+<map id="sdk/pspsdk.h" name="sdk/pspsdk.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="594,5,692,31"/>
+<area shape="rect" id="Node000002" href="$pspkermit_8h.html" title=" " alt="" coords="5,79,134,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="578,29,146,82,135,83,134,78,145,76,578,24"/>
+<area shape="rect" id="Node000003" href="$fdman_8c.html" title=" " alt="" coords="157,79,272,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="579,33,274,83,273,78,578,28"/>
+<area shape="rect" id="Node000004" href="$glue_8c.html" title=" " alt="" coords="296,79,400,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="580,37,399,81,398,76,578,32"/>
+<area shape="rect" id="Node000005" href="$osal_8c.html" title=" " alt="" coords="424,79,563,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="605,40,520,81,518,76,603,36"/>
+<area shape="rect" id="Node000006" href="$inethelper_8c.html" title=" " alt="" coords="587,79,699,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="646,46,646,79,640,79,640,46"/>
+<area shape="rect" id="Node000007" href="$memory_8c.html" title=" " alt="" coords="724,79,826,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="679,36,754,76,751,81,677,41"/>
+<area shape="rect" id="Node000008" href="$modulemgr__patches_8c.html" title=" " alt="" coords="850,79,1023,105"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="708,33,887,76,886,81,707,38"/>
+<area shape="rect" id="Node000009" href="$query__mod_8c.html" title=" " alt="" coords="1047,79,1166,105"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="708,26,1035,76,1047,78,1046,83,1034,82,707,32"/>
+<area shape="rect" id="Node000010" href="$threadutils_8c.html" title=" " alt="" coords="1190,79,1306,105"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="707,23,917,44,1179,76,1190,78,1189,83,1178,82,917,50,707,28"/>
+</map>
