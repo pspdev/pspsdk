@@ -55,7 +55,7 @@ clock_t sceKernelLibcClock(void);
 /**
   * Get the current time of time and time zone information
   */
-int sceKernelLibcGettimeofday(struct SceKernelTimeval *tp, struct timezone *tzp);
+int sceKernelLibcGettimeofday(SceKernelTimeval *tp, struct timezone *tzp);
 
 /**
   * Write back the data cache to memory

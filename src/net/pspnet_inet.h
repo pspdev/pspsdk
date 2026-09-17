@@ -36,22 +36,22 @@ extern "C" {
  *  This struct is needed because tv_sec size is different from what newlib expect
  *  Newlib expects 64bits for seconds and PSP expects 32bits
  */
-struct SceNetInetTimeval {
+typedef struct SceNetInetTimeval {
     uint32_t tv_sec;
     uint32_t tv_usec;
-};
+} SceNetInetTimeval;
 
-struct SceNetInetPollfd {
+typedef struct SceNetInetPollfd {
     /* file descriptor */
     int fd;
     /* requested events */
     short events;
     /* returned events */
     short revents;
-};
+} SceNetInetPollfd;
 
 int sceNetInetInit(void);
-int sceNetInetSelect(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct SceNetInetTimeval *timeout);
+int sceNetInetSelect(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, SceNetInetTimeval *timeout);
 int sceNetInetTerm(void);
 int sceNetInetGetErrno(void);
 int	sceNetInetAccept(int s, struct sockaddr *addr, socklen_t *addrlen);
@@ -60,7 +60,7 @@ int	sceNetInetConnect(int s, const struct sockaddr *serv_addr, socklen_t addrlen
 int	sceNetInetGetsockopt(int s, int level, int optname, void *optval, socklen_t *optlen);
 int	sceNetInetListen(int s, int backlog);
 size_t	sceNetInetRecv(int s, void *buf, size_t len, int flags);
-size_t	sceNetInetRecvfrom(int s, void *buf, size_t flags, int, struct sockaddr *from, socklen_t *fromlen);
+size_t	sceNetInetRecvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *from, socklen_t *fromlen);
 size_t	sceNetInetSend(int s, const void *buf, size_t len, int flags);
 size_t	sceNetInetSendto(int s, const void *buf, size_t len, int flags, const struct sockaddr *to, socklen_t tolen);
 int	sceNetInetSetsockopt(int s, int level, int optname, const void *optval, socklen_t optlen);
@@ -72,7 +72,7 @@ int	sceNetInetGetpeername(int s, struct sockaddr *name, socklen_t *namelen);
 int	sceNetInetGetsockname(int s, struct sockaddr *name, socklen_t *namelen);
 ssize_t sceNetInetSendmsg(int s, const struct msghdr *msg, int flags);
 ssize_t sceNetInetRecvmsg(int s, struct msghdr *msg, int flags);
-int sceNetInetPoll(struct SceNetInetPollfd *fds, size_t nfds, int timeout);
+int sceNetInetPoll(SceNetInetPollfd *fds, size_t nfds, int timeout);
 
 #ifdef __cplusplus
 }

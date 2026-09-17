@@ -1120,7 +1120,7 @@ int sceKernelCheckCallback(void);
 /* Misc. */
 
 /** Threadman types for ::sceKernelGetThreadmanIdList */
-enum SceKernelIdListType
+typedef enum SceKernelIdListType
 {
 	SCE_KERNEL_TMID_Thread = 1,
 	SCE_KERNEL_TMID_Semaphore = 2,
@@ -1137,7 +1137,7 @@ enum SceKernelIdListType
 	SCE_KERNEL_TMID_DelayThread = 65,
 	SCE_KERNEL_TMID_SuspendThread = 66,
 	SCE_KERNEL_TMID_DormantThread = 67,
-};
+} SceKernelIdListType;
 
 /**
   * Get a list of UIDs from threadman. Allows you to enumerate
@@ -1150,7 +1150,7 @@ enum SceKernelIdListType
   *
   * @return < 0 on error. Either 0 or the same as idcount on success.
   */
-int sceKernelGetThreadmanIdList(enum SceKernelIdListType type, SceUID *readbuf, int readbufsize, int *idcount);
+int sceKernelGetThreadmanIdList(SceKernelIdListType type, SceUID *readbuf, int readbufsize, int *idcount);
 
 /** Structure to contain the system status returned by ::sceKernelReferSystemStatus */
 typedef struct SceKernelSystemStatus {
@@ -1316,9 +1316,9 @@ int sceKernelReferMsgPipeStatus(SceUID uid, SceKernelMppInfo *info);
 
 /* VPL Functions */
 
-struct SceKernelVplOptParam {
+typedef struct SceKernelVplOptParam {
 	SceSize 	size;
-};
+} SceKernelVplOptParam;
 
 /**
  * Create a variable pool
@@ -1331,7 +1331,7 @@ struct SceKernelVplOptParam {
  *
  * @return The UID of the created pool, < 0 on error.
  */
-SceUID sceKernelCreateVpl(const char *name, int part, int attr, unsigned int size, struct SceKernelVplOptParam *opt);
+SceUID sceKernelCreateVpl(const char *name, int part, int attr, unsigned int size, SceKernelVplOptParam *opt);
 
 /**
  * Delete a variable pool
@@ -1419,9 +1419,9 @@ int sceKernelReferVplStatus(SceUID uid, SceKernelVplInfo *info);
 
 /* FPL Functions */
 
-struct SceKernelFplOptParam {
+typedef struct SceKernelFplOptParam {
 	SceSize 	size;
-};
+} SceKernelFplOptParam;
 
 /**
  * Create a fixed pool
@@ -1435,7 +1435,7 @@ struct SceKernelFplOptParam {
  *
  * @return The UID of the created pool, < 0 on error.
  */
-int sceKernelCreateFpl(const char *name, int part, int attr, unsigned int size, unsigned int blocks, struct SceKernelFplOptParam *opt);
+int sceKernelCreateFpl(const char *name, int part, int attr, unsigned int size, unsigned int blocks, SceKernelFplOptParam *opt);
 
 /**
  * Delete a fixed pool
@@ -1594,9 +1594,9 @@ SceInt64 sceKernelGetSystemTimeWide(void);
  */
 unsigned int sceKernelGetSystemTimeLow(void);
 
-struct SceKernelVTimerOptParam {
+typedef struct SceKernelVTimerOptParam {
 	SceSize 	size;
-};
+} SceKernelVTimerOptParam;
 
 /**
  * Create a virtual timer
@@ -1606,7 +1606,7 @@ struct SceKernelVTimerOptParam {
  *
  * @return The VTimer's UID or < 0 on error.
  */
-SceUID sceKernelCreateVTimer(const char *name, struct SceKernelVTimerOptParam *opt);
+SceUID sceKernelCreateVTimer(const char *name, SceKernelVTimerOptParam *opt);
 
 /**
  * Delete a virtual timer
@@ -1693,8 +1693,8 @@ int sceKernelStartVTimer(SceUID uid);
  */
 int sceKernelStopVTimer(SceUID uid);
 
-typedef SceUInt (*SceKernelVTimerHandler)(SceUID uid, SceKernelSysClock *, SceKernelSysClock *, void *);
-typedef SceUInt (*SceKernelVTimerHandlerWide)(SceUID uid, SceInt64, SceInt64, void *);
+typedef SceUInt (*SceKernelVTimerHandler)(SceUID uid, SceKernelSysClock *schedule, SceKernelSysClock *current, void *common);
+typedef SceUInt (*SceKernelVTimerHandlerWide)(SceUID uid, SceInt64 schedule, SceInt64 current, void *common);
 
 /**
  * Set the timer handler
@@ -1763,7 +1763,7 @@ void _sceKernelExitThread(void);
  *
  * @return The type, < 0 on error
  */
-enum SceKernelIdListType sceKernelGetThreadmanIdType(SceUID uid);
+SceKernelIdListType sceKernelGetThreadmanIdType(SceUID uid);
 
 typedef int (*SceKernelThreadEventHandler)(int mask, SceUID thid, void *common);
 
@@ -1823,7 +1823,7 @@ int sceKernelReleaseThreadEventHandler(SceUID uid);
  *
  * @return 0 on success, < 0 on error
  */
-int sceKernelReferThreadEventHandlerStatus(SceUID uid, struct SceKernelThreadEventHandlerInfo *info);
+int sceKernelReferThreadEventHandlerStatus(SceUID uid, SceKernelThreadEventHandlerInfo *info);
 
 /**
  * Get the thread profiler registers.

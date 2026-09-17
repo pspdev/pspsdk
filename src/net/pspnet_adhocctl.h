@@ -30,7 +30,7 @@ struct productStruct
 };
 
 /** Peer info structure */
-struct SceNetAdhocctlPeerInfo
+typedef struct SceNetAdhocctlPeerInfo
 {
 	struct SceNetAdhocctlPeerInfo *next;
 	/** Nickname */
@@ -41,10 +41,10 @@ struct SceNetAdhocctlPeerInfo
 	unsigned char unknown[6];
 	/** Time stamp */
 	unsigned long timestamp;
-};
+} SceNetAdhocctlPeerInfo;
 
 /** Scan info structure */
-struct SceNetAdhocctlScanInfo
+typedef struct SceNetAdhocctlScanInfo
 {
 	struct SceNetAdhocctlScanInfo *next;
 	/** Channel number */
@@ -57,18 +57,18 @@ struct SceNetAdhocctlScanInfo
 	unsigned char unknown[2];
 	/** Unknown */
 	int unknown2;
-};
+} SceNetAdhocctlScanInfo;
 
-struct SceNetAdhocctlGameModeInfo
+typedef struct SceNetAdhocctlGameModeInfo
 {
 	/** Number of peers (including self) */
 	int count;
 	/** MAC addresses of peers (including self) */
 	unsigned char macs[16][6];
-};
+} SceNetAdhocctlGameModeInfo;
 
 /** Params structure */
-struct SceNetAdhocctlParams
+typedef struct SceNetAdhocctlParams
 {
 	/** Channel number */
 	int channel;
@@ -78,7 +78,7 @@ struct SceNetAdhocctlParams
 	char nickname[128];
 	/** The BSSID */
 	unsigned char bssid[6];
-};
+} SceNetAdhocctlParams;
 
 /**
  * Initialise the Adhoc control library
@@ -139,7 +139,7 @@ int sceNetAdhocctlCreate(const char *name);
  *
  * @return 0 on success, < 0 on error.
  */
-int sceNetAdhocctlJoin(struct SceNetAdhocctlScanInfo *scaninfo);
+int sceNetAdhocctlJoin(SceNetAdhocctlScanInfo *scaninfo);
 
 /**
  * Get the adhoc ID
@@ -183,7 +183,7 @@ int sceNetAdhocctlJoinEnterGameMode(const char *name, unsigned char *hostmac, un
  *
  * @return 0 on success, < 0 on error.
  */
-int sceNetAdhocctlGetGameModeInfo(struct SceNetAdhocctlGameModeInfo *gamemodeinfo);
+int sceNetAdhocctlGetGameModeInfo(SceNetAdhocctlGameModeInfo *gamemodeinfo);
 
 /**
  * Exit game mode.
@@ -211,7 +211,7 @@ int sceNetAdhocctlGetPeerList(int *length, void *buf);
  *
  * @return 0 on success, < 0 on error.
  */
-int sceNetAdhocctlGetPeerInfo(unsigned char *mac, int size, struct SceNetAdhocctlPeerInfo *peerinfo);
+int sceNetAdhocctlGetPeerInfo(unsigned char *mac, int size, SceNetAdhocctlPeerInfo *peerinfo);
 
 /**
  * Scan the adhoc channels
@@ -279,7 +279,7 @@ int sceNetAdhocctlGetAddrByName(char *nickname, int *length, void *buf);
  *
  * @return 0 on success, < 0 on error.
  */
-int sceNetAdhocctlGetParameter(struct SceNetAdhocctlParams *params);
+int sceNetAdhocctlGetParameter(SceNetAdhocctlParams *params);
 
 #ifdef __cplusplus
 }

@@ -63,7 +63,7 @@ extern "C" {
 #define PSP_NET_APCTL_INFO_SECURITY_TYPE_WEP	1
 #define PSP_NET_APCTL_INFO_SECURITY_TYPE_WPA	2
 	
-union SceNetApctlInfo 
+typedef union SceNetApctlInfo
 { 
 	char name[64];				/* Name of the config used */ 
 	unsigned char bssid[6];		/* MAC address of the access point */ 
@@ -85,7 +85,7 @@ union SceNetApctlInfo
 	unsigned int startBrowser;	/* Should browser be started */ 
 	unsigned int wifisp;		/* 1 if connection is for Wifi service providers (WISP) */ 
 
-};
+} SceNetApctlInfo;
 	
 typedef void (*sceNetApctlHandler)(int oldState, int newState, int event, int error, void *pArg);
 
@@ -116,7 +116,7 @@ int sceNetApctlTerm(void);
  *
  * @return < 0 on error.
  */
-int sceNetApctlGetInfo(int code, union SceNetApctlInfo *pInfo);
+int sceNetApctlGetInfo(int code, SceNetApctlInfo *pInfo);
 
 /**
  * Add an apctl event handler.
