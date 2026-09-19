@@ -18,10 +18,10 @@
 	IMPORT_FUNC	"sceVshBridge",0xC9626587,vshKernelLoadModuleBufferVSH
 #endif
 #ifdef F_sceVshBridge_0004
-	IMPORT_FUNC	"sceVshBridge",0x5C2983C2,sceVshBridge_5C2983C2
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x5C2983C2,vshChkregCheckRegion,sceVshBridge_5C2983C2
 #endif
 #ifdef F_sceVshBridge_0005
-	IMPORT_FUNC	"sceVshBridge",0xC949966C,sceVshBridge_C949966C
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xC949966C,vshPowerSetWakeupCondition,sceVshBridge_C949966C
 #endif
 #ifdef F_sceVshBridge_0006
 	IMPORT_FUNC	"sceVshBridge",0xC6395C03,vshCtrlReadBufferPositive
@@ -81,43 +81,43 @@
 	IMPORT_FUNC	"sceVshBridge",0x53BFD101,vshMSAudioCheckICV
 #endif
 #ifdef F_sceVshBridge_0025
-	IMPORT_FUNC	"sceVshBridge",0xE174218C,sceVshBridge_E174218C
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xE174218C,vshMSAudioCheckICVn,sceVshBridge_E174218C
 #endif
 #ifdef F_sceVshBridge_0026
 	IMPORT_FUNC	"sceVshBridge",0x7EA32357,vshMSAudioDeauth
 #endif
 #ifdef F_sceVshBridge_0027
-	IMPORT_FUNC	"sceVshBridge",0x14877197,sceVshBridge_14877197
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x14877197,vshMSAudioInitTrack,sceVshBridge_14877197
 #endif
 #ifdef F_sceVshBridge_0028
-	IMPORT_FUNC	"sceVshBridge",0x5BBB35E4,sceVshBridge_5BBB35E4
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x5BBB35E4,vshMSAudioEndTrack,sceVshBridge_5BBB35E4
 #endif
 #ifdef F_sceVshBridge_0029
-	IMPORT_FUNC	"sceVshBridge",0xB27C593F,sceVshBridge_B27C593F
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xB27C593F,vshMSAudioInitFringe,sceVshBridge_B27C593F
 #endif
 #ifdef F_sceVshBridge_0030
-	IMPORT_FUNC	"sceVshBridge",0x0D2CEAD2,sceVshBridge_0D2CEAD2
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x0D2CEAD2,vshMSAudioDecryptFringe,sceVshBridge_0D2CEAD2
 #endif
 #ifdef F_sceVshBridge_0031
-	IMPORT_FUNC	"sceVshBridge",0xD120667D,sceVshBridge_D120667D
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xD120667D,vshMSAudioEndFringe,sceVshBridge_D120667D
 #endif
 #ifdef F_sceVshBridge_0032
-	IMPORT_FUNC	"sceVshBridge",0xD907B6AA,sceVshBridge_D907B6AA
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xD907B6AA,vshMSAudioDecryptTrack,sceVshBridge_D907B6AA
 #endif
 #ifdef F_sceVshBridge_0033
 	IMPORT_FUNC	"sceVshBridge",0xD46D4528,vshMSAudioInvalidateICV
 #endif
 #ifdef F_sceVshBridge_0034
-	IMPORT_FUNC	"sceVshBridge",0x7A63BE73,sceVshBridge_7A63BE73
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x7A63BE73,vshMSAudioClearMACEntry,sceVshBridge_7A63BE73
 #endif
 #ifdef F_sceVshBridge_0035
-	IMPORT_FUNC	"sceVshBridge",0x222A18C4,sceVshBridge_222A18C4
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x222A18C4,vshMSAudioCalculateICVn,sceVshBridge_222A18C4
 #endif
 #ifdef F_sceVshBridge_0036
-	IMPORT_FUNC	"sceVshBridge",0x04310D7C,sceVshBridge_04310D7C
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x04310D7C,vshMSAudioUpdateIBD,sceVshBridge_04310D7C
 #endif
 #ifdef F_sceVshBridge_0037
-	IMPORT_FUNC	"sceVshBridge",0x4E61C72E,sceVshBridge_4E61C72E
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x4E61C72E,vshMSAudioReadMACList,sceVshBridge_4E61C72E
 #endif
 #ifdef F_sceVshBridge_0038
 	IMPORT_FUNC	"sceVshBridge",0xE2DD0A81,vshMSAudioGetInitialEKB
@@ -135,13 +135,13 @@
 	IMPORT_FUNC	"sceVshBridge",0x07EC5661,vshVaudioChRelease
 #endif
 #ifdef F_sceVshBridge_0043
-	IMPORT_FUNC	"sceVshBridge",0x3B3D9F5D,sceVshBridge_3B3D9F5D
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0x3B3D9F5D,vshAudioSRCOutputBlocking,sceVshBridge_3B3D9F5D
 #endif
 #ifdef F_sceVshBridge_0044
-	IMPORT_FUNC	"sceVshBridge",0xB7F233A2,sceVshBridge_B7F233A2
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xB7F233A2,vshAudioSRCChReserve,sceVshBridge_B7F233A2
 #endif
 #ifdef F_sceVshBridge_0045
-	IMPORT_FUNC	"sceVshBridge",0xC58D0939,sceVshBridge_C58D0939
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xC58D0939,vshAudioSRCChRelease,sceVshBridge_C58D0939
 #endif
 #ifdef F_sceVshBridge_0046
 	IMPORT_FUNC	"sceVshBridge",0xCBDA2613,vshMeRpcLock
@@ -171,7 +171,7 @@
 	IMPORT_FUNC	"sceVshBridge",0x04AEC74C,vshKernelLoadExecVSHDiscDebug
 #endif
 #ifdef F_sceVshBridge_0055
-	IMPORT_FUNC	"sceVshBridge",0xF4873F4D,sceVshBridge_F4873F4D
+	IMPORT_FUNC_WITH_ALIAS	"sceVshBridge",0xF4873F4D,vshKernelLoadExecVSHDisk,sceVshBridge_F4873F4D
 #endif
 #ifdef F_sceVshBridge_0056
 	IMPORT_FUNC	"sceVshBridge",0x83528906,vshKernelLoadExecBufferVSHUsbWlan

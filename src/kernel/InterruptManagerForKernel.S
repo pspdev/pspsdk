@@ -39,7 +39,7 @@
 	IMPORT_FUNC	"InterruptManagerForKernel",0x58DD8978,sceKernelRegisterIntrHandler
 #endif
 #ifdef F_InterruptManagerForKernel_0012
-	IMPORT_FUNC	"InterruptManagerForKernel",0x15894D0B,InterruptManagerForKernel_15894D0B
+	IMPORT_FUNC_WITH_ALIAS	"InterruptManagerForKernel",0x15894D0B,sceKernelSetUserModeIntrHanlerAcceptable,InterruptManagerForKernel_15894D0B
 #endif
 #ifdef F_InterruptManagerForKernel_0013
 	IMPORT_FUNC	"InterruptManagerForKernel",0xF987B1F0,sceKernelReleaseIntrHandler
@@ -48,7 +48,7 @@
 	IMPORT_FUNC	"InterruptManagerForKernel",0xB5A15B30,sceKernelSetIntrLevel
 #endif
 #ifdef F_InterruptManagerForKernel_0015
-	IMPORT_FUNC	"InterruptManagerForKernel",0x43A7BBDC,InterruptManagerForKernel_43A7BBDC
+	IMPORT_FUNC_WITH_ALIAS	"InterruptManagerForKernel",0x43A7BBDC,sceKernelSetIntrLogging,InterruptManagerForKernel_43A7BBDC
 #endif
 #ifdef F_InterruptManagerForKernel_0016
 	IMPORT_FUNC	"InterruptManagerForKernel",0x02475AAF,sceKernelIsInterruptOccurred

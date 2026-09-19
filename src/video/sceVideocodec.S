@@ -27,7 +27,7 @@
 	IMPORT_FUNC	"sceVideocodec",0x4F160BF4,sceVideocodecReleaseEDRAM
 #endif
 #ifdef F_sceVideocodec_0007
-	IMPORT_FUNC	"sceVideocodec",0x627B7D42,sceVideocodec_627B7D42
+	IMPORT_FUNC_WITH_ALIAS	"sceVideocodec",0x627B7D42,sceVideocodecGetSEI,sceVideocodec_627B7D42
 #endif
 #ifdef F_sceVideocodec_0008
 	IMPORT_FUNC	"sceVideocodec",0x745A7B7A,sceVideocodecSetMemory

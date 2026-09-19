@@ -6,7 +6,7 @@
 	IMPORT_START	"sceJpeg",0x00090000
 #endif
 #ifdef F_sceJpeg_0001
-	IMPORT_FUNC	"sceJpeg",0x0425B986,sceJpeg_0425B986
+	IMPORT_FUNC_WITH_ALIAS	"sceJpeg",0x0425B986,sceJpegDecompressAllImage,sceJpeg_0425B986
 #endif
 #ifdef F_sceJpeg_0002
 	IMPORT_FUNC	"sceJpeg",0x04B5AE02,sceJpegMJpegCsc
@@ -15,13 +15,13 @@
 	IMPORT_FUNC	"sceJpeg",0x04B93CEF,sceJpegDecodeMJpeg
 #endif
 #ifdef F_sceJpeg_0004
-	IMPORT_FUNC	"sceJpeg",0x227662D7,sceJpeg_227662D7
+	IMPORT_FUNC_WITH_ALIAS	"sceJpeg",0x227662D7,sceJpegDecodeMJpegYCbCrSuccessively,sceJpeg_227662D7
 #endif
 #ifdef F_sceJpeg_0005
 	IMPORT_FUNC	"sceJpeg",0x48B602B7,sceJpegDeleteMJpeg
 #endif
 #ifdef F_sceJpeg_0006
-	IMPORT_FUNC	"sceJpeg",0x64B6F978,sceJpeg_64B6F978
+	IMPORT_FUNC_WITH_ALIAS	"sceJpeg",0x64B6F978,sceJpegDecodeMJpegSuccessively,sceJpeg_64B6F978
 #endif
 #ifdef F_sceJpeg_0007
 	IMPORT_FUNC	"sceJpeg",0x67F0ED84,sceJpegCsc

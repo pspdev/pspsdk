@@ -30,7 +30,7 @@
 	IMPORT_FUNC	"sceUsbCam",0x1D686870,sceUsbCamSetEvLevel
 #endif
 #ifdef F_sceUsbCam_0009
-	IMPORT_FUNC	"sceUsbCam",0x1E958148,sceUsbCam_1E958148
+	IMPORT_FUNC_WITH_ALIAS	"sceUsbCam",0x1E958148,sceUsbCamIoctl,sceUsbCam_1E958148
 #endif
 #ifdef F_sceUsbCam_0010
 	IMPORT_FUNC	"sceUsbCam",0x2BCD50C0,sceUsbCamGetEvLevel
@@ -102,7 +102,7 @@
 	IMPORT_FUNC	"sceUsbCam",0x951BEDF5,sceUsbCamSetReverseMode
 #endif
 #ifdef F_sceUsbCam_0033
-	IMPORT_FUNC	"sceUsbCam",0x95F8901E,sceUsbCam_95F8901E
+	IMPORT_FUNC_WITH_ALIAS	"sceUsbCam",0x95F8901E,sceUsbCamGetFwUpdateResult,sceUsbCam_95F8901E
 #endif
 #ifdef F_sceUsbCam_0034
 	IMPORT_FUNC	"sceUsbCam",0x994471E0,sceUsbCamGetImageEffectMode
@@ -129,7 +129,7 @@
 	IMPORT_FUNC	"sceUsbCam",0xC484901F,sceUsbCamSetZoom
 #endif
 #ifdef F_sceUsbCam_0042
-	IMPORT_FUNC	"sceUsbCam",0xC72ED6D3,sceUsbCam_C72ED6D3
+	IMPORT_FUNC_WITH_ALIAS	"sceUsbCam",0xC72ED6D3,sceUsbCamEnterFwUpdateMode,sceUsbCam_C72ED6D3
 #endif
 #ifdef F_sceUsbCam_0043
 	IMPORT_FUNC	"sceUsbCam",0xCFE9E999,sceUsbCamSetupVideoEx
@@ -144,7 +144,7 @@
 	IMPORT_FUNC	"sceUsbCam",0xD5279339,sceUsbCamGetReverseMode
 #endif
 #ifdef F_sceUsbCam_0047
-	IMPORT_FUNC	"sceUsbCam",0xD865997B,sceUsbCam_D865997B
+	IMPORT_FUNC_WITH_ALIAS	"sceUsbCam",0xD865997B,sceUsbCamSetResolution,sceUsbCam_D865997B
 #endif
 #ifdef F_sceUsbCam_0048
 	IMPORT_FUNC	"sceUsbCam",0xDF9D0C92,sceUsbCamGetReadVideoFrameSize

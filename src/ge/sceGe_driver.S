@@ -69,8 +69,8 @@
 	IMPORT_FUNC	"sceGe_driver",0x05DB22CE,sceGeUnsetCallback
 #endif
 #ifdef F_sceGe_driver_0022
-	IMPORT_FUNC	"sceGe_driver",0x9DA4A75F,sceGe_driver_9DA4A75F
+	IMPORT_FUNC_WITH_ALIAS	"sceGe_driver",0x9DA4A75F,sceGeSetGeometryClock,sceGe_driver_9DA4A75F
 #endif
 #ifdef F_sceGe_driver_0023
-	IMPORT_FUNC	"sceGe_driver",0x114E1745,sceGe_driver_114E1745
+	IMPORT_FUNC_WITH_ALIAS	"sceGe_driver",0x114E1745,sceGeEdramSetRefreshParam,sceGe_driver_114E1745
 #endif

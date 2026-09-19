@@ -42,25 +42,25 @@
 	IMPORT_FUNC	"KDebugForKernel",0x7D1C74F0,sceKernelDebugEchoSet
 #endif
 #ifdef F_KDebugForKernel_0013
-	IMPORT_FUNC	"KDebugForKernel",0x24C32559,KDebugForKernel_24C32559
+	IMPORT_FUNC_WITH_ALIAS	"KDebugForKernel",0x24C32559,sceKernelDipsw,KDebugForKernel_24C32559
 #endif
 #ifdef F_KDebugForKernel_0014
 	IMPORT_FUNC	"KDebugForKernel",0xD636B827,sceKernelRemoveByDebugSection
 #endif
 #ifdef F_KDebugForKernel_0015
-	IMPORT_FUNC	"KDebugForKernel",0x5282DD5E,KDebugForKernel_5282DD5E
+	IMPORT_FUNC_WITH_ALIAS	"KDebugForKernel",0x5282DD5E,sceKernelDipswSet,KDebugForKernel_5282DD5E
 #endif
 #ifdef F_KDebugForKernel_0016
-	IMPORT_FUNC	"KDebugForKernel",0x9F8703E4,KDebugForKernel_9F8703E4
+	IMPORT_FUNC_WITH_ALIAS	"KDebugForKernel",0x9F8703E4,sceKernelDipswCpTime,KDebugForKernel_9F8703E4
 #endif
 #ifdef F_KDebugForKernel_0017
-	IMPORT_FUNC	"KDebugForKernel",0x333DCEC7,KDebugForKernel_333DCEC7
+	IMPORT_FUNC_WITH_ALIAS	"KDebugForKernel",0x333DCEC7,sceKernelSm1RegisterOperations,KDebugForKernel_333DCEC7
 #endif
 #ifdef F_KDebugForKernel_0018
-	IMPORT_FUNC	"KDebugForKernel",0xE892D9A1,KDebugForKernel_E892D9A1
+	IMPORT_FUNC_WITH_ALIAS	"KDebugForKernel",0xE892D9A1,sceKernelSm1ReferOperations,KDebugForKernel_E892D9A1
 #endif
 #ifdef F_KDebugForKernel_0019
-	IMPORT_FUNC	"KDebugForKernel",0xA126F497,KDebugForKernel_A126F497
+	IMPORT_FUNC_WITH_ALIAS	"KDebugForKernel",0xA126F497,sceKernelDeci2pRegisterOperations,KDebugForKernel_A126F497
 #endif
 #ifdef F_KDebugForKernel_0020
 	IMPORT_FUNC	"KDebugForKernel",0xB7251823,KDebugForKernel_B7251823
