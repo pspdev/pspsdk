@@ -12,7 +12,7 @@
 	IMPORT_FUNC	"sceRtc",0x3F7AD767,sceRtcGetCurrentTick
 #endif
 #ifdef F_sceRtc_0003
-	IMPORT_FUNC	"sceRtc",0x029CA3B3,sceRtc_029CA3B3
+	IMPORT_FUNC	"sceRtc",0x029CA3B3,sceRtcGetAccumlativeTime
 #endif
 #ifdef F_sceRtc_0004
 	IMPORT_FUNC	"sceRtc",0x4CFA57B0,sceRtcGetCurrentClock

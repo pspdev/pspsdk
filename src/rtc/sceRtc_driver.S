@@ -12,7 +12,7 @@
 	IMPORT_FUNC	"sceRtc_driver",0x3F7AD767,sceRtcGetCurrentTick
 #endif
 #ifdef F_sceRtc_driver_0003
-	IMPORT_FUNC	"sceRtc_driver",0x029CA3B3,sceRtc_029CA3B3
+	IMPORT_FUNC	"sceRtc_driver",0x029CA3B3,sceRtcGetAccumlativeTime
 #endif
 #ifdef F_sceRtc_driver_0004
 	IMPORT_FUNC	"sceRtc_driver",0x4CFA57B0,sceRtcGetCurrentClock
@@ -114,7 +114,7 @@
 	IMPORT_FUNC	"sceRtc_driver",0x011F03C1,sceRtcGetAccumulativeTime
 #endif
 #ifdef F_sceRtc_driver_0037
-	IMPORT_FUNC	"sceRtc_driver",0x17C26C00,sceRtc_driver_17C26C00
+	IMPORT_FUNC	"sceRtc_driver",0x17C26C00,sceRtcSetCurrentSecureTick
 #endif
 #ifdef F_sceRtc_driver_0038
 	IMPORT_FUNC	"sceRtc_driver",0x1909C99B,sceRtcSetTime64_t
@@ -129,7 +129,7 @@
 	IMPORT_FUNC	"sceRtc_driver",0x62685E98,sceRtcGetLastAdjustedTime
 #endif
 #ifdef F_sceRtc_driver_0042
-	IMPORT_FUNC	"sceRtc_driver",0x6A676D2D,sceRtc_driver_6A676D2D
+	IMPORT_FUNC	"sceRtc_driver",0x6A676D2D,sceRtcUnregisterCallback
 #endif
 #ifdef F_sceRtc_driver_0043
 	IMPORT_FUNC	"sceRtc_driver",0x759937C5,sceRtcSetConf
@@ -138,7 +138,7 @@
 	IMPORT_FUNC	"sceRtc_driver",0x7D1FBED3,sceRtcSetAlarmTick
 #endif
 #ifdef F_sceRtc_driver_0045
-	IMPORT_FUNC	"sceRtc_driver",0x81FCDA34,sceRtc_driver_81FCDA34
+	IMPORT_FUNC	"sceRtc_driver",0x81FCDA34,sceRtcIsAlarmed
 #endif
 #ifdef F_sceRtc_driver_0046
 	IMPORT_FUNC	"sceRtc_driver",0x912BEE56,sceRtcInit
@@ -150,13 +150,13 @@
 	IMPORT_FUNC	"sceRtc_driver",0x9CC2797E,sceRtcSuspend
 #endif
 #ifdef F_sceRtc_driver_0049
-	IMPORT_FUNC	"sceRtc_driver",0xB44BDAED,sceRtc_driver_B44BDAED
+	IMPORT_FUNC	"sceRtc_driver",0xB44BDAED,sceRtcGetCurrentSecureTick
 #endif
 #ifdef F_sceRtc_driver_0050
 	IMPORT_FUNC	"sceRtc_driver",0xC2DDBEB5,sceRtcGetAlarmTick
 #endif
 #ifdef F_sceRtc_driver_0051
-	IMPORT_FUNC	"sceRtc_driver",0xC499AF2F,sceRtc_driver_C499AF2F
+	IMPORT_FUNC	"sceRtc_driver",0xC499AF2F,sceRtcReset
 #endif
 #ifdef F_sceRtc_driver_0052
 	IMPORT_FUNC	"sceRtc_driver",0xCE27DE2F,sceRtcEnd
@@ -168,6 +168,6 @@
 	IMPORT_FUNC	"sceRtc_driver",0xF0B5571C,sceRtcSynchronize
 #endif
 #ifdef F_sceRtc_driver_0055
-	IMPORT_FUNC	"sceRtc_driver",0xFB3B18CD,sceRtc_driver_FB3B18CD
+	IMPORT_FUNC	"sceRtc_driver",0xFB3B18CD,sceRtcRegisterCallback
 #endif
 

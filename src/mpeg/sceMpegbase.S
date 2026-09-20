@@ -18,7 +18,7 @@
 	IMPORT_FUNC "sceMpegbase",0x0530BE4E,sceMpegbase_0530BE4E
 #endif
 #ifdef F_sceMpegbase_0005
-	IMPORT_FUNC "sceMpegbase",0x304882E1,sceMpegbase_304882E1
+	IMPORT_FUNC "sceMpegbase",0x304882E1,sceMpegBaseCscAvcRange
 #endif
 #ifdef F_sceMpegbase_0006
 	IMPORT_FUNC "sceMpegbase",0x7AC0321A,sceMpegBaseYCrCbCopy
@@ -30,5 +30,5 @@
 	IMPORT_FUNC "sceMpegbase",0xAC9E717E,sceMpegbase_AC9E717E
 #endif
 #ifdef F_sceMpegbase_0009
-	IMPORT_FUNC "sceMpegbase",0xBEA18F91,sceMpegbase_BEA18F91
+	IMPORT_FUNC "sceMpegbase",0xBEA18F91,sceMpegBasePESpacketCopy
 #endif

@@ -42,10 +42,10 @@
 	IMPORT_FUNC	"sceHprm_driver",0x7B038374,sceHprmGetInternalState
 #endif
 #ifdef F_sceHprm_driver_0013
-	IMPORT_FUNC	"sceHprm_driver",0xF04591FA,sceHprm_driver_F04591FA
+	IMPORT_FUNC	"sceHprm_driver",0xF04591FA,sceHprmSetIdleCancelKey
 #endif
 #ifdef F_sceHprm_driver_0014
-	IMPORT_FUNC	"sceHprm_driver",0x971AE8FB,sceHprm_driver_971AE8FB
+	IMPORT_FUNC	"sceHprm_driver",0x971AE8FB,sceHprmGetIdleCancelKey
 #endif
 #ifdef F_sceHprm_driver_0015
 	IMPORT_FUNC	"sceHprm_driver",0xBAD0828E,sceHprmGetModel
