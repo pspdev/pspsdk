@@ -162,7 +162,7 @@ macro(create_pbp_file)
       )
   endif()
   
-  if (NOT ${ARG_MEMSIZE})
+  if (${ARG_MEMSIZE} STREQUAL "NULL")
     set(ARG_MEMSIZE "2")
   endif()
 
