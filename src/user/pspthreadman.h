@@ -53,8 +53,6 @@ enum PspThreadAttributes
 	PSP_THREAD_ATTR_USBWLAN = 0xa0000000,
 	/** Thread is part of the VSH API. */
 	PSP_THREAD_ATTR_VSH = 0xc0000000,
-	/** Allow using scratchpad memory for a thread, NOT USABLE ON V1.0 */
-	PSP_THREAD_ATTR_SCRATCH_SRAM = 0x00008000,
 	/** Disables filling the stack with 0xFF on creation */
 	PSP_THREAD_ATTR_NO_FILLSTACK = 0x00100000,
 	/** Clear the stack when the thread is deleted */
