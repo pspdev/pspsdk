@@ -54,9 +54,9 @@ int sceIdStorageCreateLeaf(unsigned int leafid);
 
 int sceIdStorageCreateAtomicLeaves(u16 *leaves, int n);
 
-int sceIdStorageFormat();
+int sceIdStorageFormat(void);
 
-int sceIdStorageUnformat();
+int sceIdStorageUnformat(void);
 
 /**@}*/
 

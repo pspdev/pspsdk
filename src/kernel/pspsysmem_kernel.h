@@ -290,7 +290,7 @@ SceGameInfo *sceKernelGetGameInfo();
  *
  * @attention Needs to link to `pspsysmem_kernel` stub.
  */
-int sceKernelGetSystemStatus();
+int sceKernelGetSystemStatus(void);
 
 /**
  * Get a UID control block
