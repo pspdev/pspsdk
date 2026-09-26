@@ -96,12 +96,12 @@ typedef struct SceMpegAvcMode
  *
  * @return 0 if success.
  */
-SceInt32 sceMpegInit();
+SceInt32 sceMpegInit(void);
 
 /**
  * sceMpegFinish
  */
-SceVoid sceMpegFinish();
+SceVoid sceMpegFinish(void);
 
 /**
  * sceMpegRingbufferQueryMemSize

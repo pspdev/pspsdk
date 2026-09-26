@@ -24,7 +24,7 @@
 	IMPORT_FUNC	"scePower_driver",0x442BFBAC,scePower_driver_442BFBAC
 #endif
 #ifdef F_scePower_driver_0007
-	IMPORT_FUNC	"scePower_driver",0xE8685403,scePower_driver_E8685403
+	IMPORT_FUNC	"scePower_driver",0xE8685403,scePowerGetLedOffTiming
 #endif
 #ifdef F_scePower_driver_0008
 	IMPORT_FUNC	"scePower_driver",0xEFD3C963,scePowerTick
@@ -51,10 +51,10 @@
 	IMPORT_FUNC	"scePower_driver",0xB999184C,scePowerGetLowBatteryCapacity
 #endif
 #ifdef F_scePower_driver_0016
-	IMPORT_FUNC	"scePower_driver",0x166922EC,scePower_driver_166922EC
+	IMPORT_FUNC	"scePower_driver",0x166922EC,scePowerBatteryForbidCharging
 #endif
 #ifdef F_scePower_driver_0017
-	IMPORT_FUNC	"scePower_driver",0xDD3D4DAC,scePower_driver_DD3D4DAC
+	IMPORT_FUNC	"scePower_driver",0xDD3D4DAC,scePowerBatteryPermitCharging
 #endif
 #ifdef F_scePower_driver_0018
 	IMPORT_FUNC	"scePower_driver",0x87440F5E,scePowerIsPowerOnline
@@ -135,7 +135,7 @@
 	IMPORT_FUNC	"scePower_driver",0x0074EF9B,scePowerGetResumeCount
 #endif
 #ifdef F_scePower_driver_0044
-	IMPORT_FUNC	"scePower_driver",0xF535D928,scePower_driver_F535D928
+	IMPORT_FUNC	"scePower_driver",0xF535D928,scePowerSetWakeupCondition
 #endif
 #ifdef F_scePower_driver_0045
 	IMPORT_FUNC	"scePower_driver",0x04B7766E,scePowerRegisterCallback
@@ -147,7 +147,7 @@
 	IMPORT_FUNC	"scePower_driver",0xDB9D28DD,scePowerUnregitserCallback
 #endif
 #ifdef F_scePower_driver_0048
-	IMPORT_FUNC	"scePower_driver",0xD24E6BEB,scePower_driver_D24E6BEB
+	IMPORT_FUNC	"scePower_driver",0xD24E6BEB,scePowerLimitScCpuClock
 #endif
 #ifdef F_scePower_driver_0049
 	IMPORT_FUNC	"scePower_driver",0x35B7662E,scePowerGetSectionDescriptionEntry
@@ -183,10 +183,10 @@
 	IMPORT_FUNC	"scePower_driver",0x737486F2,scePowerSetClockFrequency
 #endif
 #ifdef F_scePower_driver_0060
-	IMPORT_FUNC	"scePower_driver",0xE0B7A95D,scePower_driver_E0B7A95D
+	IMPORT_FUNC	"scePower_driver",0xE0B7A95D,scePowerSetGeEdramRefreshMode
 #endif
 #ifdef F_scePower_driver_0061
-	IMPORT_FUNC	"scePower_driver",0xC23AC778,scePower_driver_C23AC778
+	IMPORT_FUNC	"scePower_driver",0xC23AC778,scePowerGetGeEdramRefreshMode
 #endif
 #ifdef F_scePower_driver_0062
 	IMPORT_FUNC	"scePower_driver",0x23C31FFE,scePowerVolatileMemLock

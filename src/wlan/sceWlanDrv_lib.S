@@ -12,7 +12,7 @@
 	IMPORT_FUNC	"sceWlanDrv_lib",0xC9A8CAB7,sceWlanDevDetach
 #endif
 #ifdef F_sceWlanDrv_lib_0003
-	IMPORT_FUNC	"sceWlanDrv_lib",0x19E51F54,sceWlanDrv_lib_19E51F54
+	IMPORT_FUNC	"sceWlanDrv_lib",0x19E51F54,sceWlanDevGetMacAddr
 #endif
 #ifdef F_sceWlanDrv_lib_0004
 	IMPORT_FUNC	"sceWlanDrv_lib",0x5E7C8D94,sceWlanDevIsGameMode
@@ -48,7 +48,7 @@
 	IMPORT_FUNC	"sceWlanDrv_lib",0x56F467CA,sceWlanDrv_lib_56F467CA
 #endif
 #ifdef F_sceWlanDrv_lib_0015
-	IMPORT_FUNC	"sceWlanDrv_lib",0xFE8A0B46,sceWlanDrv_lib_FE8A0B46
+	IMPORT_FUNC	"sceWlanDrv_lib",0xFE8A0B46,sceWlanSetWakeUp
 #endif
 #ifdef F_sceWlanDrv_lib_0016
 	IMPORT_FUNC	"sceWlanDrv_lib",0x40B0AA4A,sceWlanDrv_lib_40B0AA4A

@@ -54,16 +54,16 @@
 	IMPORT_FUNC	"sceUtility",0x8874DBE0,sceUtilitySavedataGetStatus
 #endif
 #ifdef F_sceUtility_0017
-	IMPORT_FUNC	"sceUtility",0x2995D020,sceUtility_2995D020
+	IMPORT_FUNC	"sceUtility",0x2995D020,sceUtilitySavedataErrInitStart
 #endif
 #ifdef F_sceUtility_0018
-	IMPORT_FUNC	"sceUtility",0xB62A4061,sceUtility_B62A4061
+	IMPORT_FUNC	"sceUtility",0xB62A4061,sceUtilitySavedataErrShutdownStart
 #endif
 #ifdef F_sceUtility_0019
-	IMPORT_FUNC	"sceUtility",0xED0FAD38,sceUtility_ED0FAD38
+	IMPORT_FUNC	"sceUtility",0xED0FAD38,sceUtilitySavedataErrUpdate
 #endif
 #ifdef F_sceUtility_0020
-	IMPORT_FUNC	"sceUtility",0x88BC7406,sceUtility_88BC7406
+	IMPORT_FUNC	"sceUtility",0x88BC7406,sceUtilitySavedataErrGetStatus
 #endif
 #ifdef F_sceUtility_0021
 	IMPORT_FUNC	"sceUtility",0x2AD8E239,sceUtilityMsgDialogInitStart

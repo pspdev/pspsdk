@@ -45,7 +45,7 @@
 	IMPORT_FUNC	"SysclibForKernel",0x6A7900E1,strtoul
 #endif
 #ifdef F_SysclibForKernel_0014
-	IMPORT_FUNC	"SysclibForKernel",0x8AF6B8F8,SysclibForKernel_8AF6B8F8
+	IMPORT_FUNC	"SysclibForKernel",0x8AF6B8F8,pseudo_fcvt
 #endif
 #ifdef F_SysclibForKernel_0015
 	IMPORT_FUNC	"SysclibForKernel",0xDF17F4A2,SysclibForKernel___udivmoddi4

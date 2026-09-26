@@ -35,7 +35,7 @@ enum pspRtcCheckValidErrors {
  *
  * @return # of ticks per second
  */
-u32 sceRtcGetTickResolution();
+u32 sceRtcGetTickResolution(void);
 
 /**
  * Get current tick count

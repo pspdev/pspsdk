@@ -6,34 +6,34 @@
 	IMPORT_START	"scePaf",0x00090000
 #endif
 #ifdef F_scePaf_0001
-	IMPORT_FUNC	"scePaf",0xC9831AFF,scePaf_C9831AFF
+	IMPORT_FUNC	"scePaf",0xC9831AFF,sce_paf_private_printf
 #endif
 #ifdef F_scePaf_0002
-	IMPORT_FUNC	"scePaf",0xBFE9E90B,scePaf_BFE9E90B
+	IMPORT_FUNC	"scePaf",0xBFE9E90B,sce_paf_private_wprintf
 #endif
 #ifdef F_scePaf_0003
 	IMPORT_FUNC	"scePaf",0x5FAC9869,sce_paf_private_malloc
 #endif
 #ifdef F_scePaf_0004
-	IMPORT_FUNC	"scePaf",0xFCB4E053,scePaf_FCB4E053
+	IMPORT_FUNC	"scePaf",0xFCB4E053,sce_paf_private_malloc2
 #endif
 #ifdef F_scePaf_0005
-	IMPORT_FUNC	"scePaf",0x26DE971C,scePaf_26DE971C
+	IMPORT_FUNC	"scePaf",0x26DE971C,sce_paf_private_mtrim
 #endif
 #ifdef F_scePaf_0006
-	IMPORT_FUNC	"scePaf",0x613E9AA2,scePaf_613E9AA2
+	IMPORT_FUNC	"scePaf",0x613E9AA2,sce_paf_private_mtrim2
 #endif
 #ifdef F_scePaf_0007
-	IMPORT_FUNC	"scePaf",0x40C95283,scePaf_40C95283
+	IMPORT_FUNC	"scePaf",0x40C95283,sce_paf_private_check_leak
 #endif
 #ifdef F_scePaf_0008
-	IMPORT_FUNC	"scePaf",0xB61E88F2,scePaf_B61E88F2
+	IMPORT_FUNC	"scePaf",0xB61E88F2,sce_paf_private_check_leak2
 #endif
 #ifdef F_scePaf_0009
 	IMPORT_FUNC	"scePaf",0x545FE2DA,sce_paf_private_free
 #endif
 #ifdef F_scePaf_0010
-	IMPORT_FUNC	"scePaf",0x7EC15225,scePaf_7EC15225
+	IMPORT_FUNC	"scePaf",0x7EC15225,sce_paf_private_free2
 #endif
 #ifdef F_scePaf_0011
 	IMPORT_FUNC	"scePaf",0x60DECA7E,sce_paf_private___assert
@@ -138,13 +138,13 @@
 	IMPORT_FUNC	"scePaf",0x84BD418F,sce_paf_private_ftell
 #endif
 #ifdef F_scePaf_0045
-	IMPORT_FUNC	"scePaf",0x902515FB,scePaf_902515FB
+	IMPORT_FUNC	"scePaf",0x902515FB,sce_paf_private_look_ctype_table
 #endif
 #ifdef F_scePaf_0046
 	IMPORT_FUNC	"scePaf",0x3586BE05,sce_paf_private_memalign
 #endif
 #ifdef F_scePaf_0047
-	IMPORT_FUNC	"scePaf",0x2FA0EDDC,scePaf_2FA0EDDC
+	IMPORT_FUNC	"scePaf",0x2FA0EDDC,sce_paf_private_memalign2
 #endif
 #ifdef F_scePaf_0048
 	IMPORT_FUNC	"scePaf",0x3FBD9639,sce_paf_private_memcmp
@@ -258,7 +258,7 @@
 	IMPORT_FUNC	"scePaf",0x72514A05,scePaf_72514A05
 #endif
 #ifdef F_scePaf_0085
-	IMPORT_FUNC	"scePaf",0xA69BABE3,scePaf_A69BABE3
+	IMPORT_FUNC	"scePaf",0xA69BABE3,PhiPostSystemEvent
 #endif
 #ifdef F_scePaf_0086
 	IMPORT_FUNC	"scePaf",0x9430557B,scePaf_9430557B
@@ -1461,40 +1461,40 @@
 	IMPORT_FUNC	"scePaf",0xB09203B0,scePaf_B09203B0
 #endif
 #ifdef F_scePaf_0486
-	IMPORT_FUNC	"scePaf",0x58C69BDA,scePaf_58C69BDA
+	IMPORT_FUNC	"scePaf",0x58C69BDA,PAF_Resource_ResolveRefWString
 #endif
 #ifdef F_scePaf_0487
-	IMPORT_FUNC	"scePaf",0xE32B3558,scePaf_E32B3558
+	IMPORT_FUNC	"scePaf",0xE32B3558,PAF_Resource_DOMGetNodeData
 #endif
 #ifdef F_scePaf_0488
-	IMPORT_FUNC	"scePaf",0x86237EB3,scePaf_86237EB3
+	IMPORT_FUNC	"scePaf",0x86237EB3,PAF_Resource_DOMGetNodeChildByPos
 #endif
 #ifdef F_scePaf_0489
-	IMPORT_FUNC	"scePaf",0xBEF9FF15,scePaf_BEF9FF15
+	IMPORT_FUNC	"scePaf",0xBEF9FF15,PAF_Resource_DOMGetNodeChildByID
 #endif
 #ifdef F_scePaf_0490
-	IMPORT_FUNC	"scePaf",0xFE4D4112,scePaf_FE4D4112
+	IMPORT_FUNC	"scePaf",0xFE4D4112,PAF_Resource_DOMGetNodeFirstChild
 #endif
 #ifdef F_scePaf_0491
-	IMPORT_FUNC	"scePaf",0xDAA609BB,scePaf_DAA609BB
+	IMPORT_FUNC	"scePaf",0xDAA609BB,PAF_Resource_DOMGetNodeID
 #endif
 #ifdef F_scePaf_0492
-	IMPORT_FUNC	"scePaf",0x69CA1A2D,scePaf_69CA1A2D
+	IMPORT_FUNC	"scePaf",0x69CA1A2D,PAF_Resource_DOMGetNodeNext
 #endif
 #ifdef F_scePaf_0493
-	IMPORT_FUNC	"scePaf",0xD3F5956D,scePaf_D3F5956D
+	IMPORT_FUNC	"scePaf",0xD3F5956D,PAF_Resource_DOMGetNodeTable
 #endif
 #ifdef F_scePaf_0494
-	IMPORT_FUNC	"scePaf",0x602EB0CE,scePaf_602EB0CE
+	IMPORT_FUNC	"scePaf",0x602EB0CE,PAF_Resource_GetPageNodeByID
 #endif
 #ifdef F_scePaf_0495
-	IMPORT_FUNC	"scePaf",0x6A14BB04,scePaf_6A14BB04
+	IMPORT_FUNC	"scePaf",0x6A14BB04,PAF_Resource_GetWString
 #endif
 #ifdef F_scePaf_0496
-	IMPORT_FUNC	"scePaf",0x95960A88,scePaf_95960A88
+	IMPORT_FUNC	"scePaf",0x95960A88,PAF_Resource_ResolveRefString
 #endif
 #ifdef F_scePaf_0497
-	IMPORT_FUNC	"scePaf",0xD6CD39AF,scePaf_D6CD39AF
+	IMPORT_FUNC	"scePaf",0xD6CD39AF,PAF_Resource_DOMGetNodeType
 #endif
 #ifdef F_scePaf_0498
 	IMPORT_FUNC	"scePaf",0x79E57CAF,scePaf_79E57CAF
@@ -1803,13 +1803,13 @@
 	IMPORT_FUNC	"scePaf",0xFBC76D05,sce_png_read
 #endif
 #ifdef F_scePaf_0600
-	IMPORT_FUNC	"scePaf",0xC6A8BEE2,scePaf_C6A8BEE2
+	IMPORT_FUNC	"scePaf",0xC6A8BEE2,sceCccDecodeUTF8
 #endif
 #ifdef F_scePaf_0601
-	IMPORT_FUNC	"scePaf",0x8406F469,scePaf_8406F469
+	IMPORT_FUNC	"scePaf",0x8406F469,sceCccEncodeUTF16
 #endif
 #ifdef F_scePaf_0602
-	IMPORT_FUNC	"scePaf",0xB4D1CBBF,scePaf_B4D1CBBF
+	IMPORT_FUNC	"scePaf",0xB4D1CBBF,sceCccSetTable
 #endif
 #ifdef F_scePaf_0603
 	IMPORT_FUNC	"scePaf",0x8D3EAEA3,scePaf_8D3EAEA3
@@ -1818,7 +1818,7 @@
 	IMPORT_FUNC	"scePaf",0xC8E7B03F,scePaf_C8E7B03F
 #endif
 #ifdef F_scePaf_0605
-	IMPORT_FUNC	"scePaf",0xD4DAB044,scePaf_D4DAB044
+	IMPORT_FUNC	"scePaf",0xD4DAB044,sceCccSetCTable
 #endif
 #ifdef F_scePaf_0606
 	IMPORT_FUNC	"scePaf",0x15939BB8,scePaf_15939BB8
@@ -1827,19 +1827,19 @@
 	IMPORT_FUNC	"scePaf",0x8D736C8F,scePaf_8D736C8F
 #endif
 #ifdef F_scePaf_0608
-	IMPORT_FUNC	"scePaf",0xE0CF8091,scePaf_E0CF8091
+	IMPORT_FUNC	"scePaf",0xE0CF8091,sceCccDecodeUTF16
 #endif
 #ifdef F_scePaf_0609
-	IMPORT_FUNC	"scePaf",0xBEB47224,scePaf_BEB47224
+	IMPORT_FUNC	"scePaf",0xBEB47224,sceCccSJIStoUTF16
 #endif
 #ifdef F_scePaf_0610
-	IMPORT_FUNC	"scePaf",0xD9392CCB,scePaf_D9392CCB
+	IMPORT_FUNC	"scePaf",0xD9392CCB,sceCccStrlenSJIS
 #endif
 #ifdef F_scePaf_0611
-	IMPORT_FUNC	"scePaf",0xF1B73D12,scePaf_F1B73D12
+	IMPORT_FUNC	"scePaf",0xF1B73D12,sceCccUTF16toSJIS
 #endif
 #ifdef F_scePaf_0612
-	IMPORT_FUNC	"scePaf",0x00D1378F,scePaf_00D1378F
+	IMPORT_FUNC	"scePaf",0x00D1378F,sceCccUTF8toUTF16
 #endif
 #ifdef F_scePaf_0613
 	IMPORT_FUNC	"scePaf",0xD6CDB3BB,scePaf_D6CDB3BB
@@ -1854,61 +1854,61 @@
 	IMPORT_FUNC	"scePaf",0xB9383A25,scePaf_B9383A25
 #endif
 #ifdef F_scePaf_0617
-	IMPORT_FUNC	"scePaf",0xB7D3C112,scePaf_B7D3C112
+	IMPORT_FUNC	"scePaf",0xB7D3C112,sceCccStrlenUTF8
 #endif
 #ifdef F_scePaf_0618
-	IMPORT_FUNC	"scePaf",0x4BDEB2A8,scePaf_4BDEB2A8
+	IMPORT_FUNC	"scePaf",0x4BDEB2A8,sceCccStrlenUTF16
 #endif
 #ifdef F_scePaf_0619
-	IMPORT_FUNC	"scePaf",0x41B724A5,scePaf_41B724A5
+	IMPORT_FUNC	"scePaf",0x41B724A5,sceCccUTF16toUTF8
 #endif
 #ifdef F_scePaf_0620
-	IMPORT_FUNC	"scePaf",0xD5F3BAB1,scePaf_D5F3BAB1
+	IMPORT_FUNC	"scePaf",0xD5F3BAB1,InputDevice_PspPad_SetModifierKey
 #endif
 #ifdef F_scePaf_0621
-	IMPORT_FUNC	"scePaf",0xEA39A7C1,scePaf_EA39A7C1
+	IMPORT_FUNC	"scePaf",0xEA39A7C1,InputDevice_PspPad_GetKeyAssign
 #endif
 #ifdef F_scePaf_0622
-	IMPORT_FUNC	"scePaf",0x6B1E90C7,scePaf_6B1E90C7
+	IMPORT_FUNC	"scePaf",0x6B1E90C7,InputDevice_PspPad_Lock
 #endif
 #ifdef F_scePaf_0623
-	IMPORT_FUNC	"scePaf",0x66907719,scePaf_66907719
+	IMPORT_FUNC	"scePaf",0x66907719,InputDevice_PspPad_Unlock
 #endif
 #ifdef F_scePaf_0624
-	IMPORT_FUNC	"scePaf",0xAAD0EE78,scePaf_AAD0EE78
+	IMPORT_FUNC	"scePaf",0xAAD0EE78,InputDevice_PspPad_SetDigitalHandler
 #endif
 #ifdef F_scePaf_0625
-	IMPORT_FUNC	"scePaf",0xE69C3B1B,scePaf_E69C3B1B
+	IMPORT_FUNC	"scePaf",0xE69C3B1B,InputDevice_PspPad_SetAnalogHandler
 #endif
 #ifdef F_scePaf_0626
-	IMPORT_FUNC	"scePaf",0xE618F7A8,scePaf_E618F7A8
+	IMPORT_FUNC	"scePaf",0xE618F7A8,InputDevice_PspPad_DisableAnalog
 #endif
 #ifdef F_scePaf_0627
-	IMPORT_FUNC	"scePaf",0x78F94D84,scePaf_78F94D84
+	IMPORT_FUNC	"scePaf",0x78F94D84,InputDevice_PspPad_IsAnalogMode
 #endif
 #ifdef F_scePaf_0628
-	IMPORT_FUNC	"scePaf",0x5822F12A,scePaf_5822F12A
+	IMPORT_FUNC	"scePaf",0x5822F12A,InputDevice_PspPad_EnableAnalog
 #endif
 #ifdef F_scePaf_0629
-	IMPORT_FUNC	"scePaf",0xFD9DE7B9,scePaf_FD9DE7B9
+	IMPORT_FUNC	"scePaf",0xFD9DE7B9,InputDevice_PspPad_EnableAnalogThreshold
 #endif
 #ifdef F_scePaf_0630
-	IMPORT_FUNC	"scePaf",0xAD43F865,scePaf_AD43F865
+	IMPORT_FUNC	"scePaf",0xAD43F865,InputDevice_PspPad_SetKeyAssign
 #endif
 #ifdef F_scePaf_0631
-	IMPORT_FUNC	"scePaf",0x872F948B,scePaf_872F948B
+	IMPORT_FUNC	"scePaf",0x872F948B,InputDevice_PspPad_Get
 #endif
 #ifdef F_scePaf_0632
-	IMPORT_FUNC	"scePaf",0xD726F4A2,scePaf_D726F4A2
+	IMPORT_FUNC	"scePaf",0xD726F4A2,InputDevice_PspHprm_SetDigitalHandler
 #endif
 #ifdef F_scePaf_0633
-	IMPORT_FUNC	"scePaf",0xA044BFC0,scePaf_A044BFC0
+	IMPORT_FUNC	"scePaf",0xA044BFC0,InputDevice_PspHprm_Lock
 #endif
 #ifdef F_scePaf_0634
-	IMPORT_FUNC	"scePaf",0xF1CF9579,scePaf_F1CF9579
+	IMPORT_FUNC	"scePaf",0xF1CF9579,InputDevice_PspHprm_Unlock
 #endif
 #ifdef F_scePaf_0635
-	IMPORT_FUNC	"scePaf",0x132148FD,scePaf_132148FD
+	IMPORT_FUNC	"scePaf",0x132148FD,InputDevice_PspHprm_Get
 #endif
 #ifdef F_scePaf_0636
 	IMPORT_FUNC	"scePaf",0x533F3856,scePaf_533F3856
@@ -1920,22 +1920,22 @@
 	IMPORT_FUNC	"scePaf",0x8D3B3587,scePaf_8D3B3587
 #endif
 #ifdef F_scePaf_0639
-	IMPORT_FUNC	"scePaf",0x27760582,scePaf_27760582
+	IMPORT_FUNC	"scePaf",0x27760582,File_AllocLoad
 #endif
 #ifdef F_scePaf_0640
-	IMPORT_FUNC	"scePaf",0xFD3FF4AA,scePaf_FD3FF4AA
+	IMPORT_FUNC	"scePaf",0xFD3FF4AA,File_Save
 #endif
 #ifdef F_scePaf_0641
-	IMPORT_FUNC	"scePaf",0xA0ED77C4,scePaf_A0ED77C4
+	IMPORT_FUNC	"scePaf",0xA0ED77C4,Job_Start
 #endif
 #ifdef F_scePaf_0642
-	IMPORT_FUNC	"scePaf",0x35F25BA1,scePaf_35F25BA1
+	IMPORT_FUNC	"scePaf",0x35F25BA1,Job_Cancel
 #endif
 #ifdef F_scePaf_0643
-	IMPORT_FUNC	"scePaf",0x75062BCF,scePaf_75062BCF
+	IMPORT_FUNC	"scePaf",0x75062BCF,Job_isCanceled
 #endif
 #ifdef F_scePaf_0644
-	IMPORT_FUNC	"scePaf",0x79493F8F,scePaf_79493F8F
+	IMPORT_FUNC	"scePaf",0x79493F8F,Job_Cancel2
 #endif
 #ifdef F_scePaf_0645
 	IMPORT_FUNC	"scePaf",0x3E203AEB,Heap_Alloc
@@ -1944,7 +1944,7 @@
 	IMPORT_FUNC	"scePaf",0x9948CDB3,Heap_Free
 #endif
 #ifdef F_scePaf_0647
-	IMPORT_FUNC	"scePaf",0xF84A99C8,scePaf_F84A99C8
+	IMPORT_FUNC	"scePaf",0xF84A99C8,Heap_CheckMemoryBounds
 #endif
 #ifdef F_scePaf_0648
 	IMPORT_FUNC	"scePaf",0x6D491648,Heap_Create
@@ -1998,7 +1998,7 @@
 	IMPORT_FUNC	"scePaf",0x96610AE6,scePaf_96610AE6
 #endif
 #ifdef F_scePaf_0665
-	IMPORT_FUNC	"scePaf",0xA08B0F31,scePaf_A08B0F31
+	IMPORT_FUNC	"scePaf",0xA08B0F31,__cxa_pure_virtual
 #endif
 #ifdef F_scePaf_0666
 	IMPORT_FUNC	"scePaf",0xFB3DB2FF,paf_fini

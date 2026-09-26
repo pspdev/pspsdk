@@ -21,7 +21,7 @@
 	IMPORT_FUNC	"sceAudiocodec",0x6CD2A861,sceAudiocodec_6CD2A861
 #endif
 #ifdef F_sceAudiocodec_0006
-	IMPORT_FUNC	"sceAudiocodec",0x59176A0F,sceAudiocodec_59176A0F
+	IMPORT_FUNC	"sceAudiocodec",0x59176A0F,sceAudiocodecAlcExtendParameter
 #endif
 #ifdef F_sceAudiocodec_0007
 	IMPORT_FUNC	"sceAudiocodec",0x3A20A200,sceAudiocodecGetEDRAM

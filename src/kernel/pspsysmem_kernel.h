@@ -241,7 +241,7 @@ int sceKernelGetSceUidControlBlockWithType(SceUID uid, SceUidControlBlock* type,
  *
  * @return Pointer to the UID tree root
  */
-SceUidControlBlock* SysMemForKernel_536AD5E1(void);
+SceUidControlBlock* sceKernelGetUidmanCB(void);
 
 /**
  * Delete a UID
@@ -290,7 +290,7 @@ SceGameInfo *sceKernelGetGameInfo();
  *
  * @attention Needs to link to `pspsysmem_kernel` stub.
  */
-int sceKernelGetSystemStatus();
+int sceKernelGetSystemStatus(void);
 
 /**
  * Get a UID control block

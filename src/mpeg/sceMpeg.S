@@ -102,7 +102,7 @@
 	IMPORT_FUNC	"sceMpeg",0x11CAB459,sceMpeg_11CAB459
 #endif
 #ifdef F_sceMpeg_0033
-	IMPORT_FUNC	"sceMpeg",0x3C37A7A6,sceMpeg_3C37A7A6
+	IMPORT_FUNC	"sceMpeg",0x3C37A7A6,sceMpegNextAvcRpAu
 #endif
 #ifdef F_sceMpeg_0034
 	IMPORT_FUNC	"sceMpeg",0xB27711A8,sceMpeg_B27711A8
