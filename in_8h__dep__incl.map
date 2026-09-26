@@ -1,0 +1,18 @@
+<map id="libcglue/netinet/in.h" name="libcglue/netinet/in.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="225,5,358,31"/>
+<area shape="rect" id="Node000002" href="$inet_8h.html" title=" " alt="" coords="227,79,356,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="294,46,294,79,289,79,289,46"/>
+<area shape="rect" id="Node000003" href="$netdb_8c.html" title=" " alt="" coords="146,153,258,178"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="257,42,235,59,218,80,210,99,206,118,204,152,199,152,200,117,205,97,213,78,231,55,253,38"/>
+<area shape="rect" id="Node000004" href="$socket_8c.html" title=" " alt="" coords="390,153,508,178"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="374,26,469,45,509,59,535,77,541,89,540,101,527,122,503,140,478,154,475,150,500,136,523,118,535,99,535,90,531,81,507,64,468,50,373,31"/>
+<area shape="rect" id="Node000005" href="$tcp_8h.html" title=" " alt="" coords="380,79,520,105"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="333,35,424,76,422,81,331,40"/>
+<area shape="rect" id="Node000006" href="$pspnet__resolver_8h.html" title=" " alt="" coords="5,79,151,105"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="242,39,115,81,114,76,240,34"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="266,116,219,154,215,150,263,112"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="333,109,423,150,421,154,331,114"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="113,110,182,150,180,154,111,115"/>
+<area shape="rect" id="Node000007" href="$inethelper_8c.html" title=" " alt="" coords="10,153,122,178"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="76,120,71,153,65,152,71,119"/>
+</map>

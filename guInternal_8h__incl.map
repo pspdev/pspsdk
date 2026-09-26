@@ -1,0 +1,12 @@
+<map id="gu/guInternal.h" name="gu/guInternal.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,112,31"/>
+<area shape="rect" id="Node000002" href="$pspgu_8h.html" title=" " alt="" coords="25,79,92,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,31,61,63,56,63,56,31"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="17,226,100,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="59,105,52,153,52,183,56,211,50,211,47,183,47,152,53,105"/>
+<area shape="rect" id="Node000005" href="$pspge_8h.html" title=" " alt="" coords="61,153,128,178"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="67,104,84,138,79,140,62,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="27,300,90,326"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="61,252,61,284,56,284,56,252"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="91,180,74,214,69,211,86,177"/>
+</map>

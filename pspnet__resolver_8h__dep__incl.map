@@ -1,0 +1,7 @@
+<map id="net/pspnet_resolver.h" name="net/pspnet_resolver.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="56,5,202,31"/>
+<area shape="rect" id="Node000002" href="$netdb_8c.html" title=" " alt="" coords="5,79,117,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,44,74,80,71,77,105,40"/>
+<area shape="rect" id="Node000003" href="$inethelper_8c.html" title=" " alt="" coords="141,79,253,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,40,187,77,184,80,149,44"/>
+</map>
