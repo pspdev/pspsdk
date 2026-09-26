@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
 
     - name: Login to Github registry
-      uses: docker/login-action@v3
+      uses: docker/login-action@v4
       with:
         username: ${{ github.actor }}
         password:  ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
     
-    - uses: docker/build-push-action@v5
+    - uses: docker/build-push-action@v7
       with:
         context: .
         push: true
@@ -36,7 +36,7 @@ jobs:
         echo "NEW_DISPATCH_ACTION=$DISPATCH_ACTION" >> $GITHUB_ENV
 
     - name: Repository Dispatch to psp-packages
-      uses: peter-evans/repository-dispatch@v2
+      uses: peter-evans/repository-dispatch@v4
       with:
         repository: ${{ github.repository_owner }}/psp-packages
         token: ${{ secrets.DISPATCH_TOKEN }}
@@ -44,7 +44,7 @@ jobs:
         client-payload: '{"ref": "refs/heads/master"}'
     
     - name: Repository Dispatch to psplinkusb
-      uses: peter-evans/repository-dispatch@v2
+      uses: peter-evans/repository-dispatch@v4
       with:
         repository: ${{ github.repository_owner }}/psplinkusb
         token: ${{ secrets.DISPATCH_TOKEN }}
