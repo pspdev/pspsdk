@@ -1,0 +1,25 @@
+<map id="audio/pspaudiolib.c" name="audio/pspaudiolib.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="170,5,301,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,68,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,34,83,77,81,72,201,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="92,79,155,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,34,156,73,154,68,215,29"/>
+<area shape="rect" id="Node000004" href="$pspthreadman_8h.html" title=" " alt="" coords="178,79,292,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="238,31,238,63,232,63,232,31"/>
+<area shape="rect" id="Node000010" href="$pspaudio_8h.html" title=" " alt="" coords="316,79,400,105"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="257,29,326,69,323,73,255,34"/>
+<area shape="rect" id="Node000011" href="$pspaudiolib_8h.html" title=" " alt="" coords="423,79,519,105"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="276,29,417,71,416,77,274,34"/>
+<area shape="rect" id="Node000005" href="$psptypes_8h.html" title=" " alt="" coords="194,226,277,252"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="214,107,188,127,167,154,164,171,171,187,185,202,202,216,198,220,181,206,167,190,159,172,162,152,184,123,211,103"/>
+<area shape="rect" id="Node000007" href="$pspkerneltypes_8h.html" title=" " alt="" coords="176,153,294,178"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="238,105,238,137,232,137,232,105"/>
+<area shape="rect" id="Node000008" href="$pspdebug_8h.html" title=" " alt="" coords="318,153,406,178"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="258,103,328,142,326,147,255,108"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="204,300,267,326"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="238,252,238,284,232,284,232,252"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="238,179,238,211,232,211,232,179"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="342,181,271,221,269,216,339,177"/>
+<area shape="rect" id="Node000009" href="$pspmoduleinfo_8h.html" title=" " alt="" coords="304,226,420,252"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="364,179,364,211,359,211,359,179"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="kernel/pspiofilemgr_kernel.h" name="kernel/pspiofilemgr_kernel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="469,5,598,46"/>
+<area shape="rect" id="Node000002" href="$pspkernel_8h.html" title=" " alt="" coords="470,94,596,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="536,62,536,93,531,93,531,62"/>
+<area shape="rect" id="Node000003" href="$exception_8c.html" title=" " alt="" coords="5,168,131,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="455,123,143,170,132,172,131,167,142,165,454,117"/>
+<area shape="rect" id="Node000004" href="$gdb-kernellib_8c.html" title=" " alt="" coords="155,168,298,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="467,126,279,170,278,164,465,121"/>
+<area shape="rect" id="Node000005" href="$gdb-userlib_8c.html" title=" " alt="" coords="323,168,456,193"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="497,129,415,169,413,165,494,124"/>
+<area shape="rect" id="Node000006" href="$kprintf_8c.html" title=" " alt="" coords="480,168,586,193"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="536,135,536,167,531,167,531,135"/>
+<area shape="rect" id="Node000007" href="$sio_8c.html" title=" " alt="" coords="611,168,698,193"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="568,126,635,165,633,169,566,130"/>
+<area shape="rect" id="Node000008" href="$stdio_8c.html" title=" " alt="" coords="723,168,821,193"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="589,122,732,165,731,170,588,127"/>
+<area shape="rect" id="Node000009" href="$fixup_8c.html" title=" " alt="" coords="846,168,928,193"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="611,121,834,165,846,168,845,173,833,170,610,126"/>
+</map>

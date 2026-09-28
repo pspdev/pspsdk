@@ -1,0 +1,6 @@
+<map id="PspSysMemPartition" name="PspSysMemPartition">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,94,149,120"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="165,99,175,107,167,115,150,117,149,112,165,110,170,107,163,103"/>
+<area shape="rect" id="Node000002" href="$structPspPartitionData.html" title=" " alt="" coords="17,5,137,31"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="80,47,80,94,74,94,74,47"/>
+</map>
