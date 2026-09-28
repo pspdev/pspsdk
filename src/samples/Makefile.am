@@ -24,6 +24,7 @@ SAMPLES = \
 	gu/doublelist \
 	gu/cube \
 	gu/envmap \
+	gu/font
 	gu/integerdrawing \
 	gu/lights \
 	gu/lines \

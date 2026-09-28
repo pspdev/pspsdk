@@ -20,6 +20,7 @@ SAMPLES = \
 	gu/cube \
 	gu/doublelist \
 	gu/envmap \
+	gu/font \
 	gu/integerdrawing \
 	gu/lights \
 	gu/lines \

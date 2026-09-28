@@ -6,6 +6,7 @@ SUBDIRS = \
 	debug \
 	display \
 	dmac \
+	font \
 	fpu \
 	ge \
 	gu \
