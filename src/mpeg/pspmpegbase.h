@@ -56,7 +56,7 @@ SceInt32 sceMpegBaseYCrCbCopyVme(ScePVoid YUVBuffer, SceInt32 *Buffer, SceInt32 
 SceInt32 sceMpegBaseCscInit(SceInt32 width);
 SceInt32 sceMpegBaseCscVme(ScePVoid pRGBbuffer, ScePVoid pRGBbuffer2, SceInt32 width, SceMpegYCrCbBuffer* pYCrCbBuffer);
 
-SceInt32 sceMpegbase_BEA18F91(SceMpegLLI *pLLI);
+SceInt32 sceMpegBasePESpacketCopy(SceMpegLLI *pLLI);
 
 #ifdef __cplusplus
 }

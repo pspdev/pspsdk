@@ -24,15 +24,11 @@ PSP_MODULE_INFO("wlanscan", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER | THREAD_ATTR_VFPU);
 
 /* Init the scan */
-int sceNet_lib_5216CBF5(const char *name);
+int sceNetConfigUpInterface(const char *name);
 /* Do the scan */
-int sceNet_lib_7BA3ED91(const char *name, void *type, u32 *size, void *buf, u32 *unk);
+int sceNetConfig80211ScanRequest(const char *name, void *type, u32 *size, void *buf, u32 *unk);
 /* Terminate the scan */
-int sceNet_lib_D2422E4D(const char *name);
-
-#define InitScan sceNet_lib_5216CBF5
-#define ScanAPs  sceNet_lib_7BA3ED91
-#define TermScan sceNet_lib_D2422E4D
+int sceNetConfigDownInterface(const char *name);
 
 /* Global buffer to store the scan data */
 unsigned char scan_data[0xA80];
@@ -157,7 +153,7 @@ void do_scan(void)
 	int i;
 	int ret;
 
-	if(InitScan("wlan") >= 0)
+	if(sceNetConfigUpInterface("wlan") >= 0)
 	{
 		/* No real idea what this is doing ;) */
 		memset(type, 0, sizeof(type));
@@ -171,7 +167,7 @@ void do_scan(void)
 		size = sizeof(scan_data);
 		unk  = 0;
 		memset(scan_data, 0, sizeof(scan_data));
-		ret = ScanAPs("wlan", type, &size, scan_data, &unk);
+		ret = sceNetConfig80211ScanRequest("wlan", type, &size, scan_data, &unk);
 		if(ret < 0)
 		{
 			printf("Error, could not perform scan err = %08X\n", ret);
@@ -186,7 +182,7 @@ void do_scan(void)
 		printf("Error, cannot initialise scan\n");
 	}
 
-	TermScan("wlan");
+	sceNetConfigDownInterface("wlan");
 }
 
 int main(int argc, char *argv[])

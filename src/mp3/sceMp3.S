@@ -33,7 +33,7 @@
 	IMPORT_FUNC	"sceMp3",0x44E07129,sceMp3Init
 #endif
 #ifdef F_sceMp3_0009
-	IMPORT_FUNC	"sceMp3",0x732B042A,sceMp3_732B042A
+	IMPORT_FUNC	"sceMp3",0x732B042A,sceMp3EndEntry
 #endif
 #ifdef F_sceMp3_0010
 	IMPORT_FUNC	"sceMp3",0x7F696782,sceMp3GetMp3ChannelNum
@@ -45,7 +45,7 @@
 	IMPORT_FUNC	"sceMp3",0x87C263D1,sceMp3GetMaxOutputSample
 #endif
 #ifdef F_sceMp3_0013
-	IMPORT_FUNC	"sceMp3",0x8AB81558,sceMp3_8AB81558
+	IMPORT_FUNC	"sceMp3",0x8AB81558,sceMp3StartEntry
 #endif
 #ifdef F_sceMp3_0014
 	IMPORT_FUNC	"sceMp3",0x8F450998,sceMp3GetSamplingRate

@@ -57,14 +57,14 @@ SceInt32 sceMp3ReleaseMp3Handle(SceInt32 handle);
  *
  * @return 0 if success, < 0 on error.
  */
-SceInt32 sceMp3InitResource();
+SceInt32 sceMp3InitResource(void);
 
 /**
  * sceMp3TermResource
  *
  * @return 0 if success, < 0 on error.
  */
-SceInt32 sceMp3TermResource();
+SceInt32 sceMp3TermResource(void);
 
 /**
  * sceMp3Init

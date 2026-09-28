@@ -54,13 +54,13 @@
 	IMPORT_FUNC	"sceHttp",0x3A67F306,sceHttpSetCookieRecvCallback
 #endif
 #ifdef F_sceHttp_0016
-	IMPORT_FUNC	"sceHttp",0x3C478044,sceHttp_3C478044
+	IMPORT_FUNC	"sceHttp",0x3C478044,sceHttpsDisableOptionPrivate
 #endif
 #ifdef F_sceHttp_0017
 	IMPORT_FUNC	"sceHttp",0x3EABA285,sceHttpAddExtraHeader
 #endif
 #ifdef F_sceHttp_0018
-	IMPORT_FUNC	"sceHttp",0x457D221D,sceHttp_457D221D
+	IMPORT_FUNC	"sceHttp",0x457D221D,sceHttpFlushCookie
 #endif
 #ifdef F_sceHttp_0019
 	IMPORT_FUNC	"sceHttp",0x47347B50,sceHttpCreateRequest
@@ -72,7 +72,7 @@
 	IMPORT_FUNC	"sceHttp",0x4CC7D78F,sceHttpGetStatusCode
 #endif
 #ifdef F_sceHttp_0022
-	IMPORT_FUNC	"sceHttp",0x4E4A284A,sceHttp_4E4A284A
+	IMPORT_FUNC	"sceHttp",0x4E4A284A,sceHttpCloneTemplate
 #endif
 #ifdef F_sceHttp_0023
 	IMPORT_FUNC	"sceHttp",0x5152773B,sceHttpDeleteConnection
@@ -90,7 +90,7 @@
 	IMPORT_FUNC	"sceHttp",0x68AB0F86,sceHttpsInitWithPath
 #endif
 #ifdef F_sceHttp_0028
-	IMPORT_FUNC	"sceHttp",0x739C2D79,sceHttp_739C2D79
+	IMPORT_FUNC	"sceHttp",0x739C2D79,sceHttpInitExternalCache
 #endif
 #ifdef F_sceHttp_0029
 	IMPORT_FUNC	"sceHttp",0x76D1363B,sceHttpSaveSystemCookie
@@ -99,7 +99,7 @@
 	IMPORT_FUNC	"sceHttp",0x7774BF4C,sceHttpAddCookie
 #endif
 #ifdef F_sceHttp_0031
-	IMPORT_FUNC	"sceHttp",0x77EE5319,sceHttp_77EE5319
+	IMPORT_FUNC	"sceHttp",0x77EE5319,sceHttpLoadAuthList
 #endif
 #ifdef F_sceHttp_0032
 	IMPORT_FUNC	"sceHttp",0x78A0D3EC,sceHttpEnableKeepAlive
@@ -108,13 +108,13 @@
 	IMPORT_FUNC	"sceHttp",0x78B54C09,sceHttpEndCache
 #endif
 #ifdef F_sceHttp_0034
-	IMPORT_FUNC	"sceHttp",0x8046E250,sceHttp_8046E250
+	IMPORT_FUNC	"sceHttp",0x8046E250,sceHttpEnableExternalCache
 #endif
 #ifdef F_sceHttp_0035
 	IMPORT_FUNC	"sceHttp",0x87797BDD,sceHttpsLoadDefaultCert
 #endif
 #ifdef F_sceHttp_0036
-	IMPORT_FUNC	"sceHttp",0x87F1E666,sceHttp_87F1E666
+	IMPORT_FUNC	"sceHttp",0x87F1E666,sceHttpsEnableOptionPrivate
 #endif
 #ifdef F_sceHttp_0037
 	IMPORT_FUNC	"sceHttp",0x8ACD1F73,sceHttpSetConnectTimeOut
@@ -123,7 +123,7 @@
 	IMPORT_FUNC	"sceHttp",0x8EEFD953,sceHttpCreateConnection
 #endif
 #ifdef F_sceHttp_0039
-	IMPORT_FUNC	"sceHttp",0x951D310E,sceHttp_951D310E
+	IMPORT_FUNC	"sceHttp",0x951D310E,sceHttpDisableProxyAuth
 #endif
 #ifdef F_sceHttp_0040
 	IMPORT_FUNC	"sceHttp",0x9668864C,sceHttpSetRecvBlockSize
@@ -147,7 +147,7 @@
 	IMPORT_FUNC	"sceHttp",0xA4496DE5,sceHttpSetRedirectCallback
 #endif
 #ifdef F_sceHttp_0047
-	IMPORT_FUNC	"sceHttp",0xA461A167,sceHttp_A461A167
+	IMPORT_FUNC	"sceHttp",0xA461A167,sceHttpEndExternalCache
 #endif
 #ifdef F_sceHttp_0048
 	IMPORT_FUNC	"sceHttp",0xA5512E01,sceHttpDeleteRequest
@@ -168,7 +168,7 @@
 	IMPORT_FUNC	"sceHttp",0xAE948FEE,sceHttpDisableAuth
 #endif
 #ifdef F_sceHttp_0054
-	IMPORT_FUNC	"sceHttp",0xB0257723,sceHttp_B0257723
+	IMPORT_FUNC	"sceHttp",0xB0257723,sceHttpFlushExternalCache
 #endif
 #ifdef F_sceHttp_0055
 	IMPORT_FUNC	"sceHttp",0xB0C34B1D,sceHttpSetCacheContentLengthMaxSize
@@ -192,7 +192,7 @@
 	IMPORT_FUNC	"sceHttp",0xC10B6BD9,sceHttpAbortRequest
 #endif
 #ifdef F_sceHttp_0062
-	IMPORT_FUNC	"sceHttp",0xC6330B0D,sceHttp_C6330B0D
+	IMPORT_FUNC	"sceHttp",0xC6330B0D,sceHttpChangeHttpVersion
 #endif
 #ifdef F_sceHttp_0063
 	IMPORT_FUNC	"sceHttp",0xC7EF2559,sceHttpDisableKeepAlive
@@ -207,7 +207,7 @@
 	IMPORT_FUNC	"sceHttp",0xCCBD167A,sceHttpDisableCache
 #endif
 #ifdef F_sceHttp_0067
-	IMPORT_FUNC	"sceHttp",0xCDB0DC58,sceHttp_CDB0DC58
+	IMPORT_FUNC	"sceHttp",0xCDB0DC58,sceHttpEnableProxyAuth
 #endif
 #ifdef F_sceHttp_0068
 	IMPORT_FUNC	"sceHttp",0xCDF8ECB9,sceHttpCreateConnectionWithURL
@@ -234,7 +234,7 @@
 	IMPORT_FUNC	"sceHttp",0xDB266CCF,sceHttpGetAllHeader
 #endif
 #ifdef F_sceHttp_0076
-	IMPORT_FUNC	"sceHttp",0xDD6E7857,sceHttp_DD6E7857
+	IMPORT_FUNC	"sceHttp",0xDD6E7857,sceHttpSaveAuthList
 #endif
 #ifdef F_sceHttp_0077
 	IMPORT_FUNC	"sceHttp",0xE4D21302,sceHttpsInit

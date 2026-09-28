@@ -21,19 +21,19 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x5EE92F3C,sceSysconSetDebugHandlers
 #endif
 #ifdef F_sceSyscon_driver_0006
-	IMPORT_FUNC	"sceSyscon_driver",0x5FF1D610,sceSyscon_driver_5FF1D610
+	IMPORT_FUNC	"sceSyscon_driver",0x5FF1D610,sceSysconSetPollingMode
 #endif
 #ifdef F_sceSyscon_driver_0007
-	IMPORT_FUNC	"sceSyscon_driver",0xAD555CE5,sceSyscon_driver_AD555CE5
+	IMPORT_FUNC	"sceSyscon_driver",0xAD555CE5,sceSysconSetLowBatteryCallback
 #endif
 #ifdef F_sceSyscon_driver_0008
-	IMPORT_FUNC	"sceSyscon_driver",0xF281805D,sceSyscon_driver_F281805D
+	IMPORT_FUNC	"sceSyscon_driver",0xF281805D,sceSysconSetPowerSwitchCallback
 #endif
 #ifdef F_sceSyscon_driver_0009
 	IMPORT_FUNC	"sceSyscon_driver",0xA068B3D0,sceSysconSetAlarmCallback
 #endif
 #ifdef F_sceSyscon_driver_0010
-	IMPORT_FUNC	"sceSyscon_driver",0xE540E532,sceSyscon_driver_E540E532
+	IMPORT_FUNC	"sceSyscon_driver",0xE540E532,sceSysconSetAcSupplyCallback
 #endif
 #ifdef F_sceSyscon_driver_0011
 	IMPORT_FUNC	"sceSyscon_driver",0xBBFB70C0,sceSyscon_driver_BBFB70C0
@@ -42,16 +42,16 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x805180D1,sceSyscon_driver_805180D1
 #endif
 #ifdef F_sceSyscon_driver_0013
-	IMPORT_FUNC	"sceSyscon_driver",0x53072985,sceSyscon_driver_53072985
+	IMPORT_FUNC	"sceSyscon_driver",0x53072985,sceSysconSetWlanSwitchCallback
 #endif
 #ifdef F_sceSyscon_driver_0014
-	IMPORT_FUNC	"sceSyscon_driver",0xF9193EC3,sceSyscon_driver_F9193EC3
+	IMPORT_FUNC	"sceSyscon_driver",0xF9193EC3,sceSysconSetWlanPowerCallback
 #endif
 #ifdef F_sceSyscon_driver_0015
-	IMPORT_FUNC	"sceSyscon_driver",0x7479DB05,sceSyscon_driver_7479DB05
+	IMPORT_FUNC	"sceSyscon_driver",0x7479DB05,sceSysconSetHoldSwitchCallback
 #endif
 #ifdef F_sceSyscon_driver_0016
-	IMPORT_FUNC	"sceSyscon_driver",0x6848D817,sceSyscon_driver_6848D817
+	IMPORT_FUNC	"sceSyscon_driver",0x6848D817,sceSysconSetUmdSwitchCallback
 #endif
 #ifdef F_sceSyscon_driver_0017
 	IMPORT_FUNC	"sceSyscon_driver",0x5B9ACC97,sceSysconCmdExec
@@ -75,10 +75,10 @@
 	IMPORT_FUNC	"sceSyscon_driver",0xEC0DE439,sceSysconGetPowerSwitch
 #endif
 #ifdef F_sceSyscon_driver_0024
-	IMPORT_FUNC	"sceSyscon_driver",0xEA5B9823,sceSyscon_driver_EA5B9823
+	IMPORT_FUNC	"sceSyscon_driver",0xEA5B9823,sceSysconIsAlarmed
 #endif
 #ifdef F_sceSyscon_driver_0025
-	IMPORT_FUNC	"sceSyscon_driver",0xE20D08FE,sceSyscon_driver_E20D08FE
+	IMPORT_FUNC	"sceSyscon_driver",0xE20D08FE,sceSysconIsAcSupplied
 #endif
 #ifdef F_sceSyscon_driver_0026
 	IMPORT_FUNC	"sceSyscon_driver",0xE0DDFE18,sceSysconGetHPConnect
@@ -93,7 +93,7 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x138747DE,sceSysconGetUmdSwitch
 #endif
 #ifdef F_sceSyscon_driver_0030
-	IMPORT_FUNC	"sceSyscon_driver",0x71AE1BCE,sceSyscon_driver_71AE1BCE
+	IMPORT_FUNC	"sceSyscon_driver",0x71AE1BCE,sceSysconGetHRPowerStatus
 #endif
 #ifdef F_sceSyscon_driver_0031
 	IMPORT_FUNC	"sceSyscon_driver",0x7016161C,sceSysconGetWlanPowerStatus
@@ -105,22 +105,22 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x628F2351,sceSysconGetMsPowerCtrl
 #endif
 #ifdef F_sceSyscon_driver_0034
-	IMPORT_FUNC	"sceSyscon_driver",0x3C739F57,sceSyscon_driver_3C739F57
+	IMPORT_FUNC	"sceSyscon_driver",0x3C739F57,sceSysconGetHRPowerCtrl
 #endif
 #ifdef F_sceSyscon_driver_0035
 	IMPORT_FUNC	"sceSyscon_driver",0xEC37C549,sceSysconGetWlanPowerCtrl
 #endif
 #ifdef F_sceSyscon_driver_0036
-	IMPORT_FUNC	"sceSyscon_driver",0x8DDA4CA6,sceSyscon_driver_8DDA4CA6
+	IMPORT_FUNC	"sceSyscon_driver",0x8DDA4CA6,sceSysconGetTachyonVmePowerCtrl
 #endif
 #ifdef F_sceSyscon_driver_0037
-	IMPORT_FUNC	"sceSyscon_driver",0x52B74B6C,sceSyscon_driver_52B74B6C
+	IMPORT_FUNC	"sceSyscon_driver",0x52B74B6C,sceSysconGetTachyonAwPowerCtrl
 #endif
 #ifdef F_sceSyscon_driver_0038
-	IMPORT_FUNC	"sceSyscon_driver",0x1B17D3E3,sceSyscon_driver_1B17D3E3
+	IMPORT_FUNC	"sceSyscon_driver",0x1B17D3E3,sceSysconGetTachyonAvcPowerCtrl
 #endif
 #ifdef F_sceSyscon_driver_0039
-	IMPORT_FUNC	"sceSyscon_driver",0x5F19C00F,sceSyscon_driver_5F19C00F
+	IMPORT_FUNC	"sceSyscon_driver",0x5F19C00F,sceSysconGetLcdPowerCtrl
 #endif
 #ifdef F_sceSyscon_driver_0040
 	IMPORT_FUNC	"sceSyscon_driver",0xCC04A978,sceSysconGetWlanLedCtrl
@@ -135,16 +135,16 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x7BCC5EAE,sceSysconGetTimeStamp
 #endif
 #ifdef F_sceSyscon_driver_0044
-	IMPORT_FUNC	"sceSyscon_driver",0x3B657A27,sceSyscon_driver_3B657A27
+	IMPORT_FUNC	"sceSyscon_driver",0x3B657A27,sceSysconGetTachyonTemp
 #endif
 #ifdef F_sceSyscon_driver_0045
-	IMPORT_FUNC	"sceSyscon_driver",0xFC32141A,sceSyscon_driver_FC32141A
+	IMPORT_FUNC	"sceSyscon_driver",0xFC32141A,sceSysconGetPowerSupplyStatus
 #endif
 #ifdef F_sceSyscon_driver_0046
-	IMPORT_FUNC	"sceSyscon_driver",0xF775BC34,sceSyscon_driver_F775BC34
+	IMPORT_FUNC	"sceSyscon_driver",0xF775BC34,sceSysconGetWakeUpFactor
 #endif
 #ifdef F_sceSyscon_driver_0047
-	IMPORT_FUNC	"sceSyscon_driver",0xA9AEF39F,sceSyscon_driver_A9AEF39F
+	IMPORT_FUNC	"sceSyscon_driver",0xA9AEF39F,sceSysconGetWakeUpReq
 #endif
 #ifdef F_sceSyscon_driver_0048
 	IMPORT_FUNC	"sceSyscon_driver",0xC4D66C1D,sceSysconReadClock
@@ -171,7 +171,7 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x08234E6D,sceSysconReceiveSetParam
 #endif
 #ifdef F_sceSyscon_driver_0056
-	IMPORT_FUNC	"sceSyscon_driver",0x882F0AAB,sceSyscon_driver_882F0AAB
+	IMPORT_FUNC	"sceSyscon_driver",0x882F0AAB,sceSysconGetTachyonWDTStatus
 #endif
 #ifdef F_sceSyscon_driver_0057
 	IMPORT_FUNC	"sceSyscon_driver",0x2EE82492,sceSysconCtrlTachyonWDT
@@ -180,7 +180,7 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x8CBC7987,sceSysconResetDevice
 #endif
 #ifdef F_sceSyscon_driver_0059
-	IMPORT_FUNC	"sceSyscon_driver",0x00E7B6C2,sceSyscon_driver_00E7B6C2
+	IMPORT_FUNC	"sceSyscon_driver",0x00E7B6C2,sceSysconCtrlAnalogXYPolling
 #endif
 #ifdef F_sceSyscon_driver_0060
 	IMPORT_FUNC	"sceSyscon_driver",0x44439604,sceSysconCtrlHRPower
@@ -198,7 +198,7 @@
 	IMPORT_FUNC	"sceSyscon_driver",0xFB148FB6,sceSysconGetPolestarVersion
 #endif
 #ifdef F_sceSyscon_driver_0065
-	IMPORT_FUNC	"sceSyscon_driver",0x01677F91,sceSyscon_driver_01677F91
+	IMPORT_FUNC	"sceSyscon_driver",0x01677F91,sceSysconCtrlVoltage
 #endif
 #ifdef F_sceSyscon_driver_0066
 	IMPORT_FUNC	"sceSyscon_driver",0xBE27FE66,sceSysconCtrlPower
@@ -228,16 +228,16 @@
 	IMPORT_FUNC	"sceSyscon_driver",0xF0ED3255,sceSysconCtrlWlanPower
 #endif
 #ifdef F_sceSyscon_driver_0075
-	IMPORT_FUNC	"sceSyscon_driver",0x3C6DB1C5,sceSyscon_driver_3C6DB1C5
+	IMPORT_FUNC	"sceSyscon_driver",0x3C6DB1C5,sceSysconCtrlTachyonVmePower
 #endif
 #ifdef F_sceSyscon_driver_0076
-	IMPORT_FUNC	"sceSyscon_driver",0xB2558E37,sceSyscon_driver_B2558E37
+	IMPORT_FUNC	"sceSyscon_driver",0xB2558E37,sceSysconCtrlTachyonAwPower
 #endif
 #ifdef F_sceSyscon_driver_0077
-	IMPORT_FUNC	"sceSyscon_driver",0xE5E35721,sceSyscon_driver_E5E35721
+	IMPORT_FUNC	"sceSyscon_driver",0xE5E35721,sceSysconCtrlTachyonAvcPower
 #endif
 #ifdef F_sceSyscon_driver_0078
-	IMPORT_FUNC	"sceSyscon_driver",0x9478F399,sceSyscon_driver_9478F399
+	IMPORT_FUNC	"sceSyscon_driver",0x9478F399,sceSysconCtrlLcdPower
 #endif
 #ifdef F_sceSyscon_driver_0079
 	IMPORT_FUNC	"sceSyscon_driver",0x806D4D6C,sceSysconWritePolestarReg
@@ -246,10 +246,10 @@
 	IMPORT_FUNC	"sceSyscon_driver",0xD8471760,sceSysconReadPolestarReg
 #endif
 #ifdef F_sceSyscon_driver_0081
-	IMPORT_FUNC	"sceSyscon_driver",0xEAB13FBE,sceSyscon_driver_EAB13FBE
+	IMPORT_FUNC	"sceSyscon_driver",0xEAB13FBE,sceSysconPermitChargeBattery
 #endif
 #ifdef F_sceSyscon_driver_0082
-	IMPORT_FUNC	"sceSyscon_driver",0xC5075828,sceSyscon_driver_C5075828
+	IMPORT_FUNC	"sceSyscon_driver",0xC5075828,sceSysconForbidChargeBattery
 #endif
 #ifdef F_sceSyscon_driver_0083
 	IMPORT_FUNC	"sceSyscon_driver",0xE448FD3F,sceSysconBatteryNop
@@ -267,19 +267,19 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x373EC933,sceSysconBatteryGetElec
 #endif
 #ifdef F_sceSyscon_driver_0088
-	IMPORT_FUNC	"sceSyscon_driver",0x82861DE2,sceSyscon_driver_82861DE2
+	IMPORT_FUNC	"sceSyscon_driver",0x82861DE2,sceSysconBatteryGetRCap
 #endif
 #ifdef F_sceSyscon_driver_0089
 	IMPORT_FUNC	"sceSyscon_driver",0x876CA580,sceSysconBatteryGetCap
 #endif
 #ifdef F_sceSyscon_driver_0090
-	IMPORT_FUNC	"sceSyscon_driver",0x71135D7D,sceSyscon_driver_71135D7D
+	IMPORT_FUNC	"sceSyscon_driver",0x71135D7D,sceSysconBatteryGetFullCap
 #endif
 #ifdef F_sceSyscon_driver_0091
-	IMPORT_FUNC	"sceSyscon_driver",0x7CBD4522,sceSyscon_driver_7CBD4522
+	IMPORT_FUNC	"sceSyscon_driver",0x7CBD4522,sceSysconBatteryGetIFC
 #endif
 #ifdef F_sceSyscon_driver_0092
-	IMPORT_FUNC	"sceSyscon_driver",0x284FE366,sceSyscon_driver_284FE366
+	IMPORT_FUNC	"sceSyscon_driver",0x284FE366,sceSysconBatteryGetLimitTime
 #endif
 #ifdef F_sceSyscon_driver_0093
 	IMPORT_FUNC	"sceSyscon_driver",0x75025299,sceSysconBatteryGetStatus
@@ -294,37 +294,37 @@
 	IMPORT_FUNC	"sceSyscon_driver",0xFA4C4518,sceSysconBatteryGetInfo
 #endif
 #ifdef F_sceSyscon_driver_0097
-	IMPORT_FUNC	"sceSyscon_driver",0xB71B98A8,sceSyscon_driver_B71B98A8
+	IMPORT_FUNC	"sceSyscon_driver",0xB71B98A8,sceSysconBatteryGetTempAD
 #endif
 #ifdef F_sceSyscon_driver_0098
-	IMPORT_FUNC	"sceSyscon_driver",0x87671B18,sceSyscon_driver_87671B18
+	IMPORT_FUNC	"sceSyscon_driver",0x87671B18,sceSysconBatteryGetVoltAD
 #endif
 #ifdef F_sceSyscon_driver_0099
-	IMPORT_FUNC	"sceSyscon_driver",0x75D22BF8,sceSyscon_driver_75D22BF8
+	IMPORT_FUNC	"sceSyscon_driver",0x75D22BF8,sceSysconBatteryGetElecAD
 #endif
 #ifdef F_sceSyscon_driver_0100
-	IMPORT_FUNC	"sceSyscon_driver",0x4C539345,sceSyscon_driver_4C539345
+	IMPORT_FUNC	"sceSyscon_driver",0x4C539345,sceSysconBatteryGetTotalElec
 #endif
 #ifdef F_sceSyscon_driver_0101
-	IMPORT_FUNC	"sceSyscon_driver",0x4C0EE2FA,sceSyscon_driver_4C0EE2FA
+	IMPORT_FUNC	"sceSyscon_driver",0x4C0EE2FA,sceSysconBatteryGetChargeTime
 #endif
 #ifdef F_sceSyscon_driver_0102
-	IMPORT_FUNC	"sceSyscon_driver",0x1165C864,sceSyscon_driver_1165C864
+	IMPORT_FUNC	"sceSyscon_driver",0x1165C864,sceSysconBatteryWriteNVM
 #endif
 #ifdef F_sceSyscon_driver_0103
-	IMPORT_FUNC	"sceSyscon_driver",0x68EF0BEF,sceSyscon_driver_68EF0BEF
+	IMPORT_FUNC	"sceSyscon_driver",0x68EF0BEF,sceSysconBatteryReadNVM
 #endif
 #ifdef F_sceSyscon_driver_0104
 	IMPORT_FUNC	"sceSyscon_driver",0x36E28C5F,sceSysconBatteryAuth
 #endif
 #ifdef F_sceSyscon_driver_0105
-	IMPORT_FUNC	"sceSyscon_driver",0x08DA3752,sceSyscon_driver_08DA3752
+	IMPORT_FUNC	"sceSyscon_driver",0x08DA3752,sceSysconCtrlTachyonVoltage
 #endif
 #ifdef F_sceSyscon_driver_0106
 	IMPORT_FUNC	"sceSyscon_driver",0x9C4E3CA9,sceSyscon_driver_9C4E3CA9
 #endif
 #ifdef F_sceSyscon_driver_0107
-	IMPORT_FUNC	"sceSyscon_driver",0x34C36FF9,sceSyscon_driver_34C36FF9
+	IMPORT_FUNC	"sceSyscon_driver",0x34C36FF9,sceSysconGetDigitalKey
 #endif
 #ifdef F_sceSyscon_driver_0108
 	IMPORT_FUNC	"sceSyscon_driver",0xB8919D79,sceSysconMsOn
@@ -339,10 +339,10 @@
 	IMPORT_FUNC	"sceSyscon_driver",0x1B60C8AD,sceSysconWlanOff
 #endif
 #ifdef F_sceSyscon_driver_0112
-	IMPORT_FUNC	"sceSyscon_driver",0xE00BFC9E,sceSyscon_driver_E00BFC9E
+	IMPORT_FUNC	"sceSyscon_driver",0xE00BFC9E,_sceSysconGetBaryonVersion
 #endif
 #ifdef F_sceSyscon_driver_0113
-	IMPORT_FUNC	"sceSyscon_driver",0xC8D97773,sceSyscon_driver_C8D97773
+	IMPORT_FUNC	"sceSyscon_driver",0xC8D97773,_sceSysconGetBaryonTimeStamp
 #endif
 #ifdef F_sceSyscon_driver_0114
 	IMPORT_FUNC  "sceSyscon_driver", 0x3987FEA3, sceSysconCtrlUsbPower

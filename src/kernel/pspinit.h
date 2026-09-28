@@ -237,14 +237,14 @@ typedef struct SceInit {
  *
  * @return the api type in which the system has booted
 */
-int sceKernelInitApitype();
+int sceKernelInitApitype(void);
 
 /**
  * Gets the filename of the executable to be launched after all modules of the api.
  *
  * @return filename of executable or NULL if no executable found.
 */
-char *sceKernelInitFileName();
+char *sceKernelInitFileName(void);
 
 /**
  *
@@ -252,14 +252,14 @@ char *sceKernelInitFileName();
  *
  * @return the device code, one of PSPBootFrom values.
 */
-int sceKernelBootFrom();
+int sceKernelBootFrom(void);
 
 /**
  * Get the key configuration in which the system has booted.
  *
  * @return the key configuration code, one of PSPKeyConfig values 
 */
-int sceKernelApplicationType();
+int sceKernelApplicationType(void);
 #define sceKernelInitKeyConfig sceKernelApplicationType
 
 /**

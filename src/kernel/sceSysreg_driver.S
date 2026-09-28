@@ -12,13 +12,13 @@
 	IMPORT_FUNC	"sceSysreg_driver",0xF2DEAA14,sceSysregEnd
 #endif
 #ifdef F_sceSysreg_driver_0003
-	IMPORT_FUNC	"sceSysreg_driver",0xE88B77ED,sceSysreg_driver_E88B77ED
+	IMPORT_FUNC	"sceSysreg_driver",0xE88B77ED,sceSysregVblankIRQPolar
 #endif
 #ifdef F_sceSysreg_driver_0004
-	IMPORT_FUNC	"sceSysreg_driver",0xCD0F6715,sceSysreg_driver_CD0F6715
+	IMPORT_FUNC	"sceSysreg_driver",0xCD0F6715,sceSysregDoTimerEvent
 #endif
 #ifdef F_sceSysreg_driver_0005
-	IMPORT_FUNC	"sceSysreg_driver",0x844AF6BD,sceSysreg_driver_844AF6BD
+	IMPORT_FUNC	"sceSysreg_driver",0x844AF6BD,sceSysregSetMasterPriv
 #endif
 #ifdef F_sceSysreg_driver_0006
 	IMPORT_FUNC	"sceSysreg_driver",0xE2A5D1EE,sceSysregGetTachyonVersion
@@ -84,19 +84,19 @@
 	IMPORT_FUNC	"sceSysreg_driver",0xC32F2491,sceSysregKirkResetDisable
 #endif
 #ifdef F_sceSysreg_driver_0027
-	IMPORT_FUNC	"sceSysreg_driver",0xB21B6CBF,sceSysreg_driver_B21B6CBF
+	IMPORT_FUNC	"sceSysreg_driver",0xB21B6CBF,sceSysregPllGetFrequency
 #endif
 #ifdef F_sceSysreg_driver_0028
-	IMPORT_FUNC	"sceSysreg_driver",0xBB3623DF,sceSysreg_driver_BB3623DF
+	IMPORT_FUNC	"sceSysreg_driver",0xBB3623DF,sceSysregPllUpdateFrequency
 #endif
 #ifdef F_sceSysreg_driver_0029
-	IMPORT_FUNC	"sceSysreg_driver",0x53A6838B,sceSysreg_driver_53A6838B
+	IMPORT_FUNC	"sceSysreg_driver",0x53A6838B,sceSysregPllGetBaseFrequency
 #endif
 #ifdef F_sceSysreg_driver_0030
-	IMPORT_FUNC	"sceSysreg_driver",0xB4560C45,sceSysreg_driver_B4560C45
+	IMPORT_FUNC	"sceSysreg_driver",0xB4560C45,sceSysregPllGetOutSelect
 #endif
 #ifdef F_sceSysreg_driver_0031
-	IMPORT_FUNC	"sceSysreg_driver",0xDCA57573,sceSysreg_driver_DCA57573
+	IMPORT_FUNC	"sceSysreg_driver",0xDCA57573,sceSysregPllSetOutSelect
 #endif
 #ifdef F_sceSysreg_driver_0032
 	IMPORT_FUNC	"sceSysreg_driver",0x44F6CDA7,sceSysregMeBusClockEnable
@@ -105,22 +105,22 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x158AD4FC,sceSysregMeBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0034
-	IMPORT_FUNC	"sceSysreg_driver",0x4D4CE2B8,sceSysreg_driver_4D4CE2B8
+	IMPORT_FUNC	"sceSysreg_driver",0x4D4CE2B8,sceSysregAwRegABusClockEnable
 #endif
 #ifdef F_sceSysreg_driver_0035
-	IMPORT_FUNC	"sceSysreg_driver",0x789BD609,sceSysreg_driver_789BD609
+	IMPORT_FUNC	"sceSysreg_driver",0x789BD609,sceSysregAwRegABusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0036
-	IMPORT_FUNC	"sceSysreg_driver",0x391CE1C0,sceSysreg_driver_391CE1C0
+	IMPORT_FUNC	"sceSysreg_driver",0x391CE1C0,sceSysregAwRegBBusClockEnable
 #endif
 #ifdef F_sceSysreg_driver_0037
-	IMPORT_FUNC	"sceSysreg_driver",0x82D35024,sceSysreg_driver_82D35024
+	IMPORT_FUNC	"sceSysreg_driver",0x82D35024,sceSysregAwRegBBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0038
-	IMPORT_FUNC	"sceSysreg_driver",0xAF904657,sceSysreg_driver_AF904657
+	IMPORT_FUNC	"sceSysreg_driver",0xAF904657,sceSysregAwEdramBusClockEnable
 #endif
 #ifdef F_sceSysreg_driver_0039
-	IMPORT_FUNC	"sceSysreg_driver",0x438AECE9,sceSysreg_driver_438AECE9
+	IMPORT_FUNC	"sceSysreg_driver",0x438AECE9,sceSysregAwEdramBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0040
 	IMPORT_FUNC	"sceSysreg_driver",0x678AD3ED,sceSysregDmacplusBusClockEnable
@@ -159,10 +159,10 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x826430C0,sceSysregMsifBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0052
-	IMPORT_FUNC	"sceSysreg_driver",0x7CC6CBFD,sceSysreg_driver_7CC6CBFD
+	IMPORT_FUNC	"sceSysreg_driver",0x7CC6CBFD,sceSysregEmcddrBusClockEnable
 #endif
 #ifdef F_sceSysreg_driver_0053
-	IMPORT_FUNC	"sceSysreg_driver",0xEE6B9411,sceSysreg_driver_EE6B9411
+	IMPORT_FUNC	"sceSysreg_driver",0xEE6B9411,sceSysregEmcddrBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0054
 	IMPORT_FUNC	"sceSysreg_driver",0xF97D9D73,sceSysregEmcsmBusClockEnable
@@ -171,10 +171,10 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x2D0F7755,sceSysregEmcsmBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0056
-	IMPORT_FUNC	"sceSysreg_driver",0x63B9EB65,sceSysreg_driver_63B9EB65
+	IMPORT_FUNC	"sceSysreg_driver",0x63B9EB65,sceSysregApbBusClockEnable
 #endif
 #ifdef F_sceSysreg_driver_0057
-	IMPORT_FUNC	"sceSysreg_driver",0xE1AA9788,sceSysreg_driver_E1AA9788
+	IMPORT_FUNC	"sceSysreg_driver",0xE1AA9788,sceSysregApbBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0058
 	IMPORT_FUNC	"sceSysreg_driver",0xAA63C8BD,sceSysregAudioBusClockEnable
@@ -183,112 +183,112 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x054AC8C6,sceSysregAudioBusClockDisable
 #endif
 #ifdef F_sceSysreg_driver_0060
-	IMPORT_FUNC	"sceSysreg_driver",0x6B01D71B,sceSysreg_driver_6B01D71B
+	IMPORT_FUNC	"sceSysreg_driver",0x6B01D71B,sceSysregAtaClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0061
-	IMPORT_FUNC	"sceSysreg_driver",0xFC186A83,sceSysreg_driver_FC186A83
+	IMPORT_FUNC	"sceSysreg_driver",0xFC186A83,sceSysregAtaClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0062
-	IMPORT_FUNC	"sceSysreg_driver",0x7234EA80,sceSysreg_driver_7234EA80
+	IMPORT_FUNC	"sceSysreg_driver",0x7234EA80,sceSysregUsbClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0063
-	IMPORT_FUNC	"sceSysreg_driver",0x38EC3281,sceSysreg_driver_38EC3281
+	IMPORT_FUNC	"sceSysreg_driver",0x38EC3281,sceSysregUsbClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0064
-	IMPORT_FUNC	"sceSysreg_driver",0x31154490,sceSysreg_driver_31154490
+	IMPORT_FUNC	"sceSysreg_driver",0x31154490,sceSysregMsifClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0065
-	IMPORT_FUNC	"sceSysreg_driver",0x8E2D835D,sceSysreg_driver_8E2D835D
+	IMPORT_FUNC	"sceSysreg_driver",0x8E2D835D,sceSysregMsifClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0066
-	IMPORT_FUNC	"sceSysreg_driver",0x8835D1E1,sceSysreg_driver_8835D1E1
+	IMPORT_FUNC	"sceSysreg_driver",0x8835D1E1,sceSysregSpiClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0067
-	IMPORT_FUNC	"sceSysreg_driver",0x8B90B8B5,sceSysreg_driver_8B90B8B5
+	IMPORT_FUNC	"sceSysreg_driver",0x8B90B8B5,sceSysregSpiClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0068
-	IMPORT_FUNC	"sceSysreg_driver",0x7725CA08,sceSysreg_driver_7725CA08
+	IMPORT_FUNC	"sceSysreg_driver",0x7725CA08,sceSysregUartClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0069
-	IMPORT_FUNC	"sceSysreg_driver",0xA3E4154C,sceSysreg_driver_A3E4154C
+	IMPORT_FUNC	"sceSysreg_driver",0xA3E4154C,sceSysregUartClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0070
-	IMPORT_FUNC	"sceSysreg_driver",0xE8533DCA,sceSysreg_driver_E8533DCA
+	IMPORT_FUNC	"sceSysreg_driver",0xE8533DCA,sceSysregApbTimerClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0071
-	IMPORT_FUNC	"sceSysreg_driver",0xF6D83AD0,sceSysreg_driver_F6D83AD0
+	IMPORT_FUNC	"sceSysreg_driver",0xF6D83AD0,sceSysregApbTimerClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0072
-	IMPORT_FUNC	"sceSysreg_driver",0xA9CD1C1F,sceSysreg_driver_A9CD1C1F
+	IMPORT_FUNC	"sceSysreg_driver",0xA9CD1C1F,sceSysregAudioClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0073
-	IMPORT_FUNC	"sceSysreg_driver",0x2F216F38,sceSysreg_driver_2F216F38
+	IMPORT_FUNC	"sceSysreg_driver",0x2F216F38,sceSysregAudioClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0074
-	IMPORT_FUNC	"sceSysreg_driver",0xA24C242A,sceSysreg_driver_A24C242A
+	IMPORT_FUNC	"sceSysreg_driver",0xA24C242A,sceSysregLcdcClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0075
-	IMPORT_FUNC	"sceSysreg_driver",0xE89243BE,sceSysreg_driver_E89243BE
+	IMPORT_FUNC	"sceSysreg_driver",0xE89243BE,sceSysregLcdcClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0076
-	IMPORT_FUNC	"sceSysreg_driver",0x7DCA8302,sceSysreg_driver_7DCA8302
+	IMPORT_FUNC	"sceSysreg_driver",0x7DCA8302,sceSysregPwmClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0077
-	IMPORT_FUNC	"sceSysreg_driver",0x45225F8F,sceSysreg_driver_45225F8F
+	IMPORT_FUNC	"sceSysreg_driver",0x45225F8F,sceSysregPwmClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0078
-	IMPORT_FUNC	"sceSysreg_driver",0xD74D3AB6,sceSysreg_driver_D74D3AB6
+	IMPORT_FUNC	"sceSysreg_driver",0xD74D3AB6,sceSysregKeyClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0079
-	IMPORT_FUNC	"sceSysreg_driver",0xAD7C4ACB,sceSysreg_driver_AD7C4ACB
+	IMPORT_FUNC	"sceSysreg_driver",0xAD7C4ACB,sceSysregKeyClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0080
-	IMPORT_FUNC	"sceSysreg_driver",0xDC68A93F,sceSysreg_driver_DC68A93F
+	IMPORT_FUNC	"sceSysreg_driver",0xDC68A93F,sceSysregIicClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0081
-	IMPORT_FUNC	"sceSysreg_driver",0x94B0323C,sceSysreg_driver_94B0323C
+	IMPORT_FUNC	"sceSysreg_driver",0x94B0323C,sceSysregIicClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0082
-	IMPORT_FUNC	"sceSysreg_driver",0x6417CDD6,sceSysreg_driver_6417CDD6
+	IMPORT_FUNC	"sceSysreg_driver",0x6417CDD6,sceSysregSircsClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0083
-	IMPORT_FUNC	"sceSysreg_driver",0x20388C9E,sceSysreg_driver_20388C9E
+	IMPORT_FUNC	"sceSysreg_driver",0x20388C9E,sceSysregSircsClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0084
-	IMPORT_FUNC	"sceSysreg_driver",0xE3AECFFA,sceSysreg_driver_E3AECFFA
+	IMPORT_FUNC	"sceSysreg_driver",0xE3AECFFA,sceSysregGpioClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0085
-	IMPORT_FUNC	"sceSysreg_driver",0x3BBD0C0C,sceSysreg_driver_3BBD0C0C
+	IMPORT_FUNC	"sceSysreg_driver",0x3BBD0C0C,sceSysregGpioClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0086
-	IMPORT_FUNC	"sceSysreg_driver",0xC1DA05D2,sceSysreg_driver_C1DA05D2
+	IMPORT_FUNC	"sceSysreg_driver",0xC1DA05D2,sceSysregAudioClkoutClkEnable
 #endif
 #ifdef F_sceSysreg_driver_0087
-	IMPORT_FUNC	"sceSysreg_driver",0xDE170397,sceSysreg_driver_DE170397
+	IMPORT_FUNC	"sceSysreg_driver",0xDE170397,sceSysregAudioClkoutClkDisable
 #endif
 #ifdef F_sceSysreg_driver_0088
-	IMPORT_FUNC	"sceSysreg_driver",0x1969E840,sceSysreg_driver_1969E840
+	IMPORT_FUNC	"sceSysreg_driver",0x1969E840,sceSysregMsifClkSelect
 #endif
 #ifdef F_sceSysreg_driver_0089
-	IMPORT_FUNC	"sceSysreg_driver",0x1D382514,sceSysreg_driver_1D382514
+	IMPORT_FUNC	"sceSysreg_driver",0x1D382514,sceSysregMsifDelaySelect
 #endif
 #ifdef F_sceSysreg_driver_0090
-	IMPORT_FUNC	"sceSysreg_driver",0x833E6FB1,sceSysreg_driver_833E6FB1
+	IMPORT_FUNC	"sceSysreg_driver",0x833E6FB1,sceSysregAtaClkSelect
 #endif
 #ifdef F_sceSysreg_driver_0091
-	IMPORT_FUNC	"sceSysreg_driver",0x03340297,sceSysreg_driver_03340297
+	IMPORT_FUNC	"sceSysreg_driver",0x03340297,sceSysregApbTimerClkSelect
 #endif
 #ifdef F_sceSysreg_driver_0092
-	IMPORT_FUNC	"sceSysreg_driver",0x9100B4E5,sceSysreg_driver_9100B4E5
+	IMPORT_FUNC	"sceSysreg_driver",0x9100B4E5,sceSysregAudioClkSelect
 #endif
 #ifdef F_sceSysreg_driver_0093
-	IMPORT_FUNC	"sceSysreg_driver",0x0A83FC7B,sceSysreg_driver_0A83FC7B
+	IMPORT_FUNC	"sceSysreg_driver",0x0A83FC7B,sceSysregAudioClkoutClkSelect
 #endif
 #ifdef F_sceSysreg_driver_0094
-	IMPORT_FUNC	"sceSysreg_driver",0xD6628A48,sceSysreg_driver_D6628A48
+	IMPORT_FUNC	"sceSysreg_driver",0xD6628A48,sceSysregSpiClkSelect
 #endif
 #ifdef F_sceSysreg_driver_0095
-	IMPORT_FUNC	"sceSysreg_driver",0x1E18EA43,sceSysreg_driver_1E18EA43
+	IMPORT_FUNC	"sceSysreg_driver",0x1E18EA43,sceSysregLcdcClkSelect
 #endif
 #ifdef F_sceSysreg_driver_0096
 	IMPORT_FUNC	"sceSysreg_driver",0x9DD1F821,sceSysregEmcsmIoEnable
@@ -339,10 +339,10 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x26FA0928,sceSysregSircsIoDisable
 #endif
 #ifdef F_sceSysreg_driver_0112
-	IMPORT_FUNC	"sceSysreg_driver",0xF844DDF3,sceSysreg_driver_F844DDF3
+	IMPORT_FUNC	"sceSysreg_driver",0xF844DDF3,sceSysregAudioClkoutIoEnable
 #endif
 #ifdef F_sceSysreg_driver_0113
-	IMPORT_FUNC	"sceSysreg_driver",0x29A119A1,sceSysreg_driver_29A119A1
+	IMPORT_FUNC	"sceSysreg_driver",0x29A119A1,sceSysregAudioClkoutIoDisable
 #endif
 #ifdef F_sceSysreg_driver_0114
 	IMPORT_FUNC	"sceSysreg_driver",0x77DED992,sceSysregKeyIoEnable
@@ -393,7 +393,7 @@
 	IMPORT_FUNC	"sceSysreg_driver",0xA46E9CA8,sceSysreg_driver_A46E9CA8
 #endif
 #ifdef F_sceSysreg_driver_0130
-	IMPORT_FUNC	"sceSysreg_driver",0x633595F2,sceSysreg_driver_633595F2
+	IMPORT_FUNC	"sceSysreg_driver",0x633595F2,sceSysregUsbGetConnectStatus
 #endif
 #ifdef F_sceSysreg_driver_0131
 	IMPORT_FUNC	"sceSysreg_driver",0x32471457,sceSysregUsbQueryIntr
@@ -402,13 +402,13 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x692F31FF,sceSysregUsbAcquireIntr
 #endif
 #ifdef F_sceSysreg_driver_0133
-	IMPORT_FUNC	"sceSysreg_driver",0xD43E98F6,sceSysreg_driver_D43E98F6
+	IMPORT_FUNC	"sceSysreg_driver",0xD43E98F6,sceSysregMsifGetConnectStatus
 #endif
 #ifdef F_sceSysreg_driver_0134
-	IMPORT_FUNC	"sceSysreg_driver",0xBF91FBDA,sceSysreg_driver_BF91FBDA
+	IMPORT_FUNC	"sceSysreg_driver",0xBF91FBDA,sceSysregMsifQueryConnectIntr
 #endif
 #ifdef F_sceSysreg_driver_0135
-	IMPORT_FUNC	"sceSysreg_driver",0x36A75390,sceSysreg_driver_36A75390
+	IMPORT_FUNC	"sceSysreg_driver",0x36A75390,sceSysregMsifAcquireConnectIntr
 #endif
 #ifdef F_sceSysreg_driver_0136
 	IMPORT_FUNC	"sceSysreg_driver",0x25673620,sceSysregIntrInit
@@ -435,26 +435,26 @@
 	IMPORT_FUNC	"sceSysreg_driver",0x3EA188AD,sceSysregRequestIntr
 #endif
 #ifdef F_sceSysreg_driver_0144
-	IMPORT_FUNC	"sceSysreg_driver",0x5664F8B5,sceSysreg_driver_5664F8B5
+	IMPORT_FUNC	"sceSysreg_driver",0x5664F8B5,sceClkcSetCpuGear
 #endif
 #ifdef F_sceSysreg_driver_0145
-	IMPORT_FUNC	"sceSysreg_driver",0x44704E1D,sceSysreg_driver_44704E1D
+	IMPORT_FUNC	"sceSysreg_driver",0x44704E1D,sceClkcGetCpuGear
 #endif
 #ifdef F_sceSysreg_driver_0146
-	IMPORT_FUNC	"sceSysreg_driver",0x584AD989,sceSysreg_driver_584AD989
+	IMPORT_FUNC	"sceSysreg_driver",0x584AD989,sceClkcSetBusGear
 #endif
 #ifdef F_sceSysreg_driver_0147
-	IMPORT_FUNC	"sceSysreg_driver",0x377F035F,sceSysreg_driver_377F035F
+	IMPORT_FUNC	"sceSysreg_driver",0x377F035F,sceClkcGetBusGear
 #endif
 #ifdef F_sceSysreg_driver_0148
-	IMPORT_FUNC	"sceSysreg_driver",0xAB3185FD,sceSysreg_driver_AB3185FD
+	IMPORT_FUNC	"sceSysreg_driver",0xAB3185FD,sceClkcSetCpuFrequency
 #endif
 #ifdef F_sceSysreg_driver_0149
-	IMPORT_FUNC	"sceSysreg_driver",0x0EA487FA,sceSysreg_driver_0EA487FA
+	IMPORT_FUNC	"sceSysreg_driver",0x0EA487FA,sceClkcGetCpuFrequency
 #endif
 #ifdef F_sceSysreg_driver_0150
-	IMPORT_FUNC	"sceSysreg_driver",0x136E8F5A,sceSysreg_driver_136E8F5A
+	IMPORT_FUNC	"sceSysreg_driver",0x136E8F5A,sceClkcSetBusFrequency
 #endif
 #ifdef F_sceSysreg_driver_0151
-	IMPORT_FUNC	"sceSysreg_driver",0xF4811E00,sceSysreg_driver_F4811E00
+	IMPORT_FUNC	"sceSysreg_driver",0xF4811E00,sceClkcGetBusFrequency
 #endif

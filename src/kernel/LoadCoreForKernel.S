@@ -54,7 +54,7 @@
 	IMPORT_FUNC	"LoadCoreForKernel",0xC99DD47A,sceKernelQueryLoadCoreCB
 #endif
 #ifdef F_LoadCoreForKernel_0017
-	IMPORT_FUNC	"LoadCoreForKernel",0x616FCCCD,LoadCoreForKernel_616FCCCD
+	IMPORT_FUNC	"LoadCoreForKernel",0x616FCCCD,sceKernelSetBootCallbackLevel
 #endif
 #ifdef F_LoadCoreForKernel_0018
 	IMPORT_FUNC	"LoadCoreForKernel",0xF32A2940,sceKernelModuleFromUID

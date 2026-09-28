@@ -315,7 +315,7 @@
 	IMPORT_FUNC	"ThreadManForKernel",0xA249EAAE,sceKernelGetKTLS
 #endif
 #ifdef F_ThreadManForKernel_0104
-	IMPORT_FUNC	"ThreadManForKernel",0xB50F4E46,ThreadManForKernel_B50F4E46
+	IMPORT_FUNC	"ThreadManForKernel",0xB50F4E46,sceKernelSetThreadmanLogHandler
 #endif
 #ifdef F_ThreadManForKernel_0105
 	IMPORT_FUNC	"ThreadManForKernel",0x446D8DE6,sceKernelCreateThread
@@ -396,7 +396,7 @@
 	IMPORT_FUNC	"ThreadManForKernel",0xFFC36A14,sceKernelReferThreadRunStatus
 #endif
 #ifdef F_ThreadManForKernel_0131
-	IMPORT_FUNC	"ThreadManForKernel",0x2D69D086,ThreadManForKernel_2D69D086
+	IMPORT_FUNC	"ThreadManForKernel",0x2D69D086,sceKernelReferThreadDebugStatus
 #endif
 #ifdef F_ThreadManForKernel_0132
 	IMPORT_FUNC	"ThreadManForKernel",0xFCB5EB49,sceKernelGetSystemStatusFlag

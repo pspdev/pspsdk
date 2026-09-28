@@ -223,7 +223,7 @@ typedef struct SceKernelThreadKInfo {
  *
  * @return 0 on success
  */
-int ThreadManForKernel_2D69D086(SceUID uid, SceKernelThreadKInfo *info);
+int sceKernelReferThreadDebugStatus(SceUID uid, SceKernelThreadKInfo *info);
 
 #ifdef __cplusplus
 }
