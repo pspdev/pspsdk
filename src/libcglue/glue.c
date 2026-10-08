@@ -46,6 +46,7 @@
 #include "fdman.h"
 
 #define DEFAULT_HEAP_THRESHOLD_SIZE_KB 512
+#define DEFAULT_BLOCK_SIZE  (64 * 1024)
 
 /* If defined it specifies the desired size of the heap, in KB. */
 extern unsigned int sce_newlib_heap_kb_size __attribute__((weak));
@@ -305,7 +306,7 @@ static void __fill_stat(struct stat *stat, const SceIoStat *sce_stat)
         stat->st_atime = psp_to_posix_time(sce_stat->sce_st_atime);
         stat->st_mtime = psp_to_posix_time(sce_stat->sce_st_mtime);
         stat->st_ctime = psp_to_posix_time(sce_stat->sce_st_ctime);
-        stat->st_blksize = 16*1024;
+		stat->st_blksize = S_ISREG(stat->st_mode) ? DEFAULT_BLOCK_SIZE : 0;
         stat->st_blocks = stat->st_size / 512;
 }
 
