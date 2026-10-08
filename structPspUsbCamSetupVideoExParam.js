@@ -1,0 +1,26 @@
+var structPspUsbCamSetupVideoExParam =
+[
+    [ "brightness", "structPspUsbCamSetupVideoExParam.html#af20721755ba8af5ded1df7f88c7eca0d", null ],
+    [ "contrast", "structPspUsbCamSetupVideoExParam.html#a042e04176d9a61d085bd5fa632c59be4", null ],
+    [ "effectmode", "structPspUsbCamSetupVideoExParam.html#af6f100a89f80534b5e4c3c0486ecb91a", null ],
+    [ "evlevel", "structPspUsbCamSetupVideoExParam.html#a20af455e4702f4006e7c8f43835a0364", null ],
+    [ "framerate", "structPspUsbCamSetupVideoExParam.html#a7ce55967fcb370754d103f691ca496e4", null ],
+    [ "framesize", "structPspUsbCamSetupVideoExParam.html#af22e6600ce5e7a18f0c4e86630906db8", null ],
+    [ "resolution", "structPspUsbCamSetupVideoExParam.html#a40d69ade0a57d4a093f6f4ed1571528d", null ],
+    [ "saturation", "structPspUsbCamSetupVideoExParam.html#ab198c34b9bee96c35aa916f85b065c8d", null ],
+    [ "sharpness", "structPspUsbCamSetupVideoExParam.html#af1d185ee5166961d2c82ca57f3bfdf0f", null ],
+    [ "size", "structPspUsbCamSetupVideoExParam.html#a944171bfe05d124f14c6e8bd8b416d06", null ],
+    [ "unk", "structPspUsbCamSetupVideoExParam.html#a68e149318b82632dfbaec04ac55b11de", null ],
+    [ "unk10", "structPspUsbCamSetupVideoExParam.html#a35d1516dec288468dad129fddb7451d2", null ],
+    [ "unk11", "structPspUsbCamSetupVideoExParam.html#a80185777cfc2160b38316edd07897112", null ],
+    [ "unk12", "structPspUsbCamSetupVideoExParam.html#ae8e0e68fe56a3d813dd51083c2c18cda", null ],
+    [ "unk2", "structPspUsbCamSetupVideoExParam.html#ab197344cb6258c89f066540cf97306dc", null ],
+    [ "unk3", "structPspUsbCamSetupVideoExParam.html#a6ef3b7a0267b219256a6dfcb9dba86f7", null ],
+    [ "unk4", "structPspUsbCamSetupVideoExParam.html#a114e8fb79bfe6ed1552a490dd4e9d191", null ],
+    [ "unk5", "structPspUsbCamSetupVideoExParam.html#a12c5a4180190af03c9d23e15fce15b64", null ],
+    [ "unk6", "structPspUsbCamSetupVideoExParam.html#a94433cf9773791b5d915b3244cd32ef7", null ],
+    [ "unk7", "structPspUsbCamSetupVideoExParam.html#aac4e9b93f53d989d5159e6787e6336ab", null ],
+    [ "unk8", "structPspUsbCamSetupVideoExParam.html#a4a55050b54884805626db75bcecb2597", null ],
+    [ "unk9", "structPspUsbCamSetupVideoExParam.html#a0db33a40a427508749eb9d4c02f09936", null ],
+    [ "wb", "structPspUsbCamSetupVideoExParam.html#abe8a86771d6e25c9a8b146061285fae7", null ]
+];

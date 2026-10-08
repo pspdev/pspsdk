@@ -1,0 +1,5 @@
+<map id="SceKernelThreadRunStatus" name="SceKernelThreadRunStatus">
+<area shape="rect" id="Node000001" title="Statistics about a running thread." alt="" coords="5,94,188,120"/>
+<area shape="rect" id="Node000002" href="$structSceKernelSysClock.html" title="64&#45;bit system clock type." alt="" coords="28,5,165,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,47,99,94,94,94,94,47"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="SceFontImageBuffer" name="SceFontImageBuffer">
+<area shape="rect" id="Node000001" title="Buffer of the image containing a font." alt="" coords="5,94,146,120"/>
+<area shape="rect" id="Node000002" href="$structSceFontRect.html" title="Rectangular size of the font images." alt="" coords="27,5,124,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,47,78,94,73,94,73,47"/>
+</map>

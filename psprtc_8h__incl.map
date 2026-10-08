@@ -1,0 +1,9 @@
+<map id="rtc/psprtc.h" name="rtc/psprtc.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="37,5,123,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,62,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,33,52,67,47,64,70,30"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="85,79,168,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="90,30,113,64,108,67,86,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="95,153,158,178"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="130,105,130,137,124,137,124,105"/>
+</map>
