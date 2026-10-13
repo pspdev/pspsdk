@@ -49,6 +49,14 @@ int sceKernelRegisterExceptionHandler(int exno, void *func);
  */
 int sceKernelRegisterPriorityExceptionHandler(int exno, int priority, void *func);
 
+/**
+ * Get the currently active default exception handler.
+ *
+ * @return The pointer to the currently active default exception handler on
+ * success, NULL on error.
+ */
+void *sceKernelGetActiveDefaultExceptionHandler(void);
+
 #ifdef __cplusplus
 }
 #endif
