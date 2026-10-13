@@ -30,7 +30,7 @@ int sceKernelRegisterDefaultExceptionHandler(void *func);
 
 /**
  * Register a exception handler
- * 
+ *
  * @param exno - The exception number
  * @param func - Pointer to the exception handler function
  *
@@ -40,7 +40,7 @@ int sceKernelRegisterExceptionHandler(int exno, void *func);
 
 /**
  * Register a exception handler with a priority
- * 
+ *
  * @param exno - The exception number
  * @param priority - The priority of the exception
  * @param func - Pointer to the exception handler function
