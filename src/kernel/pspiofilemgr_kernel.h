@@ -96,7 +96,10 @@ typedef struct PspIoDrv
 	PspIoDrvFuncs *funcs;
 } PspIoDrv;
 
-/** 
+/** Compat: Name used on UOFW and March33 for `PspIoDrv` */
+typedef PspIoDrv SceIoDeviceTable;
+
+/**
   * Adds a new IO driver to the system.
   * @note This is only exported in the kernel version of IoFileMgr
   * 
