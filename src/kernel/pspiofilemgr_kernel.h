@@ -59,27 +59,27 @@ typedef struct PspIoDrvFileArg
 typedef struct PspIoDrvFuncs
 {
 	int (*IoInit)(PspIoDrvArg* arg);
-	int (*IoExit)(PspIoDrvArg* arg); 
-	int (*IoOpen)(PspIoDrvFileArg *arg, char *file, int flags, SceMode mode); 
-	int (*IoClose)(PspIoDrvFileArg *arg); 
-	int (*IoRead)(PspIoDrvFileArg *arg, char *data, int len); 
-	int (*IoWrite)(PspIoDrvFileArg *arg, const char *data, int len); 
-	SceOff (*IoLseek)(PspIoDrvFileArg *arg, SceOff ofs, int whence); 
+	int (*IoExit)(PspIoDrvArg* arg);
+	int (*IoOpen)(PspIoDrvFileArg *arg, char *file, int flags, SceMode mode);
+	int (*IoClose)(PspIoDrvFileArg *arg);
+	int (*IoRead)(PspIoDrvFileArg *arg, char *data, int len);
+	int (*IoWrite)(PspIoDrvFileArg *arg, const char *data, int len);
+	SceOff (*IoLseek)(PspIoDrvFileArg *arg, SceOff ofs, int whence);
 	int (*IoIoctl)(PspIoDrvFileArg *arg, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen);
-	int (*IoRemove)(PspIoDrvFileArg *arg, const char *name); 
-	int (*IoMkdir)(PspIoDrvFileArg *arg, const char *name, SceMode mode); 
+	int (*IoRemove)(PspIoDrvFileArg *arg, const char *name);
+	int (*IoMkdir)(PspIoDrvFileArg *arg, const char *name, SceMode mode);
 	int (*IoRmdir)(PspIoDrvFileArg *arg, const char *name);
-	int (*IoDopen)(PspIoDrvFileArg *arg, const char *dirname); 
+	int (*IoDopen)(PspIoDrvFileArg *arg, const char *dirname);
 	int (*IoDclose)(PspIoDrvFileArg *arg);
 	int (*IoDread)(PspIoDrvFileArg *arg, SceIoDirent *dir);
 	int (*IoGetstat)(PspIoDrvFileArg *arg, const char *file, SceIoStat *stat);
 	int (*IoChstat)(PspIoDrvFileArg *arg, const char *file, SceIoStat *stat, int bits);
-	int (*IoRename)(PspIoDrvFileArg *arg, const char *oldname, const char *newname); 
-	int (*IoChdir)(PspIoDrvFileArg *arg, const char *dir); 
-	int (*IoMount)(PspIoDrvFileArg *arg); 
-	int (*IoUmount)(PspIoDrvFileArg *arg); 
-	int (*IoDevctl)(PspIoDrvFileArg *arg, const char *devname, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen); 
-	int (*IoUnk21)(PspIoDrvFileArg *arg); 
+	int (*IoRename)(PspIoDrvFileArg *arg, const char *oldname, const char *newname);
+	int (*IoChdir)(PspIoDrvFileArg *arg, const char *dir);
+	int (*IoMount)(PspIoDrvFileArg *arg);
+	int (*IoUmount)(PspIoDrvFileArg *arg);
+	int (*IoDevctl)(PspIoDrvFileArg *arg, const char *devname, unsigned int cmd, void *indata, int inlen, void *outdata, int outlen);
+	int (*IoUnk21)(PspIoDrvFileArg *arg);
 } PspIoDrvFuncs;
 
 typedef struct PspIoDrv
@@ -102,7 +102,7 @@ typedef PspIoDrv SceIoDeviceTable;
 /**
   * Adds a new IO driver to the system.
   * @note This is only exported in the kernel version of IoFileMgr
-  * 
+  *
   * @param drv - Pointer to a filled out driver structure
   * @return < 0 on error.
   *
@@ -144,7 +144,7 @@ int sceIoReopen(const char *file, int flags, SceMode mode, SceUID fd);
  * @param dir - A character buffer in which to store the cwd
  * @param len - The length of the buffer
  *
- * @return Number of characters written to buf, if no cwd then 0 is 
+ * @return Number of characters written to buf, if no cwd then 0 is
  * returned.
  */
 int sceIoGetThreadCwd(SceUID uid, char *dir, int len);
