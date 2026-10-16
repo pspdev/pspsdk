@@ -43,14 +43,14 @@ typedef struct PspIoDrvArg
 /** Structure passed to the file functions of the io driver system */
 typedef struct PspIoDrvFileArg
 {
-	/** Unknown */
-	u32 unk1;
+	/** The file flags. Bit or'ed `PSP_O_*` flags */
+	u32 flags;
 	/** The file system number, e.g. if a file is opened as host5:/myfile.txt this field will be 5 */
 	u32 fs_num;
-	/** Pointer to the driver structure */
+	/** A pointer to the driver entry data */
 	PspIoDrvArg *drv;
-	/** Unknown, again */
-	u32 unk2;
+	/** The device attributes */
+	u32 dev_attr;
 	/** Pointer to a user defined argument, this is preserved on a per file basis */
 	void *arg;
 } PspIoDrvFileArg;
@@ -98,6 +98,12 @@ typedef struct PspIoDrv
 
 /** Compat: Name used on UOFW and March33 for `PspIoDrv` */
 typedef PspIoDrv SceIoDeviceTable;
+/** Compat: Name used on UOFW and March33 for `PspIoDrvFileArg` */
+typedef PspIoDrvFileArg SceIoIob;
+/** Compat: Name used on UOFW and March33 for `PspIoDrvArg` */
+typedef PspIoDrvArg SceIoDeviceEntry;
+/** Compat: Name used on UOFW and March33 for `PspIoDrvArg` */
+typedef PspIoDrvFuncs SceIoDeviceFunction;
 
 /**
   * Adds a new IO driver to the system.
