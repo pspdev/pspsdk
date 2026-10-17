@@ -1,0 +1,5 @@
+<map id="SceKernelVTimerInfo" name="SceKernelVTimerInfo">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,139,151,165"/>
+<area shape="rect" id="Node000002" href="$structSceKernelSysClock.html" title="64&#45;bit system clock type." alt="" coords="10,5,146,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,47,81,138,75,138,75,47"/>
+</map>

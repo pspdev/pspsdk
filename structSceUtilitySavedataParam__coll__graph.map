@@ -1,0 +1,19 @@
+<map id="SceUtilitySavedataParam" name="SceUtilitySavedataParam">
+<area shape="rect" id="Node000001" title="Structure to hold the parameters for the sceUtilitySavedataInitStart function." alt="" coords="606,220,776,246"/>
+<area shape="rect" id="Node000002" href="$structpspUtilityDialogCommon.html" title=" " alt="" coords="318,5,481,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="482,33,500,40,545,59,584,88,617,122,646,158,685,218,680,221,641,161,613,125,580,92,542,64,498,45,480,38"/>
+<area shape="rect" id="Node000003" href="$structPspUtilitySavedataSFOParam.html" title="title, savedataTitle, detail: parts of the unencrypted SFO data, it contains what the VSH and standar..." alt="" coords="301,55,498,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="464,83,500,97,543,118,584,144,635,183,676,217,673,221,632,187,580,148,541,123,498,102,462,88"/>
+<area shape="rect" id="Node000004" href="$structPspUtilitySavedataFileData.html" title=" " alt="" coords="21,171,202,196"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="217,182,276,184,430,191,582,210,620,217,619,222,582,215,429,196,276,189,217,187"/>
+<area shape="rect" id="Node000005" href="$structPspUtilitySavedataListSaveNewData.html" title=" " alt="" coords="307,212,492,253"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="206,197,307,214,306,220,205,202"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="507,230,606,230,606,236,507,236"/>
+<area shape="rect" id="Node000006" href="$structSceUtilitySavedataMsFreeInfo.html" title=" " alt="" coords="300,277,498,303"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="482,271,621,244,622,249,483,276"/>
+<area shape="rect" id="Node000007" href="$structSceUtilitySavedataMsDataInfo.html" title=" " alt="" coords="300,391,499,416"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="514,397,549,388,581,374,617,344,646,308,668,273,682,245,686,247,672,276,650,312,620,348,583,378,550,393,515,402"/>
+<area shape="rect" id="Node000008" href="$structSceUtilitySavedataUsedDataInfo.html" title=" " alt="" coords="5,347,218,372"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="233,353,383,344,450,337,498,328,548,310,596,287,669,244,672,248,599,292,550,315,500,333,451,342,384,349,233,358"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="215,373,311,387,311,393,215,378"/>
+</map>
