@@ -1,0 +1,5 @@
+<map id="SceFontCharacterInfo" name="SceFontCharacterInfo">
+<area shape="rect" id="Node000001" title="All the information regarding a single character." alt="" coords="8,94,156,120"/>
+<area shape="rect" id="Node000002" href="$structSceFontCharacterData.html" title="Fixed&#45;point info about singular characters." alt="" coords="5,5,159,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,47,85,94,79,94,79,47"/>
+</map>

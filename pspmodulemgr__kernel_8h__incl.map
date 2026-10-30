@@ -1,0 +1,14 @@
+<map id="kernel/pspmodulemgr_kernel.h" name="kernel/pspmodulemgr_kernel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,151,46"/>
+<area shape="rect" id="Node000002" href="$pspkerneltypes_8h.html" title=" " alt="" coords="42,168,160,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,46,99,152,94,152,78,47"/>
+<area shape="rect" id="Node000003" href="$psptypes_8h.html" title=" " alt="" coords="59,241,142,267"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="66,48,48,77,32,114,25,154,26,173,32,192,47,213,67,230,63,234,43,217,28,195,21,174,20,153,27,112,44,75,61,45"/>
+<area shape="rect" id="Node000005" href="$pspmodulemgr_8h.html" title=" " alt="" coords="116,94,232,120"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="103,44,149,82,146,86,100,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,194,103,226,98,226,98,194"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="69,315,132,341"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="103,267,103,299,98,299,98,267"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="164,122,126,159,122,155,160,118"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="179,120,182,154,180,175,174,195,158,217,138,234,134,230,154,213,169,192,175,174,177,154,174,120"/>
+</map>

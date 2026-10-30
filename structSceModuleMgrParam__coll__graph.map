@@ -1,0 +1,10 @@
+<map id="SceModuleMgrParam" name="SceModuleMgrParam">
+<area shape="rect" id="Node000001" title="Structure used internally for many sceModuleManager module functions." alt="" coords="77,183,223,208"/>
+<area shape="rect" id="Node000002" href="$structSceModule.html" title="Describes a loaded module in memory." alt="" coords="5,94,92,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,128,138,180,134,184,72,132"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="108,98,118,107,110,115,92,118,91,112,108,111,113,107,105,102"/>
+<area shape="rect" id="Node000003" href="$structSceLoadCoreExecFileInfo.html" title=" " alt="" coords="167,94,338,120"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="229,132,166,184,162,180,225,128"/>
+<area shape="rect" id="Node000004" href="$struct__scemoduleinfo.html" title=" " alt="" coords="196,5,309,31"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="255,47,255,94,250,94,250,47"/>
+</map>

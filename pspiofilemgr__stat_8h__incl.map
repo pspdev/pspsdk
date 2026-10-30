@@ -1,0 +1,10 @@
+<map id="user/pspiofilemgr_stat.h" name="user/pspiofilemgr_stat.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,164,31"/>
+<area shape="rect" id="Node000002" href="$psptypes_8h.html" title=" " alt="" coords="43,153,126,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,32,72,54,64,79,65,110,74,138,69,139,60,111,59,79,67,52,76,30"/>
+<area shape="rect" id="Node000004" href="$pspkerneltypes_8h.html" title=" " alt="" coords="73,79,192,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="95,30,118,64,114,67,90,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="53,226,116,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,179,87,211,82,211,82,179"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="127,106,103,141,99,138,122,103"/>
+</map>

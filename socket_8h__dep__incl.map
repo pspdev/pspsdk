@@ -1,0 +1,30 @@
+<map id="libcglue/sys/socket.h" name="libcglue/sys/socket.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="402,5,544,31"/>
+<area shape="rect" id="Node000002" href="$glue_8c.html" title=" " alt="" coords="5,79,109,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="387,37,110,84,109,79,386,32"/>
+<area shape="rect" id="Node000003" href="$netdb_8c.html" title=" " alt="" coords="336,226,447,252"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="387,34,331,49,271,73,217,107,194,129,174,154,167,174,172,190,187,203,210,213,272,227,336,234,335,239,271,233,209,219,184,207,167,193,161,174,169,151,190,125,214,103,269,68,329,44,386,29"/>
+<area shape="rect" id="Node000004" href="$in_8h.html" title=" " alt="" coords="407,79,539,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="476,46,476,79,470,79,470,46"/>
+<area shape="rect" id="Node000006" href="$socket_8c.html" title=" " alt="" coords="682,226,800,252"/>
+<area shape="poly" id="edge13_Node000001_Node000006" title=" " alt="" coords="551,33,601,49,653,74,702,107,723,128,741,151,748,170,751,191,747,226,742,225,745,191,743,172,736,154,719,131,698,111,651,78,599,54,549,38"/>
+<area shape="rect" id="Node000010" href="$pspnet__inet_8h.html" title=" " alt="" coords="825,153,945,178"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="560,17,617,22,681,33,746,50,808,77,831,93,852,114,880,151,876,154,848,117,828,97,805,81,744,55,680,38,617,28,559,23"/>
+<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="431,114,408,132,390,154,384,172,384,192,390,226,385,227,378,192,379,171,385,151,404,128,428,110"/>
+<area shape="rect" id="Node000005" href="$inet_8h.html" title=" " alt="" coords="570,153,699,178"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="515,109,608,150,606,155,513,114"/>
+<area shape="poly" id="edge9_Node000004_Node000006" title=" " alt="" coords="555,92,595,98,637,108,678,126,714,151,727,168,736,189,743,226,738,227,731,191,723,171,710,155,675,130,635,113,594,103,554,97"/>
+<area shape="rect" id="Node000007" href="$tcp_8h.html" title=" " alt="" coords="184,153,324,178"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="422,112,292,155,291,150,421,107"/>
+<area shape="rect" id="Node000008" href="$pspnet__resolver_8h.html" title=" " alt="" coords="400,153,546,178"/>
+<area shape="poly" id="edge10_Node000004_Node000008" title=" " alt="" coords="476,120,476,152,470,152,470,120"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="580,186,434,228,432,223,578,181"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="667,185,724,224,721,228,664,190"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="450,191,407,228,404,224,446,187"/>
+<area shape="rect" id="Node000009" href="$inethelper_8c.html" title=" " alt="" coords="521,226,633,252"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="504,185,561,224,558,228,501,189"/>
+<area shape="poly" id="edge16_Node000010_Node000006" title=" " alt="" coords="848,188,767,228,764,223,846,183"/>
+<area shape="poly" id="edge17_Node000010_Node000009" title=" " alt="" coords="818,185,630,228,629,223,817,180"/>
+<area shape="rect" id="Node000011" href="$select_8c.html" title=" " alt="" coords="828,226,942,252"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="888,194,888,226,882,226,882,194"/>
+</map>
