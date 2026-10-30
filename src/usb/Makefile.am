@@ -20,12 +20,14 @@ USBCAM_OBJS = sceUsbCam_0000.o sceUsbCam_0001.o sceUsbCam_0002.o sceUsbCam_0003.
 
 USBGPS_OBJS = sceUsbGps_0000.o sceUsbGps_0001.o sceUsbGps_0002.o sceUsbGps_0003.o sceUsbGps_0004.o sceUsbGps_0005.o sceUsbGps_0006.o sceUsbGps_0007.o sceUsbGps_0008.o sceUsbGps_0009.o sceUsbGps_0010.o sceUsbGps_0011.o sceUsbGps_0012.o sceUsbGps_0013.o
 
+USBGPSDRIVER_OBJS = sceUsbGps_driver_0000.o sceUsbGps_driver_0001.o sceUsbGps_driver_0002.o sceUsbGps_driver_0003.o sceUsbGps_driver_0004.o sceUsbGps_driver_0005.o sceUsbGps_driver_0006.o sceUsbGps_driver_0007.o sceUsbGps_driver_0008.o sceUsbGps_driver_0009.o sceUsbGps_driver_0010.o sceUsbGps_driver_0011.o sceUsbGps_driver_0012.o
+
 libpspusbincludedir = @PSPSDK_INCLUDEDIR@
 
 libpspusbinclude_HEADERS =	\
 	pspusb.h pspusbbus.h pspusbcam.h pspusbacc.h pspusbgps.h
 
-lib_LIBRARIES = libpspusb.a libpspusb_driver.a libpspusbbus_driver.a libpspusbcam.a libpspusbgps.a
+lib_LIBRARIES = libpspusb.a libpspusb_driver.a libpspusbbus_driver.a libpspusbcam.a libpspusbgps.a libpspusbgps_driver.a
 
 libpspusb_a_SOURCES = sceUsb.S
 libpspusb_a_LIBADD  = $(USB_OBJS)
@@ -42,6 +44,9 @@ libpspusbcam_a_LIBADD  = $(USBCAM_OBJS)
 libpspusbgps_a_SOURCES = sceUsbGps.S
 libpspusbgps_a_LIBADD  = $(USBGPS_OBJS)
 
+libpspusbgps_driver_a_SOURCES = sceUsbGps_driver.S
+libpspusbgps_driver_a_LIBADD = $(USBGPSDRIVER_OBJS)
+
 $(USB_OBJS): sceUsb.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
@@ -55,4 +60,7 @@ $(USBCAM_OBJS): sceUsbCam.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
 
 $(USBGPS_OBJS): sceUsbGps.S
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+
+$(USBGPSDRIVER_OBJS): sceUsbGps_driver.S
 	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
