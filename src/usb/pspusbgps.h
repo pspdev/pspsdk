@@ -190,6 +190,8 @@ typedef struct SceUsbGpsSatelliteData {
  * sceUtilityLoadModule(PSP_MODULE_USB_GPS) and the USB bus, accessory
  * and GPS drivers started with ::sceUsbStart before calling this.
  *
+ * Available on firmware 2.70 and higher only.
+ *
  * @return 0 on success, < 0 on error
 */
 int sceUsbGpsOpen(void);
@@ -197,12 +199,16 @@ int sceUsbGpsOpen(void);
 /**
  * Stops GPS receiver operation and shuts down the GPS driver.
  *
+ * Available on firmware 2.70 and higher only.
+ *
  * @return 0 on success, < 0 on error
 */
 int sceUsbGpsClose(void);
 
 /**
  * Gets the state of the GPS receiver.
+ *
+ * Available on firmware 2.70 and higher only.
  *
  * @param state - pointer to a variable that receives the state,
  * one of ::PspUsbGpsState
@@ -213,6 +219,8 @@ int sceUsbGpsGetState(u32 *state);
 
 /**
  * Gets position and satellite information.
+ *
+ * Available on firmware 2.70 and higher only.
  *
  * @param pos - pointer to a structure that receives the position data,
  * or NULL if not needed
@@ -229,6 +237,8 @@ int sceUsbGpsGetData(SceUsbGpsPositionData *pos, SceUsbGpsSatelliteData *sat);
  * Can be called any time after ::sceUsbGpsOpen. Takes effect immediately
  * if the receiver is running, otherwise when it starts.
  *
+ * Available on firmware 3.70 and higher only.
+ *
  * @param mode - one of ::PspUsbGpsStaticNavMode
  *
  * @return 0 on success, < 0 on error
@@ -237,6 +247,8 @@ int sceUsbGpsSetStaticNavMode(u8 mode);
 
 /**
  * Gets the current static navigation mode.
+ *
+ * Available on firmware 3.70 and higher only.
  *
  * @param mode - pointer to a variable that receives the mode,
  * one of ::PspUsbGpsStaticNavMode
@@ -251,6 +263,8 @@ int sceUsbGpsGetStaticNavMode(u8 *mode);
  * ::PSP_USBGPS_INIT_DATA_LOCATION_FLASH1. Should be called right after
  * ::sceUsbGpsOpen, before the receiver starts and the file is read.
  *
+ * Available on firmware 2.70 and higher only.
+ *
  * @param datalocation - one of ::PspUsbGpsInitDataLocation
  *
  * @return 0 on success, < 0 on error
@@ -259,6 +273,8 @@ int sceUsbGpsSetInitDataLocation(u32 datalocation);
 
 /**
  * Gets the file currently selected for the GPS init (assistance) data.
+ *
+ * Available on firmware 2.70 and higher only.
  *
  * @param datalocation - pointer to a variable that receives the current
  * location, one of ::PspUsbGpsInitDataLocation
@@ -275,6 +291,8 @@ int sceUsbGpsGetInitDataLocation(u32 *datalocation);
  * receiver while it runs. This call only writes the current in-memory copy to
  * storage so the next session can obtain a fix faster.
  *
+ * Available on firmware 2.70 and higher only.
+ *
  * @return 0 on success, < 0 on error. Returns PSP_USBGPS_ERROR_NO_INIT_DATA if
  * the receiver has not produced any assistance data yet.
 */
@@ -288,6 +306,8 @@ int sceUsbGpsSaveInitData(void);
  * ::PspUsbGpsPowerSaveMode. Should be called immediately after
  * ::sceUsbGpsOpen. It fails once the receiver has started running.
  *
+ * Available on firmware 3.00 and higher only.
+ *
  * @param mode - one of ::PspUsbGpsPowerSaveMode
  * @param interval - idle time in seconds before power saving engages, 30 to 600
  *
@@ -297,6 +317,8 @@ int sceUsbGpsSetPowerSaveMode(u32 mode, u32 interval);
 
 /**
  * Gets the current GPS receiver power-save settings.
+ *
+ * Available on firmware 3.00 and higher only.
  *
  * @param mode - pointer that receives the mode, one of ::PspUsbGpsPowerSaveMode,
  * or NULL if not needed
@@ -310,6 +332,8 @@ int sceUsbGpsGetPowerSaveMode(u32 *mode, u32 *interval);
 /**
  * Restarts the GPS receiver at the given reset level, controlling how much of
  * its acquired data is discarded.
+ *
+ * Available on firmware 2.70 and higher only.
  *
  * @param type - one of ::PspUsbGpsResetType
  *
@@ -327,6 +351,8 @@ int sceUsbGpsReset(u32 type);
  * ::sceUsbGpsGetData result. altitude + geoidsep is the WGS84
  * ellipsoidal height. Pass geoidsep as 0 when it is unknown (the
  * resulting error is negligible for a seed).
+ *
+ * Available on firmware 3.30 and higher only.
  *
  * @param latitude - latitude in degrees, -90 to 90 (south negative)
  * @param longitude - longitude in degrees, -180 to 180 (west negative)
