@@ -22,6 +22,12 @@ extern "C" {
 #define PSP_USB_CABLE_CONNECTED        0x020 
 #define PSP_USB_CONNECTION_ESTABLISHED 0x002
 
+/* Error codes of the USB bus driver, also returned by the accessory drivers */
+#define PSP_USB_ERROR_ALREADY_DONE				(0x80243001)
+#define PSP_USB_ERROR_INVALID_ARGUMENT			(0x80243002)
+#define PSP_USB_ERROR_DRIVER_NOT_FOUND			(0x80243005)
+#define PSP_USB_ERROR_BUS_DRIVER_NOT_STARTED	(0x80243007)
+
 /**
   * Start a USB driver.
   * 
