@@ -27,7 +27,7 @@ extern "C" {
 
 /**
   * Register an interrupt handler.
-  * 
+  *
   * @param intno - The interrupt number to register.
   * @param no    - The queue number.
   * @param handler - Pointer to the handler.
@@ -49,7 +49,7 @@ int sceKernelReleaseIntrHandler(int intno);
 
 /**
   * Enable an interrupt.
-  * 
+  *
   * @param intno - Interrupt to enable.
   *
   * @return 0 on success.
@@ -58,7 +58,7 @@ int sceKernelEnableIntr(int intno);
 
 /**
   * Disable an interrupt.
-  * 
+  *
   * @param intno - Interrupt to disable.
   *
   * @return 0 on success.
@@ -74,12 +74,14 @@ int sceKernelIsIntrContext(void);
 
 /**
  * Query system call number of `function`.
- * 
+ *
  * @param[in] function A function pointer of the function to get the syscall number.
  *
  * @return System call number if `>= 0`, `< 0` on error.
  */
 int sceKernelQuerySystemCall(void *function);
+
+int sceKernelCallSubIntrHandler(int intr_num, int sub_intr_num, int arg2, int arg3);
 
 #ifdef __cplusplus
 }
