@@ -146,7 +146,7 @@ typedef struct PspIoDrv
 	/** Device type, this 0x10 is for a filesystem driver */
 	u32 dev_type;
 	/** Unknown, set to `0x800` almost always (sometimes to `0x001`)*/
-	u32 unk2;
+	u32 size;
 	/** The device short description. */
 	const char *name2;
 	/** Pointer to a filled out functions table */
