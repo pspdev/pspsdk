@@ -38,7 +38,17 @@ typedef struct PspIoDrvArg
 	struct PspIoDrv *drv;
 	/** Pointer to a user defined argument (if written by the driver will preseve across calls */
 	void *arg;
+	/** The number of file descriptor UID related to the device. */
+	SceSize user_fd_count;
 } PspIoDrvArg;
+
+typedef struct SceIoCwd {
+    struct SceIoCwd *next;
+    char *path_name;
+    PspIoDrvArg *drv;
+    void *cwd_private;
+    int ref_count;
+} SceIoCwd;
 
 /** Structure passed to the file functions of the io driver system */
 typedef struct PspIoDrvFileArg
@@ -53,6 +63,53 @@ typedef struct PspIoDrvFileArg
 	u32 dev_attr;
 	/** Pointer to a user defined argument, this is preserved on a per file basis */
 	void *arg;
+	/** Current work directory data */
+	SceIoCwd *cwd;
+	/** The current file position offset. */
+	s64 file_pos;
+	/** he thread UID of owner (?). */
+	SceUID thread_id;
+	u32 unk;
+	/** UID of the opened file */
+	SceUID uid;
+	/** The thread UID of the thread that opened the file. */
+	SceUID open_thread_id;
+	/** If the file is opened in user mode. */
+	u8 is_user_mode;
+	/** If the file was opened with power lock flag. */
+	u8 is_user_mode;
+	/** Unknown. It is a boolean of some sort, async related. */
+	u8 unk2;
+	/** The async task priority. */
+	u8 async_priority;
+	/** The thread UID of the thread for the file async operations. */
+	SceUID async_thread_id;
+	/** The semaphore UID for the file async operations. */
+	SceUID async_sema;
+	/** The event flag UID for the file async operations. */
+	SceUID async_event_flag;
+	/** The callback UID for the file async operations. */
+	SceUID async_callback;
+	/** A pointer to the parameter to pass to `async_callback`. */
+	void * async_callback_argp;
+	u32 unused;
+	/** The current `k1` register value for async operations. */
+	u32 k1;
+	/** The async return value of operations. */
+	s64 async_return;
+	/** Arguments for the command to use. */
+	s32 async_args[6];
+	/** The async command to execute. */
+	u32 async_cmd;
+	/** The current user level of the file. */
+	u32 user_level;
+	/** The IO hook */
+	// FIXME: Proper type... (SceIoHook)
+	u32 hook[3];
+	u32 unk3;
+	char *new_path;
+	/// The return address.
+	SceSize return_addr;
 } PspIoDrvFileArg;
 
 /** Structure to maintain the file driver pointers */
@@ -88,9 +145,9 @@ typedef struct PspIoDrv
 	const char *name;
 	/** Device type, this 0x10 is for a filesystem driver */
 	u32 dev_type;
-	/** Unknown, set to 0x800 */
+	/** Unknown, set to `0x800` almost always (sometimes to `0x001`)*/
 	u32 unk2;
-	/** This seems to be the same as name but capitalised :/ */
+	/** The device short description. */
 	const char *name2;
 	/** Pointer to a filled out functions table */
 	PspIoDrvFuncs *funcs;
