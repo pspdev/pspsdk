@@ -77,7 +77,7 @@ typedef struct PspIoDrvFileArg
 	/** If the file is opened in user mode. */
 	u8 is_user_mode;
 	/** If the file was opened with power lock flag. */
-	u8 is_user_mode;
+	u8 is_power_locked;
 	/** Unknown. It is a boolean of some sort, async related. */
 	u8 unk2;
 	/** The async task priority. */
