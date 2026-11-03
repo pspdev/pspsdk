@@ -31,7 +31,7 @@ USBACCINTERNAL_OBJS = sceUsbAcc_internal_0000.o sceUsbAcc_internal_0001.o sceUsb
 libpspusbincludedir = @PSPSDK_INCLUDEDIR@
 
 libpspusbinclude_HEADERS =	\
-	pspusb.h pspusbbus.h pspusbcam.h pspusbacc.h pspusbgps.h
+	pspusb.h pspusbbus.h pspusbcam.h pspusbacc.h pspusbacc_kernel.h pspusbgps.h
 
 lib_LIBRARIES = libpspusb.a libpspusb_driver.a libpspusbbus_driver.a libpspusbcam.a libpspusbgps.a libpspusbgps_driver.a libpspusbacc.a libpspusbacc_driver.a libpspusbacc_internal.a
 
