@@ -173,7 +173,7 @@ int sceKernelSetDdrMemoryProtection(void *addr, int size, int prot);
  * @param unk - Unknown, probably some flag or type, pass 1.
  * @param name - Name assigned to the new heap.
  *
- * @return The UID of the new heap, or if less than 0 an error. 
+ * @return The UID of the new heap, or if less than 0 an error.
 */
 SceUID sceKernelCreateHeap(SceUID partitionid, SceSize size, int unk, const char *name);
 
@@ -303,6 +303,48 @@ int sceKernelGetSystemStatus(void);
  * @attention Needs to link to `pspsysmem_kernel` stub.
  */
 int sceKernelGetUIDcontrolBlock(SceUID uid, SceUidControlBlock** block);
+
+/**
+ * Gets the QTGP2 value.
+ *
+ * @param[out] qtgp2 A pointer to a buffer to receive the qtgp2 value. The
+ *   buffer must be at least 8 bytes in size.
+ *
+ * @returns `0` on success, `< 0` otherwise.
+ */
+int sceKernelGetQTGP2(u8 *qtgp2);
+
+/**
+ * Sets the QTGP2 value on the global game information.
+ *
+ * @param[in] qtgp2 A pointer to the QTGP2 value to set. 8 bytes buffer.
+ *
+ * @returns `0` on success, `< 0` otherwise.
+ *
+ * @attention This API
+ */
+int sceKernelSetQTGP2(const u8 *qtgp2);
+
+/**
+ * Gets the QTGP3 value.
+ *
+ * @param[out] qtgp3 A pointer to a buffer to receive the qtgp3 value. The
+ *   buffer must be at least 16 bytes in size.
+ *
+ * @returns `0` on success, `< 0` otherwise.
+ */
+int sceKernelGetQTGP3(u8 *qtgp3);
+
+/**
+ * Sets the QTGP3 value on the global game information.
+ *
+ * @param[in] qtgp3 A pointer to the QTGP3 value to set. 16 bytes buffer.
+ *
+ * @returns `0` on success, `< 0` otherwise.
+ *
+ * @attention This API
+ */
+int sceKernelSetQTGP3(const u8 *qtgp3);
 
 #ifdef __cplusplus
 }
