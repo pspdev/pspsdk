@@ -27,9 +27,6 @@
 /** @addtogroup SysMemKern System Memory Manager Kernel */
 /**@{*/
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 typedef struct _PspSysmemPartitionInfo
 {
@@ -110,6 +107,13 @@ typedef struct PspSysMemPartition {
     u32 attributes;
     PspPartitionData *data;
 } PspSysMemPartition;
+
+typedef int (* SceGetIdFunc)(const char* path, char *id);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 /**
  * Query the parition information
@@ -349,6 +353,31 @@ int sceKernelGetQTGP3(u8 *qtgp3);
  * @attention This API is available from 2.00 and forward.
  */
 int sceKernelSetQTGP3(const u8 *qtgp3);
+
+/**
+ * Registers a get ID function, that will be used on `sceKernelGetId`.
+ *
+ * @param func The function pointer to register.
+ *
+ * @returns `0` on success, `< 0` otherwise.
+ *
+ * @attention This API is available from 3.00 and forward.
+ */
+int sceKernelRegisterGetIdFunc(SceGetIdFunc func);
+
+/**
+ * Calls the registered get ID function with [`sceKernelRegisterGetIdFunc`],
+ * and then unregisters it.
+ *
+ * @param[in] path The path to pass to the registered function.
+ * @param[out] id A pointer to be passed to the registered function to receive
+ *   the ID.
+ *
+ * @returns `0` on success, `< 0` otherwise.
+ *
+ * @attention This API is available from 3.00 and forward.
+ */
+int sceKernelGetId(const char *path, char * id);
 
 #ifdef __cplusplus
 }
