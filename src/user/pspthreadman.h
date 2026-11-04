@@ -517,6 +517,18 @@ SceUID sceKernelCreateSema(const char *name, SceUInt attr, int initVal, int maxV
  */
 int sceKernelDeleteSema(SceUID semaid);
 
+/** Cancels the wait of a semaphore.
+ *
+ * @param semaid The semaphore UID
+ * @param newcount The value to set in the semaphore. If set to `-1`, the
+ *   initial value of the semaphore is used.
+ * @param[out] num_wait_threads A pointer to receive the number of threads that
+ *   were waiting on the specified semaphore.
+ *
+ * @returns `0` on success, error value otherwise (`< 0`).
+ */
+int sceKernelCancelSema(SceUID semaid, int newcount, int *num_wait_threads);
+
 /**
  * Send a signal to a semaphore
  *
