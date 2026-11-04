@@ -311,6 +311,8 @@ int sceKernelGetUIDcontrolBlock(SceUID uid, SceUidControlBlock** block);
  *   buffer must be at least 8 bytes in size.
  *
  * @returns `0` on success, `< 0` otherwise.
+ *
+ * @attention This API is available from 2.00 and forward.
  */
 int sceKernelGetQTGP2(u8 *qtgp2);
 
@@ -321,7 +323,7 @@ int sceKernelGetQTGP2(u8 *qtgp2);
  *
  * @returns `0` on success, `< 0` otherwise.
  *
- * @attention This API
+ * @attention This API is available from 2.00 and forward.
  */
 int sceKernelSetQTGP2(const u8 *qtgp2);
 
@@ -332,6 +334,8 @@ int sceKernelSetQTGP2(const u8 *qtgp2);
  *   buffer must be at least 16 bytes in size.
  *
  * @returns `0` on success, `< 0` otherwise.
+ *
+ * @attention This API is available from 2.00 and forward.
  */
 int sceKernelGetQTGP3(u8 *qtgp3);
 
@@ -342,7 +346,7 @@ int sceKernelGetQTGP3(u8 *qtgp3);
  *
  * @returns `0` on success, `< 0` otherwise.
  *
- * @attention This API
+ * @attention This API is available from 2.00 and forward.
  */
 int sceKernelSetQTGP3(const u8 *qtgp3);
 
