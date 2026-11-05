@@ -136,6 +136,7 @@ AC_CONFIG_FILES([Makefile
                  src/video/Makefile
                  src/vsh/Makefile
                  src/wlan/Makefile
+                 src/lflash_fatfmt/Makefile
                  src/samples/Makefile
                  tools/Makefile
                  tools/PrxEncrypter/Makefile])
