@@ -25,6 +25,7 @@ macro(create_pbp_file)
     VERSION         # optional, adds version information to PARAM.SFO
     OUTPUT_DIR      # optional, set the output directory for the EBOOT.PBP
     MEMSIZE         # optional, set to 1 by default for allowing access to all available memory. Can be set to 2 for better Vita compatibility, but limited memory access
+    EFAWARE         # optional, set to 1 to mark the homebrew is aware of `EF:` drive
   )
   set(options
     PBOOT     # optional, generates a PBOOT.PBP instead of EBOOT.PBP
@@ -153,7 +154,7 @@ macro(create_pbp_file)
         ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not encrypting PRX for target ${ARG_TARGET}, use ENC_PRX flag if you need to."
     )
     endif()
-    
+
   else()
     add_custom_command(
       TARGET ${ARG_TARGET}
@@ -161,9 +162,15 @@ macro(create_pbp_file)
       ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Not building PRX for target ${ARG_TARGET}"
       )
   endif()
-  
+
   if (${ARG_MEMSIZE} STREQUAL "NULL")
     set(ARG_MEMSIZE "2")
+  endif()
+
+  if (${ARG_EFAWARE} STREQUAL "NULL")
+    set(MKSFO_EFAWARE_ARG "")
+  else ()
+    set(MKSFO_EFAWARE_ARG "-d EFAWARE=${ARG_EFAWARE}")
   endif()
 
   if(PBOOT)
@@ -176,7 +183,7 @@ macro(create_pbp_file)
     add_custom_command(
       TARGET ${ARG_TARGET}
       POST_BUILD COMMAND
-      "${PSPDEV}/bin/mksfoex" "${MKSFO_PBOOT_ARG}" "-d" "MEMSIZE=${ARG_MEMSIZE}" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${ARG_OUTPUT_DIR}/PARAM.SFO"
+      "${PSPDEV}/bin/mksfoex" "${MKSFO_PBOOT_ARG}" "${MKSFO_EFAWARE_ARG}" "-d" "MEMSIZE=${ARG_MEMSIZE}" "-s" "APP_VER=${ARG_VERSION}" "${ARG_TITLE}" "${ARG_OUTPUT_DIR}/PARAM.SFO"
       COMMENT "Calling mksfoex for target ${ARG_TARGET}"
       )
     set(SFO_PATH "${ARG_OUTPUT_DIR}/PARAM.SFO")
@@ -216,5 +223,5 @@ macro(create_pbp_file)
     POST_BUILD COMMAND
     ${CMAKE_COMMAND} -E cmake_echo_color --cyan "${PBP_FILENAME} file created for target ${ARG_TARGET}."
   )
-  
+
 endmacro()
