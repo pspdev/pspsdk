@@ -1,0 +1,5 @@
+<map id="UsbdDeviceReq" name="UsbdDeviceReq">
+<area shape="rect" id="Node000001" title="USB device request, used by sceUsbbdReqSend and sceUsbbdReqRecv." alt="" coords="5,94,121,120"/>
+<area shape="rect" id="Node000002" href="$structUsbEndpoint.html" title="USB driver endpoint." alt="" coords="15,5,111,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,47,66,94,60,94,60,47"/>
+</map>

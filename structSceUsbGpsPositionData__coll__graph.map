@@ -1,0 +1,5 @@
+<map id="SceUsbGpsPositionData" name="SceUsbGpsPositionData">
+<area shape="rect" id="Node000001" title="Position information returned by sceUsbGpsGetData." alt="" coords="5,94,172,120"/>
+<area shape="rect" id="Node000002" href="$structScePspDateTime.html" title=" " alt="" coords="27,5,150,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,47,91,94,86,94,86,47"/>
+</map>
