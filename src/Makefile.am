@@ -14,6 +14,7 @@ SUBDIRS = \
 	hprm \
 	kermit \
 	kernel \
+	lflash_fatfmt \
 	libcglue \
 	libpthreadglue \
 	modinfo \
@@ -27,15 +28,15 @@ SUBDIRS = \
 	registry \
 	rtc \
 	sascore \
-	sircs \
 	sdk \
+	sircs \
 	startup \
 	umd \
 	usb \
 	usbstor \
 	user \
-	vaudio \
 	utility \
+	vaudio \
 	vfpu \
 	video \
 	vsh \
