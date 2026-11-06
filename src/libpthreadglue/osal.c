@@ -57,6 +57,26 @@ extern unsigned int __threadDataKey;
 
 extern void *__globalTls;
 
+/* Each linked runtime owns only the semaphores created through its OSAL. */
+typedef struct pspSemaphoreNode
+  {
+    pte_osSemaphoreHandle handle;
+    struct pspSemaphoreNode *next;
+  } pspSemaphoreNode;
+
+typedef struct pspSemaphoreRegistry
+  {
+    SceLwMutexWorkarea lock;
+    pspSemaphoreNode *head;
+    int initialized;
+  } pspSemaphoreRegistry;
+
+#ifdef F___semaphoreRegistry
+pspSemaphoreRegistry __semaphoreRegistry;
+#else
+extern pspSemaphoreRegistry __semaphoreRegistry;
+#endif
+
 /*
  * Data stored on a per-thread basis - allocated in pte_osThreadCreate
  * and freed in pte_osThreadDelete.
@@ -128,6 +148,15 @@ pte_osResult pte_osInit(void)
   result = pteTlsGlobalInit(PSP_MAX_TLS);
 
   if (result == PTE_OS_OK) {
+    /* Use a native lock: creating a pthread mutex would recurse into OSAL. */
+    if (sceKernelCreateLwMutex(&__semaphoreRegistry.lock,
+                              "pthread_semaphores", 0, 0, NULL) < 0) {
+      pteTlsGlobalDestroy();
+      return PTE_OS_NO_RESOURCES;
+    }
+    __semaphoreRegistry.head = NULL;
+    __semaphoreRegistry.initialized = 1;
+
     /* Allocate a key that we use to store control information (e.g. cancellation semaphore) per thread */
     result = __pteTlsAlloc(&__threadDataKey);
 
@@ -159,8 +188,12 @@ pte_osResult pte_osInit(void)
                               0,          /* initial value        */
                               255,        /* maximum value        */
                               0);         /* options (default)    */
-        result = PTE_OS_OK;
+        result = pThreadData->cancelSem < 0 ? PTE_OS_NO_RESOURCES : PTE_OS_OK;
       }
+    }
+
+    if (result != PTE_OS_OK) {
+      pte_osTerminate();
     }
   }
 
@@ -170,6 +203,37 @@ pte_osResult pte_osInit(void)
 
 #ifdef F_pte_osTerminate
 pte_osResult pte_osTerminate(void) {
+  if (__semaphoreRegistry.initialized) {
+    pspSemaphoreNode *node;
+
+    /* Callers must finish all POSIX worker threads before terminating the runtime. */
+    sceKernelLockLwMutex(&__semaphoreRegistry.lock, 1, NULL);
+    node = __semaphoreRegistry.head;
+    __semaphoreRegistry.head = NULL;
+    sceKernelUnlockLwMutex(&__semaphoreRegistry.lock, 1);
+
+    while (node != NULL) {
+      pspSemaphoreNode *next = node->next;
+      sceKernelDeleteSema(node->handle);
+      free(node);
+      node = next;
+    }
+
+    sceKernelDeleteLwMutex(&__semaphoreRegistry.lock);
+    __semaphoreRegistry.initialized = 0;
+  }
+
+  if (__globalTls != NULL) {
+    pspThreadData *pThreadData = pteTlsGetValue(__globalTls, __threadDataKey);
+    if (pThreadData != NULL) {
+      if (pThreadData->cancelSem >= 0) {
+        sceKernelDeleteSema(pThreadData->cancelSem);
+      }
+      free(pThreadData);
+    }
+    pteTlsThreadDestroy(__globalTls);
+    __globalTls = NULL;
+  }
   pteTlsGlobalDestroy();
   return PTE_OS_OK;
 }
@@ -592,8 +656,13 @@ pte_osResult pte_osMutexUnlock(pte_osMutexHandle handle)
 pte_osResult pte_osSemaphoreCreate(int initialValue, pte_osSemaphoreHandle *pHandle)
 {
   pte_osSemaphoreHandle handle;
+  pspSemaphoreNode *node;
   static int semCtr = 0;
   char semName[32];
+
+  if (!__semaphoreRegistry.initialized) {
+    return PTE_OS_NO_RESOURCES;
+  }
 
   if (semCtr++ > MAX_PSP_UID) {
     semCtr = 0;
@@ -610,6 +679,18 @@ pte_osResult pte_osSemaphoreCreate(int initialValue, pte_osSemaphoreHandle *pHan
     return PTE_OS_NO_RESOURCES;
   }
 
+  node = malloc(sizeof(*node));
+  if (node == NULL) {
+    sceKernelDeleteSema(handle);
+    return PTE_OS_NO_RESOURCES;
+  }
+
+  node->handle = handle;
+  sceKernelLockLwMutex(&__semaphoreRegistry.lock, 1, NULL);
+  node->next = __semaphoreRegistry.head;
+  __semaphoreRegistry.head = node;
+  sceKernelUnlockLwMutex(&__semaphoreRegistry.lock, 1);
+
   *pHandle = handle;
   return PTE_OS_OK;
 }
@@ -618,7 +699,23 @@ pte_osResult pte_osSemaphoreCreate(int initialValue, pte_osSemaphoreHandle *pHan
 #ifdef F_pte_osSemaphoreDelete
 pte_osResult pte_osSemaphoreDelete(pte_osSemaphoreHandle handle)
 {
+  pspSemaphoreNode **link;
+  pspSemaphoreNode *node = NULL;
+
+  if (__semaphoreRegistry.initialized) {
+    sceKernelLockLwMutex(&__semaphoreRegistry.lock, 1, NULL);
+    for (link = &__semaphoreRegistry.head; *link != NULL; link = &(*link)->next) {
+      if ((*link)->handle == handle) {
+        node = *link;
+        *link = node->next;
+        break;
+      }
+    }
+    sceKernelUnlockLwMutex(&__semaphoreRegistry.lock, 1);
+  }
+
   sceKernelDeleteSema(handle);
+  free(node);
   return PTE_OS_OK;
 }
 #endif

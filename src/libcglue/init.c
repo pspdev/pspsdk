@@ -13,6 +13,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <sys/param.h>
@@ -24,6 +25,7 @@ void __timezone_update();
 void __fdman_init();
 void __init_mutex();
 void pthread_init();
+void pthread_terminate(void);
 void __psp_free_heap();
 void __deinit_mutex();
 void __locks_init();
@@ -52,6 +54,19 @@ void __libpthreadglue_init()
 void __libpthreadglue_init();
 #endif
 
+#if defined(F___libpthreadglue_deinit) && !defined(PSP_WITHOUT_PTHREAD)
+/* Match the initialization hook while keeping the heap and locks available. */
+__attribute__((weak))
+void __libpthreadglue_deinit(void)
+{
+    pthread_terminate();
+}
+#elif defined(PSP_WITHOUT_PTHREAD)
+#define __libpthreadglue_deinit() do{}while(0)
+#else
+void __libpthreadglue_deinit(void);
+#endif
+
 #ifdef F___libcglue_init
 /* Note: This function is being called from crt0.c/crt0_prx.c.
 * It is a weak function because can be override by user program, 
@@ -73,6 +88,10 @@ void __libcglue_init(int argc, char *argv[])
 
 	/* Initialize pthread library */
 	__libpthreadglue_init();
+#ifndef PSP_WITHOUT_PTHREAD
+    /* Run TLS cleanup after C++ finalizers, while stdio and the heap live. */
+    atexit(__libpthreadglue_deinit);
+#endif
 
 	/* Initialize cwd from this program's path */
 	__init_cwd(argv[0]);
@@ -90,18 +109,10 @@ __attribute__((weak))
 void __libcglue_deinit()
 {
     __gprof_cleanup();
-    __psp_free_heap();
 	__deinit_mutex();
 	__locks_deinit();
+    __psp_free_heap();
 }
 #else
 void __libcglue_deinit();
-#endif
-
-#ifdef F_exit
-__attribute__((weak))
-void exit(int retval)
-{
-	_exit(retval);
-}
 #endif

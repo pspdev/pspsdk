@@ -15,7 +15,7 @@ CPPFLAGS = -I$(top_srcdir)/src/base \
 CFLAGS = @PSPSDK_CFLAGS@
 CCASFLAGS = $(CFLAGS)
 
-OSAL_OBJS = __threadDataKey.o __getThreadData.o __pspStubThreadEntry.o \
+OSAL_OBJS = __threadDataKey.o __semaphoreRegistry.o __getThreadData.o __pspStubThreadEntry.o \
 	pte_osInit.o pte_osTerminate.o pte_osThreadCreate.o pte_osThreadStart.o pte_osThreadDelete.o \
 	pte_osThreadExitAndDelete.o pte_osThreadExit.o pte_osThreadWaitForEnd.o pte_osThreadGetHandle.o pte_osThreadGetPriority.o pthread_num_processors_np.o \
 	pte_osThreadSetPriority.o pte_osThreadCancel.o pte_osThreadCheckCancel.o pte_osThreadSleep.o pte_osThreadGetMinPriority.o pte_osThreadGetMaxPriority.o \
