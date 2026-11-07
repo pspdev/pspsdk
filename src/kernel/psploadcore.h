@@ -250,6 +250,244 @@ typedef struct SceLibraryStubTable {
 	/** Pointer to the imported variable stubs. */
 	void *				vstubtable;
 } SceLibraryStubTable;
+typedef SceLibraryStubTable SceStubLibraryEntryTable;
+
+/*
+ * Stub library system status.
+ */
+enum SceStubLibraryStatus {
+    /* The stub library is linked only the first time a resident
+     * library is registered. If a newer version of that res. lib
+     * is registered, the stub library won't be linked with that one
+     * again.
+     */
+    STUB_LIBRARY_EXCLUSIVE_LINK = 0x1,
+    /* The stub library is linked with its corresponding resident
+     * library.
+     */
+    STUB_LIBRARY_LINKED = 0x2,
+	STUB_LIBRARY_UNKNOWN = 0x4,
+};
+
+/**
+ * This structure represents a function stub belonging to same privilege-level linked libraries,
+ * i.e. a kernel resident library linked with a kernel stub library.
+ */
+typedef struct {
+    /** The call to the imported function via a MIPS ASM Jump instruction. */
+    u32 call;
+    /** The delay slot belonging to the call, typically a NOP instruction. */
+    u32 delaySlot;
+} SceDirectCallStub;
+
+/**
+ * This structure represents a function stub belonging to different privilege-level linked libraries,
+ * i.e. a kernel resident library linked with a user stub library.
+ */
+typedef struct {
+    /** The return instruction from the stub. Typically a JR $ra command. */
+    u32 returnAddr;
+    /** The system call exception used to call the imported function. */
+    u32 syscall;
+} SceSyscallStub;
+
+/**
+ * This structure represents an imported function stub.
+ */
+typedef union {
+    /** User/User or Kernel/Kernel function stub. */
+    SceDirectCallStub dc;
+    /** Kernel/User function stub. */
+    SceSyscallStub sc;
+} SceStub;
+
+/**
+ * This structure represents an imported variable stub.
+ */
+typedef struct {
+    u32 *addr;
+    /** The NID identifying the imported variable. */
+    u32 nid;
+} SceVariableStub;
+
+/**
+ * This structure represents a stub library control block. This control block is used to manage a
+ * stub library entry table internal.
+ */
+typedef struct SceStubLibrary {
+    /** Unknown. */
+    u32 unk0; //0
+    /**
+     * A linked list of stub libraries belonging to the same group, i.e. the same resident library.
+     */
+    struct SceStubLibrary *next; //4
+    /** The name of the library. */
+    const char *lib_name; //8
+    /**
+     * The version of the library. This member is set by the corresponding stub library entry table.
+     */
+    u8 version[2]; //12
+    /**
+     * The library's attributes. This member is set by the corresponding stub library entry table.
+     */
+    u16 attribute; //14
+    /** The length of the corresponding stub library entry table in 32-Bit words. */
+    u8 stub_entry_table_len; //16
+    /**
+     * The number of imported variables by the stub library. This member is set by the corresponding
+     * stub library entry table.
+     */
+    u8 var_stub_count; //17
+    /**
+     * The number of imported functions by the stub library. This member is set by the corresponding
+     * stub library entry table.
+     */
+    u16 fn_stub_count; //18
+    /** Pointer to an array of NIDs identifying the imported functions/variables.*/
+    u32 *nid_table; //20
+    /** Pointer to the imported function stubs. */
+    SceStub *fn_stub_table; //24
+    /** Pointer to the imported variable stubs. */
+    SceVariableStub *var_stub_table; //28
+    /** Unknown. */
+    u16 unk32; //32
+    /** Pointer to the corresponding stub library entry table. */
+    SceLibraryStubTable *lib_stub_table; //36
+    /**
+     * The current status of a stub library (control block) in memory. One of ::SceStubLibraryStatus.
+     */
+    u32 status; //40
+    /** Indicates whether the stub library lives in User land or Kernel land. */
+    u32 is_user_lib; //44
+    /** The name of the library. */
+    char *lib_name2; //48
+    /** Indicates whether the library's name is located in the heap or not. */
+    u32 libname_in_heap; //52
+} SceStubLibrary; //size = 56
+
+/**
+ * This structure is used to record the functions a resident library provides to
+ * other modules. This entry table is used to register a resident library to the
+ * system. A module can register multiple libraries and multiple libraries with
+ * the same name can be in use simultaneously .
+ */
+typedef struct {
+    /** The name of the library. */
+    const char *lib_name; // 0
+  /**
+     * The version of the library. It consists of a 'major' and 'minor' field. If
+     * you want to register another version of an already registered resident
+     * library, make sure that the new library has a higher version than all its
+     * currently registered versions.
+     */
+    u8 version[2]; // 4
+  /** The library's attributes. One or more of ::SceLibAttr. */
+    s16 attribute; // 6
+  /**
+     * The length of this entry table in 32-Bit words. Set this to
+     * "LIBRARY_ENTRY_TABLE_NEW_LEN". Use this member when you want to iterate
+     * through a list of entry tables (size = len * 4).
+     */
+    u8 len; // 8
+  /** The number of exported variables by the resident library. */
+    u8 var_stub_count; // 9
+  /** The number of exported functions by the resident library. */
+    u16 func_stub_count; // 10
+  /**
+     * Pointer to an array of NIDs, followed by an array of function- and variable
+     * pointers. Each function-/variable pointer must have a NID value. These
+     * arrays are used to correctly perform linking between a resident library and
+     * its corresponding stub libraries.
+     */
+    u32 *entry_table; // 12
+  /** Unknown. */
+    u16 unk16; // 16
+  /** Unknown. */
+    u8 unk18; // 18
+  /** Unknown. */
+    u8 unk19; // 19
+} SceResidentLibraryEntryTable;
+
+/**
+ * This structure represents a resident library control block. This control block is used to manage
+ * a resident library entry table registered to the system.
+ */
+typedef struct SceResidentLibrary {
+    /** Pointer to the next resident library with the same hash value. */
+    struct SceResidentLibrary *next; // 0
+    /** Pointer to the corresponding entry table used to register this library. */
+    SceResidentLibraryEntryTable *lib_entry_table; // 4
+    /**
+     * The version of the library. This member is set by the corresponding resident library entry
+     * table.
+     */
+    u8 version[2]; // 8
+    /**
+     * The library's attributes. This member is set by the corresponding resident library entry
+     * table.
+     */
+    u16 attribute; // 10
+    /**
+     * The number of exported functions by the resident library. This member is set by the
+     * corresponding resident library entry table.
+     */
+    u16 stub_count; // 12
+    /**
+     * The number of exported variables by the resident library. This member is set by the
+     * corresponding resident library entry table.
+     */
+    u16 var_stub_count; // 14
+    /**
+     * The number of total exports by the resident library (the sum of stubCount
+     * and vStubCount).
+     */
+    u32 num_exports; // 16
+    /** Unknown. */
+    u8 unk20; // 20
+    /** Unknown. */
+    u8 unk21; // 21
+    /** Unknown. */
+    u8 unk22; // 22
+    /** Unknown. */
+    s32 unk24; // 24
+    /** Unknown. */
+    u32 unk28; // 28
+    /**
+     * Pointer to the resident library's array of NIDs, exported subroutine/variable entries.
+     * Every subroutine/variable entry has a corresponding NID used to identify it. The NID array
+     * comes first, followed by pointers to the exported functions and variables.
+     */
+    u32 *entry_table; // 32
+    /** A pointer to the first export entry (either a subroutine or variable). */
+    u32 *exports_base_addr; // 36
+    /** The number of exported functions and variables + the number of NIDs used for them. */
+    u32 exports_size; // 40
+    /** The index into the middle of the exported functions/variables array. */
+    u32 mid_func_index; // 44
+    /** Unknown. */
+    u32 unk48; // 48
+    /** Pointer to a linked list of corresponding loaded stub libraries. */
+    SceStubLibrary *stub_libs; // 52
+    /** The address of the system call table block belonging to the resident library. */
+    u32 sys_table_entry; // 56
+    /** Indicates whether the resident library lives in User land or Kernel land. */
+    u32 is_user_lib; // 60
+    /** Unknown. */
+    u32 unk64; // 64
+    /** The name of the library. */
+    char *lib_name; // 68
+    /** Indicates whether the library's name is located in the heap or not. */
+    u32 lib_name_in_heap; // 72
+    /**
+     * The entry index into Loadcore's system call table for an exported function of the resident
+     * library.
+     */
+    u16 sys_table_entry_start_index; // 76
+    /**
+     * Extra export entries in the system call table entry belonging to the resident library.
+     */
+    u16 extra_export_entries; // 78
+} SceResidentLibrary;
 
 typedef struct SceLoadCoreExecFileInfo {
 	/** Unknown. */
