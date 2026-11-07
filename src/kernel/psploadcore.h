@@ -277,7 +277,7 @@ typedef struct {
     /** The call to the imported function via a MIPS ASM Jump instruction. */
     u32 call;
     /** The delay slot belonging to the call, typically a NOP instruction. */
-    u32 delaySlot;
+    u32 delay_slot;
 } SceDirectCallStub;
 
 /**
@@ -286,7 +286,7 @@ typedef struct {
  */
 typedef struct {
     /** The return instruction from the stub. Typically a JR $ra command. */
-    u32 returnAddr;
+    u32 return_addr;
     /** The system call exception used to call the imported function. */
     u32 syscall;
 } SceSyscallStub;
