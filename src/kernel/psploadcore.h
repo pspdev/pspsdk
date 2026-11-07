@@ -250,6 +250,120 @@ typedef struct SceLibraryStubTable {
 	/** Pointer to the imported variable stubs. */
 	void *				vstubtable;
 } SceLibraryStubTable;
+typedef SceLibraryStubTable SceStubLibraryEntryTable;
+
+/*
+ * Stub library system status.
+ */
+enum SceStubLibraryStatus {
+    /* The stub library is linked only the first time a resident
+     * library is registered. If a newer version of that res. lib
+     * is registered, the stub library won't be linked with that one
+     * again.
+     */
+    STUB_LIBRARY_EXCLUSIVE_LINK = 0x1,
+    /* The stub library is linked with its corresponding resident
+     * library.
+     */
+    STUB_LIBRARY_LINKED = 0x2,
+	STUB_LIBRARY_UNKNOWN = 0x4,
+};
+
+/**
+ * This structure represents a function stub belonging to same privilege-level linked libraries,
+ * i.e. a kernel resident library linked with a kernel stub library.
+ */
+typedef struct {
+    /** The call to the imported function via a MIPS ASM Jump instruction. */
+    u32 call;
+    /** The delay slot belonging to the call, typically a NOP instruction. */
+    u32 delaySlot;
+} SceDirectCallStub;
+
+/**
+ * This structure represents a function stub belonging to different privilege-level linked libraries,
+ * i.e. a kernel resident library linked with a user stub library.
+ */
+typedef struct {
+    /** The return instruction from the stub. Typically a JR $ra command. */
+    u32 returnAddr;
+    /** The system call exception used to call the imported function. */
+    u32 syscall;
+} SceSyscallStub;
+
+/**
+ * This structure represents an imported function stub.
+ */
+typedef union {
+    /** User/User or Kernel/Kernel function stub. */
+    SceDirectCallStub dc;
+    /** Kernel/User function stub. */
+    SceSyscallStub sc;
+} SceStub;
+
+/**
+ * This structure represents an imported variable stub.
+ */
+typedef struct {
+    u32 *addr;
+    /** The NID identifying the imported variable. */
+    u32 nid;
+} SceVariableStub;
+
+/**
+ * This structure represents a stub library control block. This control block is used to manage a
+ * stub library entry table internal.
+ */
+typedef struct SceStubLibrary {
+    /** Unknown. */
+    u32 unk0; //0
+    /**
+     * A linked list of stub libraries belonging to the same group, i.e. the same resident library.
+     */
+    struct SceStubLibrary *next; //4
+    /** The name of the library. */
+    const char *libname; //8
+    /**
+     * The version of the library. This member is set by the corresponding stub library entry table.
+     */
+    u8 version[2]; //12
+    /**
+     * The library's attributes. This member is set by the corresponding stub library entry table.
+     */
+    u16 attribute; //14
+    /** The length of the corresponding stub library entry table in 32-Bit words. */
+    u8 stub_entry_table_len; //16
+    /**
+     * The number of imported variables by the stub library. This member is set by the corresponding
+     * stub library entry table.
+     */
+    u8 var_stub_count; //17
+    /**
+     * The number of imported functions by the stub library. This member is set by the corresponding
+     * stub library entry table.
+     */
+    u16 fn_stub_count; //18
+    /** Pointer to an array of NIDs identifying the imported functions/variables.*/
+    u32 *nid_table; //20
+    /** Pointer to the imported function stubs. */
+    SceStub *fn_stub_table; //24
+    /** Pointer to the imported variable stubs. */
+    SceVariableStub *var_stub_table; //28
+    /** Unknown. */
+    u16 unk32; //32
+    /** Pointer to the corresponding stub library entry table. */
+    SceLibraryStubTable *lib_stub_table; //36
+    /**
+     * The current status of a stub library (control block) in memory. One of ::SceStubLibraryStatus.
+     */
+    u32 status; //40
+    /** Indicates whether the stub library lives in User land or Kernel land. */
+    u32 is_user_lib; //44
+    /** The name of the library. */
+    char *libname2; //48
+    /** Indicates whether the library's name is located in the heap or not. */
+    u32 libname_in_heap; //52
+} SceStubLibrary; //size = 56
 
 typedef struct SceLoadCoreExecFileInfo {
 	/** Unknown. */
