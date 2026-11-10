@@ -110,6 +110,18 @@ extern "C" {
 SceUID sceKernelLoadModuleBuffer(void *buf, SceSize bufsize, int flags, SceKernelLMOption *option);
 
 /**
+ * Load a module with a specific API Type.
+ *
+ * @param apitype The API type to use.
+ * @param[in] path The path to the module to load.
+ * @param flags Unused, always `0`.
+ * @param option A pointer to an optional ::SceKernelLMOption structure.
+ *
+ * @returns Returns the module UID for the loaded module on success, `< 0` on error.
+ */
+SceUID sceKernelLoadModuleForLoadExecForUser(int apitype, const char *path, int flags, SceKernelLMOption *option);
+
+/**
  * Alias for `sceKernelLoadModuleForLoadExecForUser`
  *
  * @attention Needs to link to `pspmodulemgr_kernel` stub.
