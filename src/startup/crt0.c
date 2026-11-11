@@ -80,6 +80,9 @@ void _main(SceSize args, void *argp)
 	/* Call libc initialization hook */
 	__libcglue_init(argc, argv);
 
+	/* Run finalizers before newlib closes streams and releases their locks. */
+	atexit(_fini);
+
 	/* Init can contain C++ constructors that require working threading */
 	_init();
 
@@ -93,9 +96,6 @@ void _main(SceSize args, void *argp)
 __attribute__((__noreturn__))
 void _exit(int status)
 {
-	/* call global destructors*/
-	_fini();
-
 	// uninitialize libcglue
 	__libcglue_deinit();
 

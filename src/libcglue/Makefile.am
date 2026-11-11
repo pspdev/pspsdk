@@ -34,10 +34,10 @@ GLUE_OBJS = __dummy_passwd.o __psp_heap_blockid.o __psp_free_heap.o _fork.o _wai
 
 INIT_OBJS = \
 	__libpthreadglue_init.o \
+	__libpthreadglue_deinit.o \
 	__libcglue_init.o \
 	__gprof_cleanup.o \
-	__libcglue_deinit.o \
-	exit.o
+	__libcglue_deinit.o
 
 LOCK_OBJS = \
 	__lock___sfp_recursive_mutex.o \
