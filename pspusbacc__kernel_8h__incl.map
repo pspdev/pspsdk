@@ -1,0 +1,14 @@
+<map id="usb/pspusbacc_kernel.h" name="usb/pspusbacc_kernel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,167,31"/>
+<area shape="rect" id="Node000002" href="$psptypes_8h.html" title=" " alt="" coords="11,153,94,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,33,48,53,30,80,27,95,28,110,39,139,34,140,23,111,21,94,25,78,44,50,67,29"/>
+<area shape="rect" id="Node000004" href="$pspusbbus_8h.html" title=" " alt="" coords="39,79,133,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="89,31,89,63,83,63,83,31"/>
+<area shape="rect" id="Node000005" href="$pspusbacc_8h.html" title=" " alt="" coords="158,79,252,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="107,29,173,68,170,73,105,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="21,226,84,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="55,179,55,211,50,211,50,179"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="180,108,94,148,91,143,178,103"/>
+<area shape="rect" id="Node000006" href="$pspusb_8h.html" title=" " alt="" coords="168,153,241,178"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="207,105,207,137,202,137,202,105"/>
+</map>
