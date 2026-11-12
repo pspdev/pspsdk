@@ -222,7 +222,7 @@ int validate_header(unsigned char *data)
 			break;
 		}
 
-		if(g_elfhead.iShnum < g_elfhead.iShstrndx)
+		if(g_elfhead.iShnum <= g_elfhead.iShstrndx)
 		{
 			fprintf(stderr, "Error, number of headers is less than section string index\n");
 			break;
@@ -300,7 +300,27 @@ int load_sections(unsigned char *data)
 					g_elfsections[i].blOutput = 1;
 				}
 
-				strcpy(g_elfsections[i].szName, (char *) (g_elfsections[g_elfhead.iShstrndx].pData + g_elfsections[i].iName));
+				/* The name is an offset into the section string table taken from the
+				   file: it is neither guaranteed to be terminated nor to fit into
+				   szName, so copy at most what the table can still provide and
+				   always terminate the result. */
+				{
+					struct ElfSection *pStrTab = &g_elfsections[g_elfhead.iShstrndx];
+					unsigned int name_len = 0;
+
+					if((pStrTab->pData != NULL) && (g_elfsections[i].iName < pStrTab->iSize))
+					{
+						name_len = pStrTab->iSize - g_elfsections[i].iName;
+						if(name_len > (ELF_SECT_MAX_NAME - 1))
+						{
+							name_len = (ELF_SECT_MAX_NAME - 1);
+						}
+
+						memcpy(g_elfsections[i].szName, pStrTab->pData + g_elfsections[i].iName, name_len);
+					}
+
+					g_elfsections[i].szName[name_len] = '\0';
+				}
 				if(strcmp(g_elfsections[i].szName, PSP_MODULE_INFO_NAME) == 0)
 				{
 					g_modinfo = &g_elfsections[i];
