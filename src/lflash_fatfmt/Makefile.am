@@ -19,4 +19,4 @@ libpsplflash_fatfmt_a_SOURCES = LflashFatfmt.S
 libpsplflash_fatfmt_a_LIBADD  = $(LFLASH_FATFMT_OBJS)
 
 $(LFLASH_FATFMT_OBJS): LflashFatfmt.S
-	$(AM_V_CPPAS)$(CPPASCOMPILE) -DF_$* $< -c -o $@
+	$(AM_V_CPPAS)$(CPPASCOMPILE) -D$* $< -c -o $@
