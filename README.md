@@ -102,9 +102,6 @@ make install
 
 ## Notes
 
-* This is a BETA release of PSPSDK. Some of the features and tools described
-  here may not be fully implemented.
-
 * By default PSPSDK will install into the directory where the PSPDEV toolchain
   is installed. If you decide to install PSPSDK somewhere else then you must
   define a PSPSDK environment variable that points to your alternate directory.
