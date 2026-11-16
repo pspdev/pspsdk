@@ -1,0 +1,5 @@
+<map id="SceUsbGpsSatelliteData" name="SceUsbGpsSatelliteData">
+<area shape="rect" id="Node000001" title="Satellite information returned by sceUsbGpsGetData." alt="" coords="5,94,172,120"/>
+<area shape="rect" id="Node000002" href="$structSceUsbGpsSv.html" title="Information about a single GPS satellite." alt="" coords="34,5,143,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,47,91,94,86,94,86,47"/>
+</map>

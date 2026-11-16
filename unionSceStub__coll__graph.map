@@ -1,0 +1,7 @@
+<map id="SceStub" name="SceStub">
+<area shape="rect" id="Node000001" title="This structure represents an imported function stub." alt="" coords="105,94,177,120"/>
+<area shape="rect" id="Node000002" href="$structSceDirectCallStub.html" title="This structure represents a function stub belonging to same privilege&#45;level linked libraries,..." alt="" coords="5,5,133,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,41,133,92,129,95,87,45"/>
+<area shape="rect" id="Node000003" href="$structSceSyscallStub.html" title="This structure represents a function stub belonging to different privilege&#45;level linked libraries,..." alt="" coords="156,5,270,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="195,45,153,95,149,92,191,41"/>
+</map>
