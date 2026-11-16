@@ -121,6 +121,26 @@ int main(int argc, char *argv[]) {
    
 #endif
    
+   // Validate the section table. The offsets come straight from the file:
+   // if they are not monotonic or point past the end of the file, the sizes
+   // computed below wrap around and the tool copies unrelated buffer contents
+   // into the output files.
+   for (loop0 = 0; loop0 < 8; loop0++) {
+      if ((header.offset[loop0] < 0) || (header.offset[loop0] > total_size)) {
+         printf("ERROR: Section %d offset (0x%08X) is outside the file (%d bytes).\n",
+                loop0, header.offset[loop0], total_size);
+         fclose(infile);
+         return -1;
+      }
+      
+      if ((loop0 > 0) && (header.offset[loop0] < header.offset[loop0 - 1])) {
+         printf("ERROR: Section %d offset (0x%08X) precedes section %d offset (0x%08X).\n",
+                loop0, header.offset[loop0], loop0 - 1, header.offset[loop0 - 1]);
+         fclose(infile);
+         return -1;
+      }
+   }
+   
    // For each file in the PBP
    for (loop0 = 0; loop0 < 8; loop0++) {
       void *buffer;
@@ -172,14 +192,14 @@ int main(int argc, char *argv[]) {
          
          // Read in the data from the PBP
          size_t result = fread(buffer, readsize, 1, infile);
-         if (result < 0) {
+         if (result != 1) {
             printf("ERROR: Could not read in the section data.\n");
             free(buffer);
             return -1;
          }
          
          // Write the contents of the buffer to the output file
-         if (fwrite(buffer, readsize, 1, outfile) < 0) {
+         if (fwrite(buffer, readsize, 1, outfile) != 1) {
             printf("ERROR: Could not write out the section data.\n");
             free(buffer);
             return -1;
