@@ -3,7 +3,7 @@
  * -----------------------------------------------------------------------
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
- * Regression test for clearing an offscreen draw buffer larger than the LCD.
+ * Regression tests for clearing offscreen draw buffers larger than the LCD.
  * Results are written to ms0:/pspsdk-gu-clear-results.txt.
  */
 
@@ -25,92 +25,212 @@ PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);
 #define TARGET_WIDTH 512
 #define TARGET_HEIGHT 512
 
-/* 512 * 272 * 2 = 0x44000 bytes; each GE buffer is 8 KiB aligned. */
+/* Three non-overlapping VRAM buffers; the target also fits in 8888 format. */
 #define DISPLAY_OFFSET 0x00000
 #define DRAW_OFFSET 0x44000
 #define TARGET_OFFSET 0x88000
 #define RESULT_OFFSET 0x1f0000
 #define GE_CLEAR_MODE_COMMAND 0xd3
 
-/* RGB565 values, in the PSP's R:G:B bit order. */
-#define INITIAL_TARGET 0xf800 /* blue */
-#define INITIAL_SCREEN 0x07e0 /* green */
-#define CLEARED_COLOR 0x001f /* red */
-#define SCREEN_COLOR 0x07ff /* yellow */
+/* Color values in the PSP's RGB565 and RGBA8888 memory layouts. */
+#define TARGET_BLUE_565 0xf800
+#define SCREEN_GREEN_565 0x07e0
+#define CLEAR_RED_565 0x001f
+#define CLEAR_GREEN_565 0x07e0
+#define SCREEN_YELLOW_565 0x07ff
+#define TARGET_BLUE_8888 0xffff0000
+#define CLEAR_RED_8888 0x660000ff
 
-static unsigned int __attribute__((aligned(16))) display_list[1024];
-static char result_log[1024];
-static unsigned int result_log_size;
-static unsigned int result_count;
-static unsigned int failures;
+enum {
+    CLEAR_NORMAL,
+    CLEAR_FAST,
+    CLEAR_SPRITE,
+    CLEAR_MODE_SPRITE,
+    CLEAR_TWO_REGIONS,
+    CLEAR_TWO_REGIONS_FAST
+};
 
-typedef struct
-{
+typedef struct {
+    const char *name;
+    int method;
+    int x, y, w, h;
+    int scissor_enabled;
+    int use_draw_buffer;
+    int format;
+    int same_list_restore;
+} ClearTest;
+
+typedef struct {
+    unsigned int target_errors;
+    unsigned int screen_errors;
+    unsigned int display_errors;
+    int first_x, first_y, first_area;
+    unsigned int first_expected, first_actual;
+} Result;
+
+typedef struct {
     unsigned int color;
     unsigned short x, y, z, pad;
 } ClearVertex;
 
-static volatile uint16_t *edram(void)
+static unsigned int __attribute__((aligned(16))) display_list[1024];
+static char result_log[8192];
+static unsigned int result_log_size;
+static unsigned int failures;
+
+static const ClearTest tests[] = {
+    /* Existing baseline cases. */
+    {"normal full 565 list",        CLEAR_NORMAL,           0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
+    {"fast full 565 list",          CLEAR_FAST,             0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
+    {"plain sprite full",          CLEAR_SPRITE,           0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
+    {"clear sprite full",          CLEAR_MODE_SPRITE,      0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
+    {"clear sprite DrawBuffer",    CLEAR_MODE_SPRITE,      0,   0, 512, 512, 1, 1, GU_PSM_5650, 1},
+    {"clear sprite no scissor",    CLEAR_MODE_SPRITE,      0,   0, 512, 512, 0, 0, GU_PSM_5650, 1},
+    {"normal no scissor",          CLEAR_NORMAL,           0,   0, 512, 512, 0, 0, GU_PSM_5650, 1},
+    {"normal no scissor offset",   CLEAR_NORMAL,          64,  32, 256, 128, 0, 0, GU_PSM_5650, 0},
+    {"fast no scissor offset",     CLEAR_FAST,            64,  32, 256, 128, 0, 0, GU_PSM_5650, 0},
+
+    /* Check nonzero origins, exclusive ends, and pixels outside the region. */
+    {"normal partial 64,32",       CLEAR_NORMAL,          64,  32, 256, 128, 1, 0, GU_PSM_5650, 0},
+    {"fast partial 64,32",         CLEAR_FAST,            64,  32, 256, 128, 1, 0, GU_PSM_5650, 0},
+    {"normal lower right",        CLEAR_NORMAL,         400, 240, 112, 272, 1, 0, GU_PSM_5650, 0},
+    {"fast lower right",          CLEAR_FAST,           400, 240, 112, 272, 1, 0, GU_PSM_5650, 0},
+    {"normal one pixel",          CLEAR_NORMAL,         480, 272,   1,   1, 1, 0, GU_PSM_5650, 0},
+    {"fast one pixel",            CLEAR_FAST,           480, 272,   1,   1, 1, 0, GU_PSM_5650, 0},
+    {"normal odd boundary",       CLEAR_NORMAL,         479, 271,  33,   2, 1, 0, GU_PSM_5650, 0},
+    {"fast odd boundary",         CLEAR_FAST,           479, 271,  33,   2, 1, 0, GU_PSM_5650, 0},
+    {"normal partial DrawBuffer", CLEAR_NORMAL,          64,  32, 256, 128, 1, 1, GU_PSM_5650, 0},
+    {"fast partial DrawBuffer",   CLEAR_FAST,            64,  32, 256, 128, 1, 1, GU_PSM_5650, 0},
+
+    /* A second scissor + clear in the same list must not reuse old bounds. */
+    {"two regions normal",        CLEAR_TWO_REGIONS,      0,   0, 512, 512, 1, 0, GU_PSM_5650, 0},
+    {"two regions fast",          CLEAR_TWO_REGIONS_FAST, 0,   0, 512, 512, 1, 0, GU_PSM_5650, 0},
+
+    /* Color and stencil clear with a different pixel size and block width. */
+    {"normal full 8888",          CLEAR_NORMAL,           0,   0, 512, 512, 1, 1, GU_PSM_8888, 0},
+    {"fast full 8888",            CLEAR_FAST,             0,   0, 512, 512, 1, 1, GU_PSM_8888, 0},
+    {"normal partial 8888",       CLEAR_NORMAL,          64,  32, 256, 128, 1, 1, GU_PSM_8888, 0},
+    {"fast partial 8888",         CLEAR_FAST,            64,  32, 256, 128, 1, 1, GU_PSM_8888, 0},
+
+    /* Switching back to a 16-bit target must not retain 32-bit clear state. */
+    {"normal 565 after 8888",     CLEAR_NORMAL,         400, 240, 112, 272, 1, 0, GU_PSM_5650, 0}
+};
+
+static volatile uint16_t *edram16(void)
 {
     return (volatile uint16_t *)((uintptr_t)sceGeEdramGetAddr() | 0x40000000u);
 }
 
-static void fill_pixels(unsigned int offset, int height, uint16_t value)
+static volatile uint32_t *edram32(void)
 {
-    volatile uint16_t *pixels = (volatile uint16_t *)((uintptr_t)edram() + offset);
-    int i;
-
-    for (i = 0; i < STRIDE * height; ++i)
-        pixels[i] = value;
+    return (volatile uint32_t *)edram16();
 }
 
-static uint16_t pixel(unsigned int offset, int x, int y)
+static void fill_buffers(int format)
 {
-    return edram()[(offset / 2) + y * STRIDE + x];
-}
-
-static void report(const char *name, int full_clear_expected)
-{
-    char line[256];
-    uint16_t values[] = {
-        pixel(TARGET_OFFSET, 1, 1),
-        pixel(TARGET_OFFSET, 479, 271),
-        pixel(TARGET_OFFSET, 480, 271),
-        pixel(TARGET_OFFSET, 479, 272),
-        pixel(TARGET_OFFSET, 480, 272),
-        pixel(TARGET_OFFSET, 511, 511),
-        pixel(DRAW_OFFSET, 1, 1),
-        pixel(DISPLAY_OFFSET, 1, 1)
-    };
     unsigned int i;
-    int pass = values[6] == SCREEN_COLOR && values[7] == INITIAL_SCREEN;
 
-    for (i = 0; i < 6; ++i) {
-        uint16_t expected = (full_clear_expected || i < 2) ? CLEARED_COLOR : INITIAL_TARGET;
-        if (values[i] != expected)
-            pass = 0;
+    if (format == GU_PSM_8888) {
+        volatile uint32_t *target = (volatile uint32_t *)((uintptr_t)edram32() + TARGET_OFFSET);
+        for (i = 0; i < STRIDE * TARGET_HEIGHT; ++i)
+            target[i] = TARGET_BLUE_8888;
+    } else {
+        volatile uint16_t *target = (volatile uint16_t *)((uintptr_t)edram16() + TARGET_OFFSET);
+        for (i = 0; i < STRIDE * TARGET_HEIGHT; ++i)
+            target[i] = TARGET_BLUE_565;
     }
-    if (!pass)
-        ++failures;
 
-    int count = snprintf(line, sizeof(line),
-        "%-24s %s RT=(%04x %04x %04x %04x %04x %04x) "
-        "SCREEN=%04x DISPLAY=%04x\n",
-        name, pass ? "PASS" : "FAIL", values[0], values[1], values[2], values[3],
-        values[4], values[5], values[6], values[7]);
-
-    for (i = 0; i < sizeof(values) / sizeof(values[0]); ++i)
-        edram()[RESULT_OFFSET / 2 + result_count * 8 + i] = values[i];
-    ++result_count;
-
-    if (count > 0 && count < (int)sizeof(line) &&
-        result_log_size + (unsigned int)count <= sizeof(result_log)) {
-        memcpy(result_log + result_log_size, line, count);
-        result_log_size += count;
+    for (i = 0; i < STRIDE * SCREEN_HEIGHT; ++i) {
+        edram16()[DRAW_OFFSET / 2 + i] = SCREEN_GREEN_565;
+        edram16()[DISPLAY_OFFSET / 2 + i] = SCREEN_GREEN_565;
     }
 }
 
-static void draw_clear_sprite(int clear_mode)
+static unsigned int target_pixel(int format, int x, int y)
+{
+    unsigned int index = y * STRIDE + x;
+
+    if (format == GU_PSM_8888)
+        return edram32()[TARGET_OFFSET / 4 + index];
+    return edram16()[TARGET_OFFSET / 2 + index];
+}
+
+static void check_pixel(Result *r, int area, int x, int y,
+                        unsigned int expected, unsigned int actual)
+{
+    if (expected == actual)
+        return;
+
+    if (area == 0)
+        ++r->target_errors;
+    else if (area == 1)
+        ++r->screen_errors;
+    else
+        ++r->display_errors;
+
+    if (r->first_area == -1) {
+        r->first_area = area;
+        r->first_x = x;
+        r->first_y = y;
+        r->first_expected = expected;
+        r->first_actual = actual;
+    }
+}
+
+static int inside_rect(int x, int y, int rx, int ry, int rw, int rh)
+{
+    return x >= rx && x < rx + rw && y >= ry && y < ry + rh;
+}
+
+static void check_target(const ClearTest *t, Result *r)
+{
+    int x, y;
+
+    for (y = 0; y < TARGET_HEIGHT; ++y) {
+        for (x = 0; x < TARGET_WIDTH; ++x) {
+            unsigned int expected;
+            int inside;
+
+            if (t->method == CLEAR_TWO_REGIONS || t->method == CLEAR_TWO_REGIONS_FAST) {
+                if (inside_rect(x, y, 0, 0, 64, 64))
+                    expected = CLEAR_RED_565;
+                else if (inside_rect(x, y, 448, 448, 64, 64))
+                    expected = CLEAR_GREEN_565;
+                else
+                    expected = TARGET_BLUE_565;
+            } else {
+                if (t->scissor_enabled)
+                    inside = inside_rect(x, y, t->x, t->y, t->w, t->h);
+                else
+                    inside = inside_rect(x, y, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+                if (t->format == GU_PSM_8888)
+                    expected = inside ? CLEAR_RED_8888 : TARGET_BLUE_8888;
+                else
+                    expected = inside ? CLEAR_RED_565 : TARGET_BLUE_565;
+            }
+
+            check_pixel(r, 0, x, y, expected, target_pixel(t->format, x, y));
+        }
+    }
+}
+
+static void check_buffers(Result *r, int restored)
+{
+    int x, y;
+
+    for (y = 0; y < SCREEN_HEIGHT; ++y) {
+        for (x = 0; x < STRIDE; ++x) {
+            unsigned int expected = restored && x < SCREEN_WIDTH
+                ? SCREEN_YELLOW_565 : SCREEN_GREEN_565;
+            check_pixel(r, 1, x, y, expected, edram16()[DRAW_OFFSET / 2 + y * STRIDE + x]);
+            check_pixel(r, 2, x, y, SCREEN_GREEN_565,
+                        edram16()[DISPLAY_OFFSET / 2 + y * STRIDE + x]);
+        }
+    }
+}
+
+static void draw_sprite(int clear_mode)
 {
     ClearVertex *verts = (ClearVertex *)sceGuGetMemory(2 * sizeof(*verts));
 
@@ -134,55 +254,129 @@ static void draw_clear_sprite(int clear_mode)
         sceGuSendCommandi(GE_CLEAR_MODE_COMMAND, 0);
 }
 
-static void run_test(const char *name, int mode, int full_api, int disable_scissor)
+static void perform_clear(int method, int flags)
 {
-    fill_pixels(TARGET_OFFSET, TARGET_HEIGHT, INITIAL_TARGET);
-    fill_pixels(DRAW_OFFSET, SCREEN_HEIGHT, INITIAL_SCREEN);
-    fill_pixels(DISPLAY_OFFSET, SCREEN_HEIGHT, INITIAL_SCREEN);
-
-    sceGuStart(GU_DIRECT, display_list);
-    if (full_api)
-        sceGuDrawBuffer(GU_PSM_5650, (void *)TARGET_OFFSET, STRIDE);
-    else
-        sceGuDrawBufferList(GU_PSM_5650, (void *)TARGET_OFFSET, STRIDE);
-
-    sceGuScissor(0, 0, TARGET_WIDTH, TARGET_HEIGHT);
-    sceGuEnable(GU_SCISSOR_TEST);
-    if (disable_scissor)
-        sceGuDisable(GU_SCISSOR_TEST);
-
-    sceGuDisable(GU_TEXTURE_2D);
-    sceGuDisable(GU_BLEND);
-    sceGuClearColor(GU_RGBA(255, 0, 0, 255));
-
-    switch (mode) {
-    case 0: sceGuClear(GU_COLOR_BUFFER_BIT); break;
-    case 1: sceGuClear(GU_COLOR_BUFFER_BIT | GU_FAST_CLEAR_BIT); break;
-    case 2: draw_clear_sprite(0); break;
-    case 3: draw_clear_sprite(1); break;
+    switch (method) {
+    case CLEAR_NORMAL:
+    case CLEAR_TWO_REGIONS:
+        sceGuClear(flags);
+        break;
+    case CLEAR_FAST:
+    case CLEAR_TWO_REGIONS_FAST:
+        sceGuClear(flags | GU_FAST_CLEAR_BIT);
+        break;
+    case CLEAR_SPRITE:
+        draw_sprite(0);
+        break;
+    case CLEAR_MODE_SPRITE:
+        draw_sprite(1);
+        break;
     }
+}
 
-    /* Restore the screen buffer and clear it with a different color. */
-    if (full_api)
-        sceGuDrawBuffer(GU_PSM_5650, (void *)DRAW_OFFSET, STRIDE);
-    else
-        sceGuDrawBufferList(GU_PSM_5650, (void *)DRAW_OFFSET, STRIDE);
-
+static void restore_screen(void)
+{
+    /* Use the full API to restore stored pixel-format and buffer metadata. */
+    sceGuDrawBuffer(GU_PSM_5650, (void *)DRAW_OFFSET, STRIDE);
     sceGuScissor(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     sceGuEnable(GU_SCISSOR_TEST);
     sceGuClearColor(GU_RGBA(255, 255, 0, 255));
     sceGuClear(GU_COLOR_BUFFER_BIT);
+}
+
+static void report(const ClearTest *t, const Result *r)
+{
+    char line[320];
+    int ok = !r->target_errors && !r->screen_errors && !r->display_errors;
+    int len;
+
+    if (!ok)
+        ++failures;
+
+    if (ok) {
+        len = snprintf(line, sizeof(line), "%-28s PASS\n", t->name);
+    } else {
+        len = snprintf(line, sizeof(line),
+            "%-28s FAIL RT=%u SCREEN=%u DISPLAY=%u first=%d:(%d,%d) expected=%08x actual=%08x\n",
+            t->name, r->target_errors, r->screen_errors, r->display_errors,
+            r->first_area, r->first_x, r->first_y, r->first_expected, r->first_actual);
+    }
+
+    if (len > 0 && len < (int)sizeof(line) &&
+        result_log_size + (unsigned int)len < sizeof(result_log)) {
+        memcpy(result_log + result_log_size, line, len);
+        result_log_size += len;
+    }
+}
+
+static void run_test(const ClearTest *t)
+{
+    Result r = {0};
+    int flags = GU_COLOR_BUFFER_BIT;
+
+    r.first_area = -1;
+    r.first_x = -1;
+    r.first_y = -1;
+
+    fill_buffers(t->format);
+
+    sceGuStart(GU_DIRECT, display_list);
+    if (t->use_draw_buffer)
+        sceGuDrawBuffer(t->format, (void *)TARGET_OFFSET, STRIDE);
+    else
+        sceGuDrawBufferList(t->format, (void *)TARGET_OFFSET, STRIDE);
+
+    sceGuScissor(t->x, t->y, t->w, t->h);
+    sceGuEnable(GU_SCISSOR_TEST);
+    if (!t->scissor_enabled)
+        sceGuDisable(GU_SCISSOR_TEST);
+
+    sceGuDisable(GU_TEXTURE_2D);
+    sceGuDisable(GU_BLEND);
+    sceGuDisable(GU_DEPTH_TEST);
+    sceGuClearColor(GU_RGBA(255, 0, 0, 255));
+
+    if (t->format == GU_PSM_8888) {
+        sceGuClearStencil(0x66);
+        flags |= GU_STENCIL_BUFFER_BIT;
+    }
+
+    if (t->method == CLEAR_TWO_REGIONS || t->method == CLEAR_TWO_REGIONS_FAST) {
+        sceGuScissor(0, 0, 64, 64);
+        perform_clear(t->method, flags);
+        sceGuScissor(448, 448, 64, 64);
+        sceGuClearColor(GU_RGBA(0, 255, 0, 255));
+        perform_clear(t->method, flags);
+    } else {
+        perform_clear(t->method, flags);
+    }
+
+    if (t->same_list_restore)
+        restore_screen();
+
     sceGuFinish();
     sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
-    report(name, !disable_scissor);
+    check_target(t, &r);
+    if (!t->same_list_restore) {
+        /* Catch any offscreen clear that accidentally wrote to the LCD buffers. */
+        check_buffers(&r, 0);
+        sceGuStart(GU_DIRECT, display_list);
+        restore_screen();
+        sceGuFinish();
+        sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
+    }
+    check_buffers(&r, 1);
+    report(t, &r);
 }
 
 int main(void)
 {
+    unsigned int i;
     SceUID log_fd;
 
     sceGuInit();
+    edram16()[RESULT_OFFSET / 2] = 0;
 
     sceGuStart(GU_DIRECT, display_list);
     sceGuDrawBuffer(GU_PSM_5650, (void *)DRAW_OFFSET, STRIDE);
@@ -195,19 +389,17 @@ int main(void)
     sceGuFinish();
     sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
-    run_test("sceGuClear + scissor512", 0, 0, 0);
-    run_test("sceGuClear FAST + sc512", 1, 0, 0);
-    run_test("plain sprite + sc512", 2, 0, 0);
-    run_test("clear-mode sprite + sc512", 3, 0, 0);
-    run_test("clear-mode + DrawBuffer", 3, 1, 0);
-    run_test("clear-mode scissor OFF", 3, 0, 1);
-    run_test("sceGuClear scissor OFF", 0, 0, 1);
+    for (i = 0; i < sizeof(tests) / sizeof(tests[0]); ++i)
+        run_test(&tests[i]);
 
-    edram()[RESULT_OFFSET / 2 + result_count * 8] = failures ? 0xdead : 0xbeef;
+    edram16()[RESULT_OFFSET / 2] = failures ? 0xdead : 0xbeef;
 
     result_log_size += snprintf(result_log + result_log_size,
         sizeof(result_log) - result_log_size,
-        "Result: %s (%u failed)\n", failures ? "FAIL" : "PASS", failures);
+        "Result: %s (%u/%u passed)\n",
+        failures ? "FAIL" : "PASS",
+        (unsigned int)(sizeof(tests) / sizeof(tests[0])) - failures,
+        (unsigned int)(sizeof(tests) / sizeof(tests[0])));
 
     log_fd = sceIoOpen("ms0:/pspsdk-gu-clear-results.txt",
         PSP_O_WRONLY | PSP_O_CREAT | PSP_O_TRUNC, 0666);
@@ -216,7 +408,7 @@ int main(void)
         sceIoClose(log_fd);
     }
 
-    /* Stay under PSPLink so the host can inspect the log and reset safely. */
+    /* Do not exit PSPLink; leave the report available to the host. */
     sceKernelSleepThread();
     return 0;
 }
