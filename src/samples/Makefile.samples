@@ -93,8 +93,11 @@ SAMPLES = \
 	exceptions
 	
 
+# Samples share object files and some generate inputs without explicit dependencies.
+# Keep clean and build as separate, serial invocations even with an outer -j.
 all:
 	for sample in $(SAMPLES) ; do \
-		$(MAKE) -f Makefile.sample -C $$sample clean all || { exit 1; } \
+		$(MAKE) -j1 -f Makefile.sample -C $$sample clean || { exit 1; }; \
+		$(MAKE) -j1 -f Makefile.sample -C $$sample all || { exit 1; } \
 	done
 
