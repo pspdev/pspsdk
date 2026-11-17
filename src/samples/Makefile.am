@@ -18,6 +18,7 @@ SAMPLES = \
 	gu/blend \
 	gu/blit \
 	gu/celshading \
+	gu/clear-target \
 	gu/clut \
 	gu/common \
 	gu/copy \
