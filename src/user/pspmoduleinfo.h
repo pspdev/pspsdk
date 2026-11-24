@@ -140,6 +140,7 @@ enum PspModuleInfoAttr
 
 /* Disable the auto start of pthread on init for reducing binary size if not used. */
 #define PSP_DISABLE_AUTOSTART_PTHREAD() \
-	void __libpthreadglue_init() {}
+	void __libpthreadglue_init() {} \
+	void __libpthreadglue_deinit() {}
 
 #endif /* PSPMODULEINFO_H */

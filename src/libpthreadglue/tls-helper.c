@@ -55,7 +55,9 @@ pte_osResult pteTlsGlobalInit(int maxEntries)
     int i;
     pte_osResult result;
 
-    pte_osMutexCreate(&__globalTlsLock);
+    result = pte_osMutexCreate(&__globalTlsLock);
+    if (result != PTE_OS_OK)
+        return result;
     __keysUsed = (int *)malloc(maxEntries * sizeof(int));
 
     if (__keysUsed != NULL) {
@@ -67,6 +69,7 @@ pte_osResult pteTlsGlobalInit(int maxEntries)
         result = PTE_OS_OK;
     } else {
         result = PTE_OS_NO_RESOURCES;
+        pte_osMutexDelete(__globalTlsLock);
     }
 
     return result;
@@ -80,6 +83,8 @@ void *pteTlsThreadInit(void)
     int i;
 
     pTlsStruct = (void **)malloc(__maxTlsValues * sizeof(void *));
+    if (pTlsStruct == NULL)
+        return NULL;
 
     // PTE library assumes that keys are initialized to zero
     for (i = 0; i < __maxTlsValues; i++) {
@@ -214,6 +219,8 @@ void pteTlsGlobalDestroy(void)
 {
     pte_osMutexDelete(__globalTlsLock);
     free(__keysUsed);
+    __keysUsed = NULL;
+    __maxTlsValues = 0;
 }
 #endif
 

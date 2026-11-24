@@ -24,7 +24,7 @@ void __init_cwd(char *argv_0);
 void __timezone_update();
 void __fdman_init();
 void __init_mutex();
-void pthread_init();
+int pthread_init(void);
 void pthread_terminate(void);
 void __psp_free_heap();
 void __deinit_mutex();
@@ -46,7 +46,8 @@ void __gprof_cleanup();
 __attribute__((weak))
 void __libpthreadglue_init()
 {
-    pthread_init();
+    if (!pthread_init())
+        _exit(EXIT_FAILURE);
 }
 #elif defined(PSP_WITHOUT_PTHREAD)
 #define __libpthreadglue_init() do{}while(0)
@@ -68,6 +69,27 @@ void __libpthreadglue_deinit(void);
 #endif
 
 #ifdef F___libcglue_init
+extern void _fini(void);
+static int exit_initialized;
+
+void __libcglue_exit(int status)
+{
+    if (exit_initialized)
+        exit(status);
+}
+
+#ifndef PSP_WITHOUT_PTHREAD
+static int pthread_active;
+
+void __libcglue_pthread_cleanup(void)
+{
+    if (pthread_active) {
+        pthread_active = 0;
+        __libpthreadglue_deinit();
+    }
+}
+#endif
+
 /* Note: This function is being called from crt0.c/crt0_prx.c.
 * It is a weak function because can be override by user program, 
 * saving a lot of space in your binary, however you will loose
@@ -90,7 +112,9 @@ void __libcglue_init(int argc, char *argv[])
 	__libpthreadglue_init();
 #ifndef PSP_WITHOUT_PTHREAD
     /* Run TLS cleanup after C++ finalizers, while stdio and the heap live. */
-    atexit(__libpthreadglue_deinit);
+    pthread_active = 1;
+    if (atexit(__libcglue_pthread_cleanup) != 0)
+        _exit(EXIT_FAILURE);
 #endif
 
 	/* Initialize cwd from this program's path */
@@ -98,10 +122,15 @@ void __libcglue_init(int argc, char *argv[])
 
 	/* Initialize timezone */
 	__timezone_update();
+
+    if (atexit(_fini) != 0)
+        _exit(EXIT_FAILURE);
+    exit_initialized = 1;
 }
 #endif
 
 #ifdef F___libcglue_deinit
+extern void __libcglue_pthread_cleanup(void) __attribute__((weak));
 /* Note: This function is being called from terminate.c.
 * It is a weak function because can be override by user program
 */
@@ -109,6 +138,11 @@ __attribute__((weak))
 void __libcglue_deinit()
 {
     __gprof_cleanup();
+    /* Immediate exit skips application handlers, but module-owned pthread
+       resources must still be reclaimed before freeing the heap. */
+    if (__libcglue_pthread_cleanup) {
+        __libcglue_pthread_cleanup();
+    }
 	__deinit_mutex();
 	__locks_deinit();
     __psp_free_heap();
