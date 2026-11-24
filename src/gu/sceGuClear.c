@@ -18,6 +18,10 @@ void sceGuClear(int flags)
 #endif
 
 	GuContext *context = &gu_contexts[gu_curr_context];
+	/* The display size is not necessarily the size of the active draw target.
+	 * When scissoring is enabled, its end coordinates define the clear extent. */
+	int clear_width = context->scissor_enable ? context->scissor_end[0] + 1 : gu_draw_buffer.width;
+	int clear_height = context->scissor_enable ? context->scissor_end[1] + 1 : gu_draw_buffer.height;
 	unsigned int filter;
 	struct Vertex
 	{
@@ -59,17 +63,18 @@ void sceGuClear(int flags)
 		vertices[0].z = context->clear_depth;
 
 		vertices[1].color = filter;
-		vertices[1].x = gu_draw_buffer.width;
-		vertices[1].y = gu_draw_buffer.height;
+		vertices[1].x = clear_width;
+		vertices[1].y = clear_height;
 		vertices[1].z = context->clear_depth;
 	}
 	else
 	{
 		struct Vertex *curr;
-		unsigned int i, blockWidth;
+		int i;
+		unsigned int blockWidth;
 		// Use blockWidth of 32 for 8888, 64 for other formats
 		blockWidth = gu_draw_buffer.pixel_size == GU_PSM_8888 ? 32 : 64;
-		count = ((gu_draw_buffer.width + blockWidth - 1) / blockWidth) * 2;
+		count = ((clear_width + blockWidth - 1) / blockWidth) * 2;
 		vertices = (struct Vertex *)sceGuGetMemory(count * sizeof(struct Vertex));
 		curr = vertices;
 
@@ -82,7 +87,7 @@ void sceGuClear(int flags)
 
 			curr->color = filter;
 			curr->x = (j + k) * blockWidth;
-			curr->y = k * gu_draw_buffer.height;
+			curr->y = k * clear_height;
 			curr->z = context->clear_depth;
 		}
 	}

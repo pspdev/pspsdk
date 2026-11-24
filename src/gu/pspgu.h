@@ -942,6 +942,10 @@ void sceGuLightSpot(int light, const ScePspFVector3* direction, float exponent, 
 /**
   * Clear current drawbuffer
   *
+  * When GU_SCISSOR_TEST is enabled, the clear extent follows the scissor
+  * rectangle (including offscreen targets larger than the display).
+  * With scissoring disabled, the display buffer dimensions are used.
+  *
   * Available clear-flags are (OR them together to get final clear-mode):
   *   - GU_COLOR_BUFFER_BIT - Clears the color-buffer
   *   - GU_STENCIL_BUFFER_BIT - Clears the stencil-buffer
@@ -1472,6 +1476,7 @@ void sceGuOffset(unsigned int x, unsigned int y);
   * Set what to scissor within the current viewport
   *
   * Note that scissoring is only performed if the custom scissoring is enabled (GU_SCISSOR_TEST)
+  * and the scissor coordinates must fit within the GE's 1024x1024 region.
   *
   * @param x - Left of scissor region
   * @param y - Top of scissor region

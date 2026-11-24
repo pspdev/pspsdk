@@ -15,7 +15,7 @@ void sceGuScissor(int x, int y, int w, int h)
 	assert(gu_init && "GU not initialized");
 	assert(w > 0 && h > 0 && "Invalid scissor dimensions");
 	assert(x >= 0 && y >= 0 && "Invalid scissor position");
-	assert(x + w <= 480 && y + h <= 272 && "Scissor region too large");
+	assert(x + w <= 1024 && y + h <= 1024 && "Scissor region too large");
 #endif
 
 	GuContext *context = &gu_contexts[gu_curr_context];

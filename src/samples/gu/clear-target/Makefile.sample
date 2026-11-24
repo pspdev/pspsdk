@@ -1,0 +1,12 @@
+TARGET = gu-offscreen-clear
+OBJS = main.o
+
+CFLAGS = -Wall -Wextra -Werror -O2
+LIBS = -lpspgu
+BUILD_PRX = 1
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = GU Offscreen Clear Regression
+
+PSPSDK = $(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak
