@@ -4,11 +4,14 @@
  * Licensed under the BSD license, see LICENSE in PSPSDK root for details.
  *
  * Regression tests for clearing offscreen draw buffers larger than the LCD.
- * Results are written to ms0:/pspsdk-gu-clear-results.txt.
+ * The first two results are shown as textures on the LCD.
+ * Detailed results are written to ms0:/pspsdk-gu-clear-results.txt.
  */
 
 #include <pspuser.h>
 #include <pspge.h>
+#include <pspdebug.h>
+#include <pspdisplay.h>
 #include <pspgu.h>
 #include <pspiofilemgr.h>
 
@@ -24,6 +27,10 @@ PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER);
 #define SCREEN_HEIGHT 272
 #define TARGET_WIDTH 512
 #define TARGET_HEIGHT 512
+#define PREVIEW_SIZE 208
+#define PREVIEW_Y 32
+#define PREVIEW_LEFT_X 16
+#define PREVIEW_RIGHT_X 256
 
 /* Three non-overlapping VRAM buffers; the target also fits in 8888 format. */
 #define DISPLAY_OFFSET 0x00000
@@ -78,10 +85,20 @@ static char result_log[8192];
 static unsigned int result_log_size;
 static unsigned int failures;
 
+enum {
+    PREVIEW_NORMAL,
+    PREVIEW_FAST,
+    PREVIEW_COUNT
+};
+
+/* Preserve the actual full-size RGB565 results before the next test resets VRAM. */
+static uint16_t __attribute__((aligned(16))) previews[PREVIEW_COUNT][TARGET_HEIGHT * STRIDE];
+static unsigned int preview_errors[PREVIEW_COUNT];
+
 static const ClearTest tests[] = {
     /* Existing baseline cases. */
-    {"normal full 565 list",        CLEAR_NORMAL,           0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
-    {"fast full 565 list",          CLEAR_FAST,             0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
+    [PREVIEW_NORMAL] = {"normal full 565 list",        CLEAR_NORMAL,           0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
+    [PREVIEW_FAST] = {"fast full 565 list",          CLEAR_FAST,             0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
     {"plain sprite full",          CLEAR_SPRITE,           0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
     {"clear sprite full",          CLEAR_MODE_SPRITE,      0,   0, 512, 512, 1, 0, GU_PSM_5650, 1},
     {"clear sprite DrawBuffer",    CLEAR_MODE_SPRITE,      0,   0, 512, 512, 1, 1, GU_PSM_5650, 1},
@@ -309,7 +326,7 @@ static void report(const ClearTest *t, const Result *r)
     }
 }
 
-static void run_test(const ClearTest *t)
+static Result run_test(const ClearTest *t)
 {
     Result r = {0};
     int flags = GU_COLOR_BUFFER_BIT;
@@ -368,6 +385,85 @@ static void run_test(const ClearTest *t)
     }
     check_buffers(&r, 1);
     report(t, &r);
+    return r;
+}
+
+static void capture_preview(unsigned int index, const Result *r)
+{
+    unsigned int i;
+    const volatile uint16_t *target = edram16() + TARGET_OFFSET / 2;
+
+    for (i = 0; i < TARGET_HEIGHT * STRIDE; ++i)
+        previews[index][i] = target[i];
+
+    sceKernelDcacheWritebackRange(previews[index], sizeof(previews[index]));
+    preview_errors[index] = r->target_errors;
+}
+
+static void draw_preview(unsigned int index, int x)
+{
+    struct Vertex {
+        unsigned short u, v;
+        short x, y, z;
+    };
+    struct Vertex *verts = sceGuGetMemory(2 * sizeof(*verts));
+
+    if (!verts)
+        return;
+
+    verts[0] = (struct Vertex){0, 0, x, PREVIEW_Y, 0};
+    verts[1] = (struct Vertex){TARGET_WIDTH, TARGET_HEIGHT,
+                              x + PREVIEW_SIZE, PREVIEW_Y + PREVIEW_SIZE, 0};
+
+    sceGuTexImage(0, TARGET_WIDTH, TARGET_HEIGHT, STRIDE, previews[index]);
+    sceGuDrawArray(GU_SPRITES, GU_TEXTURE_16BIT | GU_VERTEX_16BIT | GU_TRANSFORM_2D,
+                   2, NULL, verts);
+}
+
+static void show_results(void)
+{
+    /* The regression checks are complete; only now reuse the LCD framebuffer. */
+    pspDebugScreenSetBackColor(0xff202020);
+    pspDebugScreenInitEx(NULL, PSP_DISPLAY_PIXEL_FORMAT_565, 0);
+
+    sceGuStart(GU_DIRECT, display_list);
+    sceGuDrawBuffer(GU_PSM_5650, (void *)DISPLAY_OFFSET, STRIDE);
+    sceGuScissor(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    sceGuEnable(GU_SCISSOR_TEST);
+    sceGuEnable(GU_TEXTURE_2D);
+    sceGuTexMode(GU_PSM_5650, 0, 0, GU_FALSE);
+    sceGuTexFunc(GU_TFX_REPLACE, GU_TCC_RGB);
+    sceGuTexFilter(GU_NEAREST, GU_NEAREST);
+    sceGuTexWrap(GU_CLAMP, GU_CLAMP);
+    sceGuTexScale(1.0f, 1.0f);
+    sceGuTexOffset(0.0f, 0.0f);
+    draw_preview(PREVIEW_NORMAL, PREVIEW_LEFT_X);
+    draw_preview(PREVIEW_FAST, PREVIEW_RIGHT_X);
+    sceGuFinish();
+    sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
+
+    pspDebugScreenSetXY(2, 0);
+    pspDebugScreenPrintf("512x512 offscreen clear (actual render targets)");
+    pspDebugScreenSetXY(2, 2);
+    pspDebugScreenPrintf("Normal sceGuClear");
+    pspDebugScreenSetXY(36, 2);
+    pspDebugScreenPrintf("GU_FAST_CLEAR_BIT");
+    pspDebugScreenSetXY(2, 3);
+    pspDebugScreenPrintf("Blue = uncleared; red = cleared. Both should be solid red.");
+    pspDebugScreenSetXY(2, 30);
+    pspDebugScreenPrintf("%s: %u wrong pixels", preview_errors[PREVIEW_NORMAL] ? "FAIL" : "PASS",
+                         preview_errors[PREVIEW_NORMAL]);
+    pspDebugScreenSetXY(36, 30);
+    pspDebugScreenPrintf("%s: %u wrong pixels", preview_errors[PREVIEW_FAST] ? "FAIL" : "PASS",
+                         preview_errors[PREVIEW_FAST]);
+    pspDebugScreenSetXY(2, 32);
+    pspDebugScreenPrintf("%s: %u/%u regression tests passed", failures ? "FAIL" : "PASS",
+                         (unsigned int)(sizeof(tests) / sizeof(tests[0])) - failures,
+                         (unsigned int)(sizeof(tests) / sizeof(tests[0])));
+    pspDebugScreenSetXY(2, 33);
+    pspDebugScreenPrintf("Log: ms0:/pspsdk-gu-clear-results.txt");
+
+    sceGuDisplay(GU_TRUE);
 }
 
 int main(void)
@@ -389,8 +485,11 @@ int main(void)
     sceGuFinish();
     sceGuSync(GU_SYNC_FINISH, GU_SYNC_WHAT_DONE);
 
-    for (i = 0; i < sizeof(tests) / sizeof(tests[0]); ++i)
-        run_test(&tests[i]);
+    for (i = 0; i < sizeof(tests) / sizeof(tests[0]); ++i) {
+        Result result = run_test(&tests[i]);
+        if (i < PREVIEW_COUNT)
+            capture_preview(i, &result);
+    }
 
     edram16()[RESULT_OFFSET / 2] = failures ? 0xdead : 0xbeef;
 
@@ -408,7 +507,9 @@ int main(void)
         sceIoClose(log_fd);
     }
 
-    /* Do not exit PSPLink; leave the report available to the host. */
+    show_results();
+
+    /* Do not exit PSPLink; keep the results visible and the report available. */
     sceKernelSleepThread();
     return 0;
 }
