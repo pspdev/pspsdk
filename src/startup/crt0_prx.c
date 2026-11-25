@@ -10,7 +10,6 @@
  */
 
 #include <stdlib.h>
-
 #include <string.h>
 
 #include <pspkerneltypes.h>
@@ -46,10 +45,10 @@ extern SceModuleInfo module_info __attribute__((weak));
 extern void __libcglue_init(int argc, char *argv[]);
 extern void __libcglue_deinit();
 extern void __libcglue_exit(int status) __attribute__((weak));
+extern int __libcglue_begin_deinit(void) __attribute__((weak));
 extern void _init(void);
 extern void _fini(void);
 extern void _exit(int status) __attribute__((noreturn));
-
 extern int main(int argc, char *argv[]);
 
 /**
@@ -102,7 +101,17 @@ void _main(SceSize args, void *argp)
 __attribute__((__noreturn__))
 void _exit(int status)
 {
-	// uninitialize libcglue
+	/* Do not destroy an active pthread runtime. Native threads remain the
+	 * application's responsibility. A game can exit through the kernel;
+	 * an unsafe self-unload leaves the module resident. */
+	if (__libcglue_begin_deinit && !__libcglue_begin_deinit()) {
+		if (&sce_newlib_nocreate_thread_in_start != NULL)
+			sceKernelExitThread(status);
+		else
+			sceKernelExitGame();
+		while (1);
+	}
+
 	__libcglue_deinit();
 
 	if (&sce_newlib_nocreate_thread_in_start != NULL) {

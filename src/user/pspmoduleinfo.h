@@ -102,10 +102,23 @@ enum PspModuleInfoAttr
 /* Declare the name of the main thread */
 #define PSP_MAIN_THREAD_NAME(s) const char* sce_newlib_main_thread_name = (s)
 
-/* Disable the use of newlib, getting a minimal binary. */
+/* Disable newlib startup and provide a small exit() that runs _fini()
+ * without linking the full newlib exit-handler machinery. */
+#ifdef __cplusplus
 #define PSP_DISABLE_NEWLIB() \
-	void __libcglue_init(int argc, char *argv[]) {} \
-	void __libcglue_deinit() {}
+    extern "C" void __libcglue_init(int argc, char *argv[]) {} \
+    extern "C" void __libcglue_deinit(void) {} \
+    extern "C" void _fini(void); \
+    extern "C" void _exit(int status) __attribute__((noreturn)); \
+    extern "C" __attribute__((noreturn)) void exit(int status) throw() { _fini(); _exit(status); }
+#else
+#define PSP_DISABLE_NEWLIB() \
+    void __libcglue_init(int argc, char *argv[]) {} \
+    void __libcglue_deinit(void) {} \
+    extern void _fini(void); \
+    extern void _exit(int status) __attribute__((noreturn)); \
+    __attribute__((noreturn)) void exit(int status) { _fini(); _exit(status); }
+#endif
 
 /* Disable using pipe suuport from POSIX functions. */
 #define PSP_DISABLE_NEWLIB_PIPE_SUPPORT() \
@@ -138,9 +151,17 @@ enum PspModuleInfoAttr
 #define PSP_DISABLE_NEWLIB_CWD_SUPPORT() \
 	void __init_cwd(char *argv_0) {}
 
-/* Disable the auto start of pthread on init for reducing binary size if not used. */
+/* Disable automatic pthread startup and shutdown for smaller binaries. */
+#ifdef __cplusplus
 #define PSP_DISABLE_AUTOSTART_PTHREAD() \
-	void __libpthreadglue_init() {} \
-	void __libpthreadglue_deinit() {}
+    extern "C" void __libpthreadglue_init(void) {} \
+    extern "C" void __libpthreadglue_deinit(void) {} \
+    extern "C" void __libpthreadglue_abort(void) {}
+#else
+#define PSP_DISABLE_AUTOSTART_PTHREAD() \
+    void __libpthreadglue_init(void) {} \
+    void __libpthreadglue_deinit(void) {} \
+    void __libpthreadglue_abort(void) {}
+#endif
 
 #endif /* PSPMODULEINFO_H */
