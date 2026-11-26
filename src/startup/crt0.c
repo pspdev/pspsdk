@@ -44,8 +44,11 @@ extern SceModuleInfo module_info __attribute__((weak));
 /* Allow to provide a libc init hook to be called before main */
 extern void __libcglue_init(int argc, char *argv[]);
 extern void __libcglue_deinit();
+extern void __libcglue_exit(int status) __attribute__((weak));
+extern int __libcglue_begin_deinit(void) __attribute__((weak));
 extern void _init(void);
 extern void _fini(void);
+extern void _exit(int status) __attribute__((noreturn));
 extern int main(int argc, char *argv[]);
 
 /**
@@ -87,16 +90,28 @@ void _main(SceSize args, void *argp)
 	int res = main(argc, argv);
 
 	/* Return control to the operating system. This will end calling `_exit`*/
-	exit(res);
+	if (__libcglue_exit)
+		__libcglue_exit(res);
+
+	/* Minimal runtime overrides retain the direct exit path. */
+	_fini();
+	_exit(res);
 }
 
 __attribute__((__noreturn__))
 void _exit(int status)
 {
-	/* call global destructors*/
-	_fini();
+	/* Do not destroy an active pthread runtime. Native threads remain the
+	 * application's responsibility. A game can exit through the kernel;
+	 * an unsafe self-unload leaves the module resident. */
+	if (__libcglue_begin_deinit && !__libcglue_begin_deinit()) {
+		if (&sce_newlib_nocreate_thread_in_start != NULL)
+			sceKernelExitThread(status);
+		else
+			sceKernelExitGame();
+		while (1);
+	}
 
-	// uninitialize libcglue
 	__libcglue_deinit();
 
 	if (&sce_newlib_nocreate_thread_in_start != NULL) {

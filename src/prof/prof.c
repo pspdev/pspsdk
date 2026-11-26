@@ -96,6 +96,8 @@ static unsigned int reloc_offset;
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void __gprof_cleanup(void);
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
+void __gprof_abort(void);
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 void __mcount(unsigned int, unsigned int);
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
 static SceUInt timer_handler(SceUID uid, SceKernelSysClock *c1, SceKernelSysClock *c2, void *common);
@@ -247,6 +249,8 @@ void gprof_stop(const char* filename, int should_dump)
 
         if (should_dump) {
                 fp = fopen(filename, "wb");
+                if (fp == NULL)
+                        goto release_buffers;
 
                 /* Header uses link-time addresses so psp-gprof can match ELF symbols */
                 hdr.lpc = gp.lowpc_link;
@@ -272,6 +276,7 @@ void gprof_stop(const char* filename, int should_dump)
                 fclose(fp);
         }
 
+release_buffers:
         // Free memory
         free(gp.arcs);
         free(gp.samples);
@@ -282,9 +287,15 @@ void gprof_stop(const char* filename, int should_dump)
     at cwd with all collected information.
 */
 __attribute__((__no_instrument_function__, __no_profile_instrument_function__))
-void __gprof_cleanup()
+void __gprof_cleanup(void)
 {
         gprof_stop("gmon.out", 1);
+}
+
+__attribute__((__no_instrument_function__, __no_profile_instrument_function__))
+void __gprof_abort(void)
+{
+        gprof_stop(NULL, 0);
 }
 
 /** Internal C handler for _mcount()

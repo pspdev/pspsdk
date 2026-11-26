@@ -10,16 +10,23 @@ LIBDIR =
 LDFLAGS =
 LIBS= -lpspgum -lpspgu
 
-EXTRA_TARGETS = convlogo EBOOT.PBP
+EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = adresd - spharm v1.0
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
-convlogo:
-	bin2o -i logo.raw logo.o logo
-	bin2o -i Image1.raw logo2.o logo2
-	bin2o -i Image2.raw logo3.o logo3
+.PHONY: convlogo
+convlogo: logo.o logo2.o logo3.o
+
+logo.o: logo.raw
+	bin2o -i $< $@ logo
+
+logo2.o: Image1.raw
+	bin2o -i $< $@ logo2
+
+logo3.o: Image2.raw
+	bin2o -i $< $@ logo3
 
 copyms:
 	cp -f EBOOT.PBP /cygdrive/I/PSP/GAME/SPHARM
