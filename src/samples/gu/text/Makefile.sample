@@ -1,5 +1,6 @@
 TARGET = gufont
-OBJS = font.c main.o
+OBJS = main.o
+EXTRA_CLEAN = font.c
 
 INCDIR =
 CFLAGS = -Wall -O2
@@ -16,5 +17,7 @@ PSP_EBOOT_TITLE = GUFont Sample by McZonk
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
-font.c : font.raw
+main.o: font.c
+
+font.c: font.raw
 	bin2c font.raw font.c font

@@ -94,6 +94,7 @@ SAMPLES = \
 
 all:
 	for sample in $(SAMPLES) ; do \
-		$(MAKE) -f Makefile.sample -C $$sample clean all || { exit 1; } \
+		$(MAKE) -f Makefile.sample -C $$sample clean && \
+		$(MAKE) -f Makefile.sample -C $$sample all || { exit 1; } \
 	done
 
