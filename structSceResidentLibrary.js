@@ -1,0 +1,28 @@
+var structSceResidentLibrary =
+[
+    [ "attribute", "structSceResidentLibrary.html#a546c90ec456271f21af5df18142364fd", null ],
+    [ "entry_table", "structSceResidentLibrary.html#a09cdf8cc0e31870c2f54515f7eddf39e", null ],
+    [ "exports_base_addr", "structSceResidentLibrary.html#ac70bc9211af87c8ff3b63c372832a2ba", null ],
+    [ "exports_size", "structSceResidentLibrary.html#a0ffc3dab0af79a262fd28f9571c87ba7", null ],
+    [ "extra_export_entries", "structSceResidentLibrary.html#a14569beec9f7ea931bd2913fbc8eefa5", null ],
+    [ "is_user_lib", "structSceResidentLibrary.html#a2dadcb6f663b65945aff9b0dc741beba", null ],
+    [ "lib_entry_table", "structSceResidentLibrary.html#adbfa324834d2c7d1f6480b84430a2626", null ],
+    [ "lib_name", "structSceResidentLibrary.html#a3bf9111507dea7dc78289f507477ded6", null ],
+    [ "lib_name_in_heap", "structSceResidentLibrary.html#abad3465d42bf653015b6ff1c8066cd8c", null ],
+    [ "mid_func_index", "structSceResidentLibrary.html#a196c69438253dfe2a65abe146c6b159d", null ],
+    [ "next", "structSceResidentLibrary.html#ab23381b799cddeb38f81ca8ebc67c057", null ],
+    [ "num_exports", "structSceResidentLibrary.html#aeaf584839fbe5d40eeb7a0f9d929b9a0", null ],
+    [ "stub_count", "structSceResidentLibrary.html#a15f6c1342160b8187c799f5a57533bcb", null ],
+    [ "stub_libs", "structSceResidentLibrary.html#a38fa6fa1c6c9a81751ed822d2b67fad9", null ],
+    [ "sys_table_entry", "structSceResidentLibrary.html#ae78bcd5b27bf3897197e1580572111d1", null ],
+    [ "sys_table_entry_start_index", "structSceResidentLibrary.html#ae120bce6cb54f732f4ee8429d7aa4608", null ],
+    [ "unk20", "structSceResidentLibrary.html#a8dcb89b0201f5ce1bf52d3f989e5b9c1", null ],
+    [ "unk21", "structSceResidentLibrary.html#a3a185673fad5c9fd6a5f14aa7f487631", null ],
+    [ "unk22", "structSceResidentLibrary.html#aaa430c3641659239434557a44ab999dd", null ],
+    [ "unk24", "structSceResidentLibrary.html#afb9b04ed56f740307bea7438edef0e16", null ],
+    [ "unk28", "structSceResidentLibrary.html#a43ff7d8b4da316ba1ae50abee7af2b68", null ],
+    [ "unk48", "structSceResidentLibrary.html#a8b6925e9aa6aa47bf0da95fae85f5190", null ],
+    [ "unk64", "structSceResidentLibrary.html#a548549c3f9761499ae4c413b8b59e8d7", null ],
+    [ "var_stub_count", "structSceResidentLibrary.html#a5544b5446736054f264d9114c8c1febe", null ],
+    [ "version", "structSceResidentLibrary.html#a2121dd2d43b780ee3d59af4d07270ade", null ]
+];

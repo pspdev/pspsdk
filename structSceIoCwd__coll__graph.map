@@ -1,0 +1,10 @@
+<map id="SceIoCwd" name="SceIoCwd">
+<area shape="rect" id="Node000001" title=" " alt="" coords="20,271,102,297"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="119,275,128,284,120,293,102,295,102,290,118,288,123,284,115,280"/>
+<area shape="rect" id="Node000002" href="$structPspIoDrvArg.html" title="Structure passed to the init and exit functions of the io driver system." alt="" coords="13,183,109,208"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="64,224,64,271,58,271,58,224"/>
+<area shape="rect" id="Node000003" href="$structPspIoDrv.html" title=" " alt="" coords="23,94,99,120"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="64,135,64,182,58,182,58,135"/>
+<area shape="rect" id="Node000004" href="$structPspIoDrvFuncs.html" title="Structure to maintain the file driver pointers." alt="" coords="5,5,117,31"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="64,47,64,94,58,94,58,47"/>
+</map>

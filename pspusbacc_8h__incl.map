@@ -1,0 +1,9 @@
+<map id="usb/pspusbacc.h" name="usb/pspusbacc.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="38,5,157,31"/>
+<area shape="rect" id="Node000002" href="$psptypes_8h.html" title=" " alt="" coords="5,79,89,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,33,66,68,62,65,87,30"/>
+<area shape="rect" id="Node000004" href="$pspusb_8h.html" title=" " alt="" coords="113,79,186,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="108,30,134,65,130,68,104,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="15,153,79,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="50,105,50,137,44,137,44,105"/>
+</map>

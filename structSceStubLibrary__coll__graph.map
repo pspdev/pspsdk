@@ -1,0 +1,14 @@
+<map id="SceStubLibrary" name="SceStubLibrary">
+<area shape="rect" id="Node000001" title="This structure represents a stub library control block." alt="" coords="204,183,315,208"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="332,187,341,195,333,204,316,206,315,201,331,199,336,196,328,191"/>
+<area shape="rect" id="Node000002" href="$unionSceStub.html" title="This structure represents an imported function stub." alt="" coords="105,94,177,120"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="155,132,175,157,195,170,217,180,215,185,193,175,172,161,151,135"/>
+<area shape="rect" id="Node000003" href="$structSceDirectCallStub.html" title="This structure represents a function stub belonging to same privilege&#45;level linked libraries,..." alt="" coords="5,5,133,31"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="91,41,133,92,129,95,87,45"/>
+<area shape="rect" id="Node000004" href="$structSceSyscallStub.html" title="This structure represents a function stub belonging to different privilege&#45;level linked libraries,..." alt="" coords="156,5,270,31"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="195,45,153,95,149,92,191,41"/>
+<area shape="rect" id="Node000005" href="$structSceVariableStub.html" title="This structure represents an imported variable stub." alt="" coords="200,94,319,120"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="262,135,262,182,257,182,257,135"/>
+<area shape="rect" id="Node000006" href="$structSceLibraryStubTable.html" title="Specifies a library and a set of imports from that library." alt="" coords="343,94,486,120"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="393,133,354,161,301,184,299,180,352,156,389,128"/>
+</map>

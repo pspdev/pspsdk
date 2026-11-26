@@ -1,0 +1,13 @@
+<map id="net/pspnet_inet.h" name="net/pspnet_inet.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="124,5,244,31"/>
+<area shape="rect" id="Node000002" href="$socket_8h.html" title=" " alt="" coords="79,79,174,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,33,148,68,144,65,172,30"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="197,79,288,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="195,30,225,65,221,69,191,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,69,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="113,107,66,145,62,141,110,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="93,153,160,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="129,105,129,137,124,137,124,105"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="184,153,271,178"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="145,103,199,141,196,145,142,107"/>
+</map>
